@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { buildDossierPageModel, eventDateLabel } from "./dossier-page-model";
 import { deepResearchTopics, getPublicEvidenceProjection } from "./topic-data";
 import { getEventTimelineAttribution, getEventTimelineHeadline, getTopicDisplayTitle } from "./topic-display";
+import SiteLink from "./site-link";
 
 const eventStatusLabel = {
   verified: "已確認",
@@ -39,14 +39,14 @@ export default function DossierIndexPage() {
   });
 
   return <main className="site-shell index-shell">
-    <header className="topbar"><Link className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></Link><div className="topbar-status"><span>公開閱讀</span><i /> <span>2026</span></div></header>
+    <header className="topbar"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><div className="topbar-status"><span>公開閱讀</span><i /> <span>2026</span></div></header>
     <section className="index-hero">
       <div className="index-hero-copy"><p className="eyebrow">深度研究索引</p><h1>先看事情怎麼走，<br /><em>再分辨各方怎麼說。</em></h1><p className="lede">每一題先顯示最近收錄的公開進展，再分開呈現已確認資訊、具名說法與仍待釐清的問題。數量不是完整度，也不是可信度排名。</p></div>
     </section>
     <section className="topic-index" aria-label="議題索引">
       <div className="section-heading"><div><p className="eyebrow">最近更新</p><h2>正在累積的深度研究</h2></div><p>先掃描事件進展，再進入議題展開證據與限制</p></div>
       <div className="topic-cards">{topicEvidence.map((topic, index) => {
-        return <Link className="topic-card" href={`/topics/${topic.slug}`} key={topic.slug}>
+        return <SiteLink className="topic-card" href={`/topics/${topic.slug}`} key={topic.slug}>
           <span>{String(index + 1).padStart(2, "0")}</span>
           <div>
             <p className="topic-tag">{topic.publicEvidenceAvailable ? "公開證據可讀" : "公開資料補強中"} · 更新於 {topic.lastUpdated}</p>
@@ -60,7 +60,7 @@ export default function DossierIndexPage() {
             <TopicCountMetadata verified={topic.verifiedCount} attributed={topic.attributedCount} unresolved={topic.openCount} />
           </div>
           <b aria-hidden="true">↗</b>
-        </Link>;
+        </SiteLink>;
       })}</div>
     </section>
     <section className="index-note"><div><p className="eyebrow">怎麼閱讀</p><h2>多方說法並列，<br />不等於彼此都成立。</h2></div><p>已確認資訊、具名說法與仍待釐清會分開標示；來源與數量只幫助定位材料，不代表議題完整、可信度相同或結論已成立。</p></section>

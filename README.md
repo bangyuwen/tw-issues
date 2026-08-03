@@ -17,6 +17,14 @@ npm run build
 
 `npm test` 會先驗證 `public-bundle.json` 的 schema、檔案 digest、議題 inventory 與公開邊界，再執行 rendered-page tests。
 
+## GitHub Pages
+
+`main` 的更新會透過 GitHub Actions 建置靜態輸出並部署到：
+
+<https://bangyuwen.github.io/tw-issues/>
+
+本機可用 `npm run build:github-pages` 產生相同的 `dist/client` 靜態輸出。
+
 ## Public bundle
 
 網站只消費以下公開輸入：

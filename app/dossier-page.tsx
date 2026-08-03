@@ -1,9 +1,9 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import type { DeepResearchTopic, PublicClaim } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
+import SiteLink from "./site-link";
 
 const eventStatusCopy = {
   verified: { label: "已確認", target: "#claims" },
@@ -20,10 +20,10 @@ function AiAutomationDisclaimer() {
 
 export function UnavailableDossierPage({ topic, displayTitle }: { topic: DeepResearchTopic; displayTitle: string }) {
   return <main className="site-shell dossier-shell">
-      <header className="topbar topbar-detail"><Link className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></Link><Link className="back-link" href="/">← 議題索引</Link></header>
+      <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
       <section className="hero hero-detail"><div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開資料補強中</p><h1>{displayTitle}</h1><p className="lede">本題列入最近更新的深度研究，但公開來源覆蓋尚未完成；現階段不下結論，也不公開研究敘事。</p></div><aside className="dossier-meta"><p>最近更新</p><strong>{topic.lastUpdated.slice(5).replace("-", ".")}</strong><span>研究持續整理</span></aside></section>
       <section className="evidence-section"><div className="section-intro"><p className="eyebrow">公開資料界線</p><h2>先補足來源，<br />再公開命題。</h2><p>研究中不代表任何一方說法成立。待可核對的原始紀錄與獨立來源群組足以支撐具體命題後，本頁才會顯示事實、證明範圍與來源限制。</p></div></section>
-      <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>回到最近更新的研究索引。</h2></div><Link href="/">回到議題索引 <span>→</span></Link></section>
+      <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>回到最近更新的研究索引。</h2></div><SiteLink href="/">回到議題索引 <span>→</span></SiteLink></section>
       <AiAutomationDisclaimer />
       <footer><span>TW Issues</span><span>台灣議題脈絡的公開閱讀入口。</span></footer>
     </main>;
@@ -88,7 +88,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   const [verified, unresolved] = collections;
 
   return <main className="site-shell dossier-shell">
-    <header className="topbar topbar-detail"><Link className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></Link><Link className="back-link" href="/">← 議題索引</Link></header>
+    <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
     <section className="hero hero-detail">
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
@@ -124,7 +124,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
         <ol className="source-list">{publicSources.map((source, index) => { const number = String(index + 1).padStart(2, "0"); const hasCalendarDate = /^\d{4}-\d{2}(?:-\d{2})?$/.test(source.publishedAt); return <li id={source.publicRef} data-source-ref={source.publicRef} tabIndex={-1} key={source.publicRef}><span>{number}</span><div><a className="source-title" href={source.canonicalUrl} target="_blank" rel="noreferrer">{source.title} <b aria-hidden="true">↗</b></a><p className="source-meta"><span>{source.publisher}</span><i />{hasCalendarDate ? <time dateTime={source.publishedAt}>{source.publishedAt}</time> : <span>{source.publishedAt}</span>}</p></div></li>; })}</ol>
       </section>
     </SourcesDisclosure>
-    <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>繼續探索其他議題。</h2></div><Link href="/">回到議題索引 <span>→</span></Link></section>
+    <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>繼續探索其他議題。</h2></div><SiteLink href="/">回到議題索引 <span>→</span></SiteLink></section>
     <AiAutomationDisclaimer />
     <footer><span>TW Issues</span><span>台灣議題脈絡的公開閱讀入口。</span></footer>
   </main>;
