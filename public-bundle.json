@@ -6,11 +6,11 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "802e3f0a8bdee5369502eee16d77b78061c5842f8be0f360d74598eddca365c9"
+    "sha256": "a004f5ae9cf9fa2df05b3e2a61cb4b1ce481b4bd337a74e9c00e6ce476e11939"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "92e64b52b8eb871e5e0c421e02ab73040b03729c9d817c140e6c796d2bedb589"
+    "sha256": "4b0cd2714bd55d8bbaca535fa5d7ad12304b53df79a56ba14f4d45849ef25b35"
   },
   "topics": {
     "benzopyrene-food-safety": {
@@ -30,7 +30,7 @@
       "visibility": "public",
       "publication_status": "published",
       "as_of": "2026-07-15",
-      "content_digest": "e5848f0ed9f08fb36e08117e475bdcb228f9d1f8a45d75f3d625a8ebd4535e22",
+      "content_digest": "9ccdd92a979f2da0f385a096d28a47b163454ec19f627d6df45229ed5da5a3e8",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "預算拖審與治理失序"
@@ -41,7 +41,7 @@
       "visibility": "public",
       "publication_status": "published",
       "as_of": "2026-07-13",
-      "content_digest": "437e8572767aca0e30ea5121a42a4b94aefec72ef96d200cab6f0da4891c8a3c",
+      "content_digest": "27d955f529a89d08898eb8dec75e954ac02142646a5b91b2a5358475b126d63a",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "中國跨境恐嚇與台灣公共底線"
@@ -62,8 +62,8 @@
       "slug": "flood-budget-bottleneck",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-02",
-      "content_digest": "9731eeee0a6f6cb5af58d55ca13cc76e49a1ff389cab0c892a28151e376fbfef",
+      "as_of": "2026-07-09",
+      "content_digest": "fa8a92b7c368f59a2a793844cd8fc72a955b43aeb019a995430ea71e374ac1e5",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "豪雨救災與預算卡關"
@@ -73,8 +73,8 @@
       "slug": "himars-visible-readiness",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-06-18",
-      "content_digest": "f2725e21a4be8e72bae69adc62ca92d7a78e97c7a52fbac3cd93a54bb85f3677",
+      "as_of": "2026-07-28",
+      "content_digest": "ced05d406369abc50365898a6c989ae886ac27638a7c30b3172f93214c65a2cd",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "HIMARS 演訓嚇阻"
@@ -84,8 +84,8 @@
       "slug": "japan-taiwan-alliance",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-17",
-      "content_digest": "230f555e52ec63620d89731ad51eb743d568a6b65458692eb2270137d71a9609",
+      "as_of": "2026-07-18",
+      "content_digest": "a5811aeb842a4e6339c022839bf6282adb85a91d88b3bd830154b37d882138c1",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "日台同盟與安全合作"
@@ -95,8 +95,8 @@
       "slug": "taipei-tree-governance",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-19",
-      "content_digest": "a27bebc69359b0159f7fb2bb06692a6052df525cdc831a223822d516162152fc",
+      "as_of": "2026-07-24",
+      "content_digest": "7ef45f11b4029a811ac9c55aa392f81ccbe3b11199e52183bdbf69146d5d26e3",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "臺北城市樹木治理爭議"
@@ -106,8 +106,8 @@
       "slug": "transnational-repression",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-06-30",
-      "content_digest": "57528e401481b0e3ea5d676102e4234d5b6c676122ae1608202fd66604404af2",
+      "as_of": "2026-07-01",
+      "content_digest": "11dd529c91cfe28c789e80426de4e8560d9b27c6cdbfac468e50b574f743d28d",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "中共跨境鎮壓與人權外溢"
@@ -117,8 +117,8 @@
       "slug": "typhoon-governance",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-13",
-      "content_digest": "b93a42d65790b2b1d0645d00a9db0d45c219e895ea4487340f1859cf40bf38b6",
+      "as_of": "2026-07-19",
+      "content_digest": "8d15e1d479c927f08a118d73239546d843524b26d8b5345fecf91f95170ad725",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "颱風治理與首都市政信任"

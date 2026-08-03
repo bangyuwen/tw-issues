@@ -3095,6 +3095,31 @@
             "displayRole": "媒體報導"
           }
         ]
+      },
+      {
+        "statement": "臺北市公園處表示，福林公園受保護樹木先行修剪、覆蓋保濕，並規劃由公園進入施作、遷移路燈以提供吊車動線；這是市府公開的救援與施工安排，不等於樹木已復原。",
+        "claimType": "affected_party_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄公園處公開說明的修剪、保濕、吊車動線與路燈遷移安排。",
+        "limitations": [
+          "機關說明不能證明樹木最終存活、復原或施工品質，仍缺逐株後續養護與驗收資料。"
+        ],
+        "speakers": [
+          {
+            "name": "臺北市政府工務局",
+            "role": "主管機關公開說明"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-08",
+            "canonicalUrl": "https://pkl.gov.taipei/News_Content.aspx?n=43E05059FCC72525&s=9BF3D1FF9E02B010&sms=72544237BBE4C5F6",
+            "title": "福林公園受保護樹木救援、6月17日修剪與保濕維護及後續吊車動線安排",
+            "publisher": "臺北市政府工務局",
+            "publishedAt": "2026-07-24",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
       }
     ],
     "analysisClaims": [],
@@ -3180,6 +3205,31 @@
                 "displayRole": "主管機關公開說明"
               }
             ]
+          },
+          {
+            "statement": "臺北市公園處表示，福林公園受保護樹木先行修剪、覆蓋保濕，並規劃由公園進入施作、遷移路燈以提供吊車動線；這是市府公開的救援與施工安排，不等於樹木已復原。",
+            "claimType": "affected_party_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄公園處公開說明的修剪、保濕、吊車動線與路燈遷移安排。",
+            "limitations": [
+              "機關說明不能證明樹木最終存活、復原或施工品質，仍缺逐株後續養護與驗收資料。"
+            ],
+            "speakers": [
+              {
+                "name": "臺北市政府工務局",
+                "role": "主管機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-08",
+                "canonicalUrl": "https://pkl.gov.taipei/News_Content.aspx?n=43E05059FCC72525&s=9BF3D1FF9E02B010&sms=72544237BBE4C5F6",
+                "title": "福林公園受保護樹木救援、6月17日修剪與保濕維護及後續吊車動線安排",
+                "publisher": "臺北市政府工務局",
+                "publishedAt": "2026-07-24",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
           }
         ]
       },
@@ -3230,7 +3280,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-08",
+            "publicRef": "source-09",
             "canonicalUrl": "https://www.cna.com.tw/news/aloc/202607020113.aspx",
             "title": "第284至297行：議員、市長與工務局說法",
             "publisher": "中央社",
@@ -3238,7 +3288,7 @@
             "displayRole": "媒體報導"
           },
           {
-            "publicRef": "source-09",
+            "publicRef": "source-10",
             "canonicalUrl": "https://health.ftvnews.com.tw/news/detail/2026703L06M1",
             "title": "第30至38行：議員展示公文與市府回應",
             "publisher": "民視新聞",
@@ -3246,7 +3296,7 @@
             "displayRole": "媒體報導"
           },
           {
-            "publicRef": "source-10",
+            "publicRef": "source-11",
             "canonicalUrl": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=0D36FCD30E1335CE&sms=72544237BBE4C5F6",
             "title": "市府廣場東北角兩樹 TreeID、移植日期、去向與工程時序說明",
             "publisher": "臺北市政府工務局",
@@ -3315,7 +3365,7 @@
         "kindLabel": "主管機關說明",
         "headline": "工務局公布市府廣場東北角兩樹的 TreeID、移植日期與去向，並主張路型設計早於遮陽設施會勘。",
         "sourceRefs": [
-          "source-10"
+          "source-11"
         ],
         "items": [
           {
@@ -3329,7 +3379,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-08",
+                "publicRef": "source-09",
                 "canonicalUrl": "https://www.cna.com.tw/news/aloc/202607020113.aspx",
                 "title": "第284至297行：議員、市長與工務局說法",
                 "publisher": "中央社",
@@ -3337,7 +3387,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-09",
+                "publicRef": "source-10",
                 "canonicalUrl": "https://health.ftvnews.com.tw/news/detail/2026703L06M1",
                 "title": "第30至38行：議員展示公文與市府回應",
                 "publisher": "民視新聞",
@@ -3345,7 +3395,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-10",
+                "publicRef": "source-11",
                 "canonicalUrl": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=0D36FCD30E1335CE&sms=72544237BBE4C5F6",
                 "title": "市府廣場東北角兩樹 TreeID、移植日期、去向與工程時序說明",
                 "publisher": "臺北市政府工務局",
@@ -3530,6 +3580,43 @@
                 "publisher": "臺北市法規查詢系統",
                 "publishedAt": "2022-05-16",
                 "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-08",
+        "occurredAt": "2026-07-24",
+        "reportedAt": "2026-07-24",
+        "precision": "day",
+        "kindLabel": "主管機關說明",
+        "headline": "公園處公開說明福林公園受保護樹木的修剪、保濕與施工動線安排。",
+        "sourceRefs": [
+          "source-08"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "臺北市公園處表示，福林公園受保護樹木先行修剪、覆蓋保濕，並規劃由公園進入施作、遷移路燈以提供吊車動線；這是市府公開的救援與施工安排，不等於樹木已復原。",
+            "proofScope": "記錄公園處公開說明的修剪、保濕、吊車動線與路燈遷移安排。",
+            "limitations": [
+              "機關說明不能證明樹木最終存活、復原或施工品質，仍缺逐株後續養護與驗收資料。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-08",
+                "canonicalUrl": "https://pkl.gov.taipei/News_Content.aspx?n=43E05059FCC72525&s=9BF3D1FF9E02B010&sms=72544237BBE4C5F6",
+                "title": "福林公園受保護樹木救援、6月17日修剪與保濕維護及後續吊車動線安排",
+                "publisher": "臺北市政府工務局",
+                "publishedAt": "2026-07-24",
+                "displayRole": "主管機關公開說明"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "臺北市政府工務局",
+                "role": "主管機關公開說明"
               }
             ]
           }
@@ -4548,6 +4635,31 @@
         ]
       },
       {
+        "statement": "中央社報導，民進黨發言人稱總預算審查已逾319天、尚有6個委員會未審竣；這是政黨公開說法，不是獨立確認的責任判定。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄中央社轉述的政黨公開說法。",
+        "limitations": [
+          "僅證明該黨說法及媒體報導，不獨立確認責任歸屬或所有委員會的即時狀態。"
+        ],
+        "speakers": [
+          {
+            "name": "中央社",
+            "role": "媒體報導"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-17",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607130094.aspx",
+            "title": "民進黨發言人稱總預算審查逾319天及尚有6個委員會未審竣的報導",
+            "publisher": "中央社",
+            "publishedAt": "2026-07-13",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
         "statement": "行政院1月8日盤點稱，總預算未審議通過時受限金額合計2,992億元，其中新興計畫1,017億元、經常性及延續性計畫較上年度增加部分1,805億元、預備金及災害準備金170億元。",
         "claimType": "quantitative_attributed_statement",
         "harmRisk": "elevated",
@@ -4563,7 +4675,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-17",
+            "publicRef": "source-18",
             "canonicalUrl": "https://www.ey.gov.tw/Page/448DE008087A1971/b4bc6323-3227-47cd-87be-4511ac7821ee",
             "title": "115年度總預算未依限完成審議影響的金額拆解",
             "publisher": "行政院",
@@ -4588,7 +4700,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-18",
+            "publicRef": "source-19",
             "canonicalUrl": "https://www.mohw.gov.tw/cp-16-85763-1.html",
             "title": "六大社福津貼調增方案的調幅、經費與受益人數",
             "publisher": "衛生福利部",
@@ -4623,7 +4735,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-17",
+                "publicRef": "source-18",
                 "canonicalUrl": "https://www.ey.gov.tw/Page/448DE008087A1971/b4bc6323-3227-47cd-87be-4511ac7821ee",
                 "title": "115年度總預算未依限完成審議影響的金額拆解",
                 "publisher": "行政院",
@@ -4714,6 +4826,31 @@
                 "displayRole": "媒體報導"
               }
             ]
+          },
+          {
+            "statement": "中央社報導，民進黨發言人稱總預算審查已逾319天、尚有6個委員會未審竣；這是政黨公開說法，不是獨立確認的責任判定。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄中央社轉述的政黨公開說法。",
+            "limitations": [
+              "僅證明該黨說法及媒體報導，不獨立確認責任歸屬或所有委員會的即時狀態。"
+            ],
+            "speakers": [
+              {
+                "name": "中央社",
+                "role": "媒體報導"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-17",
+                "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607130094.aspx",
+                "title": "民進黨發言人稱總預算審查逾319天及尚有6個委員會未審竣的報導",
+                "publisher": "中央社",
+                "publishedAt": "2026-07-13",
+                "displayRole": "媒體報導"
+              }
+            ]
           }
         ]
       },
@@ -4739,7 +4876,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-18",
+                "publicRef": "source-19",
                 "canonicalUrl": "https://www.mohw.gov.tw/cp-16-85763-1.html",
                 "title": "六大社福津貼調增方案的調幅、經費與受益人數",
                 "publisher": "衛生福利部",
@@ -4879,7 +5016,7 @@
         "kindLabel": "主管機關說明",
         "headline": "總預算未審議通過時受限金額合計2,992億元，其中新興計畫1,017億元、經常性及延續性計畫較上年度增加部分1,805億元、預備金及災害準備金170億元。",
         "sourceRefs": [
-          "source-17"
+          "source-18"
         ],
         "items": [
           {
@@ -4891,7 +5028,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-17",
+                "publicRef": "source-18",
                 "canonicalUrl": "https://www.ey.gov.tw/Page/448DE008087A1971/b4bc6323-3227-47cd-87be-4511ac7821ee",
                 "title": "115年度總預算未依限完成審議影響的金額拆解",
                 "publisher": "行政院",
@@ -5015,7 +5152,7 @@
         "kindLabel": "主管機關說明",
         "headline": "的六大社福津貼調增方案，規劃調幅23.5%、一年所需經費335.6億元，預計照顧89萬人，並明載須待總預算完成法定程序後辦理追加預算。",
         "sourceRefs": [
-          "source-18"
+          "source-19"
         ],
         "items": [
           {
@@ -5027,7 +5164,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-18",
+                "publicRef": "source-19",
                 "canonicalUrl": "https://www.mohw.gov.tw/cp-16-85763-1.html",
                 "title": "六大社福津貼調增方案的調幅、經費與受益人數",
                 "publisher": "衛生福利部",
@@ -5431,6 +5568,43 @@
       },
       {
         "publicKey": "event-17",
+        "occurredAt": "2026-07-13",
+        "reportedAt": "2026-07-13",
+        "precision": "day",
+        "kindLabel": "政黨說法",
+        "headline": "民進黨稱總預算審查逾319天及尚有六個委員會未審竣（政黨說法）。",
+        "sourceRefs": [
+          "source-17"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "中央社報導，民進黨發言人稱總預算審查已逾319天、尚有6個委員會未審竣；這是政黨公開說法，不是獨立確認的責任判定。",
+            "proofScope": "記錄中央社轉述的政黨公開說法。",
+            "limitations": [
+              "僅證明該黨說法及媒體報導，不獨立確認責任歸屬或所有委員會的即時狀態。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-17",
+                "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607130094.aspx",
+                "title": "民進黨發言人稱總預算審查逾319天及尚有6個委員會未審竣的報導",
+                "publisher": "中央社",
+                "publishedAt": "2026-07-13",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "中央社",
+                "role": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-18",
         "occurredAt": "2026-07-15",
         "reportedAt": "2026-07-13",
         "precision": "day",
@@ -5682,6 +5856,31 @@
             "displayRole": "主管機關公開說明"
           }
         ]
+      },
+      {
+        "statement": "Taiwan News 7月10日報導，國台辦重申「出於義憤」說法，矢板明夫則表示不能讓台灣重蹈香港覆轍；這是媒體記錄的雙方公開說法，不能證明實際動機、資助來源或指揮關係。",
+        "claimType": "attributed_statement",
+        "harmRisk": "high",
+        "proofScope": "記錄媒體對主要被指稱方與受影響者公開說法的並列報導。",
+        "limitations": [
+          "媒體轉述不能獨立證明動機、資助來源或指揮關係。"
+        ],
+        "speakers": [
+          {
+            "name": "Taiwan News",
+            "role": "媒體報導"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-09",
+            "canonicalUrl": "https://www.taiwannews.com.tw/zh/news/6398778",
+            "title": "國台辦「出於義憤」說法與矢板明夫反駁的後續報導",
+            "publisher": "Taiwan News",
+            "publishedAt": "2026-07-10",
+            "displayRole": "媒體報導"
+          }
+        ]
       }
     ],
     "analysisClaims": [],
@@ -5879,6 +6078,39 @@
                 "title": "矢板明夫對事件影響的公開陳述及法務部研議刑責段落",
                 "publisher": "公視新聞網",
                 "publishedAt": "2026-07-09",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "Taiwan News",
+          "role": "媒體報導"
+        },
+        "claims": [
+          {
+            "statement": "Taiwan News 7月10日報導，國台辦重申「出於義憤」說法，矢板明夫則表示不能讓台灣重蹈香港覆轍；這是媒體記錄的雙方公開說法，不能證明實際動機、資助來源或指揮關係。",
+            "claimType": "attributed_statement",
+            "harmRisk": "high",
+            "proofScope": "記錄媒體對主要被指稱方與受影響者公開說法的並列報導。",
+            "limitations": [
+              "媒體轉述不能獨立證明動機、資助來源或指揮關係。"
+            ],
+            "speakers": [
+              {
+                "name": "Taiwan News",
+                "role": "媒體報導"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-09",
+                "canonicalUrl": "https://www.taiwannews.com.tw/zh/news/6398778",
+                "title": "國台辦「出於義憤」說法與矢板明夫反駁的後續報導",
+                "publisher": "Taiwan News",
+                "publishedAt": "2026-07-10",
                 "displayRole": "媒體報導"
               }
             ]
@@ -6220,6 +6452,43 @@
             ]
           }
         ]
+      },
+      {
+        "publicKey": "event-09",
+        "occurredAt": "2026-07-10",
+        "reportedAt": "2026-07-10",
+        "precision": "day",
+        "kindLabel": "媒體轉述",
+        "headline": "國台辦重申「出於義憤」，矢板明夫反駁重蹈香港覆轍。",
+        "sourceRefs": [
+          "source-09"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "Taiwan News 7月10日報導，國台辦重申「出於義憤」說法，矢板明夫則表示不能讓台灣重蹈香港覆轍；這是媒體記錄的雙方公開說法，不能證明實際動機、資助來源或指揮關係。",
+            "proofScope": "記錄媒體對主要被指稱方與受影響者公開說法的並列報導。",
+            "limitations": [
+              "媒體轉述不能獨立證明動機、資助來源或指揮關係。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-09",
+                "canonicalUrl": "https://www.taiwannews.com.tw/zh/news/6398778",
+                "title": "國台辦「出於義憤」說法與矢板明夫反駁的後續報導",
+                "publisher": "Taiwan News",
+                "publishedAt": "2026-07-10",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "Taiwan News",
+                "role": "媒體報導"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -6343,6 +6612,31 @@
             "displayRole": "媒體報導"
           }
         ]
+      },
+      {
+        "statement": "臺北市消防局表示，6月25日平台短暫延遲源於大量CCTV影像傳輸，工程師即時調整伺服器容量，且不影響救災；這是機關說明，未附完整系統日志供外部重算。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄消防局對平台延遲與救災影響的公開說法。",
+        "limitations": [
+          "機關說明未附完整系統日志或原始影像傳輸數據，不能由本帳本獨立重算效能。"
+        ],
+        "speakers": [
+          {
+            "name": "臺北市政府消防局",
+            "role": "主管機關公開說明"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://eoc.gov.taipei/News/Detail/991",
+            "title": "消防局澄清「48張照片導致救災延誤」說法，並說明6月25日影像傳輸量造成平台短暫延遲及伺服器調整",
+            "publisher": "臺北市政府消防局",
+            "publishedAt": "2026-07-19",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
       }
     ],
     "analysisClaims": [],
@@ -6409,6 +6703,39 @@
                 "publisher": "公視新聞網",
                 "publishedAt": "2026-07-10",
                 "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "臺北市政府消防局",
+          "role": "主管機關公開說明"
+        },
+        "claims": [
+          {
+            "statement": "臺北市消防局表示，6月25日平台短暫延遲源於大量CCTV影像傳輸，工程師即時調整伺服器容量，且不影響救災；這是機關說明，未附完整系統日志供外部重算。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄消防局對平台延遲與救災影響的公開說法。",
+            "limitations": [
+              "機關說明未附完整系統日志或原始影像傳輸數據，不能由本帳本獨立重算效能。"
+            ],
+            "speakers": [
+              {
+                "name": "臺北市政府消防局",
+                "role": "主管機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://eoc.gov.taipei/News/Detail/991",
+                "title": "消防局澄清「48張照片導致救災延誤」說法，並說明6月25日影像傳輸量造成平台短暫延遲及伺服器調整",
+                "publisher": "臺北市政府消防局",
+                "publishedAt": "2026-07-19",
+                "displayRole": "主管機關公開說明"
               }
             ]
           }
@@ -6631,6 +6958,43 @@
             ]
           }
         ]
+      },
+      {
+        "publicKey": "event-06",
+        "occurredAt": "2026-07-19",
+        "reportedAt": "2026-07-19",
+        "precision": "day",
+        "kindLabel": "主管機關說明",
+        "headline": "消防局公開說明CCTV影像傳輸造成平台短暫延遲與伺服器調整。",
+        "sourceRefs": [
+          "source-06"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "臺北市消防局表示，6月25日平台短暫延遲源於大量CCTV影像傳輸，工程師即時調整伺服器容量，且不影響救災；這是機關說明，未附完整系統日志供外部重算。",
+            "proofScope": "記錄消防局對平台延遲與救災影響的公開說法。",
+            "limitations": [
+              "機關說明未附完整系統日志或原始影像傳輸數據，不能由本帳本獨立重算效能。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://eoc.gov.taipei/News/Detail/991",
+                "title": "消防局澄清「48張照片導致救災延誤」說法，並說明6月25日影像傳輸量造成平台短暫延遲及伺服器調整",
+                "publisher": "臺北市政府消防局",
+                "publishedAt": "2026-07-19",
+                "displayRole": "主管機關公開說明"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "臺北市政府消防局",
+                "role": "主管機關公開說明"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -6674,6 +7038,25 @@
             "displayRole": "制度或機關紀錄"
           }
         ]
+      },
+      {
+        "statement": "原住民族委員會7月9日上線「115年6月份丹娜絲颱風及七二八豪雨災後復原重建特別預算收支執行狀況月報表」；頁面確認月報表公開入口與更新日期，但不代表本帳本已逐項重算執行結果。",
+        "claimType": "procedural_fact",
+        "harmRisk": "low",
+        "proofScope": "證明原住民族委員會公開該月份災後復原特別預算收支執行月報表入口。",
+        "limitations": [
+          "頁面入口不等於本帳本已重新計算各項目實際執行率或可動支額度。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-03",
+            "canonicalUrl": "https://www.cip.gov.tw/zh-tw/news/data-list/2C5B87C44F111087/C782A9E0C4FE437EFF881C0038B7D8B3-info.html",
+            "title": "115年6月份丹娜絲颱風及七二八豪雨災後復原重建特別預算收支執行狀況月報表頁面與上線日期",
+            "publisher": "原住民族委員會",
+            "publishedAt": "2026-07-09",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
       }
     ],
     "attributedClaims": [
@@ -6694,7 +7077,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-03",
+            "publicRef": "source-04",
             "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
             "title": "行政院對災害準備金、718億元與治水預算說明",
             "publisher": "中央社",
@@ -6702,7 +7085,7 @@
             "displayRole": "媒體報導"
           },
           {
-            "publicRef": "source-04",
+            "publicRef": "source-05",
             "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270071.aspx",
             "title": "總統府救災量能說法",
             "publisher": "中央社",
@@ -6727,7 +7110,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-03",
+            "publicRef": "source-04",
             "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
             "title": "行政院對災害準備金、718億元與治水預算說明",
             "publisher": "中央社",
@@ -6753,7 +7136,7 @@
         ],
         "sources": [
           {
-            "publicRef": "source-05",
+            "publicRef": "source-06",
             "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270122.aspx",
             "title": "在野黨對救災經費與總預算爭議回應",
             "publisher": "中央社",
@@ -6761,7 +7144,7 @@
             "displayRole": "媒體報導"
           },
           {
-            "publicRef": "source-06",
+            "publicRef": "source-07",
             "canonicalUrl": "https://www.cna.com.tw/news/afe/202606260349.aspx",
             "title": "主計與財政面可動支經費說明",
             "publisher": "中央社",
@@ -6796,7 +7179,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-03",
+                "publicRef": "source-04",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
                 "title": "行政院對災害準備金、718億元與治水預算說明",
                 "publisher": "中央社",
@@ -6822,7 +7205,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-03",
+                "publicRef": "source-04",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
                 "title": "行政院對災害準備金、718億元與治水預算說明",
                 "publisher": "中央社",
@@ -6830,7 +7213,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-04",
+                "publicRef": "source-05",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270071.aspx",
                 "title": "總統府救災量能說法",
                 "publisher": "中央社",
@@ -6856,7 +7239,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-05",
+                "publicRef": "source-06",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270122.aspx",
                 "title": "在野黨對救災經費與總預算爭議回應",
                 "publisher": "中央社",
@@ -6864,7 +7247,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-06",
+                "publicRef": "source-07",
                 "canonicalUrl": "https://www.cna.com.tw/news/afe/202606260349.aspx",
                 "title": "主計與財政面可動支經費說明",
                 "publisher": "中央社",
@@ -6905,7 +7288,7 @@
         "kindLabel": "主管機關說明",
         "headline": "災害準備金與第二預備金須待總預算三讀後才能動支，並主張救災量能因此受限。",
         "sourceRefs": [
-          "source-03"
+          "source-04"
         ],
         "items": [
           {
@@ -6918,7 +7301,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-03",
+                "publicRef": "source-04",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
                 "title": "行政院對災害準備金、718億元與治水預算說明",
                 "publisher": "中央社",
@@ -6926,7 +7309,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-04",
+                "publicRef": "source-05",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270071.aspx",
                 "title": "總統府救災量能說法",
                 "publisher": "中央社",
@@ -6951,7 +7334,7 @@
         "kindLabel": "主管機關說明",
         "headline": "已先行同意執行718億元不會刪減的新興計畫，但其中長期治水工程預算不能直接替代災害防救法下的緊急移緩濟急機制。",
         "sourceRefs": [
-          "source-03"
+          "source-04"
         ],
         "items": [
           {
@@ -6963,7 +7346,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-03",
+                "publicRef": "source-04",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
                 "title": "行政院對災害準備金、718億元與治水預算說明",
                 "publisher": "中央社",
@@ -6988,7 +7371,7 @@
         "kindLabel": "主管機關說明",
         "headline": "災害準備金與第二預備金須待總預算三讀後才能動支，並主張救災量能因此受限。",
         "sourceRefs": [
-          "source-04"
+          "source-05"
         ],
         "items": [
           {
@@ -7001,7 +7384,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-03",
+                "publicRef": "source-04",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606260355.aspx",
                 "title": "行政院對災害準備金、718億元與治水預算說明",
                 "publisher": "中央社",
@@ -7009,7 +7392,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-04",
+                "publicRef": "source-05",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270071.aspx",
                 "title": "總統府救災量能說法",
                 "publisher": "中央社",
@@ -7034,7 +7417,7 @@
         "kindLabel": "政黨說法",
         "headline": "在野黨公開反駁「無錢救災」說法，主張政府仍有既有預算、移緩濟急或其他財源可運用",
         "sourceRefs": [
-          "source-05"
+          "source-06"
         ],
         "items": [
           {
@@ -7047,7 +7430,7 @@
             ],
             "sources": [
               {
-                "publicRef": "source-05",
+                "publicRef": "source-06",
                 "canonicalUrl": "https://www.cna.com.tw/news/aipl/202606270122.aspx",
                 "title": "在野黨對救災經費與總預算爭議回應",
                 "publisher": "中央社",
@@ -7055,7 +7438,7 @@
                 "displayRole": "媒體報導"
               },
               {
-                "publicRef": "source-06",
+                "publicRef": "source-07",
                 "canonicalUrl": "https://www.cna.com.tw/news/afe/202606260349.aspx",
                 "title": "主計與財政面可動支經費說明",
                 "publisher": "中央社",
@@ -7097,6 +7480,37 @@
                 "title": "財政委員會第20次全體委員會議程與總預算審查總報告草案",
                 "publisher": "立法院議事暨公報資訊網",
                 "publishedAt": "2026-07-01",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-06",
+        "occurredAt": "2026-07-09",
+        "reportedAt": "2026-07-09",
+        "precision": "day",
+        "kindLabel": "制度紀錄",
+        "headline": "原住民族委員會上線6月份災後復原特別預算收支執行月報表。",
+        "sourceRefs": [
+          "source-03"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "原住民族委員會7月9日上線「115年6月份丹娜絲颱風及七二八豪雨災後復原重建特別預算收支執行狀況月報表」；頁面確認月報表公開入口與更新日期，但不代表本帳本已逐項重算執行結果。",
+            "proofScope": "證明原住民族委員會公開該月份災後復原特別預算收支執行月報表入口。",
+            "limitations": [
+              "頁面入口不等於本帳本已重新計算各項目實際執行率或可動支額度。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://www.cip.gov.tw/zh-tw/news/data-list/2C5B87C44F111087/C782A9E0C4FE437EFF881C0038B7D8B3-info.html",
+                "title": "115年6月份丹娜絲颱風及七二八豪雨災後復原重建特別預算收支執行狀況月報表頁面與上線日期",
+                "publisher": "原住民族委員會",
+                "publishedAt": "2026-07-09",
                 "displayRole": "制度或機關紀錄"
               }
             ]
@@ -7234,6 +7648,31 @@
             "displayRole": "主管機關公開說明"
           }
         ]
+      },
+      {
+        "statement": "外交部7月18日資料表示，台灣已形成超過300家無人機供應鏈業者群聚，並規劃非紅供應鏈與安全認證、人才培訓、國際活動三項合作方向；這是外交部對產業與政策規劃的公開說法，不等同已簽政府間防衛協議或完成採購。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄外交部資料所列超過300家業者群聚與三項合作方向。",
+        "limitations": [
+          "機關資料未提供業者名單或合作成果，不能擴張成已完成採購、共同作戰或政府間防衛承諾。"
+        ],
+        "speakers": [
+          {
+            "name": "中華民國外交部",
+            "role": "主管機關公開紀錄"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://www.mofa.gov.tw/News_Content.aspx?n=98&s=122676&sms=76",
+            "title": "7月17日日台無人機聯合論壇與合作意向書簽署紀錄",
+            "publisher": "中華民國外交部",
+            "publishedAt": "2026-07-18",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
       }
     ],
     "analysisClaims": [],
@@ -7294,6 +7733,31 @@
             "proofScope": "證明外交部公開記錄兩個組織簽署合作意向書及公告所列合作方向。",
             "limitations": [
               "未取得合作意向書全文；公告也不等於政府間防衛條約、採購契約或共同作戰承諾。"
+            ],
+            "speakers": [
+              {
+                "name": "中華民國外交部",
+                "role": "主管機關公開紀錄"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mofa.gov.tw/News_Content.aspx?n=98&s=122676&sms=76",
+                "title": "7月17日日台無人機聯合論壇與合作意向書簽署紀錄",
+                "publisher": "中華民國外交部",
+                "publishedAt": "2026-07-18",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
+          },
+          {
+            "statement": "外交部7月18日資料表示，台灣已形成超過300家無人機供應鏈業者群聚，並規劃非紅供應鏈與安全認證、人才培訓、國際活動三項合作方向；這是外交部對產業與政策規劃的公開說法，不等同已簽政府間防衛協議或完成採購。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄外交部資料所列超過300家業者群聚與三項合作方向。",
+            "limitations": [
+              "機關資料未提供業者名單或合作成果，不能擴張成已完成採購、共同作戰或政府間防衛承諾。"
             ],
             "speakers": [
               {
@@ -7547,6 +8011,43 @@
             "proofScope": "證明外交部公開記錄兩個組織簽署合作意向書及公告所列合作方向。",
             "limitations": [
               "未取得合作意向書全文；公告也不等於政府間防衛條約、採購契約或共同作戰承諾。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mofa.gov.tw/News_Content.aspx?n=98&s=122676&sms=76",
+                "title": "7月17日日台無人機聯合論壇與合作意向書簽署紀錄",
+                "publisher": "中華民國外交部",
+                "publishedAt": "2026-07-18",
+                "displayRole": "主管機關公開說明"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "中華民國外交部",
+                "role": "主管機關公開紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-07",
+        "occurredAt": "2026-07-18",
+        "reportedAt": "2026-07-18",
+        "precision": "day",
+        "kindLabel": "主管機關說明",
+        "headline": "外交部公開列出無人機合作方向與超過300家供應鏈業者的說法。",
+        "sourceRefs": [
+          "source-05"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "外交部7月18日資料表示，台灣已形成超過300家無人機供應鏈業者群聚，並規劃非紅供應鏈與安全認證、人才培訓、國際活動三項合作方向；這是外交部對產業與政策規劃的公開說法，不等同已簽政府間防衛協議或完成採購。",
+            "proofScope": "記錄外交部資料所列超過300家業者群聚與三項合作方向。",
+            "limitations": [
+              "機關資料未提供業者名單或合作成果，不能擴張成已完成採購、共同作戰或政府間防衛承諾。"
             ],
             "sources": [
               {
@@ -7954,6 +8455,64 @@
             ]
           }
         ]
+      },
+      {
+        "publicKey": "event-06",
+        "occurredAt": "2026-07-01",
+        "reportedAt": "2026-07-01",
+        "precision": "day",
+        "kindLabel": "制度紀錄",
+        "headline": "FBI更新跨國鎮壓定義與常見手法清單。",
+        "sourceRefs": [
+          "source-01"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "FBI與美國司法部將跨國鎮壓界定為外國政府跨越國界，以恐嚇、威脅、騷擾、傷害或強迫等方式壓制個人的一系列手段。",
+            "proofScope": "證明FBI採用的跨國鎮壓定義。",
+            "limitations": [
+              "美國執法定義不必然等同其他國家法律構成要件。",
+              "未判定任何特定未審個案。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-01",
+                "canonicalUrl": "https://www.fbi.gov/investigate/counterintelligence/transnational-repression",
+                "title": "定義、常見手法與目標群體",
+                "publisher": "美國聯邦調查局",
+                "publishedAt": "2026-07-01",
+                "displayRole": "制度或機關紀錄"
+              },
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://www.justice.gov/nsd/transnational-repression-tnr",
+                "title": "TNR mission與targeted victims",
+                "publisher": "美國司法部國家安全司",
+                "publishedAt": "2025-02-13",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          },
+          {
+            "status": "verified",
+            "statement": "FBI列出的手法包含跟蹤、網路假訊息、威脅家屬、濫用法律程序、駭侵、暴力與強迫返國；出現其中一種手法不自動證明背後一定由某政府指揮。",
+            "proofScope": "證明FBI公開列出的常見手法範圍。",
+            "limitations": [
+              "手法清單是辨識指標，不是歸責證據。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-01",
+                "canonicalUrl": "https://www.fbi.gov/investigate/counterintelligence/transnational-repression",
+                "title": "定義、常見手法與目標群體",
+                "publisher": "美國聯邦調查局",
+                "publishedAt": "2026-07-01",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -8064,10 +8623,70 @@
         ]
       }
     ],
-    "attributedClaims": [],
+    "attributedClaims": [
+      {
+        "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+        "limitations": [
+          "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+        ],
+        "speakers": [
+          {
+            "name": "中華民國國防部",
+            "role": "主管機關公開資料"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+            "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
+            "publisher": "中華民國國防部",
+            "publishedAt": "2026-07-28",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      }
+    ],
     "analysisClaims": [],
     "editorialPositions": [],
-    "attributedSpeakerGroups": [],
+    "attributedSpeakerGroups": [
+      {
+        "speaker": {
+          "name": "中華民國國防部",
+          "role": "主管機關公開資料"
+        },
+        "claims": [
+          {
+            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "limitations": [
+              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+            ],
+            "speakers": [
+              {
+                "name": "中華民國國防部",
+                "role": "主管機關公開資料"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-28",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "openQuestions": [],
     "socialObservations": [],
     "socialObservationCount": 0,
@@ -8250,6 +8869,43 @@
                 "publisher": "Associated Press",
                 "publishedAt": "2026-06-10",
                 "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-04",
+        "occurredAt": "2026-07-28",
+        "reportedAt": "2026-07-28",
+        "precision": "day",
+        "kindLabel": "主管機關說明",
+        "headline": "國防部公開漢光42號文宣以HIMARS等系統為主軸。",
+        "sourceRefs": [
+          "source-05"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "limitations": [
+              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-28",
+                "displayRole": "制度或機關紀錄"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "中華民國國防部",
+                "role": "主管機關公開資料"
               }
             ]
           }

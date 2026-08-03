@@ -255,9 +255,9 @@ test("index keeps attribution and status beside real attributed and mixed latest
   assert.match(foodCard, /topic-card-status--attributed[^>]*>具名說法/);
   assert.match(foodCard, /食藥署長姜至剛表示/);
   assert.match(japanCard, /topic-card-status--attributed[^>]*>具名說法/);
-  assert.match(japanCard, /無人機國際學院與日本無人機聯盟/);
-  assert.match(treeCard, /topic-card-status--verified[^>]*>已確認/);
-  assert.match(treeCard, /topic-count--attributed">具名說法 4/);
+  assert.match(japanCard, /超過300家無人機/);
+  assert.match(treeCard, /topic-card-status--attributed[^>]*>具名說法/);
+  assert.match(treeCard, /topic-count--attributed">具名說法 5/);
 });
 
 test("index count metadata omits zero categories and has an all-zero fallback", () => {

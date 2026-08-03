@@ -103,7 +103,7 @@ test("budget page preserves the full chronology and separates party claims", asy
   const html = await response.text();
   assert.equal(response.status, 200);
   for (const text of [
-    "18</strong><span>筆可核對來源",
+    "19</strong><span>筆可核對來源",
     "歲出編列3兆350億元、歲入編列2兆8,623億元",
     "受限金額合計2,992億元",
     "一年所需經費335.6億元",
