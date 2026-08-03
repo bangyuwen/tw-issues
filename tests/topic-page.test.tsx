@@ -122,7 +122,8 @@ test("durable event timeline groups same-day events and starts every event close
   assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"/);
   assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><\/div>/);
   assert.doesNotMatch(html, /\d+ 件進展/);
-  assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><span class="event-date-statuses">/);
+  assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><\/header>/);
+  assert.doesNotMatch(html, /class="event-date-statuses"/);
   assert.match(html, /class="event-date-group" data-date-key="2026-07-17"/);
   assert.doesNotMatch(html, /event-date-group--multiple/);
   assert.match(html, /class="event-date-multiple-label">同日 2 則<\/span>/);
@@ -152,7 +153,7 @@ test("durable event timeline groups same-day events and starts every event close
   eventSummaries.forEach((summary) => {
     assert.doesNotMatch(summary, /<(?:div|h[1-6]|p|small)\b/);
     assert.doesNotMatch(summary, /證據界線|尚不能判定最終責任/);
-    assert.doesNotMatch(summary, /event-status-chip/);
+    assert.match(summary, /event-status-chip/);
   });
 });
 
