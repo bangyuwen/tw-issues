@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">城市、環境與韌性研究</title><desc id="desc">以城市輪廓、樹冠、水線與防護層構成的抽象編輯插畫。</desc>
+  <rect width="1200" height="500" fill="#102936"/><path d="M0 382c170-70 300 72 470 0s310 58 470-9 220 8 260 22v105H0Z" fill="#1a4650"/>
+  <g fill="#183b48" stroke="#a9cbbc" stroke-width="3"><path d="M130 350V176h120v174M270 350V110h132v240M425 350V218h110v132M556 350V148h150v202"/></g>
+  <g fill="#a9cbbc"><circle cx="830" cy="172" r="73"/><circle cx="918" cy="208" r="62"/><circle cx="754" cy="226" r="58"/></g><path d="M832 194v156" stroke="#cf6555" stroke-width="15"/>
+  <g fill="none" stroke="#cf6555" stroke-width="5"><path d="M78 72h430" stroke-width="8"/><path d="M730 390c100-44 210-44 330 0"/><path d="M748 420c90-34 188-34 294 0"/></g>
+</svg>

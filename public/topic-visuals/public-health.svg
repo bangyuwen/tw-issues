@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">公共健康與食安研究</title><desc id="desc">以檢驗容器、流向節點與放大鏡構成的抽象編輯插畫。</desc>
+  <rect width="1200" height="500" fill="#102936"/><path d="M0 390C230 310 375 470 610 380s360-80 590-10v130H0Z" fill="#173947"/>
+  <g fill="none" stroke="#a9cbbc" stroke-width="4"><path d="M184 116h190l-25 230a48 48 0 0 1-48 43h-44a48 48 0 0 1-48-43Z"/><path d="M224 183h126M214 263h145"/><circle cx="278" cy="225" r="17"/></g>
+  <g stroke="#cf6555" stroke-width="5" fill="#102936"><circle cx="622" cy="184" r="66"/><path d="m670 232 74 74"/><circle cx="604" cy="173" r="19" fill="#cf6555"/></g>
+  <g fill="#a9cbbc"><circle cx="834" cy="114" r="13"/><circle cx="1010" cy="192" r="13"/><circle cx="884" cy="328" r="13"/><circle cx="1094" cy="356" r="13"/></g>
+  <g fill="none" stroke="#a9cbbc" stroke-width="3"><path d="M834 114 1010 192 884 328 1094 356"/><path d="M834 114 884 328M1010 192l84 164"/></g>
+  <path d="M74 72h440" stroke="#cf6555" stroke-width="8"/><path d="M760 430h355" stroke="#a9cbbc" stroke-width="2"/>
+</svg>

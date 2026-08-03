@@ -1,0 +1,127 @@
+{
+  "schema_version": "tw-issues-public-bundle/v1",
+  "product_id": "tw-issues",
+  "product_name": "TW Issues",
+  "locale": "zh-Hant",
+  "license_policy": "source-specific",
+  "projection": {
+    "path": "app/public-evidence.json",
+    "sha256": "802e3f0a8bdee5369502eee16d77b78061c5842f8be0f360d74598eddca365c9"
+  },
+  "research_index": {
+    "path": "app/research-topics.json",
+    "sha256": "92e64b52b8eb871e5e0c421e02ab73040b03729c9d817c140e6c796d2bedb589"
+  },
+  "topics": {
+    "benzopyrene-food-safety": {
+      "topic_id": "benzopyrene-food-safety-2026",
+      "slug": "benzopyrene-food-safety",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-08-03",
+      "content_digest": "54fa683e1a1907779dfc00353c2387175439b7b4c0b9a60ab7fb668908e2d337",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "苯駢芘超標沙拉油食安危機"
+    },
+    "budget-delay-governance": {
+      "topic_id": "budget-delay-governance-2026",
+      "slug": "budget-delay-governance",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-15",
+      "content_digest": "e5848f0ed9f08fb36e08117e475bdcb228f9d1f8a45d75f3d625a8ebd4535e22",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "預算拖審與治理失序"
+    },
+    "cross-border-intimidation": {
+      "topic_id": "cross-border-intimidation-taiwan-2026",
+      "slug": "cross-border-intimidation",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-13",
+      "content_digest": "437e8572767aca0e30ea5121a42a4b94aefec72ef96d200cab6f0da4891c8a3c",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "中國跨境恐嚇與台灣公共底線"
+    },
+    "defense-procurement": {
+      "topic_id": "taiwan-self-defense-bargaining-2026",
+      "slug": "defense-procurement",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-19",
+      "content_digest": "771463abdda1ca167e0c7c034193c07f59f1f0c5e40cda3d3443b1164ce20b2a",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "台灣自保成談判籌碼"
+    },
+    "flood-budget-bottleneck": {
+      "topic_id": "flood-budget-bottleneck-2026",
+      "slug": "flood-budget-bottleneck",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-02",
+      "content_digest": "9731eeee0a6f6cb5af58d55ca13cc76e49a1ff389cab0c892a28151e376fbfef",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "豪雨救災與預算卡關"
+    },
+    "himars-visible-readiness": {
+      "topic_id": "himars-visible-readiness-2026",
+      "slug": "himars-visible-readiness",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-06-18",
+      "content_digest": "f2725e21a4be8e72bae69adc62ca92d7a78e97c7a52fbac3cd93a54bb85f3677",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "HIMARS 演訓嚇阻"
+    },
+    "japan-taiwan-alliance": {
+      "topic_id": "japan-taiwan-alliance-2026",
+      "slug": "japan-taiwan-alliance",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-17",
+      "content_digest": "230f555e52ec63620d89731ad51eb743d568a6b65458692eb2270137d71a9609",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "日台同盟與安全合作"
+    },
+    "taipei-tree-governance": {
+      "topic_id": "taipei-tree-governance-2026",
+      "slug": "taipei-tree-governance",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-19",
+      "content_digest": "a27bebc69359b0159f7fb2bb06692a6052df525cdc831a223822d516162152fc",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "臺北城市樹木治理爭議"
+    },
+    "transnational-repression": {
+      "topic_id": "transnational-repression-2026",
+      "slug": "transnational-repression",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-06-30",
+      "content_digest": "57528e401481b0e3ea5d676102e4234d5b6c676122ae1608202fd66604404af2",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "中共跨境鎮壓與人權外溢"
+    },
+    "typhoon-governance": {
+      "topic_id": "typhoon-governance-trust-2026",
+      "slug": "typhoon-governance",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-13",
+      "content_digest": "b93a42d65790b2b1d0645d00a9db0d45c219e895ea4487340f1859cf40bf38b6",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "颱風治理與首都市政信任"
+    }
+  }
+}

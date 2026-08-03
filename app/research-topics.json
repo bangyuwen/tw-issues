@@ -1,0 +1,195 @@
+{
+  "topics": [
+    {
+      "topicId": "benzopyrene-food-safety-2026",
+      "slug": "benzopyrene-food-safety",
+      "title": "苯駢芘超標沙拉油食安危機",
+      "lastUpdated": "2026-08-03",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "taipei-tree-governance-2026",
+      "slug": "taipei-tree-governance",
+      "title": "臺北城市樹木治理爭議",
+      "lastUpdated": "2026-07-19",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "taiwan-self-defense-bargaining-2026",
+      "slug": "defense-procurement",
+      "title": "台灣自保成談判籌碼",
+      "lastUpdated": "2026-07-19",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "japan-taiwan-alliance-2026",
+      "slug": "japan-taiwan-alliance",
+      "title": "日台同盟與安全合作",
+      "lastUpdated": "2026-07-17",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "budget-delay-governance-2026",
+      "slug": "budget-delay-governance",
+      "title": "預算拖審與治理失序",
+      "lastUpdated": "2026-07-15",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "cross-border-intimidation-taiwan-2026",
+      "slug": "cross-border-intimidation",
+      "title": "中國跨境恐嚇與台灣公共底線",
+      "lastUpdated": "2026-07-13",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "typhoon-governance-trust-2026",
+      "slug": "typhoon-governance",
+      "title": "颱風治理與首都市政信任",
+      "lastUpdated": "2026-07-13",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "flood-budget-bottleneck-2026",
+      "slug": "flood-budget-bottleneck",
+      "title": "豪雨救災與預算卡關",
+      "lastUpdated": "2026-07-02",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "transnational-repression-2026",
+      "slug": "transnational-repression",
+      "title": "中共跨境鎮壓與人權外溢",
+      "lastUpdated": "2026-06-30",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "himars-visible-readiness-2026",
+      "slug": "himars-visible-readiness",
+      "title": "HIMARS 演訓嚇阻",
+      "lastUpdated": "2026-06-18",
+      "publicEvidenceAvailable": true
+    }
+  ],
+  "allTopics": [
+    {
+      "topicId": "benzopyrene-food-safety-2026",
+      "slug": "benzopyrene-food-safety",
+      "title": "苯駢芘超標沙拉油食安危機",
+      "lastUpdated": "2026-08-03",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "taipei-tree-governance-2026",
+      "slug": "taipei-tree-governance",
+      "title": "臺北城市樹木治理爭議",
+      "lastUpdated": "2026-07-19",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "taiwan-self-defense-bargaining-2026",
+      "slug": "defense-procurement",
+      "title": "台灣自保成談判籌碼",
+      "lastUpdated": "2026-07-19",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "japan-taiwan-alliance-2026",
+      "slug": "japan-taiwan-alliance",
+      "title": "日台同盟與安全合作",
+      "lastUpdated": "2026-07-17",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "budget-delay-governance-2026",
+      "slug": "budget-delay-governance",
+      "title": "預算拖審與治理失序",
+      "lastUpdated": "2026-07-15",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "cross-border-intimidation-taiwan-2026",
+      "slug": "cross-border-intimidation",
+      "title": "中國跨境恐嚇與台灣公共底線",
+      "lastUpdated": "2026-07-13",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "typhoon-governance-trust-2026",
+      "slug": "typhoon-governance",
+      "title": "颱風治理與首都市政信任",
+      "lastUpdated": "2026-07-13",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "flood-budget-bottleneck-2026",
+      "slug": "flood-budget-bottleneck",
+      "title": "豪雨救災與預算卡關",
+      "lastUpdated": "2026-07-02",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "transnational-repression-2026",
+      "slug": "transnational-repression",
+      "title": "中共跨境鎮壓與人權外溢",
+      "lastUpdated": "2026-06-30",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "himars-visible-readiness-2026",
+      "slug": "himars-visible-readiness",
+      "title": "HIMARS 演訓嚇阻",
+      "lastUpdated": "2026-06-18",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "philippines-sanctions-demonstration-2026",
+      "slug": "philippines-sanctions-demonstration",
+      "title": "制裁菲防長示範施壓",
+      "lastUpdated": "2026-06-18",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "us-iran-conflict-2026",
+      "slug": "us-iran-conflict",
+      "title": "美伊衝突延燒",
+      "lastUpdated": "2026-04-09",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "china-youth-unemployment-2026",
+      "slug": "china-youth-unemployment",
+      "title": "中國青年失業爛尾世代",
+      "lastUpdated": "2026-04-08",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "ko-wen-je-329-rally-2026",
+      "slug": "ko-wen-je-329-rally",
+      "title": "329凱道挺柯集會與藍白合",
+      "lastUpdated": "2026-03-29",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "pla-satellite-surveillance-2026",
+      "slug": "pla-satellite-surveillance",
+      "title": "共軍偵察衛星密集監控",
+      "lastUpdated": "2026-03-28",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "sunflower-movement-anniversary-2026",
+      "slug": "sunflower-movement-anniversary",
+      "title": "太陽花運動十二週年",
+      "lastUpdated": "2026-03-28",
+      "publicEvidenceAvailable": false
+    },
+    {
+      "topicId": "trump-xi-taiwan-2026",
+      "slug": "trump-xi-taiwan",
+      "title": "川習會對台影響",
+      "lastUpdated": "2026-03-28",
+      "publicEvidenceAvailable": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">安全、嚇阻與區域合作研究</title><desc id="desc">以雷達弧線、合作節點與防護盾構成的抽象編輯插畫。</desc>
+  <rect width="1200" height="500" fill="#102936"/>
+  <g fill="none" stroke="#a9cbbc" stroke-width="3"><circle cx="340" cy="300" r="55"/><circle cx="340" cy="300" r="115"/><circle cx="340" cy="300" r="180"/><path d="M340 300 492 205"/></g><circle cx="492" cy="205" r="12" fill="#cf6555"/>
+  <path d="M760 98 960 168v118c0 78-65 124-100 143-35-19-100-65-100-143Z" fill="#183b48" stroke="#a9cbbc" stroke-width="4"/><path d="m805 260 39 39 78-94" fill="none" stroke="#cf6555" stroke-width="12"/>
+  <g fill="#a9cbbc"><circle cx="655" cy="132" r="12"/><circle cx="1090" cy="136" r="12"/><circle cx="1080" cy="380" r="12"/></g><g stroke="#a9cbbc" stroke-width="3"><path d="m655 132 105 54M960 168l130-32M960 286l120 94"/></g>
+  <path d="M78 72h430" stroke="#cf6555" stroke-width="8"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">人權與跨境壓迫研究</title><desc id="desc">以跨境連線、人物輪廓與中斷的監控框架構成的抽象編輯插畫。</desc>
+  <rect width="1200" height="500" fill="#102936"/>
+  <g fill="#a9cbbc"><circle cx="260" cy="182" r="46"/><path d="M176 340c8-76 48-116 84-116s76 40 84 116Z"/><circle cx="870" cy="196" r="42"/><path d="M794 340c7-69 42-105 76-105s69 36 76 105Z"/></g>
+  <g fill="none" stroke="#cf6555" stroke-width="5" stroke-dasharray="14 12"><path d="M325 190c150-125 328-125 485 8"/><path d="M332 306c152 80 308 80 454 18"/></g>
+  <g fill="none" stroke="#a9cbbc" stroke-width="4"><path d="M620 116h-74v74M620 384h-74v-74M696 116h74v74M696 384h74v-74"/></g><path d="m618 315 80-130" stroke="#cf6555" stroke-width="13"/>
+  <path d="M78 72h430" stroke="#cf6555" stroke-width="8"/><circle cx="1080" cy="92" r="18" fill="#cf6555"/>
+</svg>
