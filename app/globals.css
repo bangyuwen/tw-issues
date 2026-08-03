@@ -92,3 +92,18 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .citation:focus .citation-tooltip { opacity:1; transform:translateY(0); visibility:visible; }
 
 @media (max-width:800px) { .event-date-events { grid-column:1; } }
+
+/* Keep the event list readable in the in-between desktop/tablet range. */
+@media (min-width:801px) and (max-width:1100px) {
+  .event-progress-section { padding:52px 32px; }
+  .event-progress-section>.section-intro,
+  .event-timeline { max-width:760px; }
+  .event-date-group { grid-template-columns:1fr; gap:0; padding-bottom:18px; }
+  .event-date-events { grid-column:1; }
+  .event-disclosure>summary { padding:16px 42px 16px 0; }
+  .event-disclosure-action { top:17px; right:0; gap:0; font-size:0; }
+  .event-disclosure-action::before,
+  .event-disclosure[open] .event-disclosure-action::before { content:"＋"; font-size:1.15rem; }
+  .event-disclosure[open] .event-disclosure-action::before { content:"−"; }
+  .event-summary-title { max-width:none; }
+}
