@@ -43,7 +43,7 @@ function ClaimCollection({ collection, sourceLinks }: { collection: ClaimCollect
   const cards = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className={`fact-grid fact-grid--${collection.kind}`}>{claims.map((claim, index) => <ClaimCard key={`${collection.id}-${index + offset}`} claim={claim} index={index + offset} label={collection.label} zone={zone} sourceLinks={sourceLinks} />)}</div>;
   const rows = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className="verified-claim-list">{claims.map((claim, index) => <div data-claim-zone={zone} key={`${collection.id}-${index + offset}`}><EventDisclosure className="verified-claim-row"><summary><span className="verified-claim-ordinal">{String(index + offset + 1).padStart(2, "0")}</span><span className="verified-claim-title">{claim.statement}</span><span className="event-disclosure-action" aria-hidden="true">展開資料</span></summary><div className="verified-claim-body"><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure></div>)}</div>;
   const items = collection.id === "claims" ? rows : cards;
-  return <div className={`claim-collection claim-collection--${collection.kind}`} data-collection-id={collection.id}><div className="claim-direct">{items(direct, 0, "direct")}</div>{remainder.length > 0 && <details className="claim-remainder"><summary>展開其餘 {remainder.length} 項{collection.label}</summary>{items(remainder, 4, "remainder")}</details>}</div>;
+  return <div className={`claim-collection claim-collection--${collection.kind}`}><div className="claim-direct">{items(direct, 0, "direct")}</div>{remainder.length > 0 && <details className="claim-remainder"><summary>展開其餘 {remainder.length} 項{collection.label}</summary>{items(remainder, 4, "remainder")}</details>}</div>;
 }
 
 function SpeakerGroups({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
@@ -57,18 +57,23 @@ function SpeakerGroups({ groups, sourceLinks }: { groups: DossierPageModel["attr
 }
 
 const evidenceCopy = {
-  claims: { aria: "命題追溯", eyebrow: "已知資訊", title: undefined, intro: "先列出目前可以核對的命題，再把尚待釐清的問題接在同一個證據區；每一項仍分開標示證明範圍與限制。" },
-  questions: { aria: "仍待釐清", eyebrow: "仍待釐清", title: <>知道哪裡還不知道，<br />比假裝有答案更重要。</>, intro: "這些項目已有公開調查或報導脈絡，但尚不能把任何一種解釋寫成根因或責任定論。" },
+  claims: { label: "已知資訊", eyebrow: "可核對命題", aria: "命題追溯", intro: "目前可以核對的命題；每一項仍分開標示證明範圍與限制。" },
+  questions: { label: "仍待釐清", eyebrow: "調查中的問題", aria: "仍待釐清", intro: "這些項目已有公開調查或報導脈絡，但尚不能把任何一種解釋寫成根因或責任定論。" },
 };
 
-function EvidenceSubsection({ collection, sourceLinks }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
+function EvidenceBoardColumn({ collection, sourceLinks }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
   const copy = evidenceCopy[collection.id];
-  return <div className={`evidence-subsection evidence-subsection--${collection.kind}`} id={collection.id} role="region" aria-label={copy.aria}><div className="section-intro"><p className="eyebrow">{copy.eyebrow}</p>{copy.title && <h2>{copy.title}</h2>}{copy.intro && <p>{copy.intro}</p>}</div><ClaimCollection collection={collection} sourceLinks={sourceLinks} /></div>;
+  return <div className={`evidence-board-column evidence-board-column--${collection.kind}`} id={collection.id === "questions" ? "questions" : undefined} role="group" aria-label={copy.aria} data-collection-id={collection.id}><header className="evidence-board-column-heading"><div><p className="eyebrow">{copy.eyebrow}</p><h3>{copy.label}</h3></div><span className="evidence-board-column-count">{collection.claims.length} 項</span></header><p className="evidence-board-column-intro">{copy.intro}</p><ClaimCollection collection={collection} sourceLinks={sourceLinks} /></div>;
 }
 
-function EvidenceSection({ collection, relatedCollection, sourceLinks }: { collection: ClaimCollectionModel; relatedCollection?: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
-  const copy = evidenceCopy[collection.id];
-  return <section className="evidence-section" id={collection.id} aria-label={copy.aria}><div className="section-intro"><p className="eyebrow">{copy.eyebrow}</p>{copy.title && <h2>{copy.title}</h2>}{copy.intro && <p>{copy.intro}</p>}</div><ClaimCollection collection={collection} sourceLinks={sourceLinks} />{relatedCollection && relatedCollection.claims.length > 0 && <EvidenceSubsection collection={relatedCollection} sourceLinks={sourceLinks} />}</section>;
+function EvidenceBoard({ verified, unresolved, sourceLinks }: { verified: ClaimCollectionModel; unresolved: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
+  const hasVerified = verified.claims.length > 0;
+  const hasUnresolved = unresolved.claims.length > 0;
+  if (!hasVerified && !hasUnresolved) return null;
+  if (!hasUnresolved) {
+    return <section className="evidence-board evidence-board--known-only" id="claims" aria-label={evidenceCopy.claims.aria}><EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} /></section>;
+  }
+  return <section className={`evidence-board evidence-board--with-open${hasVerified ? " evidence-board--split" : " evidence-board--open-only"}`} id="claims" aria-label="已知資訊與仍待釐清"><header className="evidence-board-header"><p className="eyebrow">證據邊界</p><h2>知道哪裡還不知道，<br />比假裝有答案更重要。</h2><p>已知與未決內容放在同一套證據邊界中對照。</p></header><div className="evidence-board-columns">{hasVerified && <EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} />}<EvidenceBoardColumn collection={unresolved} sourceLinks={sourceLinks} /></div></section>;
 }
 
 function AttributedEvidenceSection({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
@@ -122,7 +127,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
         {renderTimelineGroups(olderTimelineGroups, "history")}
       </details>}
     </section>}
-    <EvidenceSection collection={verified} relatedCollection={unresolved} sourceLinks={sourceLinks} />
+    <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
     {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
     {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
