@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { AttributedSpeakerGroup, DeepResearchTopic, PublicClaim, PublicSpeaker } from "./topic-data";
+import type { DeepResearchTopic, PublicClaim } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -56,219 +56,6 @@ function SpeakerGroups({ groups, sourceLinks }: { groups: DossierPageModel["attr
   })}</div>;
 }
 
-type StanceMapEntry = {
-  key: string;
-  speaker: PublicSpeaker;
-  claim: PublicClaim;
-  relation: string;
-  targetLabel: string;
-  explicitTarget: boolean;
-  claimCount: number;
-  targetSpeaker?: PublicSpeaker;
-  targetSpeakerKey?: string;
-  reciprocal: boolean;
-};
-
-type StanceGraphNode = {
-  key: string;
-  kind: "topic" | "speaker" | "target";
-  label: string;
-  role: string;
-  index?: number;
-};
-
-type StanceGraphPosition = { x: number; y: number };
-
-function cleanStanceTarget(target: string) {
-  return target.replace(/^(?:有|所謂|對|關於|將|把)\s*/, "").trim().slice(0, 42);
-}
-
-function canonicalizeStanceTargetLabel(target: string) {
-  const cleaned = cleanStanceTarget(target);
-  return cleaned === "中央" ? "中央政府（行政院）" : cleaned;
-}
-
-function speakerKey(speaker: PublicSpeaker) {
-  return `${speaker.name}::${speaker.role}`;
-}
-
-const adversarialRelations = new Set([
-  "批評",
-  "批判",
-  "指控",
-  "抨擊",
-  "攻擊",
-  "責怪",
-  "質疑",
-  "反駁",
-  "駁斥",
-  "影射",
-]);
-
-function findTargetSpeaker(statement: string, speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
-  const target = speakers.find((candidate) => candidate.name !== speaker.name && statement.includes(candidate.name));
-  return target ? { speaker: target, key: speakerKey(target) } : undefined;
-}
-
-function findAdversarialTargetLabel(statement: string, relation: string, fallback: string) {
-  const target = statement.match(new RegExp(`${relation}\\s*(?:對|將|把)?\\s*([^，。；「」]{2,24}?)(?=未|沒有|不|是否|「|，|。|；|$)`));
-  return target ? cleanStanceTarget(target[1]) : fallback;
-}
-
-function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
-  const prioritizedClaims = claims.slice().sort((left, right) => {
-    const leftHasNamedTarget = Boolean(findTargetSpeaker(left.statement, speaker, speakers));
-    const rightHasNamedTarget = Boolean(findTargetSpeaker(right.statement, speaker, speakers));
-    return Number(rightHasNamedTarget) - Number(leftHasNamedTarget);
-  });
-  for (const claim of prioritizedClaims) {
-    const target = findTargetSpeaker(claim.statement, speaker, speakers);
-    const targetFields = target ? { targetSpeaker: target.speaker, targetSpeakerKey: target.key } : {};
-    const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
-    if (quoted) return { claim, relation: quoted[1], targetLabel: target?.speaker.name ?? canonicalizeStanceTargetLabel(findAdversarialTargetLabel(claim.statement, quoted[1], quoted[2])), explicitTarget: true, ...targetFields };
-    const direct = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|研判|認為|不應|辯稱|提醒)\s*([^，。；]{2,42})/);
-    if (direct) return { claim, relation: direct[1], targetLabel: target?.speaker.name ?? canonicalizeStanceTargetLabel(findAdversarialTargetLabel(claim.statement, direct[1], direct[2])), explicitTarget: true, ...targetFields };
-    if (target) return { claim, relation: "提及", targetLabel: target.speaker.name, explicitTarget: true, ...targetFields };
-  }
-  return { claim: claims[0], relation: "提出說法", targetLabel: "議題焦點", explicitTarget: false };
-}
-
-function buildStanceMap(groups: AttributedSpeakerGroup[]): StanceMapEntry[] {
-  const merged = new Map<string, { speaker: PublicSpeaker; claims: PublicClaim[] }>();
-  groups.forEach((group) => {
-    const key = `${group.speaker.name}::${group.speaker.role}`;
-    const current = merged.get(key) ?? { speaker: group.speaker, claims: [] };
-    current.claims.push(...group.claims);
-    merged.set(key, current);
-  });
-  const speakers = Array.from(merged.values()).map(({ speaker }) => speaker);
-  const entries = Array.from(merged.entries()).map(([key, { speaker, claims }]) => ({
-    key,
-    speaker,
-    ...findStanceTarget(claims, speaker, speakers),
-    claimCount: claims.length,
-    reciprocal: false,
-  })).filter((entry) => entry.explicitTarget && adversarialRelations.has(entry.relation));
-  return entries.map((entry) => ({
-    ...entry,
-    reciprocal: Boolean(entry.targetSpeakerKey && entries.some((other) => other.key === entry.targetSpeakerKey && other.targetSpeakerKey === entry.key)),
-  }));
-}
-
-function stanceEntryTargetKey(entry: StanceMapEntry) {
-  if (entry.targetSpeakerKey) return entry.targetSpeakerKey;
-  if (entry.explicitTarget && entry.targetLabel !== "議題焦點") return `target::${entry.targetLabel}`;
-  return "topic";
-}
-
-function buildStanceGraphNodes(entries: StanceMapEntry[]) {
-  const speakers = entries.map(({ speaker, key }) => ({ key, speaker })).filter(({ key }, index, all) => all.findIndex((candidate) => candidate.key === key) === index);
-  const speakerNodes: StanceGraphNode[] = speakers.map(({ key, speaker }, index) => ({ key, kind: "speaker", label: speaker.name, role: speaker.role, index }));
-  const targetNodes: StanceGraphNode[] = entries
-    .filter((entry) => !entry.targetSpeaker && entry.explicitTarget && entry.targetLabel !== "議題焦點")
-    .map((entry) => ({
-      key: stanceEntryTargetKey(entry),
-      kind: "target",
-      label: entry.targetLabel,
-      role: entry.targetLabel === "中央政府（行政院）" ? "組織落點，非個人" : entry.targetLabel === "其他縣市" ? "地方政府群體，非個人" : "文字中的落點",
-    }))
-    .filter((node, index, all) => all.findIndex((candidate) => candidate.key === node.key) === index);
-  return [{ key: "topic", kind: "topic", label: "議題焦點", role: "共同節點" }, ...speakerNodes, ...targetNodes];
-}
-
-function buildStanceGraphPositions(nodes: StanceGraphNode[]) {
-  const positions = new Map<string, StanceGraphPosition>([["topic", { x: 50, y: 50 }]]);
-  const orbitNodes = nodes.filter((node) => node.key !== "topic");
-  const radiusX = orbitNodes.length > 14 ? 42 : 39;
-  const radiusY = orbitNodes.length > 14 ? 37 : 34;
-  orbitNodes.forEach((node, index) => {
-    const angle = -Math.PI / 2 + (2 * Math.PI * index) / orbitNodes.length;
-    positions.set(node.key, { x: 50 + radiusX * Math.cos(angle), y: 50 + radiusY * Math.sin(angle) });
-  });
-  return positions;
-}
-
-function stanceGraphNodeRadius(node: StanceGraphNode) {
-  return node.kind === "topic" ? { x: 11, y: 11 } : { x: 9, y: 9 };
-}
-
-function trimStanceGraphEdge(source: StanceGraphPosition, target: StanceGraphPosition, sourceNode: StanceGraphNode, targetNode: StanceGraphNode) {
-  const direction = { x: target.x - source.x, y: target.y - source.y };
-  const length = Math.hypot(direction.x, direction.y);
-  if (length === 0) return { source, target };
-  const unit = { x: direction.x / length, y: direction.y / length };
-  const trimPoint = (point: StanceGraphPosition, node: StanceGraphNode, sign: 1 | -1) => {
-    const radius = stanceGraphNodeRadius(node);
-    const distance = 1 / Math.sqrt((unit.x / radius.x) ** 2 + (unit.y / radius.y) ** 2);
-    return { x: point.x + sign * unit.x * distance, y: point.y + sign * unit.y * distance };
-  };
-  return { source: trimPoint(source, sourceNode, 1), target: trimPoint(target, targetNode, -1) };
-}
-
-function buildStanceGraphEdges(entries: StanceMapEntry[]) {
-  const drawnReciprocalPairs = new Set<string>();
-  return entries.flatMap((entry) => {
-    const targetKey = stanceEntryTargetKey(entry);
-    if (entry.reciprocal) {
-      const pairKey = [entry.key, targetKey].sort().join("↔");
-      if (drawnReciprocalPairs.has(pairKey)) return [];
-      drawnReciprocalPairs.add(pairKey);
-    }
-    return [{ entry, sourceKey: entry.key, targetKey }];
-  });
-}
-
-function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
-  const entries = buildStanceMap(groups);
-  const nodes = buildStanceGraphNodes(entries);
-  const positions = buildStanceGraphPositions(nodes);
-  const nodesByKey = new Map(nodes.map((node) => [node.key, node]));
-  const edges = buildStanceGraphEdges(entries);
-  return <section className="stance-map-section" id="stance-map" aria-label="攻防關係圖">
-    <div className="stance-map-intro section-intro"><p className="eyebrow">攻防關係圖</p><h2>只把有對立性的指向畫出來。</h2><p>圖中只保留原句明確寫出的批評、質疑、指控、反駁等關係；轉述、政策說明、呼籲與單純提及仍保留在下方各方說法，不進入這張圖。人物節點與組織／群體落點分開；「中央政府（行政院）」不等同卓榮泰個人。</p></div>
-    <div className="stance-map-board">
-      <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`攻防關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
-        <svg className="stance-map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <defs><marker id="stance-arrowhead" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker><marker id="stance-arrowhead-reciprocal" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker></defs>
-          {edges.map(({ entry, sourceKey, targetKey }) => {
-            const source = positions.get(sourceKey) ?? positions.get("topic")!;
-            const target = positions.get(targetKey) ?? positions.get("topic")!;
-            const sourceNode = nodesByKey.get(sourceKey) ?? nodesByKey.get("topic")!;
-            const targetNode = nodesByKey.get(targetKey) ?? nodesByKey.get("topic")!;
-            const trimmed = trimStanceGraphEdge(source, target, sourceNode, targetNode);
-            const marker = entry.reciprocal ? "url(#stance-arrowhead-reciprocal)" : "url(#stance-arrowhead)";
-            return <path className={`stance-edge${entry.reciprocal ? " stance-edge--reciprocal" : ""}`} d={`M ${trimmed.source.x} ${trimmed.source.y} L ${trimmed.target.x} ${trimmed.target.y}`} markerEnd={marker} markerStart={entry.reciprocal ? marker : undefined} key={`${sourceKey}-${targetKey}`} />;
-          })}
-        </svg>
-        <div className="stance-map-nodes">
-          {nodes.map((node) => {
-            const position = positions.get(node.key)!;
-            const nodeLabel = `${node.label}，${node.role}`;
-            return <div className={`stance-graph-node stance-graph-node--${node.kind}`} style={{ left: `${position.x}%`, top: `${position.y}%` }} role="img" aria-label={nodeLabel} key={node.key}>
-              {node.kind === "speaker" && <span className="stance-actor-index">{String((node.index ?? 0) + 1).padStart(2, "0")}</span>}
-              <strong>{node.label}</strong>
-              <small>{node.role}</small>
-            </div>;
-          })}
-        </div>
-      </div>
-      <div className="stance-map-evidence" aria-label="攻防關係圖原句">
-        <div className="stance-map-evidence-heading"><span>箭頭的原句依據</span><small>展開查看說法與來源</small></div>
-        <div className="stance-map-evidence-list">
-          {entries.map((entry, index) => {
-            const targetLabel = entry.targetSpeaker?.name ?? entry.targetLabel;
-            return <details className={`stance-evidence stance-evidence-card${entry.reciprocal ? " stance-evidence-card--reciprocal" : ""}`} key={`${entry.key}-${index}`}>
-              <summary><span className="stance-evidence-index">{String(index + 1).padStart(2, "0")}</span><span className="stance-evidence-route"><strong>{entry.speaker.name}</strong><b>{entry.reciprocal ? "↔" : "→"}</b><strong>{targetLabel}</strong></span><span className="stance-evidence-relation">{entry.reciprocal ? "互指" : entry.relation}</span><span className="stance-evidence-action">看原句</span></summary>
-              <div className="stance-evidence-body"><p>{entry.claim.statement}</p><small>{entry.claimCount} 項具名說法</small><div className="citations">{sourceLinks(entry.claim.sources.map(({ publicRef }) => publicRef))}</div></div>
-            </details>;
-          })}
-        </div>
-      </div>
-    </div>
-    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示對立指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有明示對立關係的說法不會出現在這張圖。</p>
-  </section>;
-}
-
 const evidenceCopy = {
   claims: { aria: "命題追溯", eyebrow: "已知資訊", title: undefined, intro: undefined },
   questions: { aria: "仍待釐清", eyebrow: "仍待釐清", title: <>知道哪裡還不知道，<br />比假裝有答案更重要。</>, intro: "這些項目已有公開調查或報導脈絡，但尚不能把任何一種解釋寫成根因或責任定論。" },
@@ -293,7 +80,6 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 export default function DossierPage({ model }: { model: DossierPageModel }) {
   const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, recentTimelineGroups, olderTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
-  const stanceMapAvailable = buildStanceMap(attributedSpeakerGroups).length > 0;
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
     return source ? <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`查看來源：${source.publisher}`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a> : null;
@@ -322,7 +108,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{stanceMapAvailable && <a href="#stance-map">攻防圖</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
       <div className="section-intro"><p className="eyebrow">事件進展</p><p>預設顯示最近一週（以最新事件為基準）；較早進度仍保留在下方。</p></div>
       {recentTimelineGroups.length > 0 && renderTimelineGroups(recentTimelineGroups, "recent")}
@@ -333,7 +119,6 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     </section>}
     <EvidenceSection collection={verified} sourceLinks={sourceLinks} />
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
-    {stanceMapAvailable && <StanceMap groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
     {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
     {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
     {unresolved.claims.length > 0 && <EvidenceSection collection={unresolved} sourceLinks={sourceLinks} />}
