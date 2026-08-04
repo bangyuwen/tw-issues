@@ -438,8 +438,8 @@ test("topic page leads with progression and then each evidence disposition", () 
     html.indexOf("class=\"article-nav\""),
     html.indexOf("class=\"event-progress-section\""),
     html.indexOf("id=\"claims\""),
-    html.indexOf("id=\"reports\""),
     html.indexOf("id=\"questions\""),
+    html.indexOf("id=\"reports\""),
     html.indexOf("id=\"sources\""),
   ];
   assert.ok(order.every((position) => position >= 0));
@@ -637,63 +637,14 @@ test("speaker groups lead with a one-line public summary before expandable detai
   assert.doesNotMatch(html, /speaker-group-details" open/);
 });
 
-test("stance map connects explicitly named speakers and marks reciprocal arrows", () => {
-  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
-    topicId: "stance-map-reciprocal",
-    claims: [],
-    attributedClaims: [],
-    attributedSpeakerGroups: [
-      { speaker: { name: "甲方", role: "公共團體" }, claims: [{ ...claim, statement: "甲方批評乙方，稱資料不透明。" }] },
-      { speaker: { name: "乙方", role: "行政機關" }, claims: [{ ...claim, statement: "乙方質疑甲方，稱程序失職。" }] },
-    ],
-    openQuestions: [],
-  }} />);
-
-  assert.match(html, /id="stance-map"/);
-  assert.match(html, /class="stance-map-canvas(?: stance-map-canvas--dense)?" role="group" aria-label="攻防關係圖，3 個六角形，1 條箭頭"/);
-  assert.match(html, /<svg class="stance-map-links" viewBox="0 0 100 100"/);
-  assert.match(html, /<path class="stance-edge stance-edge--reciprocal" d="M 50 25 L 50 75"/);
-  assert.equal((html.match(/class="stance-graph-node stance-graph-node--speaker"/g) ?? []).length, 2);
-  assert.equal((html.match(/class="stance-edge stance-edge--reciprocal"/g) ?? []).length, 1);
-  assert.equal((html.match(/class="stance-evidence stance-evidence-card stance-evidence-card--reciprocal"/g) ?? []).length, 2);
-  assert.equal((html.match(/>互指<\/span>/g) ?? []).length, 2);
-  assert.match(html, /攻防關係圖/);
-  assert.match(html, /只保留原句明確寫出的批評、質疑、指控、反駁等關係/);
-  assert.match(html, /aria-label="乙方，行政機關"/);
-  assert.match(html, /aria-label="甲方，公共團體"/);
-  assert.doesNotMatch(html, /stance-lane/);
-});
-
-test("stance map omits non-adversarial attributed statements", () => {
-  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
-    topicId: "stance-map-adversarial-only",
-    claims: [],
-    attributedClaims: [],
-    attributedSpeakerGroups: [
-      { speaker: { name: "甲方", role: "公共團體" }, claims: [{ ...claim, statement: "甲方表示乙方將持續合作。" }] },
-      { speaker: { name: "乙方", role: "行政機關" }, claims: [{ ...claim, statement: "乙方研判甲方提出的資料仍待確認。" }] },
-    ],
-    openQuestions: [],
-  }} />);
-
-  assert.doesNotMatch(html, /id="stance-map"/);
-  assert.doesNotMatch(html, />攻防圖</);
-});
-
-test("published food-safety stance map connects Fu Kun-chi to the explicitly named premier", () => {
+test("published food-safety page keeps attributed evidence without automatic stance mapping", () => {
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} />);
 
-  const mapHtml = html.match(/<section class="stance-map-section"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(mapHtml, /aria-label="攻防關係圖"/);
-  assert.match(html, /<span class="stance-evidence-route"><strong>傅崐萁<\/strong><b>→<\/b><strong>卓榮泰<\/strong><\/span>/);
-  assert.match(mapHtml, /<span class="stance-evidence-route"><strong>卓榮泰<\/strong><b>→<\/b><strong>其他縣市<\/strong><\/span>/);
-  assert.match(mapHtml, /<span class="stance-evidence-route"><strong>蔣萬安<\/strong><b>→<\/b><strong>中央政府（行政院）<\/strong><\/span>/);
-  assert.match(mapHtml, /aria-label="中央政府（行政院），組織落點，非個人"/);
-  assert.match(mapHtml, /不等同卓榮泰個人/);
-  assert.doesNotMatch(mapHtml, /<span class="stance-evidence-relation">(?:提出說法|提及|研判|呼籲|否認)<\/span>/);
+  assert.doesNotMatch(html, /id="stance-map"|stance-edge|stance-graph-node|攻防關係圖/);
   assert.match(html, /傅崐萁批評行政院長卓榮泰/);
-  assert.match(html, /不能證明卓榮泰或行政院已被獨立調查認定負有本案責任/);
+  assert.match(html, /不同主體怎麼說/);
 });
+
 
 test("model preserves ledger order and includes a timeline-only source", () => {
   const timelineSource = { ...source, publicRef: "timeline-only", publisher: "時間軸來源" };

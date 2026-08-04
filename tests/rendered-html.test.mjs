@@ -157,6 +157,23 @@ test("food-safety page separates public facts, reported chronology, and open que
   assert.doesNotMatch(knownInformation, /已證實南僑/);
 });
 
+test("food-safety page integrates open questions into the known-information reading path", async () => {
+  const response = await render("/topics/benzopyrene-food-safety");
+  const html = await response.text();
+  const claimsStart = html.indexOf('<section class="evidence-section" id="claims"');
+  const reportsStart = html.indexOf('<section class="evidence-section" id="reports"');
+  const claimsSection = html.slice(claimsStart, reportsStart);
+  const nav = html.match(/<nav class="article-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
+
+  assert.equal(response.status, 200);
+  assert.ok(claimsStart >= 0 && reportsStart > claimsStart);
+  assert.match(claimsSection, /data-collection-id="claims"/);
+  assert.match(claimsSection, /class="evidence-subsection evidence-subsection--open" id="questions" role="region"/);
+  assert.match(claimsSection, /知道哪裡還不知道[\s\S]*?比假裝有答案更重要/);
+  assert.match(nav, /href="#claims">已知資訊/);
+  assert.doesNotMatch(nav, /href="#questions">仍待釐清/);
+});
+
 test("food-safety page covers response and follow-up stages without promoting statements", async () => {
   const response = await render("/topics/benzopyrene-food-safety");
   const html = await response.text();
