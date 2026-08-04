@@ -62,10 +62,29 @@ test(`topic page renders ${section} when verified claims are empty`, () => {
       assert.match(html, /有人關注測試議題/);
       assert.doesNotMatch(html, /data-claim-id="clm-test"/);
     }
+    if (section === "openQuestions") {
+      assert.match(html, /class="evidence-board evidence-board--with-open evidence-board--open-only"/);
+      assert.doesNotMatch(html, /data-collection-id="claims"/);
+      assert.match(html, /data-collection-id="questions"/);
+    }
     assert.doesNotMatch(html, /data-claim-id|clm-test|src-test/);
     assert.doesNotMatch(html, /公開資料補強中/);
   });
 }
+
+test("evidence board collapses to one known-information column without open questions", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      ...projection("socialObservations"),
+      claims: [claim],
+    }} />,
+  );
+
+  assert.match(html, /class="evidence-board evidence-board--known-only"/);
+  assert.match(html, /data-collection-id="claims"/);
+  assert.doesNotMatch(html, /data-collection-id="questions"/);
+  assert.doesNotMatch(html, /evidence-board--with-open/);
+});
 
 test("durable event timeline groups same-day events and starts every event closed", () => {
   const attributedClaim = { ...claim, statement: "主管機關提出具名說法。", speakers: [{ name: "測試機關", role: "主管機關" }] };
@@ -445,7 +464,7 @@ test("topic page leads with progression and then each evidence disposition", () 
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
   assert.doesNotMatch(html, /class="topic-infographic|class="topic-evidence-chart|class="topic-source-chart/);
-  assert.doesNotMatch(html, />證據邊界</);
+  assert.match(html, /class="evidence-board-header"[\s\S]*?>證據邊界</);
 
   for (const statement of [claim.statement, attributedClaim.statement, unresolvedClaim.statement]) {
     const cardStart = html.indexOf(statement, html.indexOf("id=\"claims\""));

@@ -26,6 +26,18 @@ async function render(pathname) {
   );
 }
 
+function claimsBoard(html) {
+  const start = html.indexOf('<section class="evidence-board');
+  const reports = html.indexOf('<section class="evidence-section" id="reports"', start);
+  return html.slice(start, reports >= 0 ? reports : html.length);
+}
+
+function verifiedClaims(html) {
+  const start = html.indexOf('data-collection-id="claims"');
+  const open = html.indexOf('data-collection-id="questions"', start);
+  return html.slice(start, open >= 0 ? open : html.length);
+}
+
 test("index selects the ten most recently updated deep-research topics", async () => {
   const response = await render("/");
   const html = await response.text();
@@ -146,9 +158,9 @@ test("food-safety page separates public facts, reported chronology, and open que
   assert.doesNotMatch(html, /clm-bap-|src-bap-|data-claim-id/);
   assert.doesNotMatch(html, /已證實南僑 6 月 10 日發現超標/);
 
-  const progress = html.match(/id="progress"[\s\S]*?<section class="evidence-section" id="claims"/)?.[0] ?? "";
+  const progress = html.match(/id="progress"[\s\S]*?<section[^>]+id="claims"/)?.[0] ?? "";
   const reported = html.match(/id="reports"[\s\S]*?<\/section>/)?.[0] ?? "";
-  const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const knownInformation = verifiedClaims(html);
   assert.ok(progress.indexOf("2026-07-17") < progress.indexOf("2026-07-04"));
   assert.match(reported, /不同主體怎麼說/);
   assert.match(html, /18 項產品、30 個批號及 360 家流向業者/);
@@ -160,16 +172,18 @@ test("food-safety page separates public facts, reported chronology, and open que
 test("food-safety page integrates open questions into the known-information reading path", async () => {
   const response = await render("/topics/benzopyrene-food-safety");
   const html = await response.text();
-  const claimsStart = html.indexOf('<section class="evidence-section" id="claims"');
+  const claimsStart = html.indexOf('<section class="evidence-board');
   const reportsStart = html.indexOf('<section class="evidence-section" id="reports"');
-  const claimsSection = html.slice(claimsStart, reportsStart);
+  const claimsSection = claimsBoard(html);
   const nav = html.match(/<nav class="article-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
 
   assert.equal(response.status, 200);
   assert.ok(claimsStart >= 0 && reportsStart > claimsStart);
-  assert.match(claimsSection, /data-collection-id="claims"/);
-  assert.match(claimsSection, /class="evidence-subsection evidence-subsection--open" id="questions" role="region"/);
-  assert.match(claimsSection, /知道哪裡還不知道[\s\S]*?比假裝有答案更重要/);
+  assert.match(claimsSection, /class="evidence-board evidence-board--with-open evidence-board--split"/);
+  assert.match(claimsSection, /<h2>知道哪裡還不知道[\s\S]*?比假裝有答案更重要/);
+  assert.match(claimsSection, /data-collection-id="claims"[\s\S]*?data-collection-id="questions"/);
+  assert.match(claimsSection, /id="questions" role="group"/);
+  assert.doesNotMatch(claimsSection, /<section[^>]+id="questions"/);
   assert.match(nav, /href="#claims">已知資訊/);
   assert.doesNotMatch(nav, /href="#questions">仍待釐清/);
 });
@@ -181,7 +195,7 @@ test("food-safety page covers response and follow-up stages without promoting st
   for (const text of ["專家會議", "南僑", "29 批", "第三批", "2.9 微克", "排除食油煉製", "巴西黃豆含水量過多", "乾燥與燻蒸時間延長", "烘烤熱損傷", "根因尚未定論"]) {
     assert.match(html, new RegExp(text));
   }
-  const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const knownInformation = verifiedClaims(html);
   for (const attributedText of ["南僑稱", "29 批", "第三批", "2.9 微克", "初步研判"]) {
     assert.doesNotMatch(knownInformation, new RegExp(attributedText));
   }
@@ -196,7 +210,7 @@ test("food-safety page covers response and follow-up stages without promoting st
 test("food-safety durable events use date groups and accessible disclosures", async () => {
   const response = await render("/topics/benzopyrene-food-safety");
   const html = await response.text();
-  const progress = html.match(/id="progress"[\s\S]*?<section class="evidence-section" id="claims"/)?.[0] ?? "";
+  const progress = html.match(/id="progress"[\s\S]*?<section[^>]+id="claims"/)?.[0] ?? "";
 
   assert.equal(response.status, 200);
   assert.ok(progress.length > 0);
@@ -233,7 +247,7 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.match(progress, /連淨七批苦茶油送驗後有四批不合格/);
   assert.match(progress, /尚待立法院審議/);
   assert.match(progress, /下架回收 824,848 公斤/);
-  const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const knownInformation = verifiedClaims(html);
   assert.doesNotMatch(knownInformation, /排除食油煉製|初步研判|根因仍未定論/);
   assert.doesNotMatch(
     knownInformation,
@@ -282,7 +296,7 @@ test("topic pages use concise display titles and structured claim reading blocks
   assert.doesNotMatch(html, /class="fact-grid fact-grid--verified"/);
   assert.match(html, /class="fact-grid fact-grid--open"/);
   assert.match(html, /class="claim-boundary"/);
-  assert.doesNotMatch(html, />證據邊界</);
+  assert.match(html, /class="evidence-board-header"[\s\S]*?>證據邊界</);
   assert.match(html, />這能確認</);
   assert.match(html, />這不能證明</);
   assert.match(html, /class="claim-sources"/);
@@ -311,7 +325,7 @@ test("topic pages use one progression-first hierarchy across different issues", 
 test("food-safety recall updates keep the July 10 and July 11 claims separate", async () => {
   const response = await render("/topics/benzopyrene-food-safety");
   const html = await response.text();
-  const progress = html.match(/id="progress"[\s\S]*?<section class="evidence-section" id="claims"/)?.[0] ?? "";
+  const progress = html.match(/id="progress"[\s\S]*?<section[^>]+id="claims"/)?.[0] ?? "";
   const july10 = progress.match(/data-date-key="2026-07-10"[\s\S]*?(?=class="event-date-group"|<\/div>\s*<\/section>)/)?.[0] ?? "";
   const july11 = progress.match(/data-date-key="2026-07-11"[\s\S]*?(?=class="event-date-group"|<\/div>\s*<\/section>)/)?.[0] ?? "";
 
@@ -341,7 +355,7 @@ test("food-safety page presents anonymous compact social samples without identif
   assert.match(sources, /<a[^>]+href="https?:\/\/[^\"]+"[^>]*>[^<]*(?:政府|署|報|中心|院)/);
   assert.doesNotMatch(html, /社群共識/);
 
-  const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const knownInformation = verifiedClaims(html);
   assert.doesNotMatch(knownInformation, /clm-bap-social-/);
   assert.doesNotMatch(html, /本頁只顯示[^<]*public-ready/);
 });
