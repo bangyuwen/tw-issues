@@ -135,6 +135,9 @@ test("food-safety page separates public facts, reported chronology, and open que
   assert.match(html, /href="#source-04"/);
   assert.doesNotMatch(html, /id="src-bap-/);
   assert.match(html, /不同主體怎麼說/);
+  assert.match(html, /class="speaker-group-summary"[\s\S]*?一句話摘要/);
+  assert.match(html, /class="speaker-group-details"><summary><span>展開 (?:<!-- -->)?\d+(?:<!-- -->)? 項具名說法/);
+  assert.doesNotMatch(html, /class="speaker-group-details" open/);
   assert.match(html, /臺中市政府表示，南僑 6 月 10 日發現超標/);
   assert.match(html, /石崇良・衛生福利部部長/);
   assert.match(html, /仍待釐清/);

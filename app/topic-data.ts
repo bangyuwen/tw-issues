@@ -49,6 +49,8 @@ export type PublicSpeaker = {
 
 export type AttributedSpeakerGroup = {
   speaker: PublicSpeaker;
+  /** Optional editorial summary of the speaker's public position. */
+  stanceSummary?: string;
   claims: PublicClaim[];
 };
 
