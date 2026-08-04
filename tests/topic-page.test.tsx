@@ -687,7 +687,9 @@ test("published food-safety stance map connects Fu Kun-chi to the explicitly nam
   assert.match(mapHtml, /aria-label="攻防關係圖"/);
   assert.match(html, /<span class="stance-evidence-route"><strong>傅崐萁<\/strong><b>→<\/b><strong>卓榮泰<\/strong><\/span>/);
   assert.match(mapHtml, /<span class="stance-evidence-route"><strong>卓榮泰<\/strong><b>→<\/b><strong>其他縣市<\/strong><\/span>/);
-  assert.match(mapHtml, /<span class="stance-evidence-route"><strong>蔣萬安<\/strong><b>→<\/b><strong>中央<\/strong><\/span>/);
+  assert.match(mapHtml, /<span class="stance-evidence-route"><strong>蔣萬安<\/strong><b>→<\/b><strong>中央政府（行政院）<\/strong><\/span>/);
+  assert.match(mapHtml, /aria-label="中央政府（行政院），組織落點，非個人"/);
+  assert.match(mapHtml, /不等同卓榮泰個人/);
   assert.doesNotMatch(mapHtml, /<span class="stance-evidence-relation">(?:提出說法|提及|研判|呼籲|否認)<\/span>/);
   assert.match(html, /傅崐萁批評行政院長卓榮泰/);
   assert.match(html, /不能證明卓榮泰或行政院已被獨立調查認定負有本案責任/);
