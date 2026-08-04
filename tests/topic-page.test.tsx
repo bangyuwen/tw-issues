@@ -438,8 +438,8 @@ test("topic page leads with progression and then each evidence disposition", () 
     html.indexOf("class=\"article-nav\""),
     html.indexOf("class=\"event-progress-section\""),
     html.indexOf("id=\"claims\""),
-    html.indexOf("id=\"reports\""),
     html.indexOf("id=\"questions\""),
+    html.indexOf("id=\"reports\""),
     html.indexOf("id=\"sources\""),
   ];
   assert.ok(order.every((position) => position >= 0));
