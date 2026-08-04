@@ -222,3 +222,8 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
   .evidence-claim-body { padding:0 0 16px 38px; }
   .evidence-claim-row[open] .event-disclosure-action::before { content:"−"; font-size:1.1rem; }
 }
+
+@media (min-width:801px) {
+  .evidence-board-columns { grid-template-columns:minmax(0,1.28fr) minmax(320px,1fr); align-items:start; }
+  .evidence-board-column--open { border-left:1px solid var(--line); background:#f0f1ee; }
+}
