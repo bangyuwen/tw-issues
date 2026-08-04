@@ -118,8 +118,8 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .speaker-statement-body .citations { margin-top:8px; }
 
 @media (max-width:800px) {
-  .speaker-group>header { gap:2px; margin-bottom:2px; }
-  .speaker-group-summary { font-size:.82rem; line-height:1.42; }
+  .speaker-group>header { grid-template-columns:1fr; gap:3px; margin-bottom:3px; }
+  .speaker-group-summary { font-size:.9rem; line-height:1.55; }
   .speaker-group-details>summary { padding:3px 22px 3px 0; }
   .speaker-statement-row>summary { padding:9px 28px 9px 0; }
   .speaker-statement-title { font-size:.9rem; }
