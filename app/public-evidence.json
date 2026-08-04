@@ -3625,70 +3625,173 @@
     ]
   },
   "defense-procurement": {
-    "topicId": "taiwan-self-defense-bargaining-2026",
+    "topicId": "defense-procurement-2026",
     "claims": [
       {
-        "statement": "2026 城鎮韌性演習由全國 22 縣市採兩年一輪，分為兵棋推演與綜合實作兩日，制度目標包含中央、地方、政府與民間的跨單位協調。",
-        "claimType": "institutional_design",
+        "statement": "2025 年 11 月，DSCA 公告一項對台非標準航空零附件可能軍售並完成國會通知程序。",
+        "claimType": "procedural_fact",
         "harmRisk": "low",
-        "proofScope": "證明全動署公布的兩年一輪、兩日演練與跨單位協調設計。",
+        "proofScope": "只證明可能軍售公告、品項、估值與國會通知階段。",
         "limitations": [
-          "制度設計不代表各縣市均已完成演練或通過驗收。"
+          "不證明台灣已簽署發價書、完成契約、付款或交貨。"
         ],
         "sources": [
           {
             "publicRef": "source-01",
-            "canonicalUrl": "https://adma.mnd.gov.tw/unit/100003/8070",
-            "title": "2026 城鎮韌性演習期程與兩日演練設計",
-            "publisher": "全民防衛動員署",
-            "publishedAt": "2026-04-08",
+            "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4330755/taipei-economic-and-cultural-representative-office-in-the-united-states-non-sta",
+            "title": "公告標題、案件內容與估值段落",
+            "publisher": "美國國防安全合作署",
+            "publishedAt": "2025-11-13",
             "displayRole": "制度或機關紀錄"
           }
         ]
       },
       {
-        "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
-        "claimType": "observed_event",
+        "statement": "立法院於 2026 年 5 月 8 日三讀通過軍購特別條例；這是 2026 年的制度進程，不是 2025 年零附件可能軍售案的履約證明。",
+        "claimType": "procedural_fact",
         "harmRisk": "low",
-        "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+        "proofScope": "只證明軍購特別條例於 2026 年 5 月 8 日完成三讀程序。",
         "limitations": [
-          "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
-          "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+          "不證明條例涵蓋的各軍購案均已簽署發價書、完成付款或交付；也不證明其與 2025 年零附件案是同一案件。"
         ],
         "sources": [
           {
             "publicRef": "source-02",
-            "canonicalUrl": "https://news.pts.org.tw/article/817629",
-            "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-            "publisher": "公視新聞網",
-            "publishedAt": "2026-07-14",
-            "displayRole": "媒體報導"
-          },
+            "canonicalUrl": "https://ppg.ly.gov.tw/ppg/bills/203110203710000/details",
+            "title": "併案審查紀錄、三讀日期與咨請公布紀錄",
+            "publisher": "中華民國立法院",
+            "publishedAt": "2026-05-12",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "立法院於 2026 年 5 月 29 日三讀通過 115 年度第一期軍購特別預算案。",
+        "claimType": "procedural_fact",
+        "harmRisk": "low",
+        "proofScope": "只證明 115 年度第一期軍購特別預算案於 2026 年 5 月 29 日完成三讀。",
+        "limitations": [
+          "不證明預算所列裝備已完成契約、付款、交貨或形成戰力，也不回溯證明 2025 年零附件案的履約狀態。",
+          "媒體報導不替代正式預算書，也不證明後續契約、付款、交貨或戰力成效。"
+        ],
+        "sources": [
           {
             "publicRef": "source-03",
-            "canonicalUrl": "https://news.pts.org.tw/article/817890",
-            "title": "捷運兵力物資轉移與戰術機動段落",
-            "publisher": "公視新聞網",
-            "publishedAt": "2026-07-16",
+            "canonicalUrl": "https://ppg.ly.gov.tw/ppg/bills/latest-pass-third-readings/1150701873/process",
+            "title": "特別預算案三讀與咨請公布紀錄",
+            "publisher": "中華民國立法院",
+            "publishedAt": "2026-05-29",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://www.taiwannews.com.tw/news/6372584",
+            "title": "立法院通過 115 年度第一期特別預算及金額的報導段落",
+            "publisher": "Taiwan News",
+            "publishedAt": "2026-05-29",
             "displayRole": "媒體報導"
           }
         ]
       },
       {
-        "statement": "立法院紀錄顯示，經濟、外交及國防、財政三委員會於2026年7月16日聯席處理行政院、民進黨立委、民眾黨團與國民黨團提出的四個無人載具條例版本，當日議程標示為詢答。",
-        "claimType": "procedural_fact",
-        "harmRisk": "low",
-        "proofScope": "證明四個版本在7月16日列入聯席委員會詢答議程。",
+        "statement": "2026年6月10日，第五作戰區首次在九鵬基地以外的西部防區實施HIMARS實彈射擊。",
+        "claimType": "event_fact",
+        "harmRisk": "elevated",
+        "proofScope": "證明軍方紀錄的日期、地點性質與首次在西部防區射擊。",
         "limitations": [
-          "不證明條文已完成審查、版本已整合、預算已核定或法案已三讀。"
+          "官方紀錄不能單獨證明戰時效能。",
+          "報導不能涵蓋所有軍方內部測試數據。"
         ],
         "sources": [
           {
-            "publicRef": "source-04",
-            "canonicalUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070904/details?meetingDate=115%2F07%2F16",
-            "title": "經濟、外交及國防、財政三委員會聯席會議議程與附件",
-            "publisher": "立法院議事暨公報資訊網",
-            "publishedAt": "2026-07-16",
+            "publicRef": "source-05",
+            "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
+            "title": "第五作戰區海馬士首度射擊全文",
+            "publisher": "國防部軍事新聞通訊社",
+            "publishedAt": "2026-06-10",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+            "publisher": "Associated Press",
+            "publishedAt": "2026-06-10",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "國防部紀錄顯示，發射車接獲任務後於3分鐘內完成機動、射擊準備與發射，射後立即撤離；AP亦獨立報導其機動射擊演練。",
+        "claimType": "operational_record",
+        "harmRisk": "elevated",
+        "proofScope": "證明軍方公開紀錄的演練程序與時間。",
+        "limitations": [
+          "單次演練不代表所有單位或戰況均能維持相同時間。",
+          "AP未獨立量測3分鐘數值。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
+            "title": "第五作戰區海馬士首度射擊全文",
+            "publisher": "國防部軍事新聞通訊社",
+            "publishedAt": "2026-06-10",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+            "publisher": "Associated Press",
+            "publishedAt": "2026-06-10",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "AP報導此次使用的是縮短射程的訓練火箭，不能用當日落點直接推論作戰彈藥的最大射程或戰時成效。",
+        "claimType": "reporting_fact",
+        "harmRisk": "elevated",
+        "proofScope": "證明報導明確區分當日訓練火箭與作戰射程。",
+        "limitations": [
+          "未提供每枚彈藥序號或技術測試報告。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+            "publisher": "Associated Press",
+            "publishedAt": "2026-06-10",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
+        "claimType": "procedural_fact",
+        "harmRisk": "elevated",
+        "proofScope": "證明2020年可能軍售通知與其程序性質。",
+        "limitations": [
+          "通知不等於契約、付款或交付完成。",
+          "possible sale通知不證明最終數量、價格與交期。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-07",
+            "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
+            "title": "Transmittal 20-69 possible sale notice",
+            "publisher": "美國國防安全合作署",
+            "publishedAt": "2020-10-21",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-08",
+            "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
+            "title": "Transmittal 26-01 possible sale notice",
+            "publisher": "美國國防安全合作署",
+            "publishedAt": "2025-12-17",
             "displayRole": "制度或機關紀錄"
           }
         ]
@@ -3696,12 +3799,13 @@
     ],
     "attributedClaims": [
       {
-        "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
-        "claimType": "procedural_fact",
+        "statement": "2025 年 11 月，國防部公開表示該零附件案用途是維持既有機隊戰備。",
+        "claimType": "attributed_statement",
         "harmRisk": "low",
-        "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
+        "proofScope": "只證明國防部曾公開說明該案用途。",
         "limitations": [
-          "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
+          "機關說法不替代最終契約、驗收或戰力成效資料。",
+          "報導仍是轉述機關說法，不證明最終契約、交付或實際戰力效果。"
         ],
         "speakers": [
           {
@@ -3711,62 +3815,70 @@
         ],
         "sources": [
           {
-            "publicRef": "source-05",
-            "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
-            "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+            "publicRef": "source-09",
+            "canonicalUrl": "https://www.mnd.gov.tw/en/Publication/85093",
+            "title": "新聞稿全文",
             "publisher": "中華民國國防部",
-            "publishedAt": "2026-07-12",
+            "publishedAt": "2025-11-14",
             "displayRole": "主管機關公開說明"
-          }
-        ]
-      },
-      {
-        "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
-        "claimType": "attributed_statement",
-        "harmRisk": "elevated",
-        "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
-        "limitations": [
-          "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
-        ],
-        "speakers": [
+          },
           {
-            "name": "顧立雄",
-            "role": "國防部長"
-          }
-        ],
-        "sources": [
-          {
-            "publicRef": "source-02",
-            "canonicalUrl": "https://news.pts.org.tw/article/817629",
-            "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-            "publisher": "公視新聞網",
-            "publishedAt": "2026-07-14",
+            "publicRef": "source-10",
+            "canonicalUrl": "https://www.taipeitimes.com/News/front/archives/2025/11/15/2003847238",
+            "title": "DSCA 公告品項、國防部用途說明與案件仍屬 proposed sale 的報導段落",
+            "publisher": "Taipei Times",
+            "publishedAt": "2025-11-15",
             "displayRole": "媒體報導"
           }
         ]
       },
       {
-        "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
-        "claimType": "attributed_statement",
+        "statement": "中央社報導，立法院於7月3日將行政院版與藍白提出的無人載具／無人機條例草案付委，經濟、外交及國防、財政三委員會排定7月16日聯席審查；付委與排程不等於條例已三讀或預算已通過。",
+        "claimType": "procedural_report",
         "harmRisk": "elevated",
-        "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
+        "proofScope": "記錄中央社對付委與聯席審查排程的報導。",
         "limitations": [
-          "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
+          "媒體報導不替代立法院正式議事紀錄，也不證明條例已三讀或預算已通過。"
         ],
         "speakers": [
           {
-            "name": "陳斌華",
-            "role": "國台辦發言人"
+            "name": "中央社",
+            "role": "媒體報導"
           }
         ],
         "sources": [
           {
-            "publicRef": "source-06",
-            "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
-            "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
-            "publisher": "新華社",
-            "publishedAt": "2026-07-08",
-            "displayRole": "政黨公開說明"
+            "publicRef": "source-11",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607110087.aspx",
+            "title": "立法院三委員會聯席審查無人機條例草案的付委與排程報導",
+            "publisher": "中央社",
+            "publishedAt": "2026-07-11",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+        "limitations": [
+          "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+        ],
+        "speakers": [
+          {
+            "name": "中華民國國防部",
+            "role": "主管機關公開資料"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-12",
+            "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+            "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與HIMARS資訊",
+            "publisher": "中華民國國防部",
+            "publishedAt": "2026-07-28",
+            "displayRole": "制度或機關紀錄"
           }
         ]
       }
@@ -3776,50 +3888,18 @@
     "attributedSpeakerGroups": [
       {
         "speaker": {
-          "name": "陳斌華",
-          "role": "國台辦發言人"
-        },
-        "claims": [
-          {
-            "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
-            "claimType": "attributed_statement",
-            "harmRisk": "elevated",
-            "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
-            "limitations": [
-              "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
-            ],
-            "speakers": [
-              {
-                "name": "陳斌華",
-                "role": "國台辦發言人"
-              }
-            ],
-            "sources": [
-              {
-                "publicRef": "source-06",
-                "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
-                "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
-                "publisher": "新華社",
-                "publishedAt": "2026-07-08",
-                "displayRole": "政黨公開說明"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "speaker": {
           "name": "中華民國國防部",
           "role": "主管機關公開說明"
         },
         "claims": [
           {
-            "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
-            "claimType": "procedural_fact",
+            "statement": "2025 年 11 月，國防部公開表示該零附件案用途是維持既有機隊戰備。",
+            "claimType": "attributed_statement",
             "harmRisk": "low",
-            "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
+            "proofScope": "只證明國防部曾公開說明該案用途。",
             "limitations": [
-              "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
+              "機關說法不替代最終契約、驗收或戰力成效資料。",
+              "報導仍是轉述機關說法，不證明最終契約、交付或實際戰力效果。"
             ],
             "speakers": [
               {
@@ -3829,12 +3909,20 @@
             ],
             "sources": [
               {
-                "publicRef": "source-05",
-                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
-                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+                "publicRef": "source-09",
+                "canonicalUrl": "https://www.mnd.gov.tw/en/Publication/85093",
+                "title": "新聞稿全文",
                 "publisher": "中華民國國防部",
-                "publishedAt": "2026-07-12",
+                "publishedAt": "2025-11-14",
                 "displayRole": "主管機關公開說明"
+              },
+              {
+                "publicRef": "source-10",
+                "canonicalUrl": "https://www.taipeitimes.com/News/front/archives/2025/11/15/2003847238",
+                "title": "DSCA 公告品項、國防部用途說明與案件仍屬 proposed sale 的報導段落",
+                "publisher": "Taipei Times",
+                "publishedAt": "2025-11-15",
+                "displayRole": "媒體報導"
               }
             ]
           }
@@ -3842,68 +3930,72 @@
       },
       {
         "speaker": {
-          "name": "顧立雄",
-          "role": "國防部長"
+          "name": "中央社",
+          "role": "媒體報導"
         },
         "claims": [
           {
-            "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
-            "claimType": "attributed_statement",
+            "statement": "中央社報導，立法院於7月3日將行政院版與藍白提出的無人載具／無人機條例草案付委，經濟、外交及國防、財政三委員會排定7月16日聯席審查；付委與排程不等於條例已三讀或預算已通過。",
+            "claimType": "procedural_report",
             "harmRisk": "elevated",
-            "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
+            "proofScope": "記錄中央社對付委與聯席審查排程的報導。",
             "limitations": [
-              "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
+              "媒體報導不替代立法院正式議事紀錄，也不證明條例已三讀或預算已通過。"
             ],
             "speakers": [
               {
-                "name": "顧立雄",
-                "role": "國防部長"
+                "name": "中央社",
+                "role": "媒體報導"
               }
             ],
             "sources": [
               {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://news.pts.org.tw/article/817629",
-                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-14",
+                "publicRef": "source-11",
+                "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607110087.aspx",
+                "title": "立法院三委員會聯席審查無人機條例草案的付委與排程報導",
+                "publisher": "中央社",
+                "publishedAt": "2026-07-11",
                 "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "中華民國國防部",
+          "role": "主管機關公開資料"
+        },
+        "claims": [
+          {
+            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "limitations": [
+              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+            ],
+            "speakers": [
+              {
+                "name": "中華民國國防部",
+                "role": "主管機關公開資料"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-12",
+                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與HIMARS資訊",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-28",
+                "displayRole": "制度或機關紀錄"
               }
             ]
           }
         ]
       }
     ],
-    "openQuestions": [
-      {
-        "statement": "公開資料仍不足以確認本輪操演的完整演後評鑑、非敏感缺失清單、責任單位與改善期限。",
-        "claimType": "data_gap",
-        "harmRisk": "low",
-        "proofScope": "說明公開新聞稿提供操演設計，但未提供完整演後評鑑與改善追蹤。",
-        "limitations": [
-          "未在這份新聞稿公開不等於相關內部評鑑不存在。",
-          "單一媒體報導不能窮盡國防部、地方政府與參演單位可能持有的資料。"
-        ],
-        "sources": [
-          {
-            "publicRef": "source-05",
-            "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
-            "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
-            "publisher": "中華民國國防部",
-            "publishedAt": "2026-07-12",
-            "displayRole": "主管機關公開說明"
-          },
-          {
-            "publicRef": "source-03",
-            "canonicalUrl": "https://news.pts.org.tw/article/817890",
-            "title": "捷運兵力物資轉移與戰術機動段落",
-            "publisher": "公視新聞網",
-            "publishedAt": "2026-07-16",
-            "displayRole": "媒體報導"
-          }
-        ]
-      }
-    ],
+    "openQuestions": [],
     "socialObservations": [],
     "socialObservationCount": 0,
     "sectionOrder": [
@@ -3921,51 +4013,43 @@
       "editorialReadiness": "LIMITED"
     },
     "dossierQuality": "PASS",
-    "coverageStatus": "GAPS_DISCLOSED",
-    "coverageGaps": [
-      {
-        "actorName": "民間參演者與韌性團體",
-        "actorRole": "受影響與參演者",
-        "status": "not_found",
-        "searchedAt": "2026-07-19T13:16:00+08:00",
-        "searchQueries": [
-          "site:kuma-academy.org 2026 城鎮韌性 演習 觀察",
-          "site:forwardalliance.tw 2026 城鎮韌性 演習",
-          "2026 城鎮韌性 演習 民間參演者 演後"
-        ],
-        "searchScope": "搜尋民防團體網站與可索引媒體，未取得可定位的 2026 年參演者演後原始聲明。",
-        "gapReason": "缺少民間參演者對跨單位協調、資訊發布與資源調度的當年度原始觀察。",
-        "gap": "",
-        "sourceRefs": [],
-        "sources": []
-      }
-    ],
+    "coverageStatus": "COMPLETE",
+    "coverageGaps": [],
     "reportedTimeline": [
       {
         "publicKey": "event-01",
-        "occurredAt": "2026-04-08",
-        "reportedAt": "2026-04-08",
+        "occurredAt": "2020-10-21",
+        "reportedAt": "2020-10-21",
         "precision": "day",
         "kindLabel": "制度紀錄",
-        "headline": "全動署公布 2026 城鎮韌性演習採兩年一輪、兵棋推演與綜合實作兩日設計。",
+        "headline": "DSCA通知國會首批HIMARS可能軍售。",
         "sourceRefs": [
-          "source-01"
+          "source-07"
         ],
         "items": [
           {
             "status": "verified",
-            "statement": "2026 城鎮韌性演習由全國 22 縣市採兩年一輪，分為兵棋推演與綜合實作兩日，制度目標包含中央、地方、政府與民間的跨單位協調。",
-            "proofScope": "證明全動署公布的兩年一輪、兩日演練與跨單位協調設計。",
+            "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
+            "proofScope": "證明2020年可能軍售通知與其程序性質。",
             "limitations": [
-              "制度設計不代表各縣市均已完成演練或通過驗收。"
+              "通知不等於契約、付款或交付完成。",
+              "possible sale通知不證明最終數量、價格與交期。"
             ],
             "sources": [
               {
-                "publicRef": "source-01",
-                "canonicalUrl": "https://adma.mnd.gov.tw/unit/100003/8070",
-                "title": "2026 城鎮韌性演習期程與兩日演練設計",
-                "publisher": "全民防衛動員署",
-                "publishedAt": "2026-04-08",
+                "publicRef": "source-07",
+                "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
+                "title": "Transmittal 20-69 possible sale notice",
+                "publisher": "美國國防安全合作署",
+                "publishedAt": "2020-10-21",
+                "displayRole": "制度或機關紀錄"
+              },
+              {
+                "publicRef": "source-08",
+                "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
+                "title": "Transmittal 26-01 possible sale notice",
+                "publisher": "美國國防安全合作署",
+                "publishedAt": "2025-12-17",
                 "displayRole": "制度或機關紀錄"
               }
             ]
@@ -3974,36 +4058,30 @@
       },
       {
         "publicKey": "event-02",
-        "occurredAt": "2026-07-08",
-        "reportedAt": "2026-07-08",
+        "occurredAt": "2025-11-13",
+        "reportedAt": "2025-11-13",
         "precision": "day",
-        "kindLabel": "政黨說法",
-        "headline": "將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
+        "kindLabel": "制度紀錄",
+        "headline": "DSCA 公告可能軍售的品項與估值，並完成國會通知程序。",
         "sourceRefs": [
-          "source-06"
+          "source-01"
         ],
         "items": [
           {
-            "status": "attributed",
-            "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
-            "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
+            "status": "verified",
+            "statement": "2025 年 11 月，DSCA 公告一項對台非標準航空零附件可能軍售並完成國會通知程序。",
+            "proofScope": "只證明可能軍售公告、品項、估值與國會通知階段。",
             "limitations": [
-              "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
+              "不證明台灣已簽署發價書、完成契約、付款或交貨。"
             ],
             "sources": [
               {
-                "publicRef": "source-06",
-                "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
-                "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
-                "publisher": "新華社",
-                "publishedAt": "2026-07-08",
-                "displayRole": "政黨公開說明"
-              }
-            ],
-            "speakers": [
-              {
-                "name": "陳斌華",
-                "role": "國台辦發言人"
+                "publicRef": "source-01",
+                "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4330755/taipei-economic-and-cultural-representative-office-in-the-united-states-non-sta",
+                "title": "公告標題、案件內容與估值段落",
+                "publisher": "美國國防安全合作署",
+                "publishedAt": "2025-11-13",
+                "displayRole": "制度或機關紀錄"
               }
             ]
           }
@@ -4011,30 +4089,39 @@
       },
       {
         "publicKey": "event-03",
-        "occurredAt": "2026-07-12",
-        "reportedAt": "2026-07-12",
+        "occurredAt": "2025-11-14",
+        "reportedAt": "2025-11-14",
         "precision": "day",
         "kindLabel": "主管機關說明",
-        "headline": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
+        "headline": "2025 年 11 月，國防部公開表示該零附件案用途是維持既有機隊戰備。",
         "sourceRefs": [
-          "source-05"
+          "source-09"
         ],
         "items": [
           {
             "status": "attributed",
-            "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
-            "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
+            "statement": "2025 年 11 月，國防部公開表示該零附件案用途是維持既有機隊戰備。",
+            "proofScope": "只證明國防部曾公開說明該案用途。",
             "limitations": [
-              "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
+              "機關說法不替代最終契約、驗收或戰力成效資料。",
+              "報導仍是轉述機關說法，不證明最終契約、交付或實際戰力效果。"
             ],
             "sources": [
               {
-                "publicRef": "source-05",
-                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
-                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+                "publicRef": "source-09",
+                "canonicalUrl": "https://www.mnd.gov.tw/en/Publication/85093",
+                "title": "新聞稿全文",
                 "publisher": "中華民國國防部",
-                "publishedAt": "2026-07-12",
+                "publishedAt": "2025-11-14",
                 "displayRole": "主管機關公開說明"
+              },
+              {
+                "publicRef": "source-10",
+                "canonicalUrl": "https://www.taipeitimes.com/News/front/archives/2025/11/15/2003847238",
+                "title": "DSCA 公告品項、國防部用途說明與案件仍屬 proposed sale 的報導段落",
+                "publisher": "Taipei Times",
+                "publishedAt": "2025-11-15",
+                "displayRole": "媒體報導"
               }
             ],
             "speakers": [
@@ -4048,39 +4135,39 @@
       },
       {
         "publicKey": "event-04",
-        "occurredAt": "2026-07-14",
-        "reportedAt": "2026-07-14",
+        "occurredAt": "2025-12-17",
+        "reportedAt": "2025-12-17",
         "precision": "day",
-        "kindLabel": "媒體轉述",
-        "headline": "公視報導黑鷹吊掛油囊、跑滑道搶修，並記錄國防部長對威脅資訊發布協調機制的說法。",
+        "kindLabel": "制度紀錄",
+        "headline": "DSCA通知國會另一批82套M142與相關裝備可能軍售。",
         "sourceRefs": [
-          "source-02"
+          "source-08"
         ],
         "items": [
           {
             "status": "verified",
-            "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
-            "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+            "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
+            "proofScope": "證明2020年可能軍售通知與其程序性質。",
             "limitations": [
-              "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
-              "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+              "通知不等於契約、付款或交付完成。",
+              "possible sale通知不證明最終數量、價格與交期。"
             ],
             "sources": [
               {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://news.pts.org.tw/article/817629",
-                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-14",
-                "displayRole": "媒體報導"
+                "publicRef": "source-07",
+                "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
+                "title": "Transmittal 20-69 possible sale notice",
+                "publisher": "美國國防安全合作署",
+                "publishedAt": "2020-10-21",
+                "displayRole": "制度或機關紀錄"
               },
               {
-                "publicRef": "source-03",
-                "canonicalUrl": "https://news.pts.org.tw/article/817890",
-                "title": "捷運兵力物資轉移與戰術機動段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-16",
-                "displayRole": "媒體報導"
+                "publicRef": "source-08",
+                "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
+                "title": "Transmittal 26-01 possible sale notice",
+                "publisher": "美國國防安全合作署",
+                "publishedAt": "2025-12-17",
+                "displayRole": "制度或機關紀錄"
               }
             ]
           }
@@ -4088,36 +4175,30 @@
       },
       {
         "publicKey": "event-05",
-        "occurredAt": "2026-07-14",
-        "reportedAt": "2026-07-14",
+        "occurredAt": "2026-05-08",
+        "reportedAt": "2026-05-12",
         "precision": "day",
-        "kindLabel": "媒體轉述",
-        "headline": "國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
+        "kindLabel": "制度紀錄",
+        "headline": "立法院三讀通過軍購特別條例；此制度事件與 2025 年零附件可能軍售個案分開記錄。",
         "sourceRefs": [
           "source-02"
         ],
         "items": [
           {
-            "status": "attributed",
-            "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
-            "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
+            "status": "verified",
+            "statement": "立法院於 2026 年 5 月 8 日三讀通過軍購特別條例；這是 2026 年的制度進程，不是 2025 年零附件可能軍售案的履約證明。",
+            "proofScope": "只證明軍購特別條例於 2026 年 5 月 8 日完成三讀程序。",
             "limitations": [
-              "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
+              "不證明條例涵蓋的各軍購案均已簽署發價書、完成付款或交付；也不證明其與 2025 年零附件案是同一案件。"
             ],
             "sources": [
               {
                 "publicRef": "source-02",
-                "canonicalUrl": "https://news.pts.org.tw/article/817629",
-                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-14",
-                "displayRole": "媒體報導"
-              }
-            ],
-            "speakers": [
-              {
-                "name": "顧立雄",
-                "role": "國防部長"
+                "canonicalUrl": "https://ppg.ly.gov.tw/ppg/bills/203110203710000/details",
+                "title": "併案審查紀錄、三讀日期與咨請公布紀錄",
+                "publisher": "中華民國立法院",
+                "publishedAt": "2026-05-12",
+                "displayRole": "制度或機關紀錄"
               }
             ]
           }
@@ -4125,65 +4206,130 @@
       },
       {
         "publicKey": "event-06",
-        "occurredAt": "2026-07-16",
-        "reportedAt": "2026-07-16",
+        "occurredAt": "2026-05-29",
+        "reportedAt": "2026-05-29",
         "precision": "day",
-        "kindLabel": "媒體轉述",
-        "headline": "公視報導憲兵利用捷運演練兵力與物資轉移，呈現道路以外的替代運輸節點。",
+        "kindLabel": "制度紀錄",
+        "headline": "立法院三讀通過 115 年度第一期軍購特別預算案。",
         "sourceRefs": [
-          "source-03"
+          "source-03",
+          "source-04"
         ],
         "items": [
           {
             "status": "verified",
-            "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
-            "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+            "statement": "立法院於 2026 年 5 月 29 日三讀通過 115 年度第一期軍購特別預算案。",
+            "proofScope": "只證明 115 年度第一期軍購特別預算案於 2026 年 5 月 29 日完成三讀。",
             "limitations": [
-              "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
-              "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+              "不證明預算所列裝備已完成契約、付款、交貨或形成戰力，也不回溯證明 2025 年零附件案的履約狀態。",
+              "媒體報導不替代正式預算書，也不證明後續契約、付款、交貨或戰力成效。"
             ],
             "sources": [
               {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://news.pts.org.tw/article/817629",
-                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-14",
-                "displayRole": "媒體報導"
+                "publicRef": "source-03",
+                "canonicalUrl": "https://ppg.ly.gov.tw/ppg/bills/latest-pass-third-readings/1150701873/process",
+                "title": "特別預算案三讀與咨請公布紀錄",
+                "publisher": "中華民國立法院",
+                "publishedAt": "2026-05-29",
+                "displayRole": "制度或機關紀錄"
               },
               {
-                "publicRef": "source-03",
-                "canonicalUrl": "https://news.pts.org.tw/article/817890",
-                "title": "捷運兵力物資轉移與戰術機動段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-16",
+                "publicRef": "source-04",
+                "canonicalUrl": "https://www.taiwannews.com.tw/news/6372584",
+                "title": "立法院通過 115 年度第一期特別預算及金額的報導段落",
+                "publisher": "Taiwan News",
+                "publishedAt": "2026-05-29",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "議題已出現真正的 2026 年制度進展，不再以 2025 年公告冒充 2026 年事件。",
+          "evidenceBoundary": "只能確認立法與預算程序，不可推論個別軍購案已完成發價書簽署、付款、交貨或形成戰力。",
+          "changeFromPrior": "新增的是軍購特別條例與第一期預算完成三讀；不是 2025 年零附件個案的契約或交付更新。"
+        }
+      },
+      {
+        "publicKey": "event-07",
+        "occurredAt": "2026-06-10",
+        "reportedAt": "2026-06-10",
+        "precision": "day",
+        "kindLabel": "制度紀錄",
+        "headline": "第五作戰區在西部防區進行HIMARS實彈射擊與機動撤離演練。",
+        "sourceRefs": [
+          "source-05",
+          "source-06"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "2026年6月10日，第五作戰區首次在九鵬基地以外的西部防區實施HIMARS實彈射擊。",
+            "proofScope": "證明軍方紀錄的日期、地點性質與首次在西部防區射擊。",
+            "limitations": [
+              "官方紀錄不能單獨證明戰時效能。",
+              "報導不能涵蓋所有軍方內部測試數據。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
+                "title": "第五作戰區海馬士首度射擊全文",
+                "publisher": "國防部軍事新聞通訊社",
+                "publishedAt": "2026-06-10",
+                "displayRole": "制度或機關紀錄"
+              },
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+                "publisher": "Associated Press",
+                "publishedAt": "2026-06-10",
                 "displayRole": "媒體報導"
               }
             ]
           },
           {
-            "status": "unresolved",
-            "statement": "公開資料仍不足以確認本輪操演的完整演後評鑑、非敏感缺失清單、責任單位與改善期限。",
-            "proofScope": "說明公開新聞稿提供操演設計，但未提供完整演後評鑑與改善追蹤。",
+            "status": "verified",
+            "statement": "國防部紀錄顯示，發射車接獲任務後於3分鐘內完成機動、射擊準備與發射，射後立即撤離；AP亦獨立報導其機動射擊演練。",
+            "proofScope": "證明軍方公開紀錄的演練程序與時間。",
             "limitations": [
-              "未在這份新聞稿公開不等於相關內部評鑑不存在。",
-              "單一媒體報導不能窮盡國防部、地方政府與參演單位可能持有的資料。"
+              "單次演練不代表所有單位或戰況均能維持相同時間。",
+              "AP未獨立量測3分鐘數值。"
             ],
             "sources": [
               {
                 "publicRef": "source-05",
-                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
-                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
-                "publisher": "中華民國國防部",
-                "publishedAt": "2026-07-12",
-                "displayRole": "主管機關公開說明"
+                "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
+                "title": "第五作戰區海馬士首度射擊全文",
+                "publisher": "國防部軍事新聞通訊社",
+                "publishedAt": "2026-06-10",
+                "displayRole": "制度或機關紀錄"
               },
               {
-                "publicRef": "source-03",
-                "canonicalUrl": "https://news.pts.org.tw/article/817890",
-                "title": "捷運兵力物資轉移與戰術機動段落",
-                "publisher": "公視新聞網",
-                "publishedAt": "2026-07-16",
+                "publicRef": "source-06",
+                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+                "publisher": "Associated Press",
+                "publishedAt": "2026-06-10",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "status": "verified",
+            "statement": "AP報導此次使用的是縮短射程的訓練火箭，不能用當日落點直接推論作戰彈藥的最大射程或戰時成效。",
+            "proofScope": "證明報導明確區分當日訓練火箭與作戰射程。",
+            "limitations": [
+              "未提供每枚彈藥序號或技術測試報告。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
+                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
+                "publisher": "Associated Press",
+                "publishedAt": "2026-06-10",
                 "displayRole": "媒體報導"
               }
             ]
@@ -4191,31 +4337,74 @@
         ]
       },
       {
-        "publicKey": "event-07",
-        "occurredAt": "2026-07-16",
-        "reportedAt": "2026-07-16",
+        "publicKey": "event-08",
+        "occurredAt": "2026-07-11",
+        "reportedAt": "2026-07-11",
         "precision": "day",
-        "kindLabel": "制度紀錄",
-        "headline": "四個無人載具條例版本進入立法院聯席委員會詢答。",
+        "kindLabel": "媒體轉述",
+        "headline": "無人載具條例草案付委，三委員會排定聯席審查。",
         "sourceRefs": [
-          "source-04"
+          "source-11"
         ],
         "items": [
           {
-            "status": "verified",
-            "statement": "立法院紀錄顯示，經濟、外交及國防、財政三委員會於2026年7月16日聯席處理行政院、民進黨立委、民眾黨團與國民黨團提出的四個無人載具條例版本，當日議程標示為詢答。",
-            "proofScope": "證明四個版本在7月16日列入聯席委員會詢答議程。",
+            "status": "attributed",
+            "statement": "中央社報導，立法院於7月3日將行政院版與藍白提出的無人載具／無人機條例草案付委，經濟、外交及國防、財政三委員會排定7月16日聯席審查；付委與排程不等於條例已三讀或預算已通過。",
+            "proofScope": "記錄中央社對付委與聯席審查排程的報導。",
             "limitations": [
-              "不證明條文已完成審查、版本已整合、預算已核定或法案已三讀。"
+              "媒體報導不替代立法院正式議事紀錄，也不證明條例已三讀或預算已通過。"
             ],
             "sources": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070904/details?meetingDate=115%2F07%2F16",
-                "title": "經濟、外交及國防、財政三委員會聯席會議議程與附件",
-                "publisher": "立法院議事暨公報資訊網",
-                "publishedAt": "2026-07-16",
+                "publicRef": "source-11",
+                "canonicalUrl": "https://www.cna.com.tw/news/aipl/202607110087.aspx",
+                "title": "立法院三委員會聯席審查無人機條例草案的付委與排程報導",
+                "publisher": "中央社",
+                "publishedAt": "2026-07-11",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "中央社",
+                "role": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-09",
+        "occurredAt": "2026-07-28",
+        "reportedAt": "2026-07-28",
+        "precision": "day",
+        "kindLabel": "主管機關說明",
+        "headline": "國防部公開漢光42號文宣以HIMARS等系統為主軸。",
+        "sourceRefs": [
+          "source-12"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "limitations": [
+              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-12",
+                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
+                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與HIMARS資訊",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-28",
                 "displayRole": "制度或機關紀錄"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "中華民國國防部",
+                "role": "主管機關公開資料"
               }
             ]
           }
@@ -8516,108 +8705,71 @@
       }
     ]
   },
-  "himars-visible-readiness": {
-    "topicId": "himars-visible-readiness-2026",
+  "self-defense-readiness": {
+    "topicId": "taiwan-self-defense-bargaining-2026",
     "claims": [
       {
-        "statement": "2026年6月10日，第五作戰區首次在九鵬基地以外的西部防區實施HIMARS實彈射擊。",
-        "claimType": "event_fact",
-        "harmRisk": "elevated",
-        "proofScope": "證明軍方紀錄的日期、地點性質與首次在西部防區射擊。",
+        "statement": "2026 城鎮韌性演習由全國 22 縣市採兩年一輪，分為兵棋推演與綜合實作兩日，制度目標包含中央、地方、政府與民間的跨單位協調。",
+        "claimType": "institutional_design",
+        "harmRisk": "low",
+        "proofScope": "證明全動署公布的兩年一輪、兩日演練與跨單位協調設計。",
         "limitations": [
-          "官方紀錄不能單獨證明戰時效能。",
-          "報導不能涵蓋所有軍方內部測試數據。"
+          "制度設計不代表各縣市均已完成演練或通過驗收。"
         ],
         "sources": [
           {
             "publicRef": "source-01",
-            "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
-            "title": "第五作戰區海馬士首度射擊全文",
-            "publisher": "國防部軍事新聞通訊社",
-            "publishedAt": "2026-06-10",
+            "canonicalUrl": "https://adma.mnd.gov.tw/unit/100003/8070",
+            "title": "2026 城鎮韌性演習期程與兩日演練設計",
+            "publisher": "全民防衛動員署",
+            "publishedAt": "2026-04-08",
             "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
+        "claimType": "observed_event",
+        "harmRisk": "low",
+        "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+        "limitations": [
+          "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
+          "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://news.pts.org.tw/article/817629",
+            "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+            "publisher": "公視新聞網",
+            "publishedAt": "2026-07-14",
+            "displayRole": "媒體報導"
           },
-          {
-            "publicRef": "source-02",
-            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-            "publisher": "Associated Press",
-            "publishedAt": "2026-06-10",
-            "displayRole": "媒體報導"
-          }
-        ]
-      },
-      {
-        "statement": "國防部紀錄顯示，發射車接獲任務後於3分鐘內完成機動、射擊準備與發射，射後立即撤離；AP亦獨立報導其機動射擊演練。",
-        "claimType": "operational_record",
-        "harmRisk": "elevated",
-        "proofScope": "證明軍方公開紀錄的演練程序與時間。",
-        "limitations": [
-          "單次演練不代表所有單位或戰況均能維持相同時間。",
-          "AP未獨立量測3分鐘數值。"
-        ],
-        "sources": [
-          {
-            "publicRef": "source-01",
-            "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
-            "title": "第五作戰區海馬士首度射擊全文",
-            "publisher": "國防部軍事新聞通訊社",
-            "publishedAt": "2026-06-10",
-            "displayRole": "制度或機關紀錄"
-          },
-          {
-            "publicRef": "source-02",
-            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-            "publisher": "Associated Press",
-            "publishedAt": "2026-06-10",
-            "displayRole": "媒體報導"
-          }
-        ]
-      },
-      {
-        "statement": "AP報導此次使用的是縮短射程的訓練火箭，不能用當日落點直接推論作戰彈藥的最大射程或戰時成效。",
-        "claimType": "reporting_fact",
-        "harmRisk": "elevated",
-        "proofScope": "證明報導明確區分當日訓練火箭與作戰射程。",
-        "limitations": [
-          "未提供每枚彈藥序號或技術測試報告。"
-        ],
-        "sources": [
-          {
-            "publicRef": "source-02",
-            "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-            "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-            "publisher": "Associated Press",
-            "publishedAt": "2026-06-10",
-            "displayRole": "媒體報導"
-          }
-        ]
-      },
-      {
-        "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
-        "claimType": "procedural_fact",
-        "harmRisk": "elevated",
-        "proofScope": "證明2020年可能軍售通知與其程序性質。",
-        "limitations": [
-          "通知不等於契約、付款或交付完成。",
-          "possible sale通知不證明最終數量、價格與交期。"
-        ],
-        "sources": [
           {
             "publicRef": "source-03",
-            "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
-            "title": "Transmittal 20-69 possible sale notice",
-            "publisher": "美國國防安全合作署",
-            "publishedAt": "2020-10-21",
-            "displayRole": "制度或機關紀錄"
-          },
+            "canonicalUrl": "https://news.pts.org.tw/article/817890",
+            "title": "捷運兵力物資轉移與戰術機動段落",
+            "publisher": "公視新聞網",
+            "publishedAt": "2026-07-16",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "立法院紀錄顯示，經濟、外交及國防、財政三委員會於2026年7月16日聯席處理行政院、民進黨立委、民眾黨團與國民黨團提出的四個無人載具條例版本，當日議程標示為詢答。",
+        "claimType": "procedural_fact",
+        "harmRisk": "low",
+        "proofScope": "證明四個版本在7月16日列入聯席委員會詢答議程。",
+        "limitations": [
+          "不證明條文已完成審查、版本已整合、預算已核定或法案已三讀。"
+        ],
+        "sources": [
           {
             "publicRef": "source-04",
-            "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
-            "title": "Transmittal 26-01 possible sale notice",
-            "publisher": "美國國防安全合作署",
-            "publishedAt": "2025-12-17",
+            "canonicalUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070904/details?meetingDate=115%2F07%2F16",
+            "title": "經濟、外交及國防、財政三委員會聯席會議議程與附件",
+            "publisher": "立法院議事暨公報資訊網",
+            "publishedAt": "2026-07-16",
             "displayRole": "制度或機關紀錄"
           }
         ]
@@ -8625,27 +8777,77 @@
     ],
     "attributedClaims": [
       {
-        "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
-        "claimType": "attributed_statement",
-        "harmRisk": "elevated",
-        "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+        "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
+        "claimType": "procedural_fact",
+        "harmRisk": "low",
+        "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
         "limitations": [
-          "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+          "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
         ],
         "speakers": [
           {
             "name": "中華民國國防部",
-            "role": "主管機關公開資料"
+            "role": "主管機關公開說明"
           }
         ],
         "sources": [
           {
             "publicRef": "source-05",
-            "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
-            "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
+            "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
+            "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
             "publisher": "中華民國國防部",
-            "publishedAt": "2026-07-28",
-            "displayRole": "制度或機關紀錄"
+            "publishedAt": "2026-07-12",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
+        "limitations": [
+          "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
+        ],
+        "speakers": [
+          {
+            "name": "顧立雄",
+            "role": "國防部長"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://news.pts.org.tw/article/817629",
+            "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+            "publisher": "公視新聞網",
+            "publishedAt": "2026-07-14",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
+        "limitations": [
+          "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
+        ],
+        "speakers": [
+          {
+            "name": "陳斌華",
+            "role": "國台辦發言人"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
+            "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
+            "publisher": "新華社",
+            "publishedAt": "2026-07-08",
+            "displayRole": "政黨公開說明"
           }
         ]
       }
@@ -8655,39 +8857,134 @@
     "attributedSpeakerGroups": [
       {
         "speaker": {
-          "name": "中華民國國防部",
-          "role": "主管機關公開資料"
+          "name": "陳斌華",
+          "role": "國台辦發言人"
         },
         "claims": [
           {
-            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
+            "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
             "claimType": "attributed_statement",
             "harmRisk": "elevated",
-            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
             "limitations": [
-              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+              "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
+            ],
+            "speakers": [
+              {
+                "name": "陳斌華",
+                "role": "國台辦發言人"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
+                "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
+                "publisher": "新華社",
+                "publishedAt": "2026-07-08",
+                "displayRole": "政黨公開說明"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "中華民國國防部",
+          "role": "主管機關公開說明"
+        },
+        "claims": [
+          {
+            "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
+            "claimType": "procedural_fact",
+            "harmRisk": "low",
+            "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
+            "limitations": [
+              "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
             ],
             "speakers": [
               {
                 "name": "中華民國國防部",
-                "role": "主管機關公開資料"
+                "role": "主管機關公開說明"
               }
             ],
             "sources": [
               {
                 "publicRef": "source-05",
-                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
-                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
+                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
+                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
                 "publisher": "中華民國國防部",
-                "publishedAt": "2026-07-28",
-                "displayRole": "制度或機關紀錄"
+                "publishedAt": "2026-07-12",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "顧立雄",
+          "role": "國防部長"
+        },
+        "claims": [
+          {
+            "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
+            "limitations": [
+              "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
+            ],
+            "speakers": [
+              {
+                "name": "顧立雄",
+                "role": "國防部長"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://news.pts.org.tw/article/817629",
+                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-14",
+                "displayRole": "媒體報導"
               }
             ]
           }
         ]
       }
     ],
-    "openQuestions": [],
+    "openQuestions": [
+      {
+        "statement": "公開資料仍不足以確認本輪操演的完整演後評鑑、非敏感缺失清單、責任單位與改善期限。",
+        "claimType": "data_gap",
+        "harmRisk": "low",
+        "proofScope": "說明公開新聞稿提供操演設計，但未提供完整演後評鑑與改善追蹤。",
+        "limitations": [
+          "未在這份新聞稿公開不等於相關內部評鑑不存在。",
+          "單一媒體報導不能窮盡國防部、地方政府與參演單位可能持有的資料。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
+            "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+            "publisher": "中華民國國防部",
+            "publishedAt": "2026-07-12",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-03",
+            "canonicalUrl": "https://news.pts.org.tw/article/817890",
+            "title": "捷運兵力物資轉移與戰術機動段落",
+            "publisher": "公視新聞網",
+            "publishedAt": "2026-07-16",
+            "displayRole": "媒體報導"
+          }
+        ]
+      }
+    ],
     "socialObservations": [],
     "socialObservationCount": 0,
     "sectionOrder": [
@@ -8705,43 +9002,51 @@
       "editorialReadiness": "LIMITED"
     },
     "dossierQuality": "PASS",
-    "coverageStatus": "COMPLETE",
-    "coverageGaps": [],
+    "coverageStatus": "GAPS_DISCLOSED",
+    "coverageGaps": [
+      {
+        "actorName": "民間參演者與韌性團體",
+        "actorRole": "受影響與參演者",
+        "status": "not_found",
+        "searchedAt": "2026-07-19T13:16:00+08:00",
+        "searchQueries": [
+          "site:kuma-academy.org 2026 城鎮韌性 演習 觀察",
+          "site:forwardalliance.tw 2026 城鎮韌性 演習",
+          "2026 城鎮韌性 演習 民間參演者 演後"
+        ],
+        "searchScope": "搜尋民防團體網站與可索引媒體，未取得可定位的 2026 年參演者演後原始聲明。",
+        "gapReason": "缺少民間參演者對跨單位協調、資訊發布與資源調度的當年度原始觀察。",
+        "gap": "",
+        "sourceRefs": [],
+        "sources": []
+      }
+    ],
     "reportedTimeline": [
       {
         "publicKey": "event-01",
-        "occurredAt": "2020-10-21",
-        "reportedAt": "2020-10-21",
+        "occurredAt": "2026-04-08",
+        "reportedAt": "2026-04-08",
         "precision": "day",
         "kindLabel": "制度紀錄",
-        "headline": "DSCA通知國會首批HIMARS可能軍售。",
+        "headline": "全動署公布 2026 城鎮韌性演習採兩年一輪、兵棋推演與綜合實作兩日設計。",
         "sourceRefs": [
-          "source-03"
+          "source-01"
         ],
         "items": [
           {
             "status": "verified",
-            "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
-            "proofScope": "證明2020年可能軍售通知與其程序性質。",
+            "statement": "2026 城鎮韌性演習由全國 22 縣市採兩年一輪，分為兵棋推演與綜合實作兩日，制度目標包含中央、地方、政府與民間的跨單位協調。",
+            "proofScope": "證明全動署公布的兩年一輪、兩日演練與跨單位協調設計。",
             "limitations": [
-              "通知不等於契約、付款或交付完成。",
-              "possible sale通知不證明最終數量、價格與交期。"
+              "制度設計不代表各縣市均已完成演練或通過驗收。"
             ],
             "sources": [
               {
-                "publicRef": "source-03",
-                "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
-                "title": "Transmittal 20-69 possible sale notice",
-                "publisher": "美國國防安全合作署",
-                "publishedAt": "2020-10-21",
-                "displayRole": "制度或機關紀錄"
-              },
-              {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
-                "title": "Transmittal 26-01 possible sale notice",
-                "publisher": "美國國防安全合作署",
-                "publishedAt": "2025-12-17",
+                "publicRef": "source-01",
+                "canonicalUrl": "https://adma.mnd.gov.tw/unit/100003/8070",
+                "title": "2026 城鎮韌性演習期程與兩日演練設計",
+                "publisher": "全民防衛動員署",
+                "publishedAt": "2026-04-08",
                 "displayRole": "制度或機關紀錄"
               }
             ]
@@ -8750,39 +9055,36 @@
       },
       {
         "publicKey": "event-02",
-        "occurredAt": "2025-12-17",
-        "reportedAt": "2025-12-17",
+        "occurredAt": "2026-07-08",
+        "reportedAt": "2026-07-08",
         "precision": "day",
-        "kindLabel": "制度紀錄",
-        "headline": "DSCA通知國會另一批82套M142與相關裝備可能軍售。",
+        "kindLabel": "政黨說法",
+        "headline": "將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
         "sourceRefs": [
-          "source-04"
+          "source-06"
         ],
         "items": [
           {
-            "status": "verified",
-            "statement": "美國國防安全合作署分別在2020年與2025年通知國會兩批HIMARS可能軍售；2025年通知列有82套M142與相關彈藥，屬可能軍售通知而非已完成交付證明。",
-            "proofScope": "證明2020年可能軍售通知與其程序性質。",
+            "status": "attributed",
+            "statement": "國台辦發言人陳斌華將南投全社會防衛韌性演習定性為「全民皆兵」，並指稱民進黨政府把民眾綁上「台獨」戰車。",
+            "proofScope": "只證明中國官方對南投演習作出上述政治定調。",
             "limitations": [
-              "通知不等於契約、付款或交付完成。",
-              "possible sale通知不證明最終數量、價格與交期。"
+              "這不是對 7 月 13 至 17 日聯合防禦操演的逐項評估，也不能證明操演實際效果。"
             ],
             "sources": [
               {
-                "publicRef": "source-03",
-                "canonicalUrl": "https://www.dsca.mil/sites/default/files/mas/Taiwan_20-69.pdf",
-                "title": "Transmittal 20-69 possible sale notice",
-                "publisher": "美國國防安全合作署",
-                "publishedAt": "2020-10-21",
-                "displayRole": "制度或機關紀錄"
-              },
+                "publicRef": "source-06",
+                "canonicalUrl": "https://www.news.cn/tw/20260708/c9a7554402b447459f4afcae99139330/c.html",
+                "title": "國台辦發言人對南投全社會防衛韌性演習的答問",
+                "publisher": "新華社",
+                "publishedAt": "2026-07-08",
+                "displayRole": "政黨公開說明"
+              }
+            ],
+            "speakers": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://www.dsca.mil/Press-Media/Major-Arms-Sales/Article-Display/Article/4363081/taipei-economic-and-cultural-representative-office-in-the-united-states-high-mo",
-                "title": "Transmittal 26-01 possible sale notice",
-                "publisher": "美國國防安全合作署",
-                "publishedAt": "2025-12-17",
-                "displayRole": "制度或機關紀錄"
+                "name": "陳斌華",
+                "role": "國台辦發言人"
               }
             ]
           }
@@ -8790,85 +9092,36 @@
       },
       {
         "publicKey": "event-03",
-        "occurredAt": "2026-06-10",
-        "reportedAt": "2026-06-10",
+        "occurredAt": "2026-07-12",
+        "reportedAt": "2026-07-12",
         "precision": "day",
-        "kindLabel": "制度紀錄",
-        "headline": "第五作戰區在西部防區進行HIMARS實彈射擊與機動撤離演練。",
+        "kindLabel": "主管機關說明",
+        "headline": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
         "sourceRefs": [
-          "source-01",
-          "source-02"
+          "source-05"
         ],
         "items": [
           {
-            "status": "verified",
-            "statement": "2026年6月10日，第五作戰區首次在九鵬基地以外的西部防區實施HIMARS實彈射擊。",
-            "proofScope": "證明軍方紀錄的日期、地點性質與首次在西部防區射擊。",
+            "status": "attributed",
+            "statement": "國防部公告 2026 年 7 月 13 日至 17 日執行聯合防禦操演，訓練部隊在去中心化指管下執行聯戰任務並強化軍種協調。",
+            "proofScope": "證明操演期程與國防部公開列出的訓練設計。",
             "limitations": [
-              "官方紀錄不能單獨證明戰時效能。",
-              "報導不能涵蓋所有軍方內部測試數據。"
+              "不證明操演已達成目標，也不揭露戰時實際指管架構或作戰成效。"
             ],
             "sources": [
               {
-                "publicRef": "source-01",
-                "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
-                "title": "第五作戰區海馬士首度射擊全文",
-                "publisher": "國防部軍事新聞通訊社",
-                "publishedAt": "2026-06-10",
-                "displayRole": "制度或機關紀錄"
-              },
-              {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-                "publisher": "Associated Press",
-                "publishedAt": "2026-06-10",
-                "displayRole": "媒體報導"
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
+                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-12",
+                "displayRole": "主管機關公開說明"
               }
-            ]
-          },
-          {
-            "status": "verified",
-            "statement": "國防部紀錄顯示，發射車接獲任務後於3分鐘內完成機動、射擊準備與發射，射後立即撤離；AP亦獨立報導其機動射擊演練。",
-            "proofScope": "證明軍方公開紀錄的演練程序與時間。",
-            "limitations": [
-              "單次演練不代表所有單位或戰況均能維持相同時間。",
-              "AP未獨立量測3分鐘數值。"
             ],
-            "sources": [
+            "speakers": [
               {
-                "publicRef": "source-01",
-                "canonicalUrl": "https://mna.mnd.gov.tw/news/detail/?UserKey=7101b6d7-bfcd-47df-bb93-025bde4dade4",
-                "title": "第五作戰區海馬士首度射擊全文",
-                "publisher": "國防部軍事新聞通訊社",
-                "publishedAt": "2026-06-10",
-                "displayRole": "制度或機關紀錄"
-              },
-              {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-                "publisher": "Associated Press",
-                "publishedAt": "2026-06-10",
-                "displayRole": "媒體報導"
-              }
-            ]
-          },
-          {
-            "status": "verified",
-            "statement": "AP報導此次使用的是縮短射程的訓練火箭，不能用當日落點直接推論作戰彈藥的最大射程或戰時成效。",
-            "proofScope": "證明報導明確區分當日訓練火箭與作戰射程。",
-            "limitations": [
-              "未提供每枚彈藥序號或技術測試報告。"
-            ],
-            "sources": [
-              {
-                "publicRef": "source-02",
-                "canonicalUrl": "https://apnews.com/article/d2ec564c95466dd0332d0df32dbc1933",
-                "title": "西岸射擊、縮距訓練彈與機動撤離段落",
-                "publisher": "Associated Press",
-                "publishedAt": "2026-06-10",
-                "displayRole": "媒體報導"
+                "name": "中華民國國防部",
+                "role": "主管機關公開說明"
               }
             ]
           }
@@ -8876,36 +9129,174 @@
       },
       {
         "publicKey": "event-04",
-        "occurredAt": "2026-07-28",
-        "reportedAt": "2026-07-28",
+        "occurredAt": "2026-07-14",
+        "reportedAt": "2026-07-14",
         "precision": "day",
-        "kindLabel": "主管機關說明",
-        "headline": "國防部公開漢光42號文宣以HIMARS等系統為主軸。",
+        "kindLabel": "媒體轉述",
+        "headline": "公視報導黑鷹吊掛油囊、跑滑道搶修，並記錄國防部長對威脅資訊發布協調機制的說法。",
         "sourceRefs": [
-          "source-05"
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
+            "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+            "limitations": [
+              "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
+              "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://news.pts.org.tw/article/817629",
+                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-14",
+                "displayRole": "媒體報導"
+              },
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://news.pts.org.tw/article/817890",
+                "title": "捷運兵力物資轉移與戰術機動段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-16",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-05",
+        "occurredAt": "2026-07-14",
+        "reportedAt": "2026-07-14",
+        "precision": "day",
+        "kindLabel": "媒體轉述",
+        "headline": "國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
+        "sourceRefs": [
+          "source-02"
         ],
         "items": [
           {
             "status": "attributed",
-            "statement": "國防部7月28日新聞參考資料指出，漢光42號文宣品以HIMARS、Altius-600M與愛國者三型為主軸；文宣與演習規劃可確認公開能見度，不等於已證明戰備率、彈藥存量或戰時成效。",
-            "proofScope": "記錄國防部公開資料對HIMARS、Altius-600M與愛國者三型的文宣能見度。",
+            "statement": "國防部長顧立雄表示，國防部與國安會對威脅資訊發布有密切協調機制，會持續依該機制運作。",
+            "proofScope": "只證明國防部長曾公開表示兩機關存在協調機制。",
             "limitations": [
-              "文宣與演習規劃不能證明戰備率、彈藥存量、交付狀態或戰時成效。"
+              "不證明發布權責、交叉核對流程與壓力測試結果已公開或完備。"
             ],
             "sources": [
               {
-                "publicRef": "source-05",
-                "canonicalUrl": "https://www.mnd.gov.tw/news/pressrelease/87171",
-                "title": "7月份第4週例行記者會新聞參考資料所列漢光42號文宣與城鎮韌性演習資訊",
-                "publisher": "中華民國國防部",
-                "publishedAt": "2026-07-28",
-                "displayRole": "制度或機關紀錄"
+                "publicRef": "source-02",
+                "canonicalUrl": "https://news.pts.org.tw/article/817629",
+                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-14",
+                "displayRole": "媒體報導"
               }
             ],
             "speakers": [
               {
-                "name": "中華民國國防部",
-                "role": "主管機關公開資料"
+                "name": "顧立雄",
+                "role": "國防部長"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-06",
+        "occurredAt": "2026-07-16",
+        "reportedAt": "2026-07-16",
+        "precision": "day",
+        "kindLabel": "媒體轉述",
+        "headline": "公視報導憲兵利用捷運演練兵力與物資轉移，呈現道路以外的替代運輸節點。",
+        "sourceRefs": [
+          "source-03"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "公視報導聯合防禦操演包含黑鷹直升機吊掛油囊、跑滑道搶修，以及利用捷運演練兵力與物資轉移等公開課目。",
+            "proofScope": "支持 7 月 14 日公開操演出現分散油料補給與基地搶修課目。",
+            "limitations": [
+              "公開畫面與媒體報導不能證明戰時一定成功，也不提供完整演後評鑑。",
+              "不代表民用捷運已永久軍事化，也不證明該替代節點在戰時的容量與安全性。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://news.pts.org.tw/article/817629",
+                "title": "黑鷹吊掛油囊、跑滑道搶修及國防部長答詢段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-14",
+                "displayRole": "媒體報導"
+              },
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://news.pts.org.tw/article/817890",
+                "title": "捷運兵力物資轉移與戰術機動段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-16",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "status": "unresolved",
+            "statement": "公開資料仍不足以確認本輪操演的完整演後評鑑、非敏感缺失清單、責任單位與改善期限。",
+            "proofScope": "說明公開新聞稿提供操演設計，但未提供完整演後評鑑與改善追蹤。",
+            "limitations": [
+              "未在這份新聞稿公開不等於相關內部評鑑不存在。",
+              "單一媒體報導不能窮盡國防部、地方政府與參演單位可能持有的資料。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://www.mnd.gov.tw/publication/87003",
+                "title": "聯合防禦操演日期、去中心化指管與軍種協調說明",
+                "publisher": "中華民國國防部",
+                "publishedAt": "2026-07-12",
+                "displayRole": "主管機關公開說明"
+              },
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://news.pts.org.tw/article/817890",
+                "title": "捷運兵力物資轉移與戰術機動段落",
+                "publisher": "公視新聞網",
+                "publishedAt": "2026-07-16",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-07",
+        "occurredAt": "2026-07-16",
+        "reportedAt": "2026-07-16",
+        "precision": "day",
+        "kindLabel": "制度紀錄",
+        "headline": "四個無人載具條例版本進入立法院聯席委員會詢答。",
+        "sourceRefs": [
+          "source-04"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "立法院紀錄顯示，經濟、外交及國防、財政三委員會於2026年7月16日聯席處理行政院、民進黨立委、民眾黨團與國民黨團提出的四個無人載具條例版本，當日議程標示為詢答。",
+            "proofScope": "證明四個版本在7月16日列入聯席委員會詢答議程。",
+            "limitations": [
+              "不證明條文已完成審查、版本已整合、預算已核定或法案已三讀。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070904/details?meetingDate=115%2F07%2F16",
+                "title": "經濟、外交及國防、財政三委員會聯席會議議程與附件",
+                "publisher": "立法院議事暨公報資訊網",
+                "publishedAt": "2026-07-16",
+                "displayRole": "制度或機關紀錄"
               }
             ]
           }

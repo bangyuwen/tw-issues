@@ -8,11 +8,11 @@ const routes = [
   "/topics/typhoon-governance",
   "/topics/budget-delay-governance",
   "/topics/defense-procurement",
+  "/topics/self-defense-readiness",
   "/topics/taipei-tree-governance",
   "/topics/flood-budget-bottleneck",
   "/topics/japan-taiwan-alliance",
   "/topics/transnational-repression",
-  "/topics/himars-visible-readiness",
 ];
 
 async function render(pathname) {
@@ -34,11 +34,12 @@ test("index selects the ten most recently updated deep-research topics", async (
   assert.match(html, /中央總預算延宕/);
   assert.match(html, /跨境恐嚇事件/);
   assert.match(html, /食用油苯駢芘超標/);
-  assert.match(html, /台灣自我防衛/);
+  assert.match(html, /軍購預算政治攻防/);
+  assert.match(html, /自我防衛與韌性/);
   assert.match(html, /治水預算卡關/);
   assert.match(html, /台日安全合作/);
   assert.match(html, /中共跨境鎮壓/);
-  assert.match(html, /HIMARS 演訓嚇阻/);
+  assert.doesNotMatch(html, /HIMARS 演訓嚇阻/);
   assert.doesNotMatch(html, /證據構成比較|研究總覽數字|來源角色分布|原始／制度紀錄/);
   assert.doesNotMatch(html, /research-kpis|evidence-overview|source-role-overview/);
   assert.match(html, /最近收錄/);
@@ -229,15 +230,26 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.doesNotMatch(progress, /clm-bap-|src-bap-|reviewDigest/);
 });
 
-test("self-defense page uses the current resilience ledger instead of legacy procurement evidence", async () => {
+test("military procurement page includes HIMARS while preserving procurement boundaries", async () => {
   const response = await render("/topics/defense-procurement");
+  const html = await response.text();
+
+  assert.equal(response.status, 200);
+  for (const text of ["HIMARS", "3分鐘", "可能軍售", "西部防區", "訓練火箭", "軍購特別條例"]) {
+    assert.match(html, new RegExp(text));
+  }
+  assert.doesNotMatch(html, /去中心化指管|城鎮韌性|黑鷹|捷運/);
+});
+
+test("self-defense page keeps domestic resilience separate from military procurement", async () => {
+  const response = await render("/topics/self-defense-readiness");
   const html = await response.text();
 
   assert.equal(response.status, 200);
   for (const text of ["去中心化指管", "城鎮韌性", "黑鷹", "捷運", "全民皆兵", "演後評鑑"]) {
     assert.match(html, new RegExp(text));
   }
-  assert.doesNotMatch(html, /非標準航空零附件|DSCA|發價書/);
+  assert.doesNotMatch(html, /HIMARS|3分鐘|可能軍售|發價書/);
 });
 
 test("topic pages use concise display titles and structured claim reading blocks", async () => {
@@ -262,7 +274,7 @@ test("topic pages use concise display titles and structured claim reading blocks
 });
 
 test("topic pages use one progression-first hierarchy across different issues", async () => {
-  const security = await (await render("/topics/himars-visible-readiness")).text();
+  const security = await (await render("/topics/defense-procurement")).text();
   const rights = await (await render("/topics/transnational-repression")).text();
   const governance = await (await render("/topics/budget-delay-governance")).text();
 
@@ -335,6 +347,7 @@ test("index does not describe every public section as public-ready facts", async
 test("unpublished and legacy aliases have no public route", async () => {
   for (const pathname of [
     "/topics/taiwan-self-defense-bargaining",
+    "/topics/himars-visible-readiness",
     "/topics/energy-disinfo",
     "/topics/candidate-bullying-accountability",
   ]) {
