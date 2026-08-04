@@ -651,6 +651,8 @@ test("stance map connects explicitly named speakers and marks reciprocal arrows"
 
   assert.match(html, /id="stance-map"/);
   assert.match(html, /class="stance-map-canvas(?: stance-map-canvas--dense)?" role="group" aria-label="攻防關係圖，3 個六角形，1 條箭頭"/);
+  assert.match(html, /<svg class="stance-map-links" viewBox="0 0 100 100"/);
+  assert.match(html, /<path class="stance-edge stance-edge--reciprocal" d="M 50 25 L 50 75"/);
   assert.equal((html.match(/class="stance-graph-node stance-graph-node--speaker"/g) ?? []).length, 2);
   assert.equal((html.match(/class="stance-edge stance-edge--reciprocal"/g) ?? []).length, 1);
   assert.equal((html.match(/class="stance-evidence stance-evidence-card stance-evidence-card--reciprocal"/g) ?? []).length, 2);
