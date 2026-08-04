@@ -1432,6 +1432,31 @@
                 "displayRole": "政黨公開說明"
               }
             ]
+          },
+          {
+            "statement": "傅崐萁批評行政院長卓榮泰，並以「院長下台」作為 7 月 25 日集會訴求；這是政治人物的公開訴求，不是獨立調查對責任的認定。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明傅崐萁在立法院公開記者會頁面中，將卓榮泰與「院長下台」訴求連結。",
+            "limitations": [
+              "這是傅崐萁的政治批評與訴求，不能證明卓榮泰或行政院已被獨立調查認定負有本案責任。"
+            ],
+            "speakers": [
+              {
+                "name": "傅崐萁",
+                "role": "立法委員"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-32",
+                "canonicalUrl": "https://www.ly.gov.tw/Pages/Detail.aspx?nodeid=54305&pid=263936",
+                "title": "「我是人 我反毒台」記者會中對 7 月 25 日集會與訴求的說明",
+                "publisher": "立法委員傅崐萁",
+                "publishedAt": "2026-07-17",
+                "displayRole": "政黨公開說明"
+              }
+            ]
           }
         ]
       },

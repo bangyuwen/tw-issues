@@ -660,6 +660,14 @@ test("stance map connects explicitly named speakers and marks reciprocal arrows"
   assert.doesNotMatch(html, /stance-lane/);
 });
 
+test("published food-safety stance map connects Fu Kun-chi to the explicitly named premier", () => {
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} />);
+
+  assert.match(html, /<span class="stance-evidence-route"><strong>傅崐萁<\/strong><b>→<\/b><strong>卓榮泰<\/strong><\/span>/);
+  assert.match(html, /傅崐萁批評行政院長卓榮泰/);
+  assert.match(html, /不能證明卓榮泰或行政院已被獨立調查認定負有本案責任/);
+});
+
 test("model preserves ledger order and includes a timeline-only source", () => {
   const timelineSource = { ...source, publicRef: "timeline-only", publisher: "時間軸來源" };
   const model = buildDossierPageModel({

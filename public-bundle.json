@@ -6,7 +6,7 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "f6dd47d4eebe719ef1e440ce3edc04b4e1859dd5c2d35d096f71c53fa0e6fe2e"
+    "sha256": "05fb9af88e35084c8a32caf5df4f086c46f460279066c190101b85ca23e89143"
   },
   "research_index": {
     "path": "app/research-topics.json",

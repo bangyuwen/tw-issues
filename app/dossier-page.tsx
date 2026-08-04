@@ -93,7 +93,12 @@ function findTargetSpeaker(statement: string, speaker: PublicSpeaker, speakers: 
 }
 
 function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
-  for (const claim of claims) {
+  const prioritizedClaims = claims.slice().sort((left, right) => {
+    const leftHasNamedTarget = Boolean(findTargetSpeaker(left.statement, speaker, speakers));
+    const rightHasNamedTarget = Boolean(findTargetSpeaker(right.statement, speaker, speakers));
+    return Number(rightHasNamedTarget) - Number(leftHasNamedTarget);
+  });
+  for (const claim of prioritizedClaims) {
     const target = findTargetSpeaker(claim.statement, speaker, speakers);
     const targetFields = target ? { targetSpeaker: target.speaker, targetSpeakerKey: target.key } : {};
     const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
