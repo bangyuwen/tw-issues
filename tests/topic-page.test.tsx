@@ -637,6 +637,26 @@ test("speaker groups lead with a one-line public summary before expandable detai
   assert.doesNotMatch(html, /speaker-group-details" open/);
 });
 
+test("stance map connects explicitly named speakers and marks reciprocal arrows", () => {
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+    topicId: "stance-map-reciprocal",
+    claims: [],
+    attributedClaims: [],
+    attributedSpeakerGroups: [
+      { speaker: { name: "甲方", role: "公共團體" }, claims: [{ ...claim, statement: "甲方批評乙方，稱資料不透明。" }] },
+      { speaker: { name: "乙方", role: "行政機關" }, claims: [{ ...claim, statement: "乙方質疑甲方，稱程序失職。" }] },
+    ],
+    openQuestions: [],
+  }} />);
+
+  assert.match(html, /id="stance-map"/);
+  assert.equal((html.match(/class="stance-actor stance-actor--target"/g) ?? []).length, 2);
+  assert.equal((html.match(/stance-lane--reciprocal/g) ?? []).length, 2);
+  assert.equal((html.match(/>互指<\/span><b>↔<\/b>/g) ?? []).length, 2);
+  assert.match(html, /aria-label="乙方，行政機關；被 甲方 以批評指向"/);
+  assert.match(html, /aria-label="甲方，公共團體；被 乙方 以質疑指向"/);
+});
+
 test("model preserves ledger order and includes a timeline-only source", () => {
   const timelineSource = { ...source, publicRef: "timeline-only", publisher: "時間軸來源" };
   const model = buildDossierPageModel({
