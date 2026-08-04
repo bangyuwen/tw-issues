@@ -178,6 +178,23 @@ function buildStanceGraphPositions(nodes: StanceGraphNode[]) {
   return positions;
 }
 
+function stanceGraphNodeRadius(node: StanceGraphNode) {
+  return node.kind === "topic" ? { x: 11, y: 11 } : { x: 9, y: 9 };
+}
+
+function trimStanceGraphEdge(source: StanceGraphPosition, target: StanceGraphPosition, sourceNode: StanceGraphNode, targetNode: StanceGraphNode) {
+  const direction = { x: target.x - source.x, y: target.y - source.y };
+  const length = Math.hypot(direction.x, direction.y);
+  if (length === 0) return { source, target };
+  const unit = { x: direction.x / length, y: direction.y / length };
+  const trimPoint = (point: StanceGraphPosition, node: StanceGraphNode, sign: 1 | -1) => {
+    const radius = stanceGraphNodeRadius(node);
+    const distance = 1 / Math.sqrt((unit.x / radius.x) ** 2 + (unit.y / radius.y) ** 2);
+    return { x: point.x + sign * unit.x * distance, y: point.y + sign * unit.y * distance };
+  };
+  return { source: trimPoint(source, sourceNode, 1), target: trimPoint(target, targetNode, -1) };
+}
+
 function buildStanceGraphEdges(entries: StanceMapEntry[]) {
   const drawnReciprocalPairs = new Set<string>();
   return entries.flatMap((entry) => {
@@ -195,18 +212,22 @@ function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attribut
   const entries = buildStanceMap(groups);
   const nodes = buildStanceGraphNodes(entries);
   const positions = buildStanceGraphPositions(nodes);
+  const nodesByKey = new Map(nodes.map((node) => [node.key, node]));
   const edges = buildStanceGraphEdges(entries);
   return <section className="stance-map-section" id="stance-map" aria-label="攻防關係圖">
     <div className="stance-map-intro section-intro"><p className="eyebrow">攻防關係圖</p><h2>只把有對立性的指向畫出來。</h2><p>圖中只保留原句明確寫出的批評、質疑、指控、反駁等關係；轉述、政策說明、呼籲與單純提及仍保留在下方各方說法，不進入這張圖。</p></div>
     <div className="stance-map-board">
       <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`攻防關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
-        <svg className="stance-map-links" viewBox="0 0 100 65" preserveAspectRatio="none" aria-hidden="true">
+        <svg className="stance-map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <defs><marker id="stance-arrowhead" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker><marker id="stance-arrowhead-reciprocal" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker></defs>
           {edges.map(({ entry, sourceKey, targetKey }) => {
             const source = positions.get(sourceKey) ?? positions.get("topic")!;
             const target = positions.get(targetKey) ?? positions.get("topic")!;
+            const sourceNode = nodesByKey.get(sourceKey) ?? nodesByKey.get("topic")!;
+            const targetNode = nodesByKey.get(targetKey) ?? nodesByKey.get("topic")!;
+            const trimmed = trimStanceGraphEdge(source, target, sourceNode, targetNode);
             const marker = entry.reciprocal ? "url(#stance-arrowhead-reciprocal)" : "url(#stance-arrowhead)";
-            return <path className={`stance-edge${entry.reciprocal ? " stance-edge--reciprocal" : ""}`} d={`M ${source.x} ${source.y} L ${target.x} ${target.y}`} markerEnd={marker} markerStart={entry.reciprocal ? marker : undefined} key={`${sourceKey}-${targetKey}`} />;
+            return <path className={`stance-edge${entry.reciprocal ? " stance-edge--reciprocal" : ""}`} d={`M ${trimmed.source.x} ${trimmed.source.y} L ${trimmed.target.x} ${trimmed.target.y}`} markerEnd={marker} markerStart={entry.reciprocal ? marker : undefined} key={`${sourceKey}-${targetKey}`} />;
           })}
         </svg>
         <div className="stance-map-nodes">
