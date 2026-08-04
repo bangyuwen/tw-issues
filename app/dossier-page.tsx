@@ -33,16 +33,11 @@ function ClaimEvidenceBody({ claim, sourceLinks }: { claim: PublicClaim & { samp
   return <><section className="claim-boundary" aria-label="可確認範圍與限制"><div className="claim-scope"><strong>這能確認</strong><p>{claim.proofScope}</p></div><div className="claim-limit"><strong>這不能證明</strong><p>{claim.limitations.join("；")}</p></div>{claim.sampleSize !== undefined && <p className="claim-sample"><strong>樣本數</strong>{claim.sampleSize}（N = {claim.sampleSize}）</p>}</section><div className="claim-sources" aria-label="資料來源"><div className="citations">{sourceLinks(claim.sources.map(({ publicRef }) => publicRef))}</div></div></>;
 }
 
-function ClaimCard({ claim, index, label, zone, sourceLinks }: { claim: PublicClaim & { sampleSize?: number }; index: number; label: string; zone: "direct" | "remainder"; sourceLinks: (ids: string[]) => ReactNode }) {
-  return <article data-claim-zone={zone}><div className="claim-card-heading"><p>{label}</p><span className="fact-number">{String(index + 1).padStart(2, "0")}</span></div><h3>{claim.statement}</h3><details className="claim-boundary-disclosure"><summary>資料與限制</summary><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></details></article>;
-}
-
 function ClaimCollection({ collection, sourceLinks }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
   const direct = collection.claims.slice(0, 4);
   const remainder = collection.claims.slice(4);
-  const cards = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className={`fact-grid fact-grid--${collection.kind}`}>{claims.map((claim, index) => <ClaimCard key={`${collection.id}-${index + offset}`} claim={claim} index={index + offset} label={collection.label} zone={zone} sourceLinks={sourceLinks} />)}</div>;
-  const rows = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className="verified-claim-list">{claims.map((claim, index) => <div data-claim-zone={zone} key={`${collection.id}-${index + offset}`}><EventDisclosure className="verified-claim-row"><summary><span className="verified-claim-ordinal">{String(index + offset + 1).padStart(2, "0")}</span><span className="verified-claim-title">{claim.statement}</span><span className="event-disclosure-action" aria-hidden="true">展開資料</span></summary><div className="verified-claim-body"><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure></div>)}</div>;
-  const items = collection.id === "claims" ? rows : cards;
+  const rows = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className={`evidence-claim-list evidence-claim-list--${collection.kind}`}>{claims.map((claim, index) => <div data-claim-zone={zone} key={`${collection.id}-${index + offset}`}><EventDisclosure className={`evidence-claim-row evidence-claim-row--${collection.kind}`}><summary><span className="evidence-claim-ordinal">{String(index + offset + 1).padStart(2, "0")}</span><span className="evidence-claim-title">{claim.statement}</span><span className="event-disclosure-action" aria-hidden="true">展開資料</span></summary><div className="evidence-claim-body"><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure></div>)}</div>;
+  const items = rows;
   return <div className={`claim-collection claim-collection--${collection.kind}`}><div className="claim-direct">{items(direct, 0, "direct")}</div>{remainder.length > 0 && <details className="claim-remainder"><summary>展開其餘 {remainder.length} 項{collection.label}</summary>{items(remainder, 4, "remainder")}</details>}</div>;
 }
 
