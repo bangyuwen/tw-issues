@@ -69,6 +69,16 @@ type StanceMapEntry = {
   reciprocal: boolean;
 };
 
+type StanceGraphNode = {
+  key: string;
+  kind: "topic" | "speaker" | "target";
+  label: string;
+  role: string;
+  index?: number;
+};
+
+type StanceGraphPosition = { x: number; y: number };
+
 function cleanStanceTarget(target: string) {
   return target.replace(/^(?:有|所謂|對|關於|將|把)\s*/, "").trim().slice(0, 42);
 }
@@ -117,29 +127,91 @@ function buildStanceMap(groups: AttributedSpeakerGroup[]): StanceMapEntry[] {
   }));
 }
 
+function stanceEntryTargetKey(entry: StanceMapEntry) {
+  if (entry.targetSpeakerKey) return entry.targetSpeakerKey;
+  if (entry.explicitTarget && entry.targetLabel !== "議題焦點") return `target::${entry.targetLabel}`;
+  return "topic";
+}
+
+function buildStanceGraphNodes(entries: StanceMapEntry[]) {
+  const speakers = entries.map(({ speaker, key }) => ({ key, speaker })).filter(({ key }, index, all) => all.findIndex((candidate) => candidate.key === key) === index);
+  const speakerNodes: StanceGraphNode[] = speakers.map(({ key, speaker }, index) => ({ key, kind: "speaker", label: speaker.name, role: speaker.role, index }));
+  const targetNodes: StanceGraphNode[] = entries
+    .filter((entry) => !entry.targetSpeaker && entry.explicitTarget && entry.targetLabel !== "議題焦點")
+    .map((entry) => ({ key: stanceEntryTargetKey(entry), kind: "target", label: entry.targetLabel, role: "文字中的落點" }))
+    .filter((node, index, all) => all.findIndex((candidate) => candidate.key === node.key) === index);
+  return [{ key: "topic", kind: "topic", label: "議題焦點", role: "共同節點" }, ...speakerNodes, ...targetNodes];
+}
+
+function buildStanceGraphPositions(nodes: StanceGraphNode[]) {
+  const positions = new Map<string, StanceGraphPosition>([["topic", { x: 50, y: 50 }]]);
+  const orbitNodes = nodes.filter((node) => node.key !== "topic");
+  const radiusX = orbitNodes.length > 14 ? 42 : 39;
+  const radiusY = orbitNodes.length > 14 ? 37 : 34;
+  orbitNodes.forEach((node, index) => {
+    const angle = -Math.PI / 2 + (2 * Math.PI * index) / orbitNodes.length;
+    positions.set(node.key, { x: 50 + radiusX * Math.cos(angle), y: 50 + radiusY * Math.sin(angle) });
+  });
+  return positions;
+}
+
+function buildStanceGraphEdges(entries: StanceMapEntry[]) {
+  const drawnReciprocalPairs = new Set<string>();
+  return entries.flatMap((entry) => {
+    const targetKey = stanceEntryTargetKey(entry);
+    if (entry.reciprocal) {
+      const pairKey = [entry.key, targetKey].sort().join("↔");
+      if (drawnReciprocalPairs.has(pairKey)) return [];
+      drawnReciprocalPairs.add(pairKey);
+    }
+    return [{ entry, sourceKey: entry.key, targetKey }];
+  });
+}
+
 function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
   const entries = buildStanceMap(groups);
+  const nodes = buildStanceGraphNodes(entries);
+  const positions = buildStanceGraphPositions(nodes);
+  const edges = buildStanceGraphEdges(entries);
   return <section className="stance-map-section" id="stance-map" aria-label="立場關係圖">
-    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫出來。</h2><p>每個六邊形是一個公開發言主體；原句點名另一個主體時，箭頭會接到另一個六角形。若兩邊都有明示指向，就顯示 ↔ 互指。</p></div>
+    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫成一張圖。</h2><p>所有公開主體都放在同一張圖裡；正六邊形是主體或文字落點，箭頭沿用原句中的明示指向。若兩邊都有明示指向，就顯示 ↔ 互指。</p></div>
     <div className="stance-map-board">
-      <div className="stance-map-axis" aria-hidden="true"><span>公開主體</span><span>文字中的落點</span></div>
-      <div className="stance-map-lanes">
-        {entries.map((entry, index) => <article className={`stance-lane ${entry.targetSpeaker ? "stance-lane--speaker" : entry.explicitTarget ? "stance-lane--explicit" : "stance-lane--topic"}${entry.reciprocal ? " stance-lane--reciprocal" : ""}`} key={`${entry.speaker.name}-${entry.speaker.role}`}>
-          <div className="stance-actor" role="img" aria-label={`${entry.speaker.name}，${entry.speaker.role}；${entry.relation}：${entry.targetLabel}`}>
-            <span className="stance-actor-index">{String(index + 1).padStart(2, "0")}</span>
-            <strong>{entry.speaker.name}</strong>
-            <small>{entry.speaker.role}</small>
-          </div>
-          <div className="stance-arrow" aria-hidden="true"><span>{entry.reciprocal ? "互指" : entry.relation}</span><b>{entry.reciprocal ? "↔" : "→"}</b></div>
-          <div className={`stance-target${entry.targetSpeaker ? " stance-target--speaker" : ""}`}>
-            {entry.targetSpeaker ? <div className="stance-actor stance-actor--target" role="img" aria-label={`${entry.targetSpeaker.name}，${entry.targetSpeaker.role}；被 ${entry.speaker.name} 以${entry.relation}指向`}><span className="stance-target-kicker">具名主體</span><strong>{entry.targetSpeaker.name}</strong><small>{entry.targetSpeaker.role}</small></div> : <><span className="stance-target-kicker">{entry.explicitTarget ? "明示指向" : "共同節點"}</span><strong>{entry.targetLabel}</strong></>}
-            <small>{entry.claimCount} 項具名說法</small>
-            <details className="stance-evidence"><summary>看原句</summary><p>{entry.claim.statement}</p><div className="citations">{sourceLinks(entry.claim.sources.map(({ publicRef }) => publicRef))}</div></details>
-          </div>
-        </article>)}
+      <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`立場關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
+        <svg className="stance-map-links" viewBox="0 0 100 65" preserveAspectRatio="none" aria-hidden="true">
+          <defs><marker id="stance-arrowhead" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker><marker id="stance-arrowhead-reciprocal" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker></defs>
+          {edges.map(({ entry, sourceKey, targetKey }) => {
+            const source = positions.get(sourceKey) ?? positions.get("topic")!;
+            const target = positions.get(targetKey) ?? positions.get("topic")!;
+            const marker = entry.reciprocal ? "url(#stance-arrowhead-reciprocal)" : "url(#stance-arrowhead)";
+            return <path className={`stance-edge${entry.reciprocal ? " stance-edge--reciprocal" : ""}`} d={`M ${source.x} ${source.y} L ${target.x} ${target.y}`} markerEnd={marker} markerStart={entry.reciprocal ? marker : undefined} key={`${sourceKey}-${targetKey}`} />;
+          })}
+        </svg>
+        <div className="stance-map-nodes">
+          {nodes.map((node) => {
+            const position = positions.get(node.key)!;
+            const nodeLabel = `${node.label}，${node.role}`;
+            return <div className={`stance-graph-node stance-graph-node--${node.kind}`} style={{ left: `${position.x}%`, top: `${position.y}%` }} role="img" aria-label={nodeLabel} key={node.key}>
+              {node.kind === "speaker" && <span className="stance-actor-index">{String((node.index ?? 0) + 1).padStart(2, "0")}</span>}
+              <strong>{node.label}</strong>
+              <small>{node.role}</small>
+            </div>;
+          })}
+        </div>
+      </div>
+      <div className="stance-map-evidence" aria-label="立場關係圖原句">
+        <div className="stance-map-evidence-heading"><span>箭頭的原句依據</span><small>展開查看說法與來源</small></div>
+        <div className="stance-map-evidence-list">
+          {entries.map((entry, index) => {
+            const targetLabel = entry.targetSpeaker?.name ?? entry.targetLabel;
+            return <details className={`stance-evidence stance-evidence-card${entry.reciprocal ? " stance-evidence-card--reciprocal" : ""}`} key={`${entry.key}-${index}`}>
+              <summary><span className="stance-evidence-index">{String(index + 1).padStart(2, "0")}</span><span className="stance-evidence-route"><strong>{entry.speaker.name}</strong><b>{entry.reciprocal ? "↔" : "→"}</b><strong>{targetLabel}</strong></span><span className="stance-evidence-relation">{entry.reciprocal ? "互指" : entry.relation}</span><span className="stance-evidence-action">看原句</span></summary>
+              <div className="stance-evidence-body"><p>{entry.claim.statement}</p><small>{entry.claimCount} 項具名說法</small><div className="citations">{sourceLinks(entry.claim.sources.map(({ publicRef }) => publicRef))}</div></div>
+            </details>;
+          })}
+        </div>
       </div>
     </div>
-    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有明示對象時，統一回到「議題焦點」。</p>
+    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有具名落點時，統一連回「議題焦點」。</p>
   </section>;
 }
 
