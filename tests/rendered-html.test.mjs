@@ -186,9 +186,11 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.equal((progress.match(/data-date-key="2026-07-20"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-21"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-27"/g) ?? []).length, 1);
+  assert.match(progress, /class="event-history-disclosure"><summary>展開較早的 11 個日期<\/summary>/);
+  assert.doesNotMatch(progress, /class="event-history-disclosure" open=""/);
   assert.equal((progress.match(/class="event-disclosure"/g) ?? []).length, 25);
   assert.equal((progress.match(/class="event-disclosure" open=""/g) ?? []).length, 0);
-  assert.equal((progress.match(/<summary>/g) ?? []).length, 25);
+  assert.equal((progress.match(/<summary>/g) ?? []).length, 26);
   assert.doesNotMatch(progress, /event-status-summary/);
   assert.doesNotMatch(progress, /1 項公開命題|筆事件來源/);
   assert.match(progress, />已確認</);
