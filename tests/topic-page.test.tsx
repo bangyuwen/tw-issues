@@ -650,11 +650,14 @@ test("stance map connects explicitly named speakers and marks reciprocal arrows"
   }} />);
 
   assert.match(html, /id="stance-map"/);
-  assert.equal((html.match(/class="stance-actor stance-actor--target"/g) ?? []).length, 2);
-  assert.equal((html.match(/stance-lane--reciprocal/g) ?? []).length, 2);
-  assert.equal((html.match(/>互指<\/span><b>↔<\/b>/g) ?? []).length, 2);
-  assert.match(html, /aria-label="乙方，行政機關；被 甲方 以批評指向"/);
-  assert.match(html, /aria-label="甲方，公共團體；被 乙方 以質疑指向"/);
+  assert.match(html, /class="stance-map-canvas(?: stance-map-canvas--dense)?" role="group" aria-label="立場關係圖，3 個六角形，1 條箭頭"/);
+  assert.equal((html.match(/class="stance-graph-node stance-graph-node--speaker"/g) ?? []).length, 2);
+  assert.equal((html.match(/class="stance-edge stance-edge--reciprocal"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="stance-evidence stance-evidence-card stance-evidence-card--reciprocal"/g) ?? []).length, 2);
+  assert.equal((html.match(/>互指<\/span>/g) ?? []).length, 2);
+  assert.match(html, /aria-label="乙方，行政機關"/);
+  assert.match(html, /aria-label="甲方，公共團體"/);
+  assert.doesNotMatch(html, /stance-lane/);
 });
 
 test("model preserves ledger order and includes a timeline-only source", () => {
