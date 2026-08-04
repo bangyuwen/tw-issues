@@ -145,7 +145,7 @@ test("food-safety page separates public facts, reported chronology, and open que
   const progress = html.match(/id="progress"[\s\S]*?<section class="evidence-section" id="claims"/)?.[0] ?? "";
   const reported = html.match(/id="reports"[\s\S]*?<\/section>/)?.[0] ?? "";
   const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.ok(progress.indexOf("2026-07-04") < progress.indexOf("2026-07-17"));
+  assert.ok(progress.indexOf("2026-07-17") < progress.indexOf("2026-07-04"));
   assert.match(reported, /不同主體怎麼說/);
   assert.match(html, /18 項產品、30 個批號及 360 家流向業者/);
   assert.match(html, /臺中市政府/);
@@ -186,6 +186,8 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.equal((progress.match(/data-date-key="2026-07-20"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-21"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-27"/g) ?? []).length, 1);
+  assert.ok(progress.indexOf('data-date-key="2026-07-27"') < progress.indexOf('data-date-key="2026-07-23"'));
+  assert.ok(progress.indexOf('data-date-key="2026-07-23"') < progress.indexOf('data-date-key="2026-07-21"'));
   assert.match(progress, /class="event-history-disclosure"><summary>展開較早的 11 個日期<\/summary>/);
   assert.doesNotMatch(progress, /class="event-history-disclosure" open=""/);
   assert.equal((progress.match(/class="event-disclosure"/g) ?? []).length, 25);

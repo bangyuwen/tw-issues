@@ -388,7 +388,7 @@ test("event timeline defaults to the latest seven days and keeps older groups co
     reportedTimeline: [event("old", "2026-07-10"), event("boundary", "2026-07-11"), event("latest", "2026-07-17")],
   });
 
-  assert.deepEqual(model.recentTimelineGroups.map(({ key }) => key), ["2026-07-11", "2026-07-17"]);
+  assert.deepEqual(model.recentTimelineGroups.map(({ key }) => key), ["2026-07-17", "2026-07-11"]);
   assert.deepEqual(model.olderTimelineGroups.map(({ key }) => key), ["2026-07-10"]);
 });
 
@@ -600,7 +600,7 @@ test("real sparse and dense projections share density and source contracts", () 
   assert.deepEqual(oil.collections.map(({ claims }) => claims.length), [9, 1]);
   for (const model of [tree, oil]) {
     assert.equal(model.publicSources.length, model.sourceById.size);
-    assert.equal(model.latestTimelineEvent?.publicKey, model.timelineGroups.at(-1)?.events.at(-1)?.publicKey);
+    assert.equal(model.latestTimelineEvent?.publicKey, model.timelineGroups[0]?.events.at(-1)?.publicKey);
   }
 });
 

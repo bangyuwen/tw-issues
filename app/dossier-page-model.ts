@@ -69,13 +69,14 @@ export function buildDossierPageModel(
     .filter(({ event }) => event.items.length > 0)
     .sort((a, b) => eventDateKey(a.event).localeCompare(eventDateKey(b.event)) || a.ledgerIndex - b.ledgerIndex)
     .map(({ event }) => event);
-  const timelineGroups: TimelineGroup[] = Array.from(timeline.reduce((groups, event) => {
+  const timelineGroupsAscending: TimelineGroup[] = Array.from(timeline.reduce((groups, event) => {
     const key = eventDateKey(event);
     const group = groups.get(key) ?? { key, label: eventDateLabel(event), events: [] };
     group.events.push(event);
     groups.set(key, group);
     return groups;
   }, new Map<string, TimelineGroup>()).values());
+  const timelineGroups = timelineGroupsAscending.slice().reverse();
   const latestTimelineEvent = timeline.at(-1);
   const recentTimelineStart = latestTimelineEvent
     ? subtractDays(eventTimelineDateKey(latestTimelineEvent), RECENT_TIMELINE_DAYS - 1)
