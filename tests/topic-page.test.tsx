@@ -256,7 +256,7 @@ test("index keeps attribution and status beside real attributed and mixed latest
   const japanCard = html.match(/href="\/topics\/japan-taiwan-alliance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const treeCard = html.match(/href="\/topics\/taipei-tree-governance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   assert.match(foodCard, /topic-card-status--attributed[^>]*>具名說法/);
-  assert.match(foodCard, /食藥署長姜至剛表示/);
+  assert.match(foodCard, /跨局處查核達 2,179 案/);
   assert.match(japanCard, /topic-card-status--attributed[^>]*>具名說法/);
   assert.match(japanCard, /超過300家無人機/);
   assert.match(treeCard, /topic-card-status--attributed[^>]*>具名說法/);

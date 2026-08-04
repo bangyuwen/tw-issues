@@ -6,11 +6,11 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "05fb9af88e35084c8a32caf5df4f086c46f460279066c190101b85ca23e89143"
+    "sha256": "224690dc520f1800f2c05819e1fada51631138c570abe4f5a146556ff60d119a"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "7dc91331b379dd0926758ea95abb4ddf0495c94d62bb1035b185e4ec17c4ec32"
+    "sha256": "721ff5be313ae720103eddacee6c48580e78ef9eed2ee9d036abb17b40ab3500"
   },
   "topics": {
     "benzopyrene-food-safety": {
@@ -18,7 +18,7 @@
       "slug": "benzopyrene-food-safety",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-08-03",
+      "as_of": "2026-08-04",
       "content_digest": "54fa683e1a1907779dfc00353c2387175439b7b4c0b9a60ab7fb668908e2d337",
       "verification_status": "public_quality_pass",
       "license": "source-specific",

@@ -183,7 +183,7 @@ test("food-safety durable events use date groups and accessible disclosures", as
 
   assert.equal(response.status, 200);
   assert.ok(progress.length > 0);
-  assert.equal((progress.match(/class="event-date-group"/g) ?? []).length, 14);
+  assert.equal((progress.match(/class="event-date-group"/g) ?? []).length, 15);
   assert.equal((progress.match(/data-date-key="2026-07-17"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-18"/g) ?? []).length, 1);
   assert.equal((progress.match(/data-date-key="2026-07-19"/g) ?? []).length, 1);
@@ -192,11 +192,11 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.equal((progress.match(/data-date-key="2026-07-27"/g) ?? []).length, 1);
   assert.ok(progress.indexOf('data-date-key="2026-07-27"') < progress.indexOf('data-date-key="2026-07-23"'));
   assert.ok(progress.indexOf('data-date-key="2026-07-23"') < progress.indexOf('data-date-key="2026-07-21"'));
-  assert.match(progress, /class="event-history-disclosure"><summary>展開較早的 11 個日期<\/summary>/);
+  assert.match(progress, /class="event-history-disclosure"><summary>展開較早的 12 個日期<\/summary>/);
   assert.doesNotMatch(progress, /class="event-history-disclosure" open=""/);
-  assert.equal((progress.match(/class="event-disclosure"/g) ?? []).length, 25);
+  assert.equal((progress.match(/class="event-disclosure"/g) ?? []).length, 26);
   assert.equal((progress.match(/class="event-disclosure" open=""/g) ?? []).length, 0);
-  assert.equal((progress.match(/<summary>/g) ?? []).length, 26);
+  assert.equal((progress.match(/<summary>/g) ?? []).length, 27);
   assert.doesNotMatch(progress, /event-status-summary/);
   assert.doesNotMatch(progress, /1 項公開命題|筆事件來源/);
   assert.match(progress, />已確認</);
@@ -215,6 +215,7 @@ test("food-safety durable events use date groups and accessible disclosures", as
   assert.match(progress, /復工計畫須由臺中市政府核定/);
   assert.match(progress, /連淨七批苦茶油送驗後有四批不合格/);
   assert.match(progress, /尚待立法院審議/);
+  assert.match(progress, /下架回收 824,848 公斤/);
   const knownInformation = html.match(/id="claims"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.doesNotMatch(knownInformation, /排除食油煉製|初步研判|根因仍未定論/);
   assert.doesNotMatch(
@@ -269,7 +270,7 @@ test("topic pages use concise display titles and structured claim reading blocks
   assert.match(html, />這不能證明</);
   assert.match(html, /class="claim-sources"/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
-  assert.match(html, /資料與來源 · (?:<!-- -->)?35(?:<!-- -->)? 筆/);
+  assert.match(html, /資料與來源 · (?:<!-- -->)?36(?:<!-- -->)? 筆/);
   assert.doesNotMatch(html, /class="topic-infographic"|INFOGRAPHIC · 一張圖讀懂|證據路徑矩陣/);
 });
 
