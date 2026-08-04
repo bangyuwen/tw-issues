@@ -292,9 +292,10 @@ test("topic pages use concise display titles and structured claim reading blocks
   assert.doesNotMatch(html, /<h1>苯駢芘超標沙拉油食安危機<\/h1>/);
   assert.match(html, /class="claim-scope"/);
   assert.match(html, /class="claim-limit"/);
-  assert.match(html, /class="verified-claim-list"/);
+  assert.match(html, /class="evidence-claim-list evidence-claim-list--verified"/);
   assert.doesNotMatch(html, /class="fact-grid fact-grid--verified"/);
-  assert.match(html, /class="fact-grid fact-grid--open"/);
+  assert.match(html, /class="evidence-claim-list evidence-claim-list--open"/);
+  assert.doesNotMatch(html, /class="fact-grid fact-grid--open"/);
   assert.match(html, /class="claim-boundary"/);
   assert.match(html, /class="evidence-board-header"[\s\S]*?>證據邊界</);
   assert.match(html, />這能確認</);

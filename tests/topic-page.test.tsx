@@ -516,17 +516,18 @@ test("sources use a default-collapsed native disclosure with stable targets", ()
   assert.ok(html.indexOf("</details>") < html.indexOf("AI 自動製作說明"));
 });
 
-test("verified claims use compact timeline rows with collapsed evidence details", () => {
+test("known and unresolved claims use compact rows with collapsed evidence details", () => {
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
     topicId: "claim-boundary-disclosure",
-    claims: [claim], attributedClaims: [], attributedSpeakerGroups: [], openQuestions: [],
+    claims: [claim], attributedClaims: [], attributedSpeakerGroups: [], openQuestions: [{ ...claim, statement: "待釐清命題。" }],
   }} />);
 
-  assert.match(html, /<details class="verified-claim-row"><summary>/);
-  assert.doesNotMatch(html, /<details class="verified-claim-row" open/);
+  assert.match(html, /<details class="evidence-claim-row evidence-claim-row--verified"><summary>/);
+  assert.match(html, /<details class="evidence-claim-row evidence-claim-row--open"><summary>/);
+  assert.doesNotMatch(html, /<details class="evidence-claim-row evidence-claim-row--(?:verified|open)" open/);
   assert.match(html, /這能確認/);
   assert.match(html, /這不能證明/);
-  assert.doesNotMatch(html, /fact-grid--verified/);
+  assert.doesNotMatch(html, /fact-grid--(?:verified|open)/);
   assert.doesNotMatch(html, /這一層只收錄可核對的公開命題/);
 });
 
@@ -631,7 +632,7 @@ for (const [field, label] of [
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={synthetic} />);
   assert.match(html, new RegExp(`展開其餘 2 項${label}`));
   assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).length, 4);
-  const remainderOrdinal = field === "claims" ? "verified-claim-ordinal" : "fact-number";
+  const remainderOrdinal = "evidence-claim-ordinal";
   assert.match(html, new RegExp(`class="claim-remainder"[\\s\\S]*?${remainderOrdinal}">05<[\\s\\S]*?命題 6`));
 });
 
