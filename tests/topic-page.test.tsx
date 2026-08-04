@@ -627,9 +627,9 @@ test("speaker groups lead with a one-line public summary before expandable detai
   }} />);
 
   assert.match(html, /不同主體怎麼說/);
-  assert.match(html, /一句話摘要/);
+  assert.match(html, /class="speaker-group-summary"><span>摘要<\/span>/);
   assert.match(html, /測試機關主張先完成公開查核，再決定後續處置。/);
-  assert.match(html, /<details class="speaker-group-details"><summary><span>展開 3 項具名說法/);
+  assert.match(html, /<details class="speaker-group-details"><summary>查看 3 項具名說法<\/summary>/);
   assert.match(html, /class="speaker-statement-list"/);
   assert.match(html, /class="speaker-statement-row"/);
   assert.doesNotMatch(html, /fact-grid--attributed/);
