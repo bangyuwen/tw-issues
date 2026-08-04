@@ -214,6 +214,7 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .stance-map-lanes { border-top:1px solid rgba(169,203,188,.22); }
 .stance-lane { --stance-accent:#8fa89d; align-items:center; padding:13px 10px; border-bottom:1px solid rgba(169,203,188,.18); }
 .stance-lane--explicit { --stance-accent:var(--coral); }
+.stance-lane--speaker { --stance-accent:var(--mint); }
 .stance-lane--topic { --stance-accent:#8fa89d; }
 .stance-actor { min-height:82px; padding:14px 23px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:var(--navy); background:var(--stance-accent); clip-path:polygon(24% 3%,76% 3%,100% 50%,76% 97%,24% 97%,0 50%); filter:drop-shadow(0 8px 10px rgba(0,0,0,.18)); transition:transform .18s ease,filter .18s ease; }
 .stance-actor:hover { transform:translateY(-3px) rotate(-1deg); filter:drop-shadow(0 11px 13px rgba(0,0,0,.25)); }
@@ -224,6 +225,11 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .stance-arrow::before { content:""; height:1px; background:currentColor; opacity:.78; }
 .stance-arrow b { font-size:1.38rem; font-weight:500; line-height:1; }
 .stance-target { min-width:0; padding:15px 16px 13px; border:1px solid rgba(169,203,188,.33); border-left:3px solid var(--stance-accent); background:rgba(245,243,238,.08); }
+.stance-target--speaker { padding:12px 14px 13px; }
+.stance-target .stance-actor--target { width:100%; min-height:82px; padding:14px 20px; }
+.stance-target .stance-actor--target .stance-target-kicker { color:rgba(16,41,54,.7); }
+.stance-target .stance-actor--target strong { max-width:22ch; color:var(--navy); font-size:.92rem; line-height:1.25; }
+.stance-target .stance-actor--target small { max-width:25ch; margin-top:4px; color:rgba(16,41,54,.72); font-size:.62rem; line-height:1.35; }
 .stance-target-kicker { display:block; color:var(--stance-accent); font-size:.61rem; font-weight:850; letter-spacing:.1em; }
 .stance-target strong { display:block; margin:5px 0 4px; color:#f9f7f0; font-size:1rem; line-height:1.45; letter-spacing:-.02em; }
 .stance-target>small { display:block; color:#a9c2b7; font-size:.65rem; font-weight:750; }

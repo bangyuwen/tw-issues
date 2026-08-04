@@ -57,24 +57,40 @@ function SpeakerGroups({ groups, sourceLinks }: { groups: DossierPageModel["attr
 }
 
 type StanceMapEntry = {
+  key: string;
   speaker: PublicSpeaker;
   claim: PublicClaim;
   relation: string;
   targetLabel: string;
   explicitTarget: boolean;
   claimCount: number;
+  targetSpeaker?: PublicSpeaker;
+  targetSpeakerKey?: string;
+  reciprocal: boolean;
 };
 
 function cleanStanceTarget(target: string) {
   return target.replace(/^(?:有|所謂|對|關於|將|把)\s*/, "").trim().slice(0, 42);
 }
 
-function findStanceTarget(claims: PublicClaim[]) {
+function speakerKey(speaker: PublicSpeaker) {
+  return `${speaker.name}::${speaker.role}`;
+}
+
+function findTargetSpeaker(statement: string, speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
+  const target = speakers.find((candidate) => candidate.name !== speaker.name && statement.includes(candidate.name));
+  return target ? { speaker: target, key: speakerKey(target) } : undefined;
+}
+
+function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
   for (const claim of claims) {
+    const target = findTargetSpeaker(claim.statement, speaker, speakers);
+    const targetFields = target ? { targetSpeaker: target.speaker, targetSpeakerKey: target.key } : {};
     const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
-    if (quoted) return { claim, relation: quoted[1], targetLabel: cleanStanceTarget(quoted[2]), explicitTarget: true };
+    if (quoted) return { claim, relation: quoted[1], targetLabel: cleanStanceTarget(quoted[2]), explicitTarget: true, ...targetFields };
     const direct = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|研判|認為|不應|辯稱|提醒)\s*([^，。；]{2,42})/);
-    if (direct) return { claim, relation: direct[1], targetLabel: cleanStanceTarget(direct[2]), explicitTarget: true };
+    if (direct) return { claim, relation: direct[1], targetLabel: cleanStanceTarget(direct[2]), explicitTarget: true, ...targetFields };
+    if (target) return { claim, relation: "提及", targetLabel: target.speaker.name, explicitTarget: true, ...targetFields };
   }
   return { claim: claims[0], relation: "提出說法", targetLabel: "議題焦點", explicitTarget: false };
 }
@@ -87,30 +103,36 @@ function buildStanceMap(groups: AttributedSpeakerGroup[]): StanceMapEntry[] {
     current.claims.push(...group.claims);
     merged.set(key, current);
   });
-  return Array.from(merged.values()).map(({ speaker, claims }) => ({
+  const speakers = Array.from(merged.values()).map(({ speaker }) => speaker);
+  const entries = Array.from(merged.entries()).map(([key, { speaker, claims }]) => ({
+    key,
     speaker,
-    ...findStanceTarget(claims),
+    ...findStanceTarget(claims, speaker, speakers),
     claimCount: claims.length,
+    reciprocal: false,
+  }));
+  return entries.map((entry) => ({
+    ...entry,
+    reciprocal: Boolean(entry.targetSpeakerKey && entries.some((other) => other.key === entry.targetSpeakerKey && other.targetSpeakerKey === entry.key)),
   }));
 }
 
 function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
   const entries = buildStanceMap(groups);
   return <section className="stance-map-section" id="stance-map" aria-label="立場關係圖">
-    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫出來。</h2><p>每個六邊形是一個公開發言主體；箭頭沿用原句裡的明示動詞，讓讀者先看見說法的落點，再回到原文查核。</p></div>
+    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫出來。</h2><p>每個六邊形是一個公開發言主體；原句點名另一個主體時，箭頭會接到另一個六角形。若兩邊都有明示指向，就顯示 ↔ 互指。</p></div>
     <div className="stance-map-board">
       <div className="stance-map-axis" aria-hidden="true"><span>公開主體</span><span>文字中的落點</span></div>
       <div className="stance-map-lanes">
-        {entries.map((entry, index) => <article className={`stance-lane ${entry.explicitTarget ? "stance-lane--explicit" : "stance-lane--topic"}`} key={`${entry.speaker.name}-${entry.speaker.role}`}>
+        {entries.map((entry, index) => <article className={`stance-lane ${entry.targetSpeaker ? "stance-lane--speaker" : entry.explicitTarget ? "stance-lane--explicit" : "stance-lane--topic"}${entry.reciprocal ? " stance-lane--reciprocal" : ""}`} key={`${entry.speaker.name}-${entry.speaker.role}`}>
           <div className="stance-actor" role="img" aria-label={`${entry.speaker.name}，${entry.speaker.role}；${entry.relation}：${entry.targetLabel}`}>
             <span className="stance-actor-index">{String(index + 1).padStart(2, "0")}</span>
             <strong>{entry.speaker.name}</strong>
             <small>{entry.speaker.role}</small>
           </div>
-          <div className="stance-arrow" aria-hidden="true"><span>{entry.relation}</span><b>→</b></div>
-          <div className="stance-target">
-            <span className="stance-target-kicker">{entry.explicitTarget ? "明示指向" : "共同節點"}</span>
-            <strong>{entry.targetLabel}</strong>
+          <div className="stance-arrow" aria-hidden="true"><span>{entry.reciprocal ? "互指" : entry.relation}</span><b>{entry.reciprocal ? "↔" : "→"}</b></div>
+          <div className={`stance-target${entry.targetSpeaker ? " stance-target--speaker" : ""}`}>
+            {entry.targetSpeaker ? <div className="stance-actor stance-actor--target" role="img" aria-label={`${entry.targetSpeaker.name}，${entry.targetSpeaker.role}；被 ${entry.speaker.name} 以${entry.relation}指向`}><span className="stance-target-kicker">具名主體</span><strong>{entry.targetSpeaker.name}</strong><small>{entry.targetSpeaker.role}</small></div> : <><span className="stance-target-kicker">{entry.explicitTarget ? "明示指向" : "共同節點"}</span><strong>{entry.targetLabel}</strong></>}
             <small>{entry.claimCount} 項具名說法</small>
             <details className="stance-evidence"><summary>看原句</summary><p>{entry.claim.statement}</p><div className="citations">{sourceLinks(entry.claim.sources.map(({ publicRef }) => publicRef))}</div></details>
           </div>
