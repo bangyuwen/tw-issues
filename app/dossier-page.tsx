@@ -83,6 +83,11 @@ function cleanStanceTarget(target: string) {
   return target.replace(/^(?:有|所謂|對|關於|將|把)\s*/, "").trim().slice(0, 42);
 }
 
+function canonicalizeStanceTargetLabel(target: string) {
+  const cleaned = cleanStanceTarget(target);
+  return cleaned === "中央" ? "中央政府（行政院）" : cleaned;
+}
+
 function speakerKey(speaker: PublicSpeaker) {
   return `${speaker.name}::${speaker.role}`;
 }
@@ -120,9 +125,9 @@ function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speaker
     const target = findTargetSpeaker(claim.statement, speaker, speakers);
     const targetFields = target ? { targetSpeaker: target.speaker, targetSpeakerKey: target.key } : {};
     const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
-    if (quoted) return { claim, relation: quoted[1], targetLabel: target?.speaker.name ?? findAdversarialTargetLabel(claim.statement, quoted[1], cleanStanceTarget(quoted[2])), explicitTarget: true, ...targetFields };
+    if (quoted) return { claim, relation: quoted[1], targetLabel: target?.speaker.name ?? canonicalizeStanceTargetLabel(findAdversarialTargetLabel(claim.statement, quoted[1], quoted[2])), explicitTarget: true, ...targetFields };
     const direct = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|研判|認為|不應|辯稱|提醒)\s*([^，。；]{2,42})/);
-    if (direct) return { claim, relation: direct[1], targetLabel: target?.speaker.name ?? findAdversarialTargetLabel(claim.statement, direct[1], cleanStanceTarget(direct[2])), explicitTarget: true, ...targetFields };
+    if (direct) return { claim, relation: direct[1], targetLabel: target?.speaker.name ?? canonicalizeStanceTargetLabel(findAdversarialTargetLabel(claim.statement, direct[1], direct[2])), explicitTarget: true, ...targetFields };
     if (target) return { claim, relation: "提及", targetLabel: target.speaker.name, explicitTarget: true, ...targetFields };
   }
   return { claim: claims[0], relation: "提出說法", targetLabel: "議題焦點", explicitTarget: false };
@@ -161,7 +166,12 @@ function buildStanceGraphNodes(entries: StanceMapEntry[]) {
   const speakerNodes: StanceGraphNode[] = speakers.map(({ key, speaker }, index) => ({ key, kind: "speaker", label: speaker.name, role: speaker.role, index }));
   const targetNodes: StanceGraphNode[] = entries
     .filter((entry) => !entry.targetSpeaker && entry.explicitTarget && entry.targetLabel !== "議題焦點")
-    .map((entry) => ({ key: stanceEntryTargetKey(entry), kind: "target", label: entry.targetLabel, role: "文字中的落點" }))
+    .map((entry) => ({
+      key: stanceEntryTargetKey(entry),
+      kind: "target",
+      label: entry.targetLabel,
+      role: entry.targetLabel === "中央政府（行政院）" ? "組織落點，非個人" : entry.targetLabel === "其他縣市" ? "地方政府群體，非個人" : "文字中的落點",
+    }))
     .filter((node, index, all) => all.findIndex((candidate) => candidate.key === node.key) === index);
   return [{ key: "topic", kind: "topic", label: "議題焦點", role: "共同節點" }, ...speakerNodes, ...targetNodes];
 }
@@ -215,7 +225,7 @@ function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attribut
   const nodesByKey = new Map(nodes.map((node) => [node.key, node]));
   const edges = buildStanceGraphEdges(entries);
   return <section className="stance-map-section" id="stance-map" aria-label="攻防關係圖">
-    <div className="stance-map-intro section-intro"><p className="eyebrow">攻防關係圖</p><h2>只把有對立性的指向畫出來。</h2><p>圖中只保留原句明確寫出的批評、質疑、指控、反駁等關係；轉述、政策說明、呼籲與單純提及仍保留在下方各方說法，不進入這張圖。</p></div>
+    <div className="stance-map-intro section-intro"><p className="eyebrow">攻防關係圖</p><h2>只把有對立性的指向畫出來。</h2><p>圖中只保留原句明確寫出的批評、質疑、指控、反駁等關係；轉述、政策說明、呼籲與單純提及仍保留在下方各方說法，不進入這張圖。人物節點與組織／群體落點分開；「中央政府（行政院）」不等同卓榮泰個人。</p></div>
     <div className="stance-map-board">
       <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`攻防關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
         <svg className="stance-map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
