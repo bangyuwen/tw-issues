@@ -6,11 +6,11 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "a004f5ae9cf9fa2df05b3e2a61cb4b1ce481b4bd337a74e9c00e6ce476e11939"
+    "sha256": "f6dd47d4eebe719ef1e440ce3edc04b4e1859dd5c2d35d096f71c53fa0e6fe2e"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "4b0cd2714bd55d8bbaca535fa5d7ad12304b53df79a56ba14f4d45849ef25b35"
+    "sha256": "7dc91331b379dd0926758ea95abb4ddf0495c94d62bb1035b185e4ec17c4ec32"
   },
   "topics": {
     "benzopyrene-food-safety": {
@@ -47,15 +47,15 @@
       "indexed_title": "中國跨境恐嚇與台灣公共底線"
     },
     "defense-procurement": {
-      "topic_id": "taiwan-self-defense-bargaining-2026",
+      "topic_id": "defense-procurement-2026",
       "slug": "defense-procurement",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-19",
-      "content_digest": "771463abdda1ca167e0c7c034193c07f59f1f0c5e40cda3d3443b1164ce20b2a",
+      "as_of": "2026-07-28",
+      "content_digest": "faa57f37071cf0b3065d08afe065da96c8569d0c9956a8d09a25e613d9083597",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
-      "indexed_title": "台灣自保成談判籌碼"
+      "indexed_title": "軍購預算政治攻防"
     },
     "flood-budget-bottleneck": {
       "topic_id": "flood-budget-bottleneck-2026",
@@ -68,17 +68,6 @@
       "license": "source-specific",
       "indexed_title": "豪雨救災與預算卡關"
     },
-    "himars-visible-readiness": {
-      "topic_id": "himars-visible-readiness-2026",
-      "slug": "himars-visible-readiness",
-      "visibility": "public",
-      "publication_status": "published",
-      "as_of": "2026-07-28",
-      "content_digest": "ced05d406369abc50365898a6c989ae886ac27638a7c30b3172f93214c65a2cd",
-      "verification_status": "public_quality_pass",
-      "license": "source-specific",
-      "indexed_title": "HIMARS 演訓嚇阻"
-    },
     "japan-taiwan-alliance": {
       "topic_id": "japan-taiwan-alliance-2026",
       "slug": "japan-taiwan-alliance",
@@ -89,6 +78,17 @@
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "日台同盟與安全合作"
+    },
+    "self-defense-readiness": {
+      "topic_id": "taiwan-self-defense-bargaining-2026",
+      "slug": "self-defense-readiness",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-07-28",
+      "content_digest": "771463abdda1ca167e0c7c034193c07f59f1f0c5e40cda3d3443b1164ce20b2a",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "台灣自保成談判籌碼"
     },
     "taipei-tree-governance": {
       "topic_id": "taipei-tree-governance-2026",

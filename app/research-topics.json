@@ -8,9 +8,16 @@
       "publicEvidenceAvailable": true
     },
     {
-      "topicId": "himars-visible-readiness-2026",
-      "slug": "himars-visible-readiness",
-      "title": "HIMARS 演訓嚇阻",
+      "topicId": "taiwan-self-defense-bargaining-2026",
+      "slug": "self-defense-readiness",
+      "title": "台灣自保成談判籌碼",
+      "lastUpdated": "2026-07-28",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "defense-procurement-2026",
+      "slug": "defense-procurement",
+      "title": "軍購預算政治攻防",
       "lastUpdated": "2026-07-28",
       "publicEvidenceAvailable": true
     },
@@ -19,13 +26,6 @@
       "slug": "taipei-tree-governance",
       "title": "臺北城市樹木治理爭議",
       "lastUpdated": "2026-07-24",
-      "publicEvidenceAvailable": true
-    },
-    {
-      "topicId": "taiwan-self-defense-bargaining-2026",
-      "slug": "defense-procurement",
-      "title": "台灣自保成談判籌碼",
-      "lastUpdated": "2026-07-19",
       "publicEvidenceAvailable": true
     },
     {
@@ -80,9 +80,16 @@
       "publicEvidenceAvailable": true
     },
     {
-      "topicId": "himars-visible-readiness-2026",
-      "slug": "himars-visible-readiness",
-      "title": "HIMARS 演訓嚇阻",
+      "topicId": "taiwan-self-defense-bargaining-2026",
+      "slug": "self-defense-readiness",
+      "title": "台灣自保成談判籌碼",
+      "lastUpdated": "2026-07-28",
+      "publicEvidenceAvailable": true
+    },
+    {
+      "topicId": "defense-procurement-2026",
+      "slug": "defense-procurement",
+      "title": "軍購預算政治攻防",
       "lastUpdated": "2026-07-28",
       "publicEvidenceAvailable": true
     },
@@ -91,13 +98,6 @@
       "slug": "taipei-tree-governance",
       "title": "臺北城市樹木治理爭議",
       "lastUpdated": "2026-07-24",
-      "publicEvidenceAvailable": true
-    },
-    {
-      "topicId": "taiwan-self-defense-bargaining-2026",
-      "slug": "defense-procurement",
-      "title": "台灣自保成談判籌碼",
-      "lastUpdated": "2026-07-19",
       "publicEvidenceAvailable": true
     },
     {
@@ -171,9 +171,9 @@
       "publicEvidenceAvailable": false
     },
     {
-      "topicId": "pla-satellite-surveillance-2026",
-      "slug": "pla-satellite-surveillance",
-      "title": "共軍偵察衛星密集監控",
+      "topicId": "trump-xi-taiwan-2026",
+      "slug": "trump-xi-taiwan",
+      "title": "川習會對台影響",
       "lastUpdated": "2026-03-28",
       "publicEvidenceAvailable": false
     },
@@ -185,9 +185,9 @@
       "publicEvidenceAvailable": false
     },
     {
-      "topicId": "trump-xi-taiwan-2026",
-      "slug": "trump-xi-taiwan",
-      "title": "川習會對台影響",
+      "topicId": "pla-satellite-surveillance-2026",
+      "slug": "pla-satellite-surveillance",
+      "title": "共軍偵察衛星密集監控",
       "lastUpdated": "2026-03-28",
       "publicEvidenceAvailable": false
     }

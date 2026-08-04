@@ -2,13 +2,13 @@ const conciseTitles: Record<string, string> = {
   "benzopyrene-food-safety": "食用油苯駢芘超標",
   "budget-delay-governance": "中央總預算延宕",
   "taipei-tree-governance": "臺北樹木治理",
-  "defense-procurement": "台灣自我防衛",
+  "defense-procurement": "軍購預算政治攻防",
+  "self-defense-readiness": "自我防衛與韌性",
   "cross-border-intimidation": "跨境恐嚇事件",
   "typhoon-governance": "颱風與城市治理",
   "flood-budget-bottleneck": "治水預算卡關",
   "japan-taiwan-alliance": "台日安全合作",
   "transnational-repression": "中共跨境鎮壓",
-  "himars-visible-readiness": "HIMARS 演訓嚇阻",
 };
 
 export function getTopicDisplayTitle(slug: string, fallback: string) {
@@ -20,12 +20,12 @@ const topicVisuals: Record<string, { src: string; alt: string; caption: string }
   "budget-delay-governance": { src: "/topic-visuals/governance.svg", alt: "預算審議、制度程序與治理的主題視覺", caption: "制度治理 · 程序、決策、執行" },
   "taipei-tree-governance": { src: "/topic-visuals/city-environment.svg", alt: "城市樹木、環境與治理的主題視覺", caption: "城市環境 · 樹木、空間、韌性" },
   "defense-procurement": { src: "/topic-visuals/security.svg", alt: "防衛整備、合作與區域安全的主題視覺", caption: "安全防衛 · 整備、合作、嚇阻" },
+  "self-defense-readiness": { src: "/topic-visuals/security.svg", alt: "自我防衛、城鎮韌性與社會協調的主題視覺", caption: "防衛韌性 · 指管、後勤、社會協調" },
   "cross-border-intimidation": { src: "/topic-visuals/human-rights.svg", alt: "跨境恐嚇、人身安全與公共底線的主題視覺", caption: "人權安全 · 跨境壓迫、保護、追責" },
   "typhoon-governance": { src: "/topic-visuals/city-environment.svg", alt: "颱風、城市治理與韌性的主題視覺", caption: "城市環境 · 災害、治理、韌性" },
   "flood-budget-bottleneck": { src: "/topic-visuals/city-environment.svg", alt: "治水、預算與城市韌性的主題視覺", caption: "城市環境 · 治水、預算、韌性" },
   "japan-taiwan-alliance": { src: "/topic-visuals/security.svg", alt: "台日合作、區域安全與嚇阻的主題視覺", caption: "區域安全 · 合作、整備、嚇阻" },
   "transnational-repression": { src: "/topic-visuals/human-rights.svg", alt: "跨國鎮壓、人權與法律追責的主題視覺", caption: "人權安全 · 監控、壓迫、追責" },
-  "himars-visible-readiness": { src: "/topic-visuals/security.svg", alt: "HIMARS 演訓、戰備與嚇阻的主題視覺", caption: "安全防衛 · 演訓、戰備、嚇阻" },
 };
 
 export function getTopicVisual(slug: string) {
