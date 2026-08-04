@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { DeepResearchTopic, PublicClaim } from "./topic-data";
+import type { AttributedSpeakerGroup, DeepResearchTopic, PublicClaim, PublicSpeaker } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -56,6 +56,71 @@ function SpeakerGroups({ groups, sourceLinks }: { groups: DossierPageModel["attr
   })}</div>;
 }
 
+type StanceMapEntry = {
+  speaker: PublicSpeaker;
+  claim: PublicClaim;
+  relation: string;
+  targetLabel: string;
+  explicitTarget: boolean;
+  claimCount: number;
+};
+
+function cleanStanceTarget(target: string) {
+  return target.replace(/^(?:有|所謂|對|關於|將|把)\s*/, "").trim().slice(0, 42);
+}
+
+function findStanceTarget(claims: PublicClaim[]) {
+  for (const claim of claims) {
+    const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
+    if (quoted) return { claim, relation: quoted[1], targetLabel: cleanStanceTarget(quoted[2]), explicitTarget: true };
+    const direct = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|研判|認為|不應|辯稱|提醒)\s*([^，。；]{2,42})/);
+    if (direct) return { claim, relation: direct[1], targetLabel: cleanStanceTarget(direct[2]), explicitTarget: true };
+  }
+  return { claim: claims[0], relation: "提出說法", targetLabel: "議題焦點", explicitTarget: false };
+}
+
+function buildStanceMap(groups: AttributedSpeakerGroup[]): StanceMapEntry[] {
+  const merged = new Map<string, { speaker: PublicSpeaker; claims: PublicClaim[] }>();
+  groups.forEach((group) => {
+    const key = `${group.speaker.name}::${group.speaker.role}`;
+    const current = merged.get(key) ?? { speaker: group.speaker, claims: [] };
+    current.claims.push(...group.claims);
+    merged.set(key, current);
+  });
+  return Array.from(merged.values()).map(({ speaker, claims }) => ({
+    speaker,
+    ...findStanceTarget(claims),
+    claimCount: claims.length,
+  }));
+}
+
+function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
+  const entries = buildStanceMap(groups);
+  return <section className="stance-map-section" id="stance-map" aria-label="立場關係圖">
+    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫出來。</h2><p>每個六邊形是一個公開發言主體；箭頭沿用原句裡的明示動詞，讓讀者先看見說法的落點，再回到原文查核。</p></div>
+    <div className="stance-map-board">
+      <div className="stance-map-axis" aria-hidden="true"><span>公開主體</span><span>文字中的落點</span></div>
+      <div className="stance-map-lanes">
+        {entries.map((entry, index) => <article className={`stance-lane ${entry.explicitTarget ? "stance-lane--explicit" : "stance-lane--topic"}`} key={`${entry.speaker.name}-${entry.speaker.role}`}>
+          <div className="stance-actor" role="img" aria-label={`${entry.speaker.name}，${entry.speaker.role}；${entry.relation}：${entry.targetLabel}`}>
+            <span className="stance-actor-index">{String(index + 1).padStart(2, "0")}</span>
+            <strong>{entry.speaker.name}</strong>
+            <small>{entry.speaker.role}</small>
+          </div>
+          <div className="stance-arrow" aria-hidden="true"><span>{entry.relation}</span><b>→</b></div>
+          <div className="stance-target">
+            <span className="stance-target-kicker">{entry.explicitTarget ? "明示指向" : "共同節點"}</span>
+            <strong>{entry.targetLabel}</strong>
+            <small>{entry.claimCount} 項具名說法</small>
+            <details className="stance-evidence"><summary>看原句</summary><p>{entry.claim.statement}</p><div className="citations">{sourceLinks(entry.claim.sources.map(({ publicRef }) => publicRef))}</div></details>
+          </div>
+        </article>)}
+      </div>
+    </div>
+    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有明示對象時，統一回到「議題焦點」。</p>
+  </section>;
+}
+
 const evidenceCopy = {
   claims: { aria: "命題追溯", eyebrow: "已知資訊", title: undefined, intro: undefined },
   questions: { aria: "仍待釐清", eyebrow: "仍待釐清", title: <>知道哪裡還不知道，<br />比假裝有答案更重要。</>, intro: "這些項目已有公開調查或報導脈絡，但尚不能把任何一種解釋寫成根因或責任定論。" },
@@ -80,6 +145,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 export default function DossierPage({ model }: { model: DossierPageModel }) {
   const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, recentTimelineGroups, olderTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
+  const stanceMapAvailable = buildStanceMap(attributedSpeakerGroups).length > 1;
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
     return source ? <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`查看來源：${source.publisher}`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a> : null;
@@ -108,7 +174,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{stanceMapAvailable && <a href="#stance-map">立場圖</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
       <div className="section-intro"><p className="eyebrow">事件進展</p><p>預設顯示最近一週（以最新事件為基準）；較早進度仍保留在下方。</p></div>
       {recentTimelineGroups.length > 0 && renderTimelineGroups(recentTimelineGroups, "recent")}
@@ -119,6 +185,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     </section>}
     <EvidenceSection collection={verified} sourceLinks={sourceLinks} />
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
+    {stanceMapAvailable && <StanceMap groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
     {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
     {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
     {unresolved.claims.length > 0 && <EvidenceSection collection={unresolved} sourceLinks={sourceLinks} />}
