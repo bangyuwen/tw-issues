@@ -87,9 +87,27 @@ function speakerKey(speaker: PublicSpeaker) {
   return `${speaker.name}::${speaker.role}`;
 }
 
+const adversarialRelations = new Set([
+  "批評",
+  "批判",
+  "指控",
+  "抨擊",
+  "攻擊",
+  "責怪",
+  "質疑",
+  "反駁",
+  "駁斥",
+  "影射",
+]);
+
 function findTargetSpeaker(statement: string, speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
   const target = speakers.find((candidate) => candidate.name !== speaker.name && statement.includes(candidate.name));
   return target ? { speaker: target, key: speakerKey(target) } : undefined;
+}
+
+function findAdversarialTargetLabel(statement: string, relation: string, fallback: string) {
+  const target = statement.match(new RegExp(`${relation}\\s*(?:對|將|把)?\\s*([^，。；「」]{2,24}?)(?=未|沒有|不|是否|「|，|。|；|$)`));
+  return target ? cleanStanceTarget(target[1]) : fallback;
 }
 
 function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speakers: PublicSpeaker[]) {
@@ -102,9 +120,9 @@ function findStanceTarget(claims: PublicClaim[], speaker: PublicSpeaker, speaker
     const target = findTargetSpeaker(claim.statement, speaker, speakers);
     const targetFields = target ? { targetSpeaker: target.speaker, targetSpeakerKey: target.key } : {};
     const quoted = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|辯稱|提醒)[^「」]{0,24}「([^」]{2,42})」/);
-    if (quoted) return { claim, relation: quoted[1], targetLabel: cleanStanceTarget(quoted[2]), explicitTarget: true, ...targetFields };
+    if (quoted) return { claim, relation: quoted[1], targetLabel: target?.speaker.name ?? findAdversarialTargetLabel(claim.statement, quoted[1], cleanStanceTarget(quoted[2])), explicitTarget: true, ...targetFields };
     const direct = claim.statement.match(/(批評|批判|指稱|指控|抨擊|攻擊|責怪|質疑|反駁|駁斥|影射|否認|呼籲|主張|稱為|定性為|研判|認為|不應|辯稱|提醒)\s*([^，。；]{2,42})/);
-    if (direct) return { claim, relation: direct[1], targetLabel: cleanStanceTarget(direct[2]), explicitTarget: true, ...targetFields };
+    if (direct) return { claim, relation: direct[1], targetLabel: target?.speaker.name ?? findAdversarialTargetLabel(claim.statement, direct[1], cleanStanceTarget(direct[2])), explicitTarget: true, ...targetFields };
     if (target) return { claim, relation: "提及", targetLabel: target.speaker.name, explicitTarget: true, ...targetFields };
   }
   return { claim: claims[0], relation: "提出說法", targetLabel: "議題焦點", explicitTarget: false };
@@ -125,7 +143,7 @@ function buildStanceMap(groups: AttributedSpeakerGroup[]): StanceMapEntry[] {
     ...findStanceTarget(claims, speaker, speakers),
     claimCount: claims.length,
     reciprocal: false,
-  }));
+  })).filter((entry) => entry.explicitTarget && adversarialRelations.has(entry.relation));
   return entries.map((entry) => ({
     ...entry,
     reciprocal: Boolean(entry.targetSpeakerKey && entries.some((other) => other.key === entry.targetSpeakerKey && other.targetSpeakerKey === entry.key)),
@@ -178,10 +196,10 @@ function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attribut
   const nodes = buildStanceGraphNodes(entries);
   const positions = buildStanceGraphPositions(nodes);
   const edges = buildStanceGraphEdges(entries);
-  return <section className="stance-map-section" id="stance-map" aria-label="立場關係圖">
-    <div className="stance-map-intro section-intro"><p className="eyebrow">立場關係圖</p><h2>把「誰在指向誰」畫成一張圖。</h2><p>所有公開主體都放在同一張圖裡；正六邊形是主體或文字落點，箭頭沿用原句中的明示指向。若兩邊都有明示指向，就顯示 ↔ 互指。</p></div>
+  return <section className="stance-map-section" id="stance-map" aria-label="攻防關係圖">
+    <div className="stance-map-intro section-intro"><p className="eyebrow">攻防關係圖</p><h2>只把有對立性的指向畫出來。</h2><p>圖中只保留原句明確寫出的批評、質疑、指控、反駁等關係；轉述、政策說明、呼籲與單純提及仍保留在下方各方說法，不進入這張圖。</p></div>
     <div className="stance-map-board">
-      <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`立場關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
+      <div className={`stance-map-canvas${nodes.length > 14 ? " stance-map-canvas--dense" : ""}`} role="group" aria-label={`攻防關係圖，${nodes.length} 個六角形，${edges.length} 條箭頭`}>
         <svg className="stance-map-links" viewBox="0 0 100 65" preserveAspectRatio="none" aria-hidden="true">
           <defs><marker id="stance-arrowhead" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker><marker id="stance-arrowhead-reciprocal" markerWidth="4" markerHeight="4" refX="3.5" refY="2" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0,0 L4,2 L0,4 z" /></marker></defs>
           {edges.map(({ entry, sourceKey, targetKey }) => {
@@ -203,7 +221,7 @@ function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attribut
           })}
         </div>
       </div>
-      <div className="stance-map-evidence" aria-label="立場關係圖原句">
+      <div className="stance-map-evidence" aria-label="攻防關係圖原句">
         <div className="stance-map-evidence-heading"><span>箭頭的原句依據</span><small>展開查看說法與來源</small></div>
         <div className="stance-map-evidence-list">
           {entries.map((entry, index) => {
@@ -216,7 +234,7 @@ function StanceMap({ groups, sourceLinks }: { groups: DossierPageModel["attribut
         </div>
       </div>
     </div>
-    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有具名落點時，統一連回「議題焦點」。</p>
+    <p className="stance-map-note"><strong>閱讀界線：</strong>箭頭只表示公開文字中的明示對立指向，不等於責任判定、攻擊事實或 TW Issues 的立場；沒有明示對立關係的說法不會出現在這張圖。</p>
   </section>;
 }
 
@@ -244,7 +262,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 export default function DossierPage({ model }: { model: DossierPageModel }) {
   const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, recentTimelineGroups, olderTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
-  const stanceMapAvailable = buildStanceMap(attributedSpeakerGroups).length > 1;
+  const stanceMapAvailable = buildStanceMap(attributedSpeakerGroups).length > 0;
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
     return source ? <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`查看來源：${source.publisher}`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a> : null;
@@ -273,7 +291,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{stanceMapAvailable && <a href="#stance-map">立場圖</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{stanceMapAvailable && <a href="#stance-map">攻防圖</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}{unresolved.claims.length > 0 && <a href="#questions">仍待釐清</a>}<a href="#sources">資料來源</a></div></nav>
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
       <div className="section-intro"><p className="eyebrow">事件進展</p><p>預設顯示最近一週（以最新事件為基準）；較早進度仍保留在下方。</p></div>
       {recentTimelineGroups.length > 0 && renderTimelineGroups(recentTimelineGroups, "recent")}
