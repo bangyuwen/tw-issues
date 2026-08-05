@@ -1,4 +1,302 @@
 {
+  "ezway-preauthorization": {
+    "topicId": "ezway-preauthorization-2026",
+    "claims": [
+      {
+        "statement": "自 2026 年 3 月 1 日起，個人進口簡易申報快遞貨物採實名認證線上委任者，全面適用預先確認委任。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "只證明財政部關務署公告的制度生效日與適用對象。",
+        "limitations": [
+          "不代表所有進口貨物都屬於快遞簡易申報。",
+          "個案是否符合申報條件仍須依貨物、申報方式與報關資料判斷。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-preauth",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191",
+            "title": "網購族請注意，海關自3月1日起全面實施預先確認委任，保障民眾個資及權益！",
+            "publisher": "財政部關務署",
+            "publishedAt": "2026-02-24",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "預先委任流程由報關業者先透過 EZ WAY 易利委 APP 推播貨物資訊，收貨人確認與實際購買相符並完成線上委任後，報關業者再辦理後續報關。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "證明關務署對預先委任先確認、後報關流程的公開說明。",
+        "limitations": [
+          "推播資料仍須逐筆核對，這頁不替代報關業者或海關的個案判斷。",
+          "流程說明不代表任何特定包裹已完成報關或通關。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-preauth",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191",
+            "title": "網購族請注意，海關自3月1日起全面實施預先確認委任，保障民眾個資及權益！",
+            "publisher": "財政部關務署",
+            "publishedAt": "2026-02-24",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-ezway-plan",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=e507d33802614cc18a49c9a6d73b10b2",
+            "title": "海關全面實施預先委任，防杜冒名報關及確保民眾權益",
+            "publisher": "財政部關務署",
+            "publishedAt": "2025-12-19",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "關務署 FAQ 將實名認證適用範圍列為進口快遞貨物簡易申報單（不涉輸入規定、完稅價格未逾新臺幣 5 萬元），適用對象包括中華民國國民與持居留證外籍人士。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "只呈現關務署 FAQ 列示的適用範圍、金額門檻與對象。",
+        "limitations": [
+          "FAQ 的範圍說明不是對個別貨物可否進口的裁定。",
+          "涉及輸入規定或其他申報型態時，仍應查閱對應規範並向報關業者確認。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-faq",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1150",
+            "title": "常見問題（FAQ）",
+            "publisher": "財政部關務署",
+            "publishedAt": "2020-07-08",
+            "displayRole": "主管機關常見問答"
+          }
+        ]
+      },
+      {
+        "statement": "EZ WAY 推播資料可讓收貨人查到報關日期、報單號碼、分提單號碼、申報金額（購買金額加運費）及貨物品項與名稱；核對無誤可點選「申報相符」，資料不符則點選「申報不符」並填列原因。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "證明關務署 FAQ 對 App 可查欄位與回覆選項的列示。",
+        "limitations": [
+          "App 的畫面與欄位可能隨版本調整，實際操作仍以當時介面為準。",
+          "資料不符時需再向 App 顯示的報關業者或海關窗口釐清，不能只依頁面文字判定責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-faq",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1150",
+            "title": "常見問題（FAQ）",
+            "publisher": "財政部關務署",
+            "publishedAt": "2020-07-08",
+            "displayRole": "主管機關常見問答"
+          },
+          {
+            "publicRef": "source-ezway-overview",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1471",
+            "title": "簡介與操作說明",
+            "publisher": "財政部關務署",
+            "publishedAt": "2021-04-09",
+            "displayRole": "主管機關操作說明"
+          }
+        ]
+      },
+      {
+        "statement": "自 2025 年 10 月 28 日起，使用「簡訊認證（健保卡號）」的新註冊者須以實體健保卡插卡完成身分驗證；電信認證與晶片居留證簡訊認證程序未變。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "證明關務署公告的新註冊驗證變更與兩種未變更的註冊方式。",
+        "limitations": [
+          "該變更也適用於日後變更資料或需要重新驗證者；已完成註冊者原則上可繼續使用。",
+          "實體健保卡插卡驗證需要電腦與讀卡機，這頁不保證個別設備或帳號操作結果。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-registration",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=f5a49b30c5414ee28072cc53df4ce66b",
+            "title": "自114年10月28日起EZ WAY APP註冊增加實體健保卡驗證，防杜冒名風險",
+            "publisher": "財政部關務署",
+            "publishedAt": "2025-10-21",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "一個手機門號僅能綁定一個身分證字號；EZ WAY 實名認證可用手機門號綁定身分證號或居留證號，以簡化快遞簡易申報的紙本報關委任。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "呈現關務署操作說明對綁定關係與線上委任用途的描述。",
+        "limitations": [
+          "這不代表可以把註冊資料、證件或手機門號出借給他人。",
+          "線上委任只處理公開說明所涵蓋的快遞簡易申報流程，不取代其他通關文件或法定程序。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-overview",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1471",
+            "title": "簡介與操作說明",
+            "publisher": "財政部關務署",
+            "publishedAt": "2021-04-09",
+            "displayRole": "主管機關操作說明"
+          },
+          {
+            "publicRef": "source-ezway-registration",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=f5a49b30c5414ee28072cc53df4ce66b",
+            "title": "自114年10月28日起EZ WAY APP註冊增加實體健保卡驗證，防杜冒名風險",
+            "publisher": "財政部關務署",
+            "publishedAt": "2025-10-21",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      }
+    ],
+    "attributedClaims": [],
+    "openQuestions": [
+      {
+        "statement": "個別包裹是否屬快遞簡易申報、是否會收到 EZ WAY 推播，仍需依實際申報方式與貨物條件確認。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "關務署 FAQ 只在採用快遞簡易申報時說明 App 推播與查詢流程。",
+        "limitations": [
+          "這頁不能替代賣方、物流或報關業者查詢個別貨物狀態。",
+          "沒有看到推播不能單獨證明貨物尚未抵臺、尚未報關或已完成通關。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-faq",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1150",
+            "title": "常見問題（FAQ）",
+            "publisher": "財政部關務署",
+            "publishedAt": "2020-07-08",
+            "displayRole": "主管機關常見問答"
+          }
+        ]
+      },
+      {
+        "statement": "若推播資料不符或疑似遭冒名，重新推播與個案通關處理的時程，公開制度說明沒有提供固定期限。",
+        "claimType": "fact",
+        "harmRisk": "low",
+        "proofScope": "關務署公告要求先點選「申報不符」、洽報關業者釐清並待重新推播，但未在該公告設定一般個案時限。",
+        "limitations": [
+          "實際狀況需向 App 顯示的報關業者、進口地海關窗口或 EZ WAY 客服確認。",
+          "不能據此推定任何特定業者延誤或責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-ezway-preauth",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191",
+            "title": "網購族請注意，海關自3月1日起全面實施預先確認委任，保障民眾個資及權益！",
+            "publisher": "財政部關務署",
+            "publishedAt": "2026-02-24",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-ezway-support",
+            "canonicalUrl": "https://web.customs.gov.tw/singlehtml/3150?cntId=cus1_3150_3150_1152",
+            "title": "聯繫服務窗口",
+            "publisher": "財政部關務署",
+            "publishedAt": "2025-10-07",
+            "displayRole": "主管機關服務窗口"
+          }
+        ]
+      }
+    ],
+    "reportedTimeline": [
+      {
+        "publicKey": "ezway-event-preauth-effective",
+        "occurredAt": "2026-03-01",
+        "reportedAt": "2026-02-24",
+        "precision": "day",
+        "kindLabel": "制度上路",
+        "headline": "預先確認委任全面實施",
+        "sourceRefs": [
+          "source-ezway-preauth"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "自 2026 年 3 月 1 日起，個人進口簡易申報快遞貨物採實名認證線上委任者，全面適用預先確認委任。",
+            "proofScope": "只證明關務署公告的制度生效日與適用對象。",
+            "limitations": [
+              "不代表所有進口貨物都屬於快遞簡易申報。",
+              "個案是否符合申報條件仍須依貨物、申報方式與報關資料判斷。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-preauth",
+                "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191",
+                "title": "網購族請注意，海關自3月1日起全面實施預先確認委任，保障民眾個資及權益！",
+                "publisher": "財政部關務署",
+                "publishedAt": "2026-02-24",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "ezway-event-registration-security",
+        "occurredAt": "2025-10-28",
+        "reportedAt": "2025-10-21",
+        "precision": "day",
+        "kindLabel": "註冊安全",
+        "headline": "簡訊認證新註冊改採實體健保卡驗證",
+        "sourceRefs": [
+          "source-ezway-registration"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "自 2025 年 10 月 28 日起，使用「簡訊認證（健保卡號）」的新註冊者須以實體健保卡插卡完成身分驗證；電信認證與晶片居留證簡訊認證程序未變。",
+            "proofScope": "證明關務署公告的新註冊驗證變更與兩種未變更的註冊方式。",
+            "limitations": [
+              "該變更也適用於日後變更資料或需要重新驗證者；已完成註冊者原則上可繼續使用。",
+              "實際操作仍可能受設備與帳號狀態影響。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-registration",
+                "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=f5a49b30c5414ee28072cc53df4ce66b",
+                "title": "自114年10月28日起EZ WAY APP註冊增加實體健保卡驗證，防杜冒名風險",
+                "publisher": "財政部關務署",
+                "publishedAt": "2025-10-21",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "ezway-event-preauth-announced",
+        "occurredAt": "2025-12-19",
+        "reportedAt": "2025-12-19",
+        "precision": "day",
+        "kindLabel": "制度公告",
+        "headline": "關務署公告全面實施預先委任規劃",
+        "sourceRefs": [
+          "source-ezway-plan"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "關務署於 2025 年 12 月 19 日公告，規劃自 2026 年 3 月 1 日起全面實施進口快遞貨物預先委任。",
+            "proofScope": "只證明關務署在該日發布這項制度規劃公告。",
+            "limitations": [
+              "公告本身不提供個別包裹的申報結果或通關時程。",
+              "制度公告與個案責任、貨物是否遭冒名是不同層次的問題。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-plan",
+                "canonicalUrl": "https://web.customs.gov.tw/singlehtml/2222?cntId=e507d33802614cc18a49c9a6d73b10b2",
+                "title": "海關全面實施預先委任，防杜冒名報關及確保民眾權益",
+                "publisher": "財政部關務署",
+                "publishedAt": "2025-12-19",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "benzopyrene-food-safety": {
     "topicId": "benzopyrene-food-safety-2026",
     "claims": [

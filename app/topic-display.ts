@@ -1,4 +1,5 @@
 const conciseTitles: Record<string, string> = {
+  "ezway-preauthorization": "EZ WAY 易利委預先委任",
   "benzopyrene-food-safety": "食用油苯駢芘超標",
   "budget-delay-governance": "中央總預算延宕",
   "taipei-tree-governance": "臺北樹木治理",

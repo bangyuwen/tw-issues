@@ -6,13 +6,24 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "224690dc520f1800f2c05819e1fada51631138c570abe4f5a146556ff60d119a"
+    "sha256": "2b76b0f9ffa71d01b29dba0db4f6339a50c6793a7f28041a13f01f70dbc339d7"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "721ff5be313ae720103eddacee6c48580e78ef9eed2ee9d036abb17b40ab3500"
+    "sha256": "68e64e4b06aeaaf9aa11872fa27c1ca4a4d7a546b1fbbe35a0d83df45e335616"
   },
   "topics": {
+    "ezway-preauthorization": {
+      "topic_id": "ezway-preauthorization-2026",
+      "slug": "ezway-preauthorization",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-08-05",
+      "content_digest": "9c4844b3b22272f76de5f2e150ea1221799b7afa5cb55990b976864f6aa6904d",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "EZ WAY 易利委與跨境快遞預先委任"
+    },
     "benzopyrene-food-safety": {
       "topic_id": "benzopyrene-food-safety-2026",
       "slug": "benzopyrene-food-safety",

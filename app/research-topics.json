@@ -1,6 +1,13 @@
 {
   "topics": [
     {
+      "topicId": "ezway-preauthorization-2026",
+      "slug": "ezway-preauthorization",
+      "title": "EZ WAY 易利委與跨境快遞預先委任",
+      "lastUpdated": "2026-08-05",
+      "publicEvidenceAvailable": true
+    },
+    {
       "topicId": "benzopyrene-food-safety-2026",
       "slug": "benzopyrene-food-safety",
       "title": "苯駢芘超標沙拉油食安危機",
@@ -72,6 +79,13 @@
     }
   ],
   "allTopics": [
+    {
+      "topicId": "ezway-preauthorization-2026",
+      "slug": "ezway-preauthorization",
+      "title": "EZ WAY 易利委與跨境快遞預先委任",
+      "lastUpdated": "2026-08-05",
+      "publicEvidenceAvailable": true
+    },
     {
       "topicId": "benzopyrene-food-safety-2026",
       "slug": "benzopyrene-food-safety",

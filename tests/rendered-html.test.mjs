@@ -3,6 +3,7 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const routes = [
+  "/topics/ezway-preauthorization",
   "/topics/benzopyrene-food-safety",
   "/topics/cross-border-intimidation",
   "/topics/typhoon-governance",
@@ -38,10 +39,11 @@ function verifiedClaims(html) {
   return html.slice(start, open >= 0 ? open : html.length);
 }
 
-test("index selects the ten most recently updated deep-research topics", async () => {
+test("index selects the eleven most recently updated deep-research topics", async () => {
   const response = await render("/");
   const html = await response.text();
   assert.equal(response.status, 200);
+  assert.match(html, /EZ WAY 易利委預先委任/);
   assert.match(html, /臺北樹木治理/);
   assert.match(html, /中央總預算延宕/);
   assert.match(html, /跨境恐嚇事件/);
@@ -86,6 +88,28 @@ test("every published route renders only claim projections and allowlisted sourc
     assert.doesNotMatch(html, /current-issue|本次爭點|事實查核步驟|值得先問的問題/);
     assert.doesNotMatch(html, /internal strategy|internal_only|disputed|待補資料/);
   }
+});
+
+test("EZ WAY page explains pre-authorization without expanding the official scope", async () => {
+  const response = await render("/topics/ezway-preauthorization");
+  const html = await response.text();
+
+  assert.equal(response.status, 200);
+  for (const text of [
+    "EZ WAY 易利委預先委任",
+    "2026 年 3 月 1 日",
+    "預先確認委任",
+    "申報相符",
+    "申報不符",
+    "實體健保卡",
+    "完稅價格未逾新臺幣 5 萬元",
+    "仍待釐清",
+  ]) {
+    assert.match(html, new RegExp(text));
+  }
+  assert.match(html, /財政部關務署/);
+  assert.doesNotMatch(html, /個別包裹已完成通關|所有進口貨物都適用/);
+  assert.doesNotMatch(html, /data-claim-id|clm-|src-/);
 });
 
 test("cross-border page publishes reviewed facts and clearly attributed statements", async () => {
