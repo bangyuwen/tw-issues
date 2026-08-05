@@ -148,6 +148,130 @@
       }
     ],
     "attributedClaims": [],
+    "attributedSpeakerGroups": [
+      {
+        "speaker": {
+          "name": "台北市航空貨運承攬公會",
+          "role": "業者公會（經中央社報導）"
+        },
+        "stanceSummary": "中央社報導，公會對全面實施前的法律、系統與配套準備表達疑慮，並提出空運通關風險。",
+        "claims": [
+          {
+            "statement": "中央社報導，台北市航空貨運承攬公會提醒，若法律、系統與配套尚未準備完成就全面實施預先委任，可能造成空運通關體系風險。",
+            "claimType": "attributed_statement",
+            "harmRisk": "low",
+            "proofScope": "只證明中央社曾報導該公會提出這項疑慮。",
+            "limitations": [
+              "不證明空運通關一定會癱瘓，也不代表所有業者或收貨人都持相同看法。",
+              "這是媒體報導的公會意見，不是本頁對實際通關容量的獨立判定。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-news-preauth",
+                "canonicalUrl": "https://www.cna.com.tw/news/afe/202601290104.aspx",
+                "title": "進口快遞貨物3月起全面預先委任　海關：防杜冒名報關",
+                "publisher": "中央社 CNA",
+                "publishedAt": "2026-01-29",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "台北市航空貨運承攬公會",
+                "role": "業者公會"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "財政部關務署",
+          "role": "主管機關（經中央社報導）"
+        },
+        "stanceSummary": "中央社整理關務署對預先委任推行、通關容量與註冊驗證的回應。",
+        "claims": [
+          {
+            "statement": "中央社報導，關務署引述截至 2025 年 11 月 30 日已有超過 300 萬人加入預先委任、預先委任比率逾八成，並說明制度自 2026 年 3 月 1 日全面實施。",
+            "claimType": "attributed_statement",
+            "harmRisk": "low",
+            "proofScope": "只證明中央社曾報導關務署提供這組特定時間點的統計與制度說明。",
+            "limitations": [
+              "這不是本頁獨立重算的使用人數或比率。",
+              "統計是特定時間點快照，不代表目前人數或比例。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-news-preauth",
+                "canonicalUrl": "https://www.cna.com.tw/news/afe/202601290104.aspx",
+                "title": "進口快遞貨物3月起全面預先委任　海關：防杜冒名報關",
+                "publisher": "中央社 CNA",
+                "publishedAt": "2026-01-29",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "財政部關務署",
+                "role": "主管機關"
+              }
+            ]
+          },
+          {
+            "statement": "中央社報導，關務署回應多數業者已在境外完成推播確認，並認為現行倉容可負荷少數未完成推播即發貨的情況。",
+            "claimType": "attributed_statement",
+            "harmRisk": "low",
+            "proofScope": "只證明中央社曾報導關務署對業者作業與倉容風險的回應。",
+            "limitations": [
+              "不獨立證明每個業者或個案都已在境外完成推播確認。",
+              "這是主管機關經媒體報導的回應，不是本頁對倉容或通關容量的獨立驗證。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-news-preauth",
+                "canonicalUrl": "https://www.cna.com.tw/news/afe/202601290104.aspx",
+                "title": "進口快遞貨物3月起全面預先委任　海關：防杜冒名報關",
+                "publisher": "中央社 CNA",
+                "publishedAt": "2026-01-29",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "財政部關務署",
+                "role": "主管機關"
+              }
+            ]
+          },
+          {
+            "statement": "中央社報導，關務署表示 2025 年 10 月 28 日起，採簡訊認證（健保卡號）的新註冊者需改以實體健保卡插卡驗證，並引述當時約 685 萬人註冊使用 EZ WAY。",
+            "claimType": "attributed_statement",
+            "harmRisk": "low",
+            "proofScope": "只證明中央社曾報導關務署對註冊驗證與當時註冊人數的說明。",
+            "limitations": [
+              "685 萬人是新聞報導所引述的當時統計，不代表目前註冊人數。",
+              "註冊人數不能推導實際使用頻率、申報件數或個案通關結果。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-ezway-news-registration",
+                "canonicalUrl": "https://www.cna.com.tw/news/afe/202510210268.aspx",
+                "title": "易利委簡訊認證註冊防冒名　10/28起加實體健保卡驗證",
+                "publisher": "中央社 CNA",
+                "publishedAt": "2025-10-21",
+                "displayRole": "媒體報導"
+              }
+            ],
+            "speakers": [
+              {
+                "name": "財政部關務署",
+                "role": "主管機關"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "openQuestions": [
       {
         "statement": "個別包裹是否屬快遞簡易申報、是否會收到 EZ WAY 推播，仍需依實際申報方式與貨物條件確認。",

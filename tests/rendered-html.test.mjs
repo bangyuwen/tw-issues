@@ -103,6 +103,9 @@ test("EZ WAY page explains pre-authorization without expanding the official scop
     "申報不符",
     "實體健保卡",
     "完稅價格未逾新臺幣 5 萬元",
+    "中央社 CNA",
+    "空運通關體系風險",
+    "不同主體怎麼說",
     "仍待釐清",
   ]) {
     assert.match(html, new RegExp(text));

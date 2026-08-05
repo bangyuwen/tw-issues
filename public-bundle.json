@@ -6,7 +6,7 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "2b76b0f9ffa71d01b29dba0db4f6339a50c6793a7f28041a13f01f70dbc339d7"
+    "sha256": "c168a8d30c90303a0551ef4e46ac03a0f88970f41e12415cb20c3a62f1ffe5a7"
   },
   "research_index": {
     "path": "app/research-topics.json",
@@ -19,7 +19,7 @@
       "visibility": "public",
       "publication_status": "published",
       "as_of": "2026-08-05",
-      "content_digest": "9c4844b3b22272f76de5f2e150ea1221799b7afa5cb55990b976864f6aa6904d",
+      "content_digest": "84bebf3b464763925af8c8e1df1f40486c93213e431cba0d56499ee2ad41ae88",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "EZ WAY 易利委與跨境快遞預先委任"
