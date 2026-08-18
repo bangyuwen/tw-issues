@@ -139,12 +139,9 @@ test("durable event timeline groups same-day events and starts every event close
   assert.equal((html.match(/class="event-disclosure"/g) ?? []).length, 3);
   assert.equal((html.match(/class="event-disclosure" open=""/g) ?? []).length, 0);
   assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"/);
-  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><p>預設顯示最近一週（以最新事件為基準）；較早進度仍保留在下方。<\/p><\/div>/);
-  assert.match(html, /class="event-history-disclosure"><summary>展開較早的 1 個日期<\/summary>/);
-  assert.doesNotMatch(html, /class="event-history-disclosure" open=""/);
+  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><\/div>/);
   assert.doesNotMatch(html, /\d+ 件進展/);
-  assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><\/header>/);
-  assert.doesNotMatch(html, /class="event-date-statuses"/);
+  assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><span class="event-date-statuses">/);
   assert.match(html, /class="event-date-group" data-date-key="2026-07-17"/);
   assert.doesNotMatch(html, /event-date-group--multiple/);
   assert.match(html, /class="event-date-multiple-label">同日 2 則<\/span>/);
@@ -174,7 +171,7 @@ test("durable event timeline groups same-day events and starts every event close
   eventSummaries.forEach((summary) => {
     assert.doesNotMatch(summary, /<(?:div|h[1-6]|p|small)\b/);
     assert.doesNotMatch(summary, /證據界線|尚不能判定最終責任/);
-    assert.match(summary, /event-status-chip/);
+    assert.doesNotMatch(summary, /event-status-chip/);
   });
 });
 
@@ -389,28 +386,6 @@ test("event timeline preserves partial date precision in grouping", () => {
   assert.equal((html.match(/data-date-key="2026-07-17"/g) ?? []).length, 1);
 });
 
-test("event timeline defaults to the latest seven days and keeps older groups collapsed", () => {
-  const event = (publicKey: string, occurredAt: string) => ({
-    publicKey,
-    occurredAt,
-    precision: "day" as const,
-    kindLabel: "制度紀錄",
-    headline: claim.statement,
-    sourceRefs: ["source-01"],
-    items: [{ status: "verified" as const, ...claim }],
-  });
-  const model = buildDossierPageModel({
-    topicId: "recent-timeline",
-    claims: [claim],
-    attributedClaims: [],
-    openQuestions: [],
-    reportedTimeline: [event("old", "2026-07-10"), event("boundary", "2026-07-11"), event("latest", "2026-07-17")],
-  });
-
-  assert.deepEqual(model.recentTimelineGroups.map(({ key }) => key), ["2026-07-17", "2026-07-11"]);
-  assert.deepEqual(model.olderTimelineGroups.map(({ key }) => key), ["2026-07-10"]);
-});
-
 test("topic page does not invent a timeline when safe durable events are absent", () => {
   const html = renderToStaticMarkup(
     <TopicPage
@@ -620,7 +595,7 @@ test("real sparse and dense projections share density and source contracts", () 
   assert.deepEqual(oil.collections.map(({ claims }) => claims.length), [9, 1]);
   for (const model of [tree, oil]) {
     assert.equal(model.publicSources.length, model.sourceById.size);
-    assert.equal(model.latestTimelineEvent?.publicKey, model.timelineGroups[0]?.events.at(-1)?.publicKey);
+    assert.equal(model.latestTimelineEvent?.publicKey, model.timelineGroups.at(-1)?.events.at(-1)?.publicKey);
   }
 });
 
