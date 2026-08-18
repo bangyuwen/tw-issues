@@ -7,8 +7,6 @@ export type ClaimCollectionModel = {
   claims: Array<PublicClaim & { sampleSize?: number }>;
 };
 
-export type TimelineGroup = { key: string; label: string; events: ReportedEvent[] };
-
 export type DossierPageModel = {
   topicId: string;
   topic?: DeepResearchTopic;
@@ -21,13 +19,9 @@ export type DossierPageModel = {
   socialSampleSize: number;
   publicSources: PublicSource[];
   sourceById: Map<string, PublicSource>;
-  timelineGroups: TimelineGroup[];
-  recentTimelineGroups: TimelineGroup[];
-  olderTimelineGroups: TimelineGroup[];
+  timelineGroups: Array<{ key: string; label: string; events: ReportedEvent[] }>;
   latestTimelineEvent?: ReportedEvent;
 };
-
-export const RECENT_TIMELINE_DAYS = 7;
 
 export function eventDateKey(event: ReportedEvent) {
   if (event.precision === "year") return event.occurredAt.slice(0, 4);
@@ -43,19 +37,6 @@ export function eventDateLabel(event: ReportedEvent) {
   return `${year} 年 ${month} 月 ${day} 日`;
 }
 
-function eventTimelineDateKey(event: ReportedEvent) {
-  const key = eventDateKey(event);
-  if (event.precision === "year") return `${key}-01-01`;
-  if (event.precision === "month") return `${key}-01`;
-  return key;
-}
-
-function subtractDays(dateKey: string, days: number) {
-  const date = new Date(`${dateKey}T00:00:00Z`);
-  date.setUTCDate(date.getUTCDate() - days);
-  return date.toISOString().slice(0, 10);
-}
-
 export function buildDossierPageModel(
   projection: PublicEvidenceProjection,
   metadata?: { topic: DeepResearchTopic; displayTitle: string },
@@ -69,22 +50,13 @@ export function buildDossierPageModel(
     .filter(({ event }) => event.items.length > 0)
     .sort((a, b) => eventDateKey(a.event).localeCompare(eventDateKey(b.event)) || a.ledgerIndex - b.ledgerIndex)
     .map(({ event }) => event);
-  const timelineGroupsAscending: TimelineGroup[] = Array.from(timeline.reduce((groups, event) => {
+  const timelineGroups = Array.from(timeline.reduce((groups, event) => {
     const key = eventDateKey(event);
     const group = groups.get(key) ?? { key, label: eventDateLabel(event), events: [] };
     group.events.push(event);
     groups.set(key, group);
     return groups;
-  }, new Map<string, TimelineGroup>()).values());
-  const timelineGroups = timelineGroupsAscending.slice().reverse();
-  const latestTimelineEvent = timeline.at(-1);
-  const recentTimelineStart = latestTimelineEvent
-    ? subtractDays(eventTimelineDateKey(latestTimelineEvent), RECENT_TIMELINE_DAYS - 1)
-    : undefined;
-  const recentTimelineGroups = recentTimelineStart
-    ? timelineGroups.filter((group) => eventTimelineDateKey(group.events[0]) >= recentTimelineStart)
-    : [];
-  const olderTimelineGroups = timelineGroups.filter((group) => !recentTimelineGroups.includes(group));
+  }, new Map<string, { key: string; label: string; events: ReportedEvent[] }>()).values());
   const publicSources = Array.from(new Map([
     ...collections.flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
     ...(projection.attributedSpeakerGroups ?? []).flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
@@ -105,8 +77,6 @@ export function buildDossierPageModel(
     publicSources,
     sourceById: new Map(publicSources.map((item) => [item.publicRef, item])),
     timelineGroups,
-    recentTimelineGroups,
-    olderTimelineGroups,
-    latestTimelineEvent,
+    latestTimelineEvent: timeline.at(-1),
   };
 }

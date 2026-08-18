@@ -10,7 +10,7 @@
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "68e64e4b06aeaaf9aa11872fa27c1ca4a4d7a546b1fbbe35a0d83df45e335616"
+    "sha256": "b897c3cc59471d97a7a86c7a6b9a1b0836ba26111b499deda8d528fd5a52b37f"
   },
   "topics": {
     "ezway-preauthorization": {
@@ -29,7 +29,7 @@
       "slug": "benzopyrene-food-safety",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-08-04",
+      "as_of": "2026-08-05",
       "content_digest": "54fa683e1a1907779dfc00353c2387175439b7b4c0b9a60ab7fb668908e2d337",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
@@ -40,7 +40,7 @@
       "slug": "budget-delay-governance",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-15",
+      "as_of": "2026-08-05",
       "content_digest": "9ccdd92a979f2da0f385a096d28a47b163454ec19f627d6df45229ed5da5a3e8",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
@@ -84,7 +84,7 @@
       "slug": "japan-taiwan-alliance",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-07-18",
+      "as_of": "2026-08-05",
       "content_digest": "a5811aeb842a4e6339c022839bf6282adb85a91d88b3bd830154b37d882138c1",
       "verification_status": "public_quality_pass",
       "license": "source-specific",

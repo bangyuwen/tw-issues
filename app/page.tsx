@@ -1,7 +1,7 @@
+import SiteLink from "./site-link";
 import { buildDossierPageModel, eventDateLabel } from "./dossier-page-model";
 import { deepResearchTopics, getPublicEvidenceProjection } from "./topic-data";
 import { getEventTimelineAttribution, getEventTimelineHeadline, getTopicDisplayTitle } from "./topic-display";
-import SiteLink from "./site-link";
 
 const eventStatusLabel = {
   verified: "已確認",

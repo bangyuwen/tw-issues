@@ -1,9 +1,9 @@
+import SiteLink from "./site-link";
 import type { ReactNode } from "react";
 import type { DeepResearchTopic, PublicClaim } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
-import SiteLink from "./site-link";
 
 const eventStatusCopy = {
   verified: { label: "已確認", target: "#claims" },
@@ -83,28 +83,12 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, recentTimelineGroups, olderTimelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
     return source ? <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`查看來源：${source.publisher}`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a> : null;
   });
-  const renderTimelineGroups = (groups: DossierPageModel["timelineGroups"], variant: "recent" | "history") => <div className={`event-timeline event-timeline--${variant}`}>{groups.map((group) => {
-    const hasMultipleEvents = group.events.length > 1;
-    return <section className="event-date-group" data-date-key={group.key} key={group.key}>
-      <header className="event-date-heading"><time dateTime={group.key}>{group.label}</time>{hasMultipleEvents && <span className="event-date-multiple-label">同日 {group.events.length} 則</span>}</header>
-      <div className="event-date-events">{group.events.map((event) => {
-        const attribution = event.items.flatMap((item) => item.speakers ?? []).map((speaker) => `${speaker.name}・${speaker.role}`).join("、");
-        const eventStatuses = Array.from(new Set(event.items.map((item) => item.status)));
-        return <EventDisclosure key={event.publicKey}>
-          <summary><span className="event-summary-meta"><span className="event-kind-label">{event.kindLabel}</span>{eventStatuses.map((status) => <span className={`event-status-chip event-status-chip--${status}`} key={status}>{eventStatusCopy[status].label}</span>)}</span>{attribution && <span className="event-summary-attribution">{attribution}</span>}<span className="event-summary-title">{event.headline}</span><span className="event-disclosure-action" aria-hidden="true">展開證據</span></summary>
-          <div className="event-disclosure-body">{event.items.map((item, index) => <article className={`event-item event-item--${item.status}`} key={`${event.publicKey}-${index}`}><header><span>{eventStatusCopy[item.status].label}</span><a href={eventStatusCopy[item.status].target}>查看完整分區</a></header><h4>{item.statement}</h4>{item.status === "attributed" && item.speakers && <p className="claim-speakers"><strong>說法歸屬</strong>{item.speakers.map((speaker) => speaker.name).join("、")}</p>}<dl><div><dt>這能確認</dt><dd>{item.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{item.limitations.join("；")}</dd></div></dl><div className="citations">{sourceLinks(item.sources.map((itemSource) => itemSource.publicRef))}</div></article>)}
-            {event.commentary && <aside className="event-commentary"><p className="eyebrow">怎麼看這個轉折</p><p><strong>意義：</strong>{event.commentary.significance}</p>{event.commentary.changeFromPrior && <p><strong>與前一步的變化：</strong>{event.commentary.changeFromPrior}</p>}<p><strong>這不能證明：</strong>{event.commentary.evidenceBoundary}</p></aside>}
-          </div>
-        </EventDisclosure>;
-      })}</div>
-    </section>;
-  })}</div>;
   const [verified, unresolved] = collections;
 
   return <main className="site-shell dossier-shell">
@@ -115,12 +99,23 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     </section>
     <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
-      <div className="section-intro"><p className="eyebrow">事件進展</p><p>預設顯示最近一週（以最新事件為基準）；較早進度仍保留在下方。</p></div>
-      {recentTimelineGroups.length > 0 && renderTimelineGroups(recentTimelineGroups, "recent")}
-      {olderTimelineGroups.length > 0 && <details className="event-history-disclosure">
-        <summary>{`展開較早的 ${olderTimelineGroups.length} 個日期`}</summary>
-        {renderTimelineGroups(olderTimelineGroups, "history")}
-      </details>}
+      <div className="section-intro"><p className="eyebrow">事件進展</p></div>
+      <div className="event-timeline">{timelineGroups.map((group) => {
+        const groupStatuses = Array.from(new Set(group.events.flatMap((event) => event.items.map((item) => item.status))));
+        const hasMultipleEvents = group.events.length > 1;
+        return <section className="event-date-group" data-date-key={group.key} key={group.key}>
+          <header className="event-date-heading"><time dateTime={group.key}>{group.label}</time>{hasMultipleEvents && <span className="event-date-multiple-label">同日 {group.events.length} 則</span>}<span className="event-date-statuses">{groupStatuses.map((status) => <span className={`event-status-chip event-status-chip--${status}`} key={status}>{eventStatusCopy[status].label}</span>)}</span></header>
+          <div className="event-date-events">{group.events.map((event) => {
+            const attribution = event.items.flatMap((item) => item.speakers ?? []).map((speaker) => `${speaker.name}・${speaker.role}`).join("、");
+            return <EventDisclosure key={event.publicKey}>
+              <summary><span className="event-summary-meta"><span className="event-kind-label">{event.kindLabel}</span></span>{attribution && <span className="event-summary-attribution">{attribution}</span>}<span className="event-summary-title">{event.headline}</span><span className="event-disclosure-action" aria-hidden="true">展開證據</span></summary>
+              <div className="event-disclosure-body">{event.items.map((item, index) => <article className={`event-item event-item--${item.status}`} key={`${event.publicKey}-${index}`}><header><span>{eventStatusCopy[item.status].label}</span><a href={eventStatusCopy[item.status].target}>查看完整分區</a></header><h4>{item.statement}</h4>{item.status === "attributed" && item.speakers && <p className="claim-speakers"><strong>說法歸屬</strong>{item.speakers.map((speaker) => speaker.name).join("、")}</p>}<dl><div><dt>這能確認</dt><dd>{item.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{item.limitations.join("；")}</dd></div></dl><div className="citations">{sourceLinks(item.sources.map((itemSource) => itemSource.publicRef))}</div></article>)}
+                {event.commentary && <aside className="event-commentary"><p className="eyebrow">怎麼看這個轉折</p><p><strong>意義：</strong>{event.commentary.significance}</p>{event.commentary.changeFromPrior && <p><strong>與前一步的變化：</strong>{event.commentary.changeFromPrior}</p>}<p><strong>這不能證明：</strong>{event.commentary.evidenceBoundary}</p></aside>}
+              </div>
+            </EventDisclosure>;
+          })}</div>
+        </section>;
+      })}</div>
     </section>}
     <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
