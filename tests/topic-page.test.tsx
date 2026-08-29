@@ -129,6 +129,36 @@ test("topic page does not treat unrendered attributedClaims as evidence", () => 
   assert.doesNotMatch(html, /測試公開命題/);
 });
 
+test("timeline-only projection omits links to absent evidence sections", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "timeline-only",
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+      reportedTimeline: [{
+        publicKey: "timeline-only-event",
+        occurredAt: "2026-07-17",
+        precision: "day",
+        kindLabel: "程序進度",
+        headline: "只有時間軸的公開事件",
+        sourceRefs: [source.publicRef],
+        items: [
+          { status: "verified", statement: "已確認的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source] },
+          { status: "attributed", statement: "具名的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source], speakers: [{ name: "測試機關", role: "主管機關" }] },
+          { status: "unresolved", statement: "待釐清的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source] },
+        ],
+      }],
+    }} />,
+  );
+
+  assert.match(html, /id="progress"/);
+  assert.match(html, /只有時間軸的公開事件/);
+  assert.doesNotMatch(html, /href="#claims"/);
+  assert.doesNotMatch(html, /href="#reports"/);
+  assert.doesNotMatch(html, /href="#questions"/);
+});
+
 test("evidence board collapses to one known-information column without open questions", () => {
   const html = renderToStaticMarkup(
     <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
@@ -209,6 +239,9 @@ test("durable event timeline groups same-day events and starts every event close
   assert.equal((html.match(/測試機關/g) ?? []).length, 3);
   assert.doesNotMatch(html, /（主管機關）/);
   assert.match(html, />仍待釐清</);
+  assert.match(html, /href="#claims">查看完整分區/);
+  assert.match(html, /href="#reports">查看完整分區/);
+  assert.match(html, /href="#questions">查看完整分區/);
   assert.match(html, /尚不能判定最終責任/);
   assert.doesNotMatch(html, /\d+ 項公開命題/);
   assert.doesNotMatch(html, /1 筆事件來源/);

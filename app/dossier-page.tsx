@@ -128,7 +128,13 @@ function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availab
   </section>;
 }
 
-function TimelineGroups({ groups, sourceLinks }: { groups: TimelineGroup[]; sourceLinks: (ids: string[]) => ReactNode }) {
+type TimelineTargetAvailability = Record<keyof typeof eventStatusCopy, boolean>;
+
+function TimelineGroups({ groups, sourceLinks, targetAvailability }: {
+  groups: TimelineGroup[];
+  sourceLinks: (ids: string[]) => ReactNode;
+  targetAvailability: TimelineTargetAvailability;
+}) {
   return <div className="event-timeline">{groups.map((group) => {
     const groupStatuses = Array.from(new Set(group.events.flatMap((event) => event.items.map((item) => item.status))));
     const hasMultipleEvents = group.events.length > 1;
@@ -138,7 +144,7 @@ function TimelineGroups({ groups, sourceLinks }: { groups: TimelineGroup[]; sour
         const attribution = event.items.flatMap((item) => item.speakers ?? []).map((speaker) => `${speaker.name}・${speaker.role}`).join("、");
         return <EventDisclosure key={event.publicKey}>
           <summary><span className="event-summary-meta"><span className="event-kind-label">{event.kindLabel}</span></span>{attribution && <span className="event-summary-attribution">{attribution}</span>}<span className="event-summary-title">{event.headline}</span><span className="event-disclosure-action" aria-hidden="true">展開證據</span></summary>
-          <div className="event-disclosure-body">{event.items.map((item, index) => <article className={`event-item event-item--${item.status}`} key={`${event.publicKey}-${index}`}><header><span>{eventStatusCopy[item.status].label}</span><a href={eventStatusCopy[item.status].target}>查看完整分區</a></header><h4>{item.statement}</h4>{item.status === "attributed" && item.speakers && <p className="claim-speakers"><strong>說法歸屬</strong>{item.speakers.map((speaker) => speaker.name).join("、")}</p>}<dl><div><dt>這能確認</dt><dd>{item.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{item.limitations.join("；")}</dd></div></dl><div className="citations">{sourceLinks(item.sources.map((itemSource) => itemSource.publicRef))}</div></article>)}
+          <div className="event-disclosure-body">{event.items.map((item, index) => <article className={`event-item event-item--${item.status}`} key={`${event.publicKey}-${index}`}><header><span>{eventStatusCopy[item.status].label}</span>{targetAvailability[item.status] && <a href={eventStatusCopy[item.status].target}>查看完整分區</a>}</header><h4>{item.statement}</h4>{item.status === "attributed" && item.speakers && <p className="claim-speakers"><strong>說法歸屬</strong>{item.speakers.map((speaker) => speaker.name).join("、")}</p>}<dl><div><dt>這能確認</dt><dd>{item.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{item.limitations.join("；")}</dd></div></dl><div className="citations">{sourceLinks(item.sources.map((itemSource) => itemSource.publicRef))}</div></article>)}
             {event.commentary && <aside className="event-commentary"><p className="eyebrow">怎麼看這個轉折</p><p><strong>意義：</strong>{event.commentary.significance}</p>{event.commentary.changeFromPrior && <p><strong>與前一步的變化：</strong>{event.commentary.changeFromPrior}</p>}<p><strong>這不能證明：</strong>{event.commentary.evidenceBoundary}</p></aside>}
           </div>
         </EventDisclosure>;
@@ -147,15 +153,21 @@ function TimelineGroups({ groups, sourceLinks }: { groups: TimelineGroup[]; sour
   })}</div>;
 }
 
-function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks }: { phases: TimelinePhaseModel[]; unphasedGroups: TimelineGroup[]; timelineGroups: TimelineGroup[]; sourceLinks: (ids: string[]) => ReactNode }) {
-  if (phases.length === 0) return <section className="event-progress-section" id="progress" aria-label="事件進展"><div className="section-intro"><p className="eyebrow">事件進展</p><h2>事情怎麼走到今天？</h2></div><TimelineGroups groups={timelineGroups} sourceLinks={sourceLinks} /></section>;
+function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks, targetAvailability }: {
+  phases: TimelinePhaseModel[];
+  unphasedGroups: TimelineGroup[];
+  timelineGroups: TimelineGroup[];
+  sourceLinks: (ids: string[]) => ReactNode;
+  targetAvailability: TimelineTargetAvailability;
+}) {
+  if (phases.length === 0) return <section className="event-progress-section" id="progress" aria-label="事件進展"><div className="section-intro"><p className="eyebrow">事件進展</p><h2>事情怎麼走到今天？</h2></div><TimelineGroups groups={timelineGroups} sourceLinks={sourceLinks} targetAvailability={targetAvailability} /></section>;
   return <section className="event-progress-section case-chronology" id="progress" aria-label="分階段事件脈絡">
     <div className="section-intro"><p className="eyebrow">完整脈絡</p><h2>{phases.length} 個階段，串起事件的關鍵轉折。</h2><p>階段摘要與事件時間軸合併呈現；每個「轉折」都是 TW Issues 依公開資料提出的分析，不是司法或行政機關的結論。</p></div>
     <div className="chronology-phases">{phases.map((phase, index) => <section className="chronology-phase" key={`${phase.period}-${phase.title}`}>
       <header className="chronology-phase-heading"><div><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div><div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="chronology-turning-point"><strong>轉折 · TW Issues 分析</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div></header>
-      <TimelineGroups groups={phase.groups} sourceLinks={sourceLinks} />
+      <TimelineGroups groups={phase.groups} sourceLinks={sourceLinks} targetAvailability={targetAvailability} />
     </section>)}</div>
-    {unphasedGroups.length > 0 && <section className="chronology-unphased"><h3>其他事件</h3><TimelineGroups groups={unphasedGroups} sourceLinks={sourceLinks} /></section>}
+    {unphasedGroups.length > 0 && <section className="chronology-unphased"><h3>其他事件</h3><TimelineGroups groups={unphasedGroups} sourceLinks={sourceLinks} targetAvailability={targetAvailability} /></section>}
   </section>;
 }
 
@@ -191,7 +203,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}{verified.claims.length > 0 && <a href="#claims">已知資訊</a>}{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
     {contextOverview && <ContextOverviewSection
       overview={contextOverview}
       sourceLinks={sourceLinks}
@@ -203,7 +215,17 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
         questions: unresolved.claims.length > 0,
       }}
     />}
-    {timelineGroups.length > 0 && <ChronologySection phases={timelinePhases} unphasedGroups={unphasedTimelineGroups} timelineGroups={timelineGroups} sourceLinks={sourceLinks} />}
+    {timelineGroups.length > 0 && <ChronologySection
+      phases={timelinePhases}
+      unphasedGroups={unphasedTimelineGroups}
+      timelineGroups={timelineGroups}
+      sourceLinks={sourceLinks}
+      targetAvailability={{
+        verified: verified.claims.length > 0,
+        attributed: attributedSpeakerGroups.length > 0,
+        unresolved: unresolved.claims.length > 0,
+      }}
+    />}
     {proceedingTracks.length > 0 && <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} />}
     {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}
     <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />
