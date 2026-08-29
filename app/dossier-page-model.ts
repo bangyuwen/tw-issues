@@ -1,4 +1,4 @@
-import type { AttributedSpeakerGroup, DeepResearchTopic, PublicClaim, PublicEvidenceProjection, PublicSource, ReportedEvent } from "./topic-data";
+import type { AttributedSpeakerGroup, DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
 
 export type ClaimCollectionModel = {
   id: "claims" | "questions";
@@ -13,6 +13,8 @@ export type DossierPageModel = {
   displayTitle?: string;
   collections: ClaimCollectionModel[];
   attributedSpeakerGroups: AttributedSpeakerGroup[];
+  publicPeople: PublicPersonProfile[];
+  politicalNarratives: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
   editorialPositions?: PublicClaim[];
   socialObservations: PublicEvidenceProjection["socialObservations"];
@@ -62,6 +64,11 @@ export function buildDossierPageModel(
     ...(projection.attributedSpeakerGroups ?? []).flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
     ...(projection.analysisClaims ?? []).flatMap(({ sources }) => sources),
     ...(projection.editorialPositions ?? []).flatMap(({ sources }) => sources),
+    ...(projection.publicPeople ?? []).flatMap(({ sources }) => sources),
+    ...(projection.politicalNarratives ?? []).flatMap(({ sources, amplification = [] }) => [
+      ...sources,
+      ...amplification.flatMap(({ sources: amplificationSources }) => amplificationSources),
+    ]),
     ...timeline.flatMap(({ items }) => items.flatMap(({ sources }) => sources)),
   ].map((item) => [item.publicRef, item])).values());
   return {
@@ -70,6 +77,8 @@ export function buildDossierPageModel(
     displayTitle: metadata?.displayTitle,
     collections,
     attributedSpeakerGroups: projection.attributedSpeakerGroups ?? [],
+    publicPeople: projection.publicPeople ?? [],
+    politicalNarratives: projection.politicalNarratives ?? [],
     analysisClaims: projection.analysisClaims ?? [],
     editorialPositions: projection.editorialPositions ?? [],
     socialObservations: projection.socialObservations ?? [],

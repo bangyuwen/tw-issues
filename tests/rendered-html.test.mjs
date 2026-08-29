@@ -72,7 +72,7 @@ test("index selects the twelve most recently updated deep-research topics", asyn
   assert.doesNotMatch(html, /內部議題快照|僅限內部存取|internal_only|disputed/);
 });
 
-test("Hsinchu stadium page separates administrative findings, criminal outcome, and open questions", async () => {
+test("Hsinchu stadium page presents people, political narratives, and evidence boundaries", async () => {
   const response = await render("/topics/hsinchu-baseball-stadium");
   const html = await response.text();
   assert.equal(response.status, 200);
@@ -90,10 +90,24 @@ test("Hsinchu stadium page separates administrative findings, criminal outcome, 
     "改善工程已竣工",
     "仍待釐清",
     "完整處分書",
+    "關鍵人物",
+    "政治敘事與擴散",
+    "沈慧虹",
+    "林耕仁",
+    "黃國昌",
+    "林為洲",
+    "高虹安以「12億元棒球場」連結政黨輪替訴求",
+    "2026-08-29",
+    "沒有符合原始貼文、作者、日期與封存連結門檻的社群節點",
   ]) {
     assert.match(html, new RegExp(text));
   }
   assert.match(html, /class="event-progress-section"/);
+  assert.match(html, /class="people-grid"/);
+  assert.match(html, /class="narrative-matrix"/);
+  assert.match(html, /id="people"/);
+  assert.match(html, /id="narratives"/);
+  assert.match(html, /不判定主觀操弄意圖/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
   assert.doesNotMatch(html, /data-date-key="2023-01-05"/);

@@ -1,6 +1,6 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
-import type { DeepResearchTopic, PublicClaim } from "./topic-data";
+import type { DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicPersonProfile } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -75,6 +75,29 @@ function AttributedEvidenceSection({ groups, sourceLinks }: { groups: DossierPag
   return <section className="evidence-section" id="reports" aria-label="不同主體怎麼說"><div className="section-intro"><p className="eyebrow">不同主體怎麼說</p><p>依主體整理公開說法；不代表已確認或完整。</p></div><SpeakerGroups groups={groups} sourceLinks={sourceLinks} /></section>;
 }
 
+function PeopleSection({ people, sourceLinks }: { people: PublicPersonProfile[]; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <section className="evidence-section people-section" id="people" aria-label="關鍵人物">
+    <div className="section-intro"><p className="eyebrow">關鍵人物</p><h2>先看角色，再看立場。</h2><p>人物卡只整理公開身分、涉入關係與可回查資料；沒有直接來源的內容不補寫成個人主張。</p></div>
+    <div className="people-grid">{people.map((person) => <article className="person-card" key={person.personId}>
+      <header><h3>{person.name}</h3><p>{person.role} · {person.affiliation}</p></header>
+      <dl><div><dt>時間／身分</dt><dd>{person.period}</dd></div><div><dt>與本案關係</dt><dd>{person.relationToTopic}</dd></div></dl>
+      <p className="person-summary">{person.summary}</p>
+      <details><summary>查看證據界線</summary><div className="person-boundary"><p><strong>這能確認</strong>{person.proofScope}</p><p><strong>這不能證明</strong>{person.limitations.join("；")}</p></div></details>
+      <div className="citations">{sourceLinks(person.sources.map(({ publicRef }) => publicRef))}</div>
+    </article>)}</div>
+  </section>;
+}
+
+function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: PoliticalNarrative[]; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <section className="evidence-section narrative-section" id="narratives" aria-label="政治敘事與擴散">
+    <div className="section-intro"><p className="eyebrow">政治敘事與擴散</p><h2>同一座球場，如何成為不同的政治故事？</h2><p>依日期、場合與發言者對照公開敘事；「擴散」只描述可回查的公開傳播，不判定主觀操弄意圖。</p><p className="narrative-disclosure">目前沒有符合原始貼文、作者、日期與封存連結門檻的社群節點，因此本段只呈現可回查的媒體與公開紀錄。</p></div>
+    <div className="narrative-matrix" role="list">{narratives.map((narrative) => <article className={`narrative-row narrative-row--${narrative.status}`} key={narrative.publicKey} role="listitem">
+      <header><time dateTime={narrative.occurredAt}>{narrative.occurredAt}</time><span>{narrative.arena}</span><strong>{narrative.speaker.name}</strong></header>
+      <div><h3>{narrative.headline}</h3><p>{narrative.statement}</p><p className="narrative-status"><strong>{narrative.status === "analysis" ? "TW Issues 分析" : "具名說法"}</strong>：{narrative.status === "analysis" ? "以下為依公開資料提出的判讀，不是已確認事實。" : "只證明來源記錄此人曾如此表示。"}</p><dl><div><dt>這能確認</dt><dd>{narrative.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{narrative.limitations.join("；")}</dd></div></dl>{narrative.amplification && narrative.amplification.length > 0 && <div className="narrative-amplification"><strong>可回查擴散</strong>{narrative.amplification.map((item) => <p key={`${item.channel}-${item.publishedAt}`}>{item.channel}（{item.publishedAt}）：{item.description} <span className="citations">{sourceLinks(item.sources.map(({ publicRef }) => publicRef))}</span></p>)}</div>}<div className="citations">{sourceLinks(narrative.sources.map(({ publicRef }) => publicRef))}</div></div>
+    </article>)}</div>
+  </section>;
+}
+
 function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis" | "positions"; eyebrow: string; claims: PublicClaim[]; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="evidence-section editorial-section" id={id} aria-label={eyebrow}>
     <div className="section-intro"><p className="eyebrow">{eyebrow}</p><p>以下是 TW Issues 依公開前提提出的判讀或主張，不是已確認事實。</p></div>
@@ -83,7 +106,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
@@ -97,7 +120,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">關鍵人物</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
       <div className="section-intro"><p className="eyebrow">事件進展</p></div>
       <div className="event-timeline">{timelineGroups.map((group) => {
@@ -118,6 +141,8 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       })}</div>
     </section>}
     <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />
+    {publicPeople.length > 0 && <PeopleSection people={publicPeople} sourceLinks={sourceLinks} />}
+    {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
     {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
     {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
