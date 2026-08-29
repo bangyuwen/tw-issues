@@ -142,7 +142,7 @@ function TimelineGroups({ groups, sourceLinks }: { groups: TimelineGroup[]; sour
 function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks }: { phases: TimelinePhaseModel[]; unphasedGroups: TimelineGroup[]; timelineGroups: TimelineGroup[]; sourceLinks: (ids: string[]) => ReactNode }) {
   if (phases.length === 0) return <section className="event-progress-section" id="progress" aria-label="事件進展"><div className="section-intro"><p className="eyebrow">事件進展</p><h2>事情怎麼走到今天？</h2></div><TimelineGroups groups={timelineGroups} sourceLinks={sourceLinks} /></section>;
   return <section className="event-progress-section case-chronology" id="progress" aria-label="分階段事件脈絡">
-    <div className="section-intro"><p className="eyebrow">完整脈絡</p><h2>五個階段，從重建走到不起訴之後。</h2><p>階段摘要與事件時間軸合併呈現；每個「轉折」都是 TW Issues 依公開資料提出的分析，不是司法或行政機關的結論。</p></div>
+    <div className="section-intro"><p className="eyebrow">完整脈絡</p><h2>{phases.length} 個階段，串起事件的關鍵轉折。</h2><p>階段摘要與事件時間軸合併呈現；每個「轉折」都是 TW Issues 依公開資料提出的分析，不是司法或行政機關的結論。</p></div>
     <div className="chronology-phases">{phases.map((phase, index) => <section className="chronology-phase" key={`${phase.period}-${phase.title}`}>
       <header className="chronology-phase-heading"><div><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div><div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="chronology-turning-point"><strong>轉折 · TW Issues 分析</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div></header>
       <TimelineGroups groups={phase.groups} sourceLinks={sourceLinks} />
@@ -153,7 +153,7 @@ function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks
 
 function ProceedingTracksSection({ tracks, sourceLinks }: { tracks: ProceedingTrack[]; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="evidence-section proceedings-section" id="proceedings" aria-label="責任與程序結果對照">
-    <div className="section-intro"><p className="eyebrow">責任與程序</p><h2>同一爭議，五個程序各自回答什麼？</h2><p>這裡對照調查主體、問題、結論與效力。某一程序的結果，不能自動覆蓋另一條責任線。</p></div>
+    <div className="section-intro"><p className="eyebrow">責任與程序</p><h2>同一爭議，{tracks.length} 個程序各自回答什麼？</h2><p>這裡對照調查主體、問題、結論與效力。某一程序的結果，不能自動覆蓋另一條責任線。</p></div>
     <div className="proceeding-matrix">{tracks.map((track, index) => <article className={`proceeding-row proceeding-row--${track.kind}`} key={`${track.kind}-${track.label}`}>
       <header><span>{String(index + 1).padStart(2, "0")}</span><p>{track.label}</p><strong>{track.status}</strong></header>
       <div className="proceeding-body"><p className="proceeding-actor"><strong>處理主體</strong>{track.body}</p><h3>{track.question}</h3><dl><div><dt>已作成的結論</dt><dd>{track.conclusion}</dd></div><div><dt>程序效果</dt><dd>{track.effect}</dd></div></dl><aside><strong>這個程序沒有回答</strong><ul>{track.doesNotConclude.map((item) => <li key={item}>{item}</li>)}</ul></aside><p className="proceeding-next"><strong>下一個待確認節點</strong>{track.nextStep}</p><div className="citations">{sourceLinks(track.sources.map(({ publicRef }) => publicRef))}</div></div>

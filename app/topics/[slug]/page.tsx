@@ -30,8 +30,19 @@ export default function TopicPage({ params, projectionOverride }: {
   if (!topic) notFound();
   const displayTitle = getTopicDisplayTitle(params.slug, topic.title);
   const projection = projectionOverride ?? getPublicEvidenceProjection(params.slug);
-  const hasEvidence = projection && [projection.claims, projection.attributedClaims, projection.attributedSpeakerGroups ?? [], projection.openQuestions,
-    projection.reportedTimeline ?? [], projection.socialObservations ?? []].some((items) => items.length > 0);
+  const hasEvidence = Boolean(projection && (
+    projection.claims.length > 0
+    || projection.openQuestions.length > 0
+    || Boolean(projection.contextOverview)
+    || (projection.attributedSpeakerGroups?.length ?? 0) > 0
+    || (projection.proceedingTracks?.length ?? 0) > 0
+    || (projection.publicPeople?.length ?? 0) > 0
+    || (projection.politicalNarratives?.length ?? 0) > 0
+    || (projection.analysisClaims?.length ?? 0) > 0
+    || (projection.editorialPositions?.length ?? 0) > 0
+    || (projection.socialObservations?.length ?? 0) > 0
+    || (projection.reportedTimeline?.some(({ items }) => items.length > 0) ?? false)
+  ));
   if (!projection || !hasEvidence) return <UnavailableDossierPage topic={topic} displayTitle={displayTitle} />;
   return <DossierPage model={buildDossierPageModel(projection, { topic, displayTitle })} />;
 }

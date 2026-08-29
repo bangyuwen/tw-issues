@@ -72,6 +72,47 @@ test(`topic page renders ${section} when verified claims are empty`, () => {
   });
 }
 
+test("topic page publishes a proceeding-track-only projection", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "proceeding-only",
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+      proceedingTracks: [{
+        kind: "administrative",
+        label: "行政調查",
+        body: "測試機關",
+        question: "程序回答什麼？",
+        conclusion: "已作成測試結論。",
+        effect: "要求改善。",
+        doesNotConclude: ["不等於刑事有罪。"],
+        status: "已公布",
+        nextStep: "追查改善結果",
+        sources: [source],
+      }],
+    }} />,
+  );
+
+  assert.match(html, /同一爭議，1 個程序各自回答什麼/);
+  assert.match(html, /程序回答什麼/);
+  assert.doesNotMatch(html, /公開資料補強中/);
+});
+
+test("topic page does not treat unrendered attributedClaims as evidence", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "unrendered-attributed-only",
+      claims: [],
+      attributedClaims: [claim],
+      openQuestions: [],
+    }} />,
+  );
+
+  assert.match(html, /公開資料補強中/);
+  assert.doesNotMatch(html, /測試公開命題/);
+});
+
 test("evidence board collapses to one known-information column without open questions", () => {
   const html = renderToStaticMarkup(
     <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
@@ -732,6 +773,7 @@ test("model preserves context overview and collects lane and phase sources", () 
   assert.equal(model.timelinePhases[0]?.groups[0]?.events[0]?.publicKey, "event-phase");
   assert.deepEqual(model.unphasedContextPhases.map(({ title }) => title), ["沒有事件鍵的補充階段"]);
   assert.equal(model.unphasedTimelineGroups.length, 0);
+  assert.match(html, /1 個階段，串起事件的關鍵轉折/);
   assert.equal(html.match(/第一階段：程序建檔/g)?.length, 1);
   assert.equal(html.match(/沒有事件鍵的補充階段/g)?.length, 1);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
@@ -743,4 +785,35 @@ test("model orders political narratives by occurrence date while preserving same
   const narrative = (publicKey: string, occurredAt: string): NonNullable<PublicEvidenceProjection["politicalNarratives"]>[number] => ({ publicKey, occurredAt, arena: "選舉", headline: publicKey, speaker: { name: "測試人物", role: "候選人" }, statement: "具名說法", status: "attributed", proofScope: "只證明曾如此表示", limitations: ["不證明真相"], sources: [source] });
   const model = buildDossierPageModel({ topicId: "narrative-order", claims: [], attributedClaims: [], openQuestions: [], politicalNarratives: [narrative("late", "2022-11-25"), narrative("same-a", "2022-11-16"), narrative("early", "2022-11-02"), narrative("same-b", "2022-11-16")] });
   assert.deepEqual(model.politicalNarratives.map(({ publicKey }) => publicKey), ["early", "same-a", "same-b", "late"]);
+});
+
+test("every publicRef uses one canonical source metadata record within its projection", () => {
+  const sourceFingerprints = (value: unknown, records = new Map<string, Set<string>>()) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => sourceFingerprints(item, records));
+      return records;
+    }
+    if (!value || typeof value !== "object") return records;
+    const candidate = value as Record<string, unknown>;
+    if (["publicRef", "canonicalUrl", "title", "publisher", "publishedAt", "displayRole"].every((key) => typeof candidate[key] === "string")) {
+      const publicRef = candidate.publicRef as string;
+      const fingerprints = records.get(publicRef) ?? new Set<string>();
+      fingerprints.add(JSON.stringify([
+        candidate.canonicalUrl,
+        candidate.title,
+        candidate.publisher,
+        candidate.publishedAt,
+        candidate.displayRole,
+      ]));
+      records.set(publicRef, fingerprints);
+    }
+    Object.values(candidate).forEach((item) => sourceFingerprints(item, records));
+    return records;
+  };
+
+  for (const [slug, evidence] of Object.entries(publicEvidenceBySlug)) {
+    for (const [publicRef, fingerprints] of sourceFingerprints(evidence)) {
+      assert.equal(fingerprints.size, 1, `${slug}:${publicRef} has conflicting source metadata`);
+    }
+  }
 });

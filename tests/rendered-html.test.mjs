@@ -106,7 +106,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "黃國昌",
     "林為洲",
     "高虹安以「12億元棒球場」連結政黨輪替訴求",
-    "同一爭議，五個程序各自回答什麼",
+    "個程序各自回答什麼",
     "市府與統包商契約爭議",
     "統包商與下包商民事案",
     "巨佳營造與下包商揚名實業間約737萬元工程款民事一審",
@@ -117,6 +117,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   ]) {
     assert.match(html, new RegExp(text));
   }
+  assert.match(html, /5<!-- --> 個程序各自回答什麼/);
   assert.match(html, /class="event-progress-section case-chronology"/);
   assert.match(html, /class="context-overview" id="context"/);
   assert.match(html, /class="context-lanes"/);
