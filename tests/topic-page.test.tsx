@@ -892,6 +892,19 @@ test("model collects social observation sources without promoting the samples", 
   assert.equal(model.publicSources.length, 1);
 });
 
+test("legacy social source references do not create phantom public citations", () => {
+  const model = buildDossierPageModel({
+    topicId: "legacy-social-samples",
+    claims: [],
+    attributedClaims: [],
+    openQuestions: [],
+    socialObservations: [{ summary: "沒有 canonical metadata 的 legacy 樣本。", sourceRefs: ["legacy-social"] }],
+    socialObservationCount: 1,
+  });
+  assert.equal(model.publicSources.length, 0);
+  assert.equal(model.sourceById.has("legacy-social"), false);
+});
+
 test("model preserves context overview and collects lane and phase sources", () => {
   const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
   const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };

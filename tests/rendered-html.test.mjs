@@ -500,6 +500,7 @@ test("food-safety page presents anonymous compact social samples without identif
   assert.doesNotMatch(nav, /社群反應樣本|social-observations/);
   const sources = html.match(/id="sources"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.doesNotMatch(sources, /src-bap-|social_post|開啟原始來源/);
+  assert.doesNotMatch(html, /aria-label="社群樣本來源"/);
   assert.match(sources, /<a[^>]+href="https?:\/\/[^\"]+"[^>]*>[^<]*(?:政府|署|報|中心|院)/);
   assert.doesNotMatch(html, /社群共識/);
 
