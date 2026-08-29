@@ -19,9 +19,11 @@ function AiAutomationDisclaimer() {
 }
 
 export function UnavailableDossierPage({ topic, displayTitle }: { topic: DeepResearchTopic; displayTitle: string }) {
-  return <main className="site-shell dossier-shell">
+  const isCaseDossier = topic.slug === "hsinchu-baseball-stadium";
+  return <main className={`site-shell dossier-shell${isCaseDossier ? " dossier-shell--case" : ""}`}>
+      <a className="skip-link" href="#main-content">跳至主要內容</a>
       <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
-      <section className="hero hero-detail"><div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開資料補強中</p><h1>{displayTitle}</h1><p className="lede">本題列入最近更新的深度研究，但公開來源覆蓋尚未完成；現階段不下結論，也不公開研究敘事。</p></div><aside className="dossier-meta"><p>最近更新</p><strong>{topic.lastUpdated.slice(5).replace("-", ".")}</strong><span>研究持續整理</span></aside></section>
+      <section id="main-content" tabIndex={-1} className="hero hero-detail"><div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開資料補強中</p><h1>{displayTitle}</h1><p className="lede">本題列入最近更新的深度研究，但公開來源覆蓋尚未完成；現階段不下結論，也不公開研究敘事。</p></div><aside className="dossier-meta"><p>最近更新</p><strong>{topic.lastUpdated.slice(5).replace("-", ".")}</strong><span>研究持續整理</span></aside></section>
       <section className="evidence-section"><div className="section-intro"><p className="eyebrow">公開資料界線</p><h2>先補足來源，<br />再公開命題。</h2><p>研究中不代表任何一方說法成立。待可核對的原始紀錄與獨立來源群組足以支撐具體命題後，本頁才會顯示事實、證明範圍與來源限制。</p></div></section>
       <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>回到最近更新的研究索引。</h2></div><SiteLink href="/">回到議題索引 <span>→</span></SiteLink></section>
       <AiAutomationDisclaimer />
@@ -206,22 +208,102 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
   </section>;
 }
 
+function CaseReadingLegend() {
+  return <section className="case-reading-legend" aria-labelledby="case-reading-legend-title">
+    <div className="case-reading-legend-intro"><p className="eyebrow">閱讀圖例</p><h2 id="case-reading-legend-title">先辨認資料的狀態。</h2></div>
+    <ul>
+      <li className="case-reading-legend-item case-reading-legend-item--verified"><span aria-hidden="true" /><div><strong>已確認</strong><p>目前可以核對的命題。</p></div></li>
+      <li className="case-reading-legend-item case-reading-legend-item--attributed"><span aria-hidden="true" /><div><strong>具名說法</strong><p>只證明來源記錄此人曾如此表示。</p></div></li>
+      <li className="case-reading-legend-item case-reading-legend-item--unresolved"><span aria-hidden="true" /><div><strong>仍待釐清</strong><p>尚不能把任何一種解釋寫成根因或責任定論。</p></div></li>
+      <li className="case-reading-legend-item case-reading-legend-item--analysis"><span aria-hidden="true" /><div><strong>TW Issues 分析</strong><p>以下為依公開資料提出的判讀，不是已確認事實。</p></div></li>
+    </ul>
+  </section>;
+}
+
+function ArticleNavigation({
+  isCaseDossier,
+  contextOverview,
+  timelineGroups,
+  administrationActions,
+  proceedingTracks,
+  politicalNarratives,
+  unresolved,
+  verified,
+  publicPeople,
+  attributedSpeakerGroups,
+  analysisClaims,
+  editorialPositions,
+}: {
+  isCaseDossier: boolean;
+  contextOverview?: DossierPageModel["contextOverview"];
+  timelineGroups: TimelineGroup[];
+  administrationActions: AdministrationAction[];
+  proceedingTracks: ProceedingTrack[];
+  politicalNarratives: PoliticalNarrative[];
+  unresolved: ClaimCollectionModel;
+  verified: ClaimCollectionModel;
+  publicPeople: PublicPersonProfile[];
+  attributedSpeakerGroups: DossierPageModel["attributedSpeakerGroups"];
+  analysisClaims: PublicClaim[];
+  editorialPositions: PublicClaim[];
+}) {
+  const contextLink = contextOverview && <a href="#context">案情地圖</a>;
+  const timelineLink = timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>;
+  const administrationLink = administrationActions.length > 0 && <a href="#administration-actions">市府行動</a>;
+  const proceedingsLink = proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>;
+  const narrativesLink = politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>;
+  const questionsLink = unresolved.claims.length > 0 && <a href="#questions">未決問題</a>;
+  const claimsLink = verified.claims.length > 0 && <a href="#claims">已知資訊</a>;
+  const peopleLink = publicPeople.length > 0 && <a href="#people">人物索引</a>;
+  const reportsLink = attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>;
+  const analysisLink = analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>;
+  const positionsLink = editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>;
+  const sourcesLink = <a href="#sources">資料來源</a>;
+  const group = (label: string, links: ReactNode) => <div className="article-nav-group" role="group" aria-label={label}><p className="article-nav-group-label">{label}</p><div className="article-nav-group-links">{links}</div></div>;
+
+  return <nav className={`article-nav${isCaseDossier ? " article-nav--case" : ""}`} aria-label="本頁閱讀導覽"><span>本頁導覽</span>{isCaseDossier ? <div className="article-nav-groups">
+    {group("案情總覽", <>{contextLink}{timelineLink}</>)}
+    {group("證據快照", <>{questionsLink}{claimsLink}{sourcesLink}</>)}
+    {group("程序線", <>{administrationLink}{proceedingsLink}</>)}
+    {group("人物與說法／分析", <>{narrativesLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}</>)}
+  </div> : <div>{contextLink}{timelineLink}{administrationLink}{proceedingsLink}{narrativesLink}{questionsLink}{claimsLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{sourcesLink}</div>}</nav>;
+}
+
 export default function DossierPage({ model }: { model: DossierPageModel }) {
   const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
+  const isCaseDossier = topic.slug === "hsinchu-baseball-stadium";
+  const sourceNumberByRef = new Map(publicSources.map((source, index) => [source.publicRef, String(index + 1).padStart(2, "0")]));
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
-    return source ? <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`查看來源：${source.publisher}`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a> : null;
+    if (!source) return null;
+    const number = sourceNumberByRef.get(source.publicRef) ?? "—";
+    return <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`來源 ${number}：${source.publisher}｜${source.title}（${source.publishedAt}）`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a>;
   });
   const [verified, unresolved] = collections;
 
-  return <main className="site-shell dossier-shell">
+  return <main className={`site-shell dossier-shell${isCaseDossier ? " dossier-shell--case" : ""}`}>
+    <a className="skip-link" href="#main-content">跳至主要內容</a>
     <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
-    <section className="hero hero-detail">
+    <section id="main-content" tabIndex={-1} className="hero hero-detail">
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
-      <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
+      {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{administrationActions.length > 0 && <a href="#administration-actions">市府行動</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}{verified.claims.length > 0 && <a href="#claims">已知資訊</a>}{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    {isCaseDossier && <CaseReadingLegend />}
+    <ArticleNavigation
+      isCaseDossier={isCaseDossier}
+      contextOverview={contextOverview}
+      timelineGroups={timelineGroups}
+      administrationActions={administrationActions}
+      proceedingTracks={proceedingTracks}
+      politicalNarratives={politicalNarratives}
+      unresolved={unresolved}
+      verified={verified}
+      publicPeople={publicPeople}
+      attributedSpeakerGroups={attributedSpeakerGroups}
+      analysisClaims={analysisClaims}
+      editorialPositions={editorialPositions}
+    />
     {contextOverview && <ContextOverviewSection
       overview={contextOverview}
       sourceLinks={sourceLinks}

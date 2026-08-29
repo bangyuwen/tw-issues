@@ -153,6 +153,14 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="administration-action-matrix"/);
   assert.equal((html.match(/class="administration-action-row/g) ?? []).length, 12);
   assert.match(html, /href="#administration-actions"/);
+  assert.match(html, /class="skip-link" href="#main-content"/);
+  assert.match(html, /id="main-content" tabindex="-1" class="hero hero-detail"/);
+  assert.match(html, /class="dossier-meta dossier-meta--case"/);
+  assert.match(html, /查看已列來源/);
+  assert.match(html, /class="article-nav article-nav--case"/);
+  assert.match(html, /role="group" aria-label="案情總覽"/);
+  assert.match(html, /class="case-reading-legend"/);
+  assert.match(html, /aria-label="來源 01：/);
   assert.doesNotMatch(html, /class="context-phases"/);
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
   assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
@@ -264,6 +272,7 @@ test("budget page preserves the full chronology and separates party claims", asy
   }
   assert.match(html, /class="event-progress-section"/);
   assert.match(html, /依主體整理公開說法；不代表已確認或完整。/);
+  assert.doesNotMatch(html, /article-nav--case/);
   assert.match(html, /AI 自動製作說明/);
   assert.match(html, /請以頁面列出的原始資料與來源連結為準/);
   assert.doesNotMatch(html, /data-claim-id/);
