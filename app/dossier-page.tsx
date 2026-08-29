@@ -101,10 +101,10 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
 function ContextOverviewSection({ overview, sourceLinks }: { overview: ContextOverview; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="context-overview" id="context" aria-label="脈絡總覽">
     <header className="context-overview-heading"><p className="eyebrow">先把問題拆開</p><h2>{overview.headline}</h2><p>{overview.summary}</p></header>
-    <div className="context-lanes" aria-label="四條問題線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
+    <div className="context-lanes" aria-label="責任與狀態分線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
       <p>{lane.label}</p><h3>{lane.finding}</h3><details><summary>證據界線</summary><p>{lane.proofScope}</p></details><div className="citations">{sourceLinks(lane.sources.map(({ publicRef }) => publicRef))}</div>
     </article>)}</div>
-    <div className="context-phases" aria-label="事件五階段">{overview.phases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
+    <div className="context-phases" aria-label="事件階段">{overview.phases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
       <div className="context-phase-index"><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div>
       <div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="context-turning-point"><strong>轉折</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div>
     </article>)}</div>

@@ -134,6 +134,14 @@
               "displayRole": "媒體報導"
             },
             {
+              "publicRef": "source-12",
+              "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211020113.aspx",
+              "title": "國民黨中常會移師新竹市 朱立倫：唯一支持林耕仁",
+              "publisher": "中央社",
+              "publishedAt": "2022-11-02",
+              "displayRole": "政黨公開說法"
+            },
+            {
               "publicRef": "source-15",
               "canonicalUrl": "https://www.cna.com.tw/news/aloc/202401260271.aspx",
               "title": "新竹棒球場案6人送監察院 綠議員：至今查無不法",
@@ -164,6 +172,14 @@
               "publisher": "中央社",
               "publishedAt": "2026-08-28",
               "displayRole": "司法進度報導"
+            },
+            {
+              "publicRef": "source-08",
+              "canonicalUrl": "https://www.cna.com.tw/news/ahel/202511120338.aspx",
+              "title": "巨佳欠新竹棒球場下包商工程款：法院判付737萬元",
+              "publisher": "中央社",
+              "publishedAt": "2025-11-12",
+              "displayRole": "司法案件報導"
             }
           ]
         },
