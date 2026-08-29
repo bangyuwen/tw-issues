@@ -180,6 +180,56 @@ test("topic page does not treat unrendered attributedClaims as evidence", () => 
   assert.doesNotMatch(html, /測試公開命題/);
 });
 
+test("topic page publishes an eligible Hsinchu primary-document-only projection", () => {
+  const primaryDocument = publicEvidenceBySlug["hsinchu-baseball-stadium"].primaryDocument;
+  assert.ok(primaryDocument);
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "hsinchu-baseball-stadium" }} projectionOverride={{
+      topicId: "hsinchu-baseball-stadium-2026",
+      primaryDocument,
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+    }} />,
+  );
+
+  assert.match(html, /id="primary-document"/);
+  assert.match(html, /新竹棒球場案不起訴處分書第三方重製影像/);
+  assert.match(html, /已對照第三方重製影像/);
+  assert.doesNotMatch(html, /公開資料補強中/);
+});
+
+test("topic page rejects non-Hsinchu and ineligible primary-document-only projections", () => {
+  const primaryDocument = publicEvidenceBySlug["hsinchu-baseball-stadium"].primaryDocument;
+  assert.ok(primaryDocument);
+  const nonHsinchuHtml = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "another-topic",
+      primaryDocument,
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+    }} />,
+  );
+  const ineligibleHsinchuHtml = renderToStaticMarkup(
+    <TopicPage params={{ slug: "hsinchu-baseball-stadium" }} projectionOverride={{
+      topicId: "hsinchu-baseball-stadium-2026",
+      primaryDocument: {
+        ...primaryDocument,
+        source: { ...primaryDocument.source, publicRef: "source-57" },
+      },
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+    }} />,
+  );
+
+  for (const html of [nonHsinchuHtml, ineligibleHsinchuHtml]) {
+    assert.match(html, /公開資料補強中/);
+    assert.doesNotMatch(html, /id="primary-document"/);
+  }
+});
+
 test("timeline-only projection omits links to absent evidence sections", () => {
   const html = renderToStaticMarkup(
     <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
@@ -667,7 +717,7 @@ test("known and unresolved claims expose proof boundaries before collapsed sourc
   assert.ok(generic.indexOf('class="evidence-claim-row evidence-claim-row--verified"') < generic.indexOf('class="claim-boundary"'));
 });
 
-test("Hsinchu uses one context-first document table of contents without changing generic navigation", () => {
+test("Hsinchu uses one primary-document-first table of contents without changing generic navigation", () => {
   const hsinchu = renderToStaticMarkup(
     <TopicPage
       params={{ slug: "hsinchu-baseball-stadium" }}
@@ -684,7 +734,7 @@ test("Hsinchu uses one context-first document table of contents without changing
   assert.match(hsinchu, /class="article-nav article-nav--case case-toc"/);
   assert.match(hsinchu, /id="case-contents"/);
   assert.doesNotMatch(hsinchu, /article-nav-groups|case-map-nav|案情問題導覽/);
-  const order = ["context", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
+  const order = ["primary-document", "context", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
     .map((id) => hsinchu.indexOf(`id="${id}"`));
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
@@ -1047,7 +1097,7 @@ test("every publicRef uses one canonical source metadata record within its proje
   }
 });
 
-test("Hsinchu model exposes public-safe coverage limits and six complete chapter groups", () => {
+test("Hsinchu model exposes the primary document, public-safe coverage limits, and six complete chapter groups", () => {
   const model = buildDossierPageModel(
     publicEvidenceBySlug["hsinchu-baseball-stadium"],
     { topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true }, displayTitle: "新竹棒球場爭議" },
@@ -1055,8 +1105,8 @@ test("Hsinchu model exposes public-safe coverage limits and six complete chapter
 
   assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
     {
-      gap: "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
-      gapReason: "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gap: "市府已宣布將提出再議；目前已有第三方社群重製的不起訴處分書第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gapReason: "市府已宣布將提出再議；目前已有第三方社群重製的不起訴處分書第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
       sourceRefs: ["source-01", "source-09", "source-34"],
       rest: {},
     },
@@ -1079,12 +1129,17 @@ test("Hsinchu model exposes public-safe coverage limits and six complete chapter
     }
   }
 
+  assert.equal(model.primaryDocument?.source.publicRef, "source-58");
+  assert.equal(model.primaryDocument?.coverage.firstObservedPage, 3);
+  assert.equal(model.primaryDocument?.coverage.lastObservedPage, 22);
+  assert.equal(model.publicSources.length, 58);
+  assert.equal(model.publicSources.filter(({ publicRef }) => publicRef === "source-58").length, 1);
   assert.equal(model.hsinchuChapters.length, 6);
   assert.deepEqual(model.hsinchuChapters.map(({ href }) => href), [
-    "#context", "#claims", "#progress", "#people", "#analysis", "#social-observations",
+    "#primary-document", "#claims", "#progress", "#people", "#analysis", "#social-observations",
   ]);
   assert.deepEqual(model.hsinchuChapters.flatMap(({ links }) => links.map(({ href }) => href)), [
-    "#context", "#responsibility-lines", "#coverage-limits",
+    "#primary-document", "#context", "#responsibility-lines", "#coverage-limits",
     "#claims", "#questions",
     "#progress", "#administration-actions", "#proceedings",
     "#people", "#reports", "#narratives",
@@ -1093,6 +1148,30 @@ test("Hsinchu model exposes public-safe coverage limits and six complete chapter
   ]);
   assert.equal(model.editorialPositions?.length, 0);
   assert.doesNotMatch(JSON.stringify(model.hsinchuChapters), /positions/);
+});
+
+test("primary-document data is omitted from sparse and non-Hsinchu models", () => {
+  const primaryDocument = publicEvidenceBySlug["hsinchu-baseball-stadium"].primaryDocument;
+  assert.ok(primaryDocument);
+  const sparseHsinchu = buildDossierPageModel({
+    topicId: "hsinchu-baseball-stadium-2026",
+    claims: [],
+    attributedClaims: [],
+    openQuestions: [],
+  });
+  const nonHsinchu = buildDossierPageModel({
+    topicId: "another-topic",
+    primaryDocument,
+    claims: [],
+    attributedClaims: [],
+    openQuestions: [],
+  });
+
+  assert.equal(sparseHsinchu.primaryDocument, undefined);
+  assert.doesNotMatch(JSON.stringify(sparseHsinchu.hsinchuChapters), /primary-document/);
+  assert.equal(nonHsinchu.primaryDocument, undefined);
+  assert.equal(nonHsinchu.hsinchuChapters.length, 0);
+  assert.equal(nonHsinchu.sourceById.has("source-58"), false);
 });
 
 test("Hsinchu attribution reconciliation is positional, time-bounded, and preserves limitation variants", () => {
@@ -1178,5 +1257,5 @@ test("Hsinchu preserves all 16 timeline events and 17 inner items with their evi
   assert.equal(model.politicalNarratives.length, 9);
   assert.equal(model.analysisClaims?.length, 5);
   assert.equal(model.socialObservations.length, 10);
-  assert.equal(model.publicSources.length, 57);
+  assert.equal(model.publicSources.length, 58);
 });

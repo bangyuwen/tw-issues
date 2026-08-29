@@ -3,6 +3,7 @@ import researchIndex from "./research-topics.json";
 
 export type PublicEvidenceProjection = {
   topicId: string;
+  primaryDocument?: PrimaryDocument;
   claims: PublicClaim[];
   attributedClaims: PublicClaim[];
   attributedSpeakerGroups?: AttributedSpeakerGroup[];
@@ -25,6 +26,60 @@ export type PublicEvidenceProjection = {
     publicSafety: "PASS" | "BLOCKED";
     editorialReadiness: "PASS" | "LIMITED" | "BLOCKED";
   };
+};
+
+export type PrimaryDocumentCoverage = {
+  firstObservedPage: number;
+  lastObservedPage: number;
+  missingBefore: string;
+  missingAfter: string;
+  redactionStatus: string;
+};
+
+export type PrimaryDocumentGuideEntry = {
+  pageRange: string;
+  label: string;
+  summary: string;
+  layer: "allegation_or_referral" | "legal_standard" | "prosecutorial_reasoning";
+};
+
+export type PrimaryDocumentExcerpt = {
+  documentPage: number;
+  label: "影像可見文字｜第三方重製";
+  text: string;
+  reviewStatus: "checked_against_image";
+  proofScope: string;
+  limitations: string[];
+};
+
+export type PrimaryDocumentAttribution = {
+  label: "楊玲宜貼文摘要｜具名說法";
+  speaker: PublicSpeaker;
+  summary: string;
+  proofScope: string;
+  limitations: string[];
+};
+
+export type PrimaryDocumentAnalysisBoundary = {
+  label: "TW Issues 分析｜非司法結論";
+  summary: string;
+  limitations: string[];
+};
+
+export type PrimaryDocument = {
+  publicKey: string;
+  title: string;
+  documentKind: "non_prosecution_disposition";
+  provenanceStatus: "third_party_redacted_partial_reproduction";
+  warning: string;
+  source: PublicSource;
+  capturedAt: string;
+  coverage: PrimaryDocumentCoverage;
+  guide: PrimaryDocumentGuideEntry[];
+  excerpts: PrimaryDocumentExcerpt[];
+  posterAttribution: PrimaryDocumentAttribution;
+  analysisBoundary: PrimaryDocumentAnalysisBoundary;
+  nonConclusions: string[];
 };
 
 /** Public projection fields approved for visible coverage-limit presentation. */

@@ -1,4 +1,4 @@
-import type { AdministrationAction, AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicCoverageGap, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent, PublicSpeaker } from "./topic-data";
+import type { AdministrationAction, AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, PrimaryDocument, ProceedingTrack, PublicClaim, PublicCoverageGap, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent, PublicSpeaker } from "./topic-data";
 
 export type ClaimCollectionModel = {
   id: "claims" | "questions";
@@ -16,6 +16,7 @@ export type DossierPageModel = {
   attributedReports: AttributedReportModel[];
   coverageLimits: CoverageLimitViewModel[];
   hsinchuChapters: HsinchuChapterDescriptor[];
+  primaryDocument?: PrimaryDocument;
   contextOverview?: ContextOverview;
   administrationActions: AdministrationAction[];
   proceedingTracks: ProceedingTrack[];
@@ -35,7 +36,7 @@ export type DossierPageModel = {
 };
 
 export type DossierSectionDescriptor = {
-  href: `#${"context" | "responsibility-lines" | "coverage-limits" | "claims" | "questions" | "progress" | "administration-actions" | "proceedings" | "people" | "reports" | "narratives" | "analysis" | "positions" | "social-observations" | "sources"}`;
+  href: `#${"primary-document" | "context" | "responsibility-lines" | "coverage-limits" | "claims" | "questions" | "progress" | "administration-actions" | "proceedings" | "people" | "reports" | "narratives" | "analysis" | "positions" | "social-observations" | "sources"}`;
   label: string;
 };
 
@@ -89,6 +90,17 @@ function isHsinchuProjection(projection: PublicEvidenceProjection, metadata?: { 
     && projection.topicId === hsinchuTopicId;
 }
 
+export function getEligiblePrimaryDocument(
+  projection: PublicEvidenceProjection,
+  metadata?: { topic: DeepResearchTopic },
+) {
+  return isHsinchuProjection(projection, metadata)
+    && projection.primaryDocument?.source.publicRef === "source-58"
+    && projection.primaryDocument.provenanceStatus === "third_party_redacted_partial_reproduction"
+    ? projection.primaryDocument
+    : undefined;
+}
+
 type HsinchuClaimSnapshot = {
   statement: string;
   claimType: PublicClaim["claimType"];
@@ -117,7 +129,7 @@ const approvedHsinchuProsecutorClaims: readonly HsinchuClaimSnapshot[] = [
     proofScope: "只證明媒體轉述竹檢對偵查方法、金流結果及行政疏失與刑事證據區分的說明。",
     limitations: [
       "未發現犯罪證據是檢方偵查判斷，不等同法院已對所有工程爭議作成終局認定。",
-      "完整不起訴處分書及相關卷證仍待取得。",
+      "目前另有第三方社群重製影像第 3–22 頁可供有限核對；官方完整不起訴處分書、缺頁及相關卷證仍待取得。",
     ],
     sourceRefs: ["source-04", "source-05"],
   },
@@ -144,15 +156,16 @@ const approvedHsinchuProsecutorClaims: readonly HsinchuClaimSnapshot[] = [
     sourceRefs: ["source-04"],
   },
   {
-    statement: "檢方表示，開挖發現的不符規範石塊約36.245立方公尺、占拆除工程產出B5類土石方約0.75%，其餘不合格掩埋物約9.006至10.446立方公尺；查無外運賣土、故意非法掩埋或詐領工程款的證據。",
+    statement: "檢方表示，兩次開挖所見部分物件其實是依設計或施工鋪設的PE網、噴灌管線及電線，均非廢棄物；不符規範石塊約36.245立方公尺、占拆除工程產出B5類土石方約0.75%，其餘不合格掩埋物約9.006至10.446立方公尺；查無外運賣土、故意非法掩埋或詐領工程款的證據。",
     claimType: "attributed_statement",
     harmRisk: "high",
-    proofScope: "只證明媒體轉述竹檢對開挖異物數量、比例及外運、掩埋、詐領款項證據的說明。",
+    proofScope: "只證明聯合報轉述竹檢的偵結說明，以及楊玲宜 Threads 所公開遮蔽影像第18頁的可見文字；社群影像不是檢方官方全文。",
     limitations: [
       "數量與比例是檢方公開說明的調查口徑，不能取代完整鑑定、契約核對或民事損害計算。",
       "不起訴不等同於行政缺失、契約瑕疵或公共安全疑慮不存在。",
+      "Threads 附件僅涵蓋處分書第3至22頁，且姓名、公司名稱已遮蔽；不能據此補寫缺頁、確認完整文脈或還原被遮蔽內容。",
     ],
-    sourceRefs: ["source-04"],
+    sourceRefs: ["source-04", "source-58"],
   },
 ];
 
@@ -262,6 +275,7 @@ export function getHsinchuDossierChapters(model: DossierPageModel): HsinchuChapt
       number: "01",
       label: "案情範圍與證據界線",
       links: [
+        ...link("#primary-document", "核心文件導讀", Boolean(model.primaryDocument)),
         ...link("#context", "案情範圍", Boolean(model.contextOverview)),
         ...link("#responsibility-lines", "責任與狀態", Boolean(model.contextOverview?.lanes.length)),
         ...link("#coverage-limits", "證據覆蓋界線", model.coverageLimits.length > 0),
@@ -330,6 +344,7 @@ export function buildDossierPageModel(
     gapReason,
     sourceRefs: [...sourceRefs],
   }));
+  const primaryDocument = getEligiblePrimaryDocument(projection, metadata);
   const hasAttributedInputs = projection.attributedClaims.length > 0 || (projection.attributedSpeakerGroups?.length ?? 0) > 0;
   const attribution = isHsinchuProjection(projection, metadata) && hasAttributedInputs
     ? reconcileHsinchuAttributedClaims(projection.attributedClaims, projection.attributedSpeakerGroups ?? [])
@@ -391,6 +406,7 @@ export function buildDossierPageModel(
     ]),
     ...timeline.flatMap(({ items }) => items.flatMap(({ sources }) => sources)),
     ...(projection.socialObservations ?? []).flatMap(({ sources = [] }) => sources),
+    ...(primaryDocument ? [primaryDocument.source] : []),
   ].map((item) => [item.publicRef, item])).values());
   const model: DossierPageModel = {
     topicId: projection.topicId,
@@ -401,6 +417,7 @@ export function buildDossierPageModel(
     attributedReports: attribution.attributedReports,
     coverageLimits,
     hsinchuChapters: [],
+    primaryDocument,
     contextOverview: projection.contextOverview,
     administrationActions,
     proceedingTracks: projection.proceedingTracks ?? [],
