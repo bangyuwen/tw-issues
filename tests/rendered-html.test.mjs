@@ -147,6 +147,22 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "PTT 球迷討論把 2022 到 2026 仍在施工視為",
     "政治提款機",
     "非隨機樣本，不能代表民意或事件真相",
+    "新竹棒球場案不起訴處分書第三方重製影像",
+    "公開來源：",
+    "楊玲宜 Threads",
+    "第三方社群重製・不是官方完整全文・已遮蔽・僅涵蓋第 3–22 頁",
+    "第 1–2 頁未附",
+    "至少第 23–25 頁未附",
+    "告發與移送內容",
+    "待檢驗的主張，不是檢察官已認定的事實",
+    "影像可見文字｜第三方重製",
+    "文件第 18 頁",
+    "已對照第三方重製影像",
+    "塑膠管為噴灌系統",
+    "電線亦為施工公司鋪設，均非廢棄物",
+    "楊玲宜貼文摘要｜具名說法",
+    "TW Issues 分析｜非司法結論",
+    "「大秘寶」屬政治傳播框架，不是這份處分書的法律用語",
   ]) {
     assert.match(html, new RegExp(text));
   }
@@ -163,9 +179,11 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /id="main-content" tabindex="-1" class="hero hero-detail"/);
   assert.match(html, /class="dossier-meta dossier-meta--case"/);
   assert.match(html, /查看已列來源/);
-  assert.match(html, /57<!-- --> 筆/);
+  assert.match(html, /58<!-- --> 筆/);
   assert.match(html, /class="article-nav article-nav--case case-toc"/);
   assert.match(html, /id="case-contents"/);
+  assert.match(html, /href="#primary-document"[^>]*>.*?案情範圍與證據界線/);
+  assert.match(html, /href="#primary-document"[^>]*>核心文件導讀/);
   assert.match(html, /href="#context"[^>]*>.*?案情範圍/);
   assert.match(html, /href="#claims"[^>]*>.*?已知與未決/);
   assert.match(html, /href="#progress"[^>]*>.*?時間與程序/);
@@ -176,6 +194,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="case-reading-legend"/);
   assert.match(html, /aria-label="來源 01：/);
   assert.doesNotMatch(html, /class="context-phases"/);
+  assert.ok(html.indexOf('id="primary-document"') < html.indexOf('id="context"'), "primary document precedes case context");
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="claims"'), "context overview precedes known and unresolved evidence");
   assert.ok(html.indexOf('id="claims"') < html.indexOf('id="progress"'), "known and unresolved evidence precede the detailed timeline");
   assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
@@ -197,6 +216,18 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /id="narratives"/);
   assert.match(html, /不判定主觀操弄意圖/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
+  assert.match(html, /href="https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A"/);
+  assert.match(html, /href="#source-58"/);
+  assert.match(html, /id="source-58" data-source-ref="source-58"/);
+  assert.equal((html.match(/id="source-58"/g) ?? []).length, 1);
+  assert.match(html, /data-document-layer="allegation_or_referral"[^>]*><span>第 3–8 頁/);
+  assert.doesNotMatch(html, /data-document-layer="prosecutorial_reasoning"[^>]*><span>第 3–8 頁/);
+  assert.match(html, /data-review-status="checked_against_image"[^>]*>已對照第三方重製影像/);
+  assert.match(html, /這不是法院判決，也不是法官對高虹安或林智堅作成的認定/);
+  assert.match(html, /頁面沒有寫高虹安本人開挖、鋪設或發現這些物件/);
+  assert.doesNotMatch(html, /高虹安挖到(?:管線|電線)/);
+  assert.doesNotMatch(html, /法官認定[^<]*(?:PE 網|噴灌管|電線)/);
+  assert.doesNotMatch(html, /處分書(?:稱|認定)[^<]*大秘寶/);
   assert.match(html, /href="#source-49"/);
   assert.match(html, /監察院<!-- --> · <!-- -->2026-07-22/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
@@ -559,7 +590,7 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.equal((html.match(/class="[^"]*\s+case-toc-chapter(?:\s|")/g) ?? []).length, 6);
   const nav = html.match(/<nav id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
   for (const target of [
-    "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
+    "primary-document", "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
     "administration-actions", "proceedings", "people", "reports", "narratives", "analysis",
     "social-observations", "sources",
   ]) {

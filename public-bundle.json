@@ -6,7 +6,7 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "cab032426ecd24e0479ec45a9f417b375212011fe7ee795d91d2a1c8fecf87bb"
+    "sha256": "6b33908be0d775e39197fb68251a49c102f296e241d16ff3a1c3a4b7b3cfed68"
   },
   "research_index": {
     "path": "app/research-topics.json",
@@ -19,7 +19,7 @@
       "visibility": "public",
       "publication_status": "published",
       "as_of": "2026-08-29",
-      "content_digest": "4ccee4e872eb2e91203d9f9e4af8239e6aeee41d50849aaf92958c838b04cf66",
+      "content_digest": "52d4406ada0bd2583a896a73532653b939dd79f1316831e288a6f8c0482847ae",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "新竹棒球場爭議與責任"

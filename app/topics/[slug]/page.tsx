@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DossierPage, { UnavailableDossierPage } from "../../dossier-page";
-import { buildDossierPageModel } from "../../dossier-page-model";
+import { buildDossierPageModel, getEligiblePrimaryDocument } from "../../dossier-page-model";
 import {
   deepResearchTopics, publicEvidenceBySlug, getDeepResearchTopic, getPublicEvidenceProjection,
 } from "../../topic-data";
@@ -30,8 +30,10 @@ export default function TopicPage({ params, projectionOverride }: {
   if (!topic) notFound();
   const displayTitle = getTopicDisplayTitle(params.slug, topic.title);
   const projection = projectionOverride ?? getPublicEvidenceProjection(params.slug);
+  const metadata = { topic, displayTitle };
   const hasEvidence = Boolean(projection && (
-    projection.claims.length > 0
+    Boolean(getEligiblePrimaryDocument(projection, metadata))
+    || projection.claims.length > 0
     || projection.openQuestions.length > 0
     || Boolean(projection.contextOverview)
     || (projection.attributedSpeakerGroups?.length ?? 0) > 0
@@ -45,5 +47,5 @@ export default function TopicPage({ params, projectionOverride }: {
     || (projection.reportedTimeline?.some(({ items }) => items.length > 0) ?? false)
   ));
   if (!projection || !hasEvidence) return <UnavailableDossierPage topic={topic} displayTitle={displayTitle} />;
-  return <DossierPage model={buildDossierPageModel(projection, { topic, displayTitle })} />;
+  return <DossierPage model={buildDossierPageModel(projection, metadata)} />;
 }

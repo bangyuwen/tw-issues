@@ -1,6 +1,6 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
-import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile, PublicSource, SocialObservation } from "./topic-data";
+import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, PrimaryDocument, ProceedingTrack, PublicClaim, PublicPersonProfile, PublicSource, SocialObservation } from "./topic-data";
 import { getHsinchuDossierChapters, type AttributedReportModel, type ClaimCollectionModel, type CoverageLimitViewModel, type DossierPageModel, type HsinchuChapterDescriptor, type TimelineGroup, type TimelinePhaseModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -332,6 +332,69 @@ function CaseReadingLegend() {
   </section>;
 }
 
+function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
+  return <section className="primary-document" id="primary-document" aria-labelledby="primary-document-title">
+    <header className="primary-document-heading">
+      <p className="eyebrow">核心文件導讀</p>
+      <h3 id="primary-document-title">{document.title}</h3>
+      <p className="primary-document-warning" role="note"><strong>閱讀警示</strong>{document.warning}</p>
+      <p className="primary-document-intro">這份資料對理解不起訴理由很重要，但來源仍是第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
+      <p className="primary-document-source-meta"><span>公開來源：{document.source.publisher}</span><span>發布：<time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></span><span>擷取：<time dateTime={document.capturedAt}>{document.capturedAt}</time></span></p>
+      <div className="primary-document-actions">
+        <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
+        <a href={`#${document.source.publicRef}`}>查看來源登錄</a>
+      </div>
+    </header>
+
+    <section className="primary-document-panel primary-document-coverage" aria-labelledby="primary-document-coverage-title">
+      <h4 id="primary-document-coverage-title">目前看得到哪些頁？</h4>
+      <dl>
+        <div><dt>可見範圍</dt><dd>文件第 {document.coverage.firstObservedPage}–{document.coverage.lastObservedPage} 頁</dd></div>
+        <div><dt>前段缺頁</dt><dd>{document.coverage.missingBefore}</dd></div>
+        <div><dt>後段缺頁</dt><dd>{document.coverage.missingAfter}</dd></div>
+        <div><dt>遮蔽狀態</dt><dd>{document.coverage.redactionStatus}</dd></div>
+      </dl>
+    </section>
+
+    <section className="primary-document-panel" aria-labelledby="primary-document-guide-title">
+      <h4 id="primary-document-guide-title">先分辨文件每一段在做什麼</h4>
+      <ol className="primary-document-guide">{document.guide.map((entry) => <li data-document-layer={entry.layer} key={`${entry.pageRange}-${entry.label}`}>
+        <span>{entry.pageRange}</span><div><strong>{entry.label}</strong><p>{entry.summary}</p></div>
+      </li>)}</ol>
+    </section>
+
+    <section className="primary-document-panel" aria-labelledby="primary-document-excerpt-title">
+      <h4 id="primary-document-excerpt-title">核對過的關鍵摘錄</h4>
+      {document.excerpts.map((excerpt) => <article className="primary-document-excerpt" key={excerpt.documentPage}>
+        <header><span>{excerpt.label}</span><strong>{`文件第 ${excerpt.documentPage} 頁`}</strong></header>
+        <blockquote>{excerpt.text}</blockquote>
+        <dl><div><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照第三方重製影像</dd></div><div><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{excerpt.limitations.join("；")}</dd></div></dl>
+      </article>)}
+    </section>
+
+    <div className="primary-document-layers" aria-label="貼文、文件與分析的分層">
+      <section className="primary-document-layer primary-document-layer--attributed" aria-labelledby="primary-document-attribution-title">
+        <p id="primary-document-attribution-title">{document.posterAttribution.label}</p>
+        <h4>{document.posterAttribution.speaker.name}</h4>
+        <span>{document.posterAttribution.speaker.role}</span>
+        <p>{document.posterAttribution.summary}</p>
+        <dl><div><dt>這能確認</dt><dd>{document.posterAttribution.proofScope}</dd></div><div><dt>限制</dt><dd>{document.posterAttribution.limitations.join("；")}</dd></div></dl>
+      </section>
+      <section className="primary-document-layer primary-document-layer--analysis" aria-labelledby="primary-document-analysis-title">
+        <p id="primary-document-analysis-title">{document.analysisBoundary.label}</p>
+        <h4>把第 18 頁放回正確範圍</h4>
+        <p>{document.analysisBoundary.summary}</p>
+        <dl><div><dt>限制</dt><dd>{document.analysisBoundary.limitations.join("；")}</dd></div></dl>
+      </section>
+    </div>
+
+    <section className="primary-document-non-conclusions" aria-labelledby="primary-document-non-conclusions-title">
+      <h4 id="primary-document-non-conclusions-title">這份文件不能直接推出</h4>
+      <ul>{document.nonConclusions.map((item) => <li key={item}>{item}</li>)}</ul>
+    </section>
+  </section>;
+}
+
 function ArticleNavigation({
   isCaseDossier,
   caseChapters,
@@ -388,7 +451,7 @@ function ArticleNavigation({
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, attributedReports = [], coverageLimits = [], hsinchuChapters = [], contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, attributedReports = [], coverageLimits = [], hsinchuChapters = [], primaryDocument, contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const isCaseDossier = topic.slug === "hsinchu-baseball-stadium";
   const sourceNumberByRef = new Map(publicSources.map((source, index) => [source.publicRef, String(index + 1).padStart(2, "0")]));
@@ -400,6 +463,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   });
   const [verified, unresolved] = collections;
   const caseChapters = hsinchuChapters.length > 0 ? hsinchuChapters : getHsinchuDossierChapters(model);
+  const primaryDocumentSection = primaryDocument ? <PrimaryDocumentSection document={primaryDocument} /> : null;
   const contextSection = contextOverview ? <ContextOverviewSection
     overview={contextOverview}
     sourceLinks={sourceLinks}
@@ -444,7 +508,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   </SourcesDisclosure>;
 
   const caseContent = isCaseDossier ? <>
-    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{contextSection}</HsinchuChapter>}
+    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{primaryDocumentSection}{contextSection}</HsinchuChapter>}
     {caseChapters[1] && <HsinchuChapter chapter={caseChapters[1]}>{evidenceSection}</HsinchuChapter>}
     {caseChapters[2] && <HsinchuChapter chapter={caseChapters[2]}>{chronologySection}{administrationSection}{proceedingsSection}</HsinchuChapter>}
     {caseChapters[3] && <HsinchuChapter chapter={caseChapters[3]}>{peopleSection}{reportsSection}{narrativesSection}</HsinchuChapter>}

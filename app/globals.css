@@ -511,6 +511,47 @@ html { scroll-padding-top:82px; }
 .dossier-shell--hsinchu .source-list,.dossier-shell--hsinchu .source-list li,.dossier-shell--hsinchu .source-title { min-width:0; overflow-wrap:anywhere; }
 .dossier-shell--hsinchu .source-list .source-title { color:var(--ink); }
 .dossier-shell--hsinchu .source-list .source-title:hover { color:#a34336; }
+.dossier-shell--hsinchu .primary-document { width:min(72ch,100%); margin:0 auto; padding:34px 0 46px; color:var(--ink); overflow-wrap:anywhere; }
+.dossier-shell--hsinchu .primary-document-heading > .eyebrow { margin-bottom:10px; color:#8c463e; }
+.dossier-shell--hsinchu .primary-document-heading h3 { margin:0; color:var(--navy); font-size:clamp(1.8rem,3.4vw,2.7rem); line-height:1.18; letter-spacing:-.055em; }
+.dossier-shell--hsinchu .primary-document-intro { margin:18px 0 0; color:var(--soft); font-size:1.02rem; line-height:1.8; }
+.dossier-shell--hsinchu .primary-document-source-meta { margin:12px 0 0; display:flex; flex-wrap:wrap; gap:4px 16px; color:var(--muted); font-size:.74rem; font-weight:750; line-height:1.6; }
+.dossier-shell--hsinchu .primary-document-warning { margin:20px 0 0; padding:16px 18px; border-left:5px solid #a34336; color:#5f2924; background:#f7e9e5; font-size:.94rem; font-weight:750; line-height:1.65; }
+.dossier-shell--hsinchu .primary-document-warning strong { display:block; margin-bottom:3px; color:#7f3028; font-size:.7rem; letter-spacing:.08em; }
+.dossier-shell--hsinchu .primary-document-actions { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; }
+.dossier-shell--hsinchu .primary-document-actions a { min-height:44px; padding:10px 14px; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--navy); color:var(--paper-white); background:var(--navy); font-size:.8rem; font-weight:850; line-height:1.4; text-decoration:none; }
+.dossier-shell--hsinchu .primary-document-actions a + a { color:var(--navy); background:transparent; }
+.dossier-shell--hsinchu .primary-document-actions a:hover { color:var(--paper-white); background:#8c463e; border-color:#8c463e; }
+.dossier-shell--hsinchu .primary-document-panel { margin-top:32px; padding-top:26px; border-top:2px solid var(--navy); }
+.dossier-shell--hsinchu .primary-document :is(h4) { margin:0 0 16px; color:var(--navy); font-size:1.2rem; line-height:1.4; }
+.dossier-shell--hsinchu .primary-document-coverage dl { margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+.dossier-shell--hsinchu .primary-document-coverage dl div { min-width:0; padding:14px 16px; background:var(--paper-white); }
+.dossier-shell--hsinchu .primary-document dt { color:#7f3028; font-size:.68rem; font-weight:900; letter-spacing:.06em; }
+.dossier-shell--hsinchu .primary-document dd { margin:5px 0 0; color:var(--soft); font-size:.88rem; line-height:1.7; }
+.dossier-shell--hsinchu .primary-document-guide { margin:0; padding:0; border-top:1px solid var(--line); list-style:none; }
+.dossier-shell--hsinchu .primary-document-guide li { min-width:0; padding:16px 0; display:grid; grid-template-columns:minmax(90px,.28fr) minmax(0,1fr); gap:16px; border-bottom:1px solid var(--line); }
+.dossier-shell--hsinchu .primary-document-guide li > span { color:#7f3028; font-size:.75rem; font-weight:900; line-height:1.55; }
+.dossier-shell--hsinchu .primary-document-guide strong { display:block; color:var(--navy); font-size:.98rem; line-height:1.5; }
+.dossier-shell--hsinchu .primary-document-guide p { margin:5px 0 0; color:var(--soft); font-size:.9rem; line-height:1.75; }
+.dossier-shell--hsinchu .primary-document-excerpt { padding:22px; border:1px solid #b8c8bf; border-top:4px solid #1d6b5d; background:#f0f4f0; }
+.dossier-shell--hsinchu .primary-document-excerpt header { display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; color:#1d5d52; font-size:.72rem; line-height:1.5; }
+.dossier-shell--hsinchu .primary-document-excerpt header span { font-weight:900; letter-spacing:.04em; }
+.dossier-shell--hsinchu .primary-document-excerpt blockquote { margin:18px 0; padding:0; color:var(--navy); font-size:1.12rem; font-weight:750; line-height:1.85; }
+.dossier-shell--hsinchu .primary-document-excerpt dl { margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.dossier-shell--hsinchu .primary-document-excerpt dl div { min-width:0; padding:12px; background:rgba(255,254,250,.82); }
+.dossier-shell--hsinchu .primary-document-layers { margin-top:32px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.dossier-shell--hsinchu .primary-document-layer { min-width:0; padding:20px; border:1px solid var(--line); background:var(--paper-white); }
+.dossier-shell--hsinchu .primary-document-layer > p:first-child { margin:0 0 10px; color:#7f3028; font-size:.68rem; font-weight:900; letter-spacing:.05em; }
+.dossier-shell--hsinchu .primary-document-layer--analysis > p:first-child { color:#65547b; }
+.dossier-shell--hsinchu .primary-document-layer h4 { margin-bottom:4px; }
+.dossier-shell--hsinchu .primary-document-layer > span { color:var(--muted); font-size:.75rem; font-weight:750; line-height:1.5; }
+.dossier-shell--hsinchu .primary-document-layer > p:not(:first-child) { margin:14px 0; color:var(--soft); font-size:.9rem; line-height:1.75; }
+.dossier-shell--hsinchu .primary-document-layer dl { margin:0; }
+.dossier-shell--hsinchu .primary-document-layer dl div + div { margin-top:10px; }
+.dossier-shell--hsinchu .primary-document-non-conclusions { margin-top:32px; padding:22px; border:1px solid #d3b9b3; background:#fbf2ef; }
+.dossier-shell--hsinchu .primary-document-non-conclusions ul { margin:0; padding-left:20px; }
+.dossier-shell--hsinchu .primary-document-non-conclusions li { padding-left:4px; color:var(--soft); font-size:.92rem; line-height:1.75; }
+.dossier-shell--hsinchu .primary-document-non-conclusions li + li { margin-top:8px; }
 
 @media (max-width:800px) {
   .dossier-shell--hsinchu .coverage-limits { width:calc(100% - 40px); padding:34px 0 28px; }
@@ -526,6 +567,15 @@ html { scroll-padding-top:82px; }
   .dossier-shell--hsinchu .case-toc-sublist { padding-left:44px; padding-right:12px; }
   .dossier-shell--hsinchu .procedural-report-row dl { grid-template-columns:1fr; }
   .dossier-shell--hsinchu .speaker-statement-date { grid-column:2; }
+  .dossier-shell--hsinchu .primary-document { width:100%; padding:24px 0 34px; }
+  .dossier-shell--hsinchu .primary-document-heading h3 { font-size:1.8rem; }
+  .dossier-shell--hsinchu .primary-document-coverage dl,
+  .dossier-shell--hsinchu .primary-document-excerpt dl,
+  .dossier-shell--hsinchu .primary-document-layers { grid-template-columns:1fr; }
+  .dossier-shell--hsinchu .primary-document-guide li { grid-template-columns:1fr; gap:5px; }
+  .dossier-shell--hsinchu .primary-document-excerpt,
+  .dossier-shell--hsinchu .primary-document-layer,
+  .dossier-shell--hsinchu .primary-document-non-conclusions { padding:17px; }
 }
 
 @media (prefers-reduced-motion:reduce) {
