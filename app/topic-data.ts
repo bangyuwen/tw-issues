@@ -7,6 +7,7 @@ export type PublicEvidenceProjection = {
   attributedClaims: PublicClaim[];
   attributedSpeakerGroups?: AttributedSpeakerGroup[];
   contextOverview?: ContextOverview;
+  proceedingTracks?: ProceedingTrack[];
   publicPeople?: PublicPersonProfile[];
   politicalNarratives?: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
@@ -28,7 +29,7 @@ export type ContextOverview = {
   headline: string;
   summary: string;
   lanes: Array<{
-    kind: "administrative" | "criminal" | "political" | "operational";
+    kind: "administrative" | "criminal" | "civil" | "political" | "operational";
     label: string;
     finding: string;
     proofScope: string;
@@ -39,8 +40,22 @@ export type ContextOverview = {
     title: string;
     summary: string;
     turningPoint: string;
+    eventKeys?: string[];
     sources: PublicSource[];
   }>;
+};
+
+export type ProceedingTrack = {
+  kind: "administrative" | "criminal" | "civil" | "contract" | "operational";
+  label: string;
+  body: string;
+  question: string;
+  conclusion: string;
+  effect: string;
+  doesNotConclude: string[];
+  status: string;
+  nextStep: string;
+  sources: PublicSource[];
 };
 
 export type ReportedEvent = {
@@ -90,6 +105,8 @@ export type PoliticalNarrative = {
   headline: string;
   speaker: PublicSpeaker;
   statement: string;
+  frameLabel?: string;
+  changeFromPrior?: string;
   status: "attributed" | "analysis";
   proofScope: string;
   limitations: string[];

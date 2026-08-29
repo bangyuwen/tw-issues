@@ -72,6 +72,93 @@ test(`topic page renders ${section} when verified claims are empty`, () => {
   });
 }
 
+test("topic page publishes a proceeding-track-only projection", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "proceeding-only",
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+      proceedingTracks: [
+        {
+          kind: "administrative",
+          label: "行政調查",
+          body: "測試機關",
+          question: "程序回答什麼？",
+          conclusion: "已作成測試結論。",
+          effect: "要求改善。",
+          doesNotConclude: ["不等於刑事有罪。"],
+          status: "已公布",
+          nextStep: "追查改善結果",
+          sources: [source],
+        },
+        {
+          kind: "criminal",
+          label: "刑事偵查",
+          body: "測試地檢署",
+          question: "證據是否足以起訴？",
+          conclusion: "已作成偵查處分。",
+          effect: "偵查終結。",
+          doesNotConclude: ["不處理行政責任。"],
+          status: "已偵結",
+          nextStep: "確認後續程序",
+          sources: [source],
+        },
+      ],
+    }} />,
+  );
+
+  assert.match(html, /同一爭議，2 個程序各自回答什麼/);
+  assert.match(html, /程序回答什麼/);
+  assert.match(html, /證據是否足以起訴/);
+  assert.equal(html.match(/class="proceeding-row /g)?.length, 2);
+  assert.doesNotMatch(html, /公開資料補強中/);
+});
+
+test("topic page does not treat unrendered attributedClaims as evidence", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "unrendered-attributed-only",
+      claims: [],
+      attributedClaims: [claim],
+      openQuestions: [],
+    }} />,
+  );
+
+  assert.match(html, /公開資料補強中/);
+  assert.doesNotMatch(html, /測試公開命題/);
+});
+
+test("timeline-only projection omits links to absent evidence sections", () => {
+  const html = renderToStaticMarkup(
+    <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+      topicId: "timeline-only",
+      claims: [],
+      attributedClaims: [],
+      openQuestions: [],
+      reportedTimeline: [{
+        publicKey: "timeline-only-event",
+        occurredAt: "2026-07-17",
+        precision: "day",
+        kindLabel: "程序進度",
+        headline: "只有時間軸的公開事件",
+        sourceRefs: [source.publicRef],
+        items: [
+          { status: "verified", statement: "已確認的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source] },
+          { status: "attributed", statement: "具名的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source], speakers: [{ name: "測試機關", role: "主管機關" }] },
+          { status: "unresolved", statement: "待釐清的事件項目。", proofScope: claim.proofScope, limitations: claim.limitations, sources: [source] },
+        ],
+      }],
+    }} />,
+  );
+
+  assert.match(html, /id="progress"/);
+  assert.match(html, /只有時間軸的公開事件/);
+  assert.doesNotMatch(html, /href="#claims"/);
+  assert.doesNotMatch(html, /href="#reports"/);
+  assert.doesNotMatch(html, /href="#questions"/);
+});
+
 test("evidence board collapses to one known-information column without open questions", () => {
   const html = renderToStaticMarkup(
     <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
@@ -139,7 +226,7 @@ test("durable event timeline groups same-day events and starts every event close
   assert.equal((html.match(/class="event-disclosure"/g) ?? []).length, 3);
   assert.equal((html.match(/class="event-disclosure" open=""/g) ?? []).length, 0);
   assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"/);
-  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><\/div>/);
+  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><h2>事情怎麼走到今天？<\/h2><\/div>/);
   assert.doesNotMatch(html, /\d+ 件進展/);
   assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><span class="event-date-statuses">/);
   assert.match(html, /class="event-date-group" data-date-key="2026-07-17"/);
@@ -152,6 +239,9 @@ test("durable event timeline groups same-day events and starts every event close
   assert.equal((html.match(/測試機關/g) ?? []).length, 3);
   assert.doesNotMatch(html, /（主管機關）/);
   assert.match(html, />仍待釐清</);
+  assert.match(html, /href="#claims">查看完整分區/);
+  assert.match(html, /href="#reports">查看完整分區/);
+  assert.match(html, /href="#questions">查看完整分區/);
   assert.match(html, /尚不能判定最終責任/);
   assert.doesNotMatch(html, /\d+ 項公開命題/);
   assert.doesNotMatch(html, /1 筆事件來源/);
@@ -602,16 +692,22 @@ test("real sparse and dense projections share density and source contracts", () 
   }
 });
 
-for (const [field, label] of [
-  ["claims", "可核對命題"], ["openQuestions", "調查中的問題"],
-] as const) test(`${field} renders four direct claims and a section-local remainder`, () => {
+test("verified claims render four direct claims and a section-local remainder", () => {
   const claims = Array.from({ length: 6 }, (_, index) => ({ ...claim, statement: `命題 ${index + 1}` }));
-  const synthetic: PublicEvidenceProjection = { topicId: "density", claims: [], attributedClaims: [], openQuestions: [], [field]: claims };
+  const synthetic: PublicEvidenceProjection = { topicId: "density", claims, attributedClaims: [], openQuestions: [] };
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={synthetic} />);
-  assert.match(html, new RegExp(`展開其餘 2 項${label}`));
+  assert.match(html, /展開其餘 2 項可核對命題/);
   assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).length, 4);
   const remainderOrdinal = "evidence-claim-ordinal";
   assert.match(html, new RegExp(`class="claim-remainder"[\\s\\S]*?${remainderOrdinal}">05<[\\s\\S]*?命題 6`));
+});
+
+test("open questions keep every title directly visible", () => {
+  const questions = Array.from({ length: 6 }, (_, index) => ({ ...claim, statement: `未決問題 ${index + 1}` }));
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{ topicId: "open-density", claims: [], attributedClaims: [], openQuestions: questions }} />);
+  assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).length, 6);
+  assert.doesNotMatch(html, /class="claim-remainder"/);
+  assert.match(html, /未決問題 6/);
 });
 
 test("speaker groups lead with a one-line public summary before expandable details", () => {
@@ -701,7 +797,8 @@ test("model collects person and narrative sources including amplification", () =
 test("model preserves context overview and collects lane and phase sources", () => {
   const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
   const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };
-  const model = buildDossierPageModel({
+  const proceedingSource = { ...source, publicRef: "proceeding-source", publisher: "程序來源" };
+  const evidence: PublicEvidenceProjection = {
     topicId: "context-overview",
     claims: [claim],
     attributedClaims: [],
@@ -710,10 +807,76 @@ test("model preserves context overview and collects lane and phase sources", () 
       headline: "先拆開問題",
       summary: "不同程序回答不同問題。",
       lanes: [{ kind: "administrative", label: "行政", finding: "有行政缺失", proofScope: "不等於刑事責任", sources: [laneSource] }],
-      phases: [{ period: "2022", title: "爭議爆發", summary: "公開事件", turningPoint: "程序不同", sources: [phaseSource] }],
+      phases: [
+        { period: "2022", title: "第一階段：程序建檔", summary: "公開事件", turningPoint: "程序不同", eventKeys: ["event-phase"], sources: [phaseSource] },
+        { period: "2023", title: "沒有事件鍵的補充階段", summary: "仍應出現在脈絡總覽。", turningPoint: "保留舊資料相容性", sources: [phaseSource] },
+        { period: "2024", title: "第二階段：程序追蹤", summary: "另一個公開事件", turningPoint: "進入後續程序", eventKeys: ["event-phase-two"], sources: [phaseSource] },
+      ],
     },
-  });
-  assert.equal(model.contextOverview?.phases.length, 1);
+    proceedingTracks: [{ kind: "administrative", label: "行政調查", body: "測試機關", question: "有無行政缺失？", conclusion: "已作成調查結論。", effect: "要求改善。", doesNotConclude: ["不等於刑事有罪。"], status: "已公布", nextStep: "追查改善", sources: [proceedingSource] }],
+    reportedTimeline: [
+      { publicKey: "event-phase", occurredAt: "2022-07", precision: "month", kindLabel: "調查", headline: "爭議爆發", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] },
+      { publicKey: "event-phase-two", occurredAt: "2024-01", precision: "month", kindLabel: "追蹤", headline: "後續程序", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] },
+    ],
+  };
+  const model = buildDossierPageModel(evidence);
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={evidence} />);
+
+  assert.equal(model.contextOverview?.phases.length, 3);
+  assert.equal(model.timelinePhases.length, 2);
+  assert.equal(model.timelinePhases[0]?.groups[0]?.events[0]?.publicKey, "event-phase");
+  assert.equal(model.timelinePhases[1]?.groups[0]?.events[0]?.publicKey, "event-phase-two");
+  assert.deepEqual(model.unphasedContextPhases.map(({ title }) => title), ["沒有事件鍵的補充階段"]);
+  assert.equal(model.unphasedTimelineGroups.length, 0);
+  assert.match(html, /2 個階段，串起事件的關鍵轉折/);
+  assert.equal(html.match(/第一階段：程序建檔/g)?.length, 1);
+  assert.equal(html.match(/沒有事件鍵的補充階段/g)?.length, 1);
+  assert.equal(html.match(/第二階段：程序追蹤/g)?.length, 1);
+  assert.equal(html.match(/轉折 · TW Issues 分析/g)?.length, 3);
+  assert.match(html, /從 3 個問題進入/);
+  assert.match(html, /href="#progress"/);
+  assert.match(html, /href="#responsibility-lines"/);
+  assert.match(html, /href="#proceedings"/);
+  assert.doesNotMatch(html, /href="#narratives"/);
+  assert.doesNotMatch(html, /href="#questions"/);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
   assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
+  assert.equal(model.sourceById.get("proceeding-source")?.publisher, "程序來源");
+});
+
+test("model orders political narratives by occurrence date while preserving same-day ledger order", () => {
+  const narrative = (publicKey: string, occurredAt: string): NonNullable<PublicEvidenceProjection["politicalNarratives"]>[number] => ({ publicKey, occurredAt, arena: "選舉", headline: publicKey, speaker: { name: "測試人物", role: "候選人" }, statement: "具名說法", status: "attributed", proofScope: "只證明曾如此表示", limitations: ["不證明真相"], sources: [source] });
+  const model = buildDossierPageModel({ topicId: "narrative-order", claims: [], attributedClaims: [], openQuestions: [], politicalNarratives: [narrative("late", "2022-11-25"), narrative("same-a", "2022-11-16"), narrative("early", "2022-11-02"), narrative("same-b", "2022-11-16")] });
+  assert.deepEqual(model.politicalNarratives.map(({ publicKey }) => publicKey), ["early", "same-a", "same-b", "late"]);
+});
+
+test("every publicRef uses one canonical source metadata record within its projection", () => {
+  const sourceFingerprints = (value: unknown, records = new Map<string, Set<string>>()) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => sourceFingerprints(item, records));
+      return records;
+    }
+    if (!value || typeof value !== "object") return records;
+    const candidate = value as Record<string, unknown>;
+    if (["publicRef", "canonicalUrl", "title", "publisher", "publishedAt", "displayRole"].every((key) => typeof candidate[key] === "string")) {
+      const publicRef = candidate.publicRef as string;
+      const fingerprints = records.get(publicRef) ?? new Set<string>();
+      fingerprints.add(JSON.stringify([
+        candidate.canonicalUrl,
+        candidate.title,
+        candidate.publisher,
+        candidate.publishedAt,
+        candidate.displayRole,
+      ]));
+      records.set(publicRef, fingerprints);
+    }
+    Object.values(candidate).forEach((item) => sourceFingerprints(item, records));
+    return records;
+  };
+
+  for (const [slug, evidence] of Object.entries(publicEvidenceBySlug)) {
+    for (const [publicRef, fingerprints] of sourceFingerprints(evidence)) {
+      assert.equal(fingerprints.size, 1, `${slug}:${publicRef} has conflicting source metadata`);
+    }
+  }
 });
