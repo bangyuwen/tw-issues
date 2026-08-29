@@ -157,6 +157,31 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .proceeding-row--criminal>header>span { color:#334f68; }
 .proceeding-row--civil>header>span,.proceeding-row--contract>header>span { color:#8c463e; }
 .proceeding-row--operational>header>span { color:#49675d; }
+.administration-actions-section { width:min(1120px,100%); }
+.administration-attribution-boundary { display:grid; grid-template-columns:150px minmax(0,1fr); gap:18px; margin-top:24px; padding:16px 18px; border-left:4px solid #9a542d; background:#fff8f2; }
+.administration-attribution-boundary strong { color:#8c463e; font-size:.72rem; letter-spacing:.06em; }
+.administration-attribution-boundary p { margin:0; color:#674a3e; font-size:.86rem; line-height:1.7; }
+.administration-action-matrix { margin-top:28px; border-top:1px solid var(--ink); }
+.administration-action-row { display:grid; grid-template-columns:190px minmax(0,1fr); gap:30px; padding:28px 0; border-bottom:1px solid var(--line); }
+.administration-action-row>header { display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+.administration-action-row>header>span { color:#9a542d; font-size:.7rem; font-weight:900; }
+.administration-action-row>header time { color:var(--navy); font-size:.85rem; font-weight:850; line-height:1.45; }
+.administration-action-row>header p { margin:0; color:var(--soft); font-size:.74rem; line-height:1.5; }
+.administration-action-row>header>strong { padding:5px 8px; color:#49675d; border:1px solid #b9ccc1; background:#e8f0eb; font-size:.64rem; line-height:1.45; }
+.administration-action-row--mixed>header>strong { color:#8c463e; border-color:#d8b9a9; background:#fff0e8; }
+.administration-action-row--ongoing>header>strong { color:#334f68; border-color:#b8cad9; background:#eaf1f6; }
+.administration-action-actor { display:flex; align-items:baseline; gap:8px; margin:0; }
+.administration-action-actor strong { color:#49675d; font-size:.78rem; }
+.administration-action-actor span { color:var(--soft); font-size:.7rem; }
+.administration-action-body h3 { max-width:48ch; margin:8px 0 16px; color:var(--navy); font-size:1.32rem; line-height:1.45; letter-spacing:-.025em; }
+.administration-action-body dl { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0; }
+.administration-action-body dl div { padding:14px; background:#f0f1ee; }
+.administration-action-body dt,.administration-action-body aside>strong { color:#49675d; font-size:.66rem; font-weight:850; letter-spacing:.06em; }
+.administration-action-body dd { margin:6px 0 0; color:var(--soft); font-size:.86rem; line-height:1.7; }
+.administration-action-body aside { margin-top:10px; padding:14px; border-left:3px solid #9a542d; background:#fff8f2; }
+.administration-action-body aside p { margin:6px 0 0; color:#674a3e; font-size:.82rem; line-height:1.65; }
+.administration-action-body ul { margin:6px 0 0; padding-left:20px; color:#674a3e; font-size:.82rem; line-height:1.65; }
+.administration-action-body .citations { margin-top:12px; }
 .person-boundary strong,.narrative-amplification strong { display:block; color:#49675d; font-size:.64rem; letter-spacing:.06em; }
 .person-card .citations,.narrative-row .citations { margin-top:12px; }
 .narrative-matrix { margin-top:24px; border-top:1px solid var(--line); }
@@ -226,6 +251,11 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
   .proceeding-row>header { display:grid; grid-template-columns:max-content 1fr; align-items:center; }
   .proceeding-row>header>strong { grid-column:1 / -1; }
   .proceeding-body dl { grid-template-columns:1fr; }
+  .administration-attribution-boundary { grid-template-columns:1fr; gap:6px; }
+  .administration-action-row { grid-template-columns:1fr; gap:14px; padding:22px 0; }
+  .administration-action-row>header { display:grid; grid-template-columns:max-content 1fr; align-items:center; }
+  .administration-action-row>header p,.administration-action-row>header>strong { grid-column:1 / -1; }
+  .administration-action-body dl { grid-template-columns:1fr; }
   summary { min-height:44px; }
 }
 

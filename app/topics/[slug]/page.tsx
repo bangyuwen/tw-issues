@@ -35,6 +35,7 @@ export default function TopicPage({ params, projectionOverride }: {
     || projection.openQuestions.length > 0
     || Boolean(projection.contextOverview)
     || (projection.attributedSpeakerGroups?.length ?? 0) > 0
+    || (projection.administrationActions?.length ?? 0) > 0
     || (projection.proceedingTracks?.length ?? 0) > 0
     || (projection.publicPeople?.length ?? 0) > 0
     || (projection.politicalNarratives?.length ?? 0) > 0

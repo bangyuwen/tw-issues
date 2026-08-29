@@ -122,6 +122,9 @@ for (const slug of projectionSlugs) {
   if (!/^[a-f0-9]{64}$/.test(topic.content_digest ?? "")) {
     throw new Error(`${slug}: public topic content digest is invalid`);
   }
+  if (slug === "hsinchu-baseball-stadium") {
+    assertDigest(`${slug} content`, JSON.stringify(projection[slug]), topic.content_digest);
+  }
   if (!/^(public_quality_pass|public_projection)$/.test(topic.verification_status ?? "")) {
     throw new Error(`${slug}: public topic verification status is invalid`);
   }
