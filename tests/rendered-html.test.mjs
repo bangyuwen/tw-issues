@@ -141,6 +141,12 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "相較前一階段 · TW Issues 分析",
     "2026-08-29",
     "沒有符合原始貼文、作者、日期與封存連結門檻的社群節點",
+    "社群反應樣本",
+    "批評樣本",
+    "反向聲音",
+    "PTT 球迷討論把 2022 到 2026 仍在施工視為",
+    "政治提款機",
+    "非隨機樣本，不能代表民意或事件真相",
   ]) {
     assert.match(html, new RegExp(text));
   }
@@ -157,7 +163,9 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /id="main-content" tabindex="-1" class="hero hero-detail"/);
   assert.match(html, /class="dossier-meta dossier-meta--case"/);
   assert.match(html, /查看已列來源/);
+  assert.match(html, /57<!-- --> 筆/);
   assert.match(html, /class="article-nav article-nav--case"/);
+  assert.match(html, /href="#social-observations">社群反應/);
   assert.match(html, /role="group" aria-label="案情總覽"/);
   assert.match(html, /class="case-reading-legend"/);
   assert.match(html, /aria-label="來源 01：/);
@@ -174,6 +182,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /id="narratives"/);
   assert.match(html, /不判定主觀操弄意圖/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
+  assert.match(html, /href="#source-49"/);
   assert.match(html, /監察院<!-- --> · <!-- -->2026-07-22/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
   assert.doesNotMatch(html, /data-date-key="2023-01-05"/);

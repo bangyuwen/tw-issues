@@ -870,6 +870,28 @@ test("model collects person and narrative sources including amplification", () =
   assert.equal(model.sourceById.get("amplification-source")?.publisher, "擴散來源");
 });
 
+test("model collects social observation sources without promoting the samples", () => {
+  const socialSource = { ...source, publicRef: "social-source", publisher: "社群來源" };
+  const model = buildDossierPageModel({
+    topicId: "social-samples",
+    claims: [],
+    attributedClaims: [],
+    openQuestions: [],
+    socialObservations: [{
+      kind: "criticism",
+      summary: "公開討論中的批評樣本。",
+      proofScope: "只證明該討論出現這種批評。",
+      limitations: ["不代表整體民意。"],
+      sources: [socialSource],
+    }],
+    socialObservationCount: 1,
+  });
+  assert.equal(model.socialObservations.length, 1);
+  assert.equal(model.socialSampleSize, 1);
+  assert.equal(model.sourceById.get("social-source")?.publisher, "社群來源");
+  assert.equal(model.publicSources.length, 1);
+});
+
 test("model preserves context overview and collects lane and phase sources", () => {
   const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
   const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };

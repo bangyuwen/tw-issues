@@ -1,6 +1,6 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
-import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile } from "./topic-data";
+import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile, SocialObservation } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel, TimelineGroup, TimelinePhaseModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -99,6 +99,33 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
       <div><h3>{narrative.headline}</h3>{narrative.frameLabel && <p className="narrative-frame"><strong>框架 · TW Issues 分析</strong>{narrative.frameLabel}</p>}<p>{narrative.statement}</p><p className="narrative-status"><strong>{narrative.status === "analysis" ? "TW Issues 分析" : "具名說法"}</strong>：{narrative.status === "analysis" ? "以下為依公開資料提出的判讀，不是已確認事實。" : "只證明來源記錄此人曾如此表示。"}</p>{narrative.changeFromPrior && <p className="narrative-change"><strong>相較前一階段 · TW Issues 分析</strong>{narrative.changeFromPrior}</p>}<dl><div><dt>這能確認</dt><dd>{narrative.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{narrative.limitations.join("；")}</dd></div></dl>{narrative.amplification && narrative.amplification.length > 0 && <div className="narrative-amplification"><strong>可回查擴散</strong>{narrative.amplification.map((item) => <p key={`${item.channel}-${item.publishedAt}`}>{item.channel}（{item.publishedAt}）：{item.description} <span className="citations">{sourceLinks(item.sources.map(({ publicRef }) => publicRef))}</span></p>)}</div>}<div className="citations">{sourceLinks(narrative.sources.map(({ publicRef }) => publicRef))}</div></div>
     </article>)}</div>
   </section>;
+}
+
+function SocialObservationsSection({ observations, sampleSize, sourceLinks }: { observations: SocialObservation[]; sampleSize: number; sourceLinks: (ids: string[]) => ReactNode }) {
+  const hasKinds = observations.some(({ kind }) => kind !== undefined);
+  const groups = hasKinds
+    ? [
+      { key: "criticism", label: "批評樣本", items: observations.filter(({ kind }) => kind !== "counterpoint") },
+      { key: "counterpoint", label: "反向聲音", items: observations.filter(({ kind }) => kind === "counterpoint") },
+    ].filter(({ items }) => items.length > 0)
+    : [{ key: "observations", label: "公開樣本", items: observations }];
+
+  return <aside className="social-observation-note" id="social-observations" aria-label="社群反應樣本">
+    <div className="social-observation-intro"><p className="eyebrow">社群反應樣本</p><strong>樣本數 N = {sampleSize}</strong><p>以下是可回查的公開貼文與媒體轉述。非隨機樣本，不能代表民意或事件真相。</p></div>
+    <div className="social-observation-groups">{groups.map((group) => <section className="social-observation-group" key={group.key} aria-labelledby={`social-observation-${group.key}`}>
+      <h3 id={`social-observation-${group.key}`}>{group.label}</h3>
+      <ol>{group.items.map((observation, index) => {
+        const sourceIds = observation.sources && observation.sources.length > 0 ? observation.sources.map(({ publicRef }) => publicRef) : observation.sourceRefs ?? [];
+        const boundary = observation.proofScope || (observation.limitations && observation.limitations.length > 0);
+        return <li className="social-observation-item" key={`${group.key}-${index}`}>
+          <header><span>樣本 {String.fromCharCode(65 + observations.indexOf(observation))}</span>{observation.sourceTypeLabel && <b>{observation.sourceTypeLabel}</b>}</header>
+          <p>{observation.summary}</p>
+          {boundary && <details className="social-observation-boundary"><summary>查看證據界線</summary><dl>{observation.proofScope && <div><dt>這能確認</dt><dd>{observation.proofScope}</dd></div>}{observation.limitations && observation.limitations.length > 0 && <div><dt>這不能證明</dt><dd>{observation.limitations.join("；")}</dd></div>}</dl></details>}
+          {sourceIds.length > 0 && <div className="citations" aria-label="社群樣本來源">{sourceLinks(sourceIds)}</div>}
+        </li>;
+      })}</ol>
+    </section>)}</div>
+  </aside>;
 }
 
 function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availableSections }: {
@@ -233,6 +260,7 @@ function ArticleNavigation({
   attributedSpeakerGroups,
   analysisClaims,
   editorialPositions,
+  socialObservations,
 }: {
   isCaseDossier: boolean;
   contextOverview?: DossierPageModel["contextOverview"];
@@ -246,6 +274,7 @@ function ArticleNavigation({
   attributedSpeakerGroups: DossierPageModel["attributedSpeakerGroups"];
   analysisClaims: PublicClaim[];
   editorialPositions: PublicClaim[];
+  socialObservations: NonNullable<DossierPageModel["socialObservations"]>;
 }) {
   const contextLink = contextOverview && <a href="#context">案情地圖</a>;
   const timelineLink = timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>;
@@ -258,6 +287,7 @@ function ArticleNavigation({
   const reportsLink = attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>;
   const analysisLink = analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>;
   const positionsLink = editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>;
+  const socialLink = isCaseDossier && socialObservations.length > 0 && <a href="#social-observations">社群反應</a>;
   const sourcesLink = <a href="#sources">資料來源</a>;
   const group = (label: string, links: ReactNode) => <div className="article-nav-group" role="group" aria-label={label}><p className="article-nav-group-label">{label}</p><div className="article-nav-group-links">{links}</div></div>;
 
@@ -265,7 +295,7 @@ function ArticleNavigation({
     {group("案情總覽", <>{contextLink}{timelineLink}</>)}
     {group("證據快照", <>{questionsLink}{claimsLink}{sourcesLink}</>)}
     {group("程序線", <>{administrationLink}{proceedingsLink}</>)}
-    {group("人物與說法／分析", <>{narrativesLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}</>)}
+    {group("人物與說法／分析", <>{narrativesLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{socialLink}</>)}
   </div> : <div>{contextLink}{timelineLink}{administrationLink}{proceedingsLink}{narrativesLink}{questionsLink}{claimsLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{sourcesLink}</div>}</nav>;
 }
 
@@ -303,6 +333,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       attributedSpeakerGroups={attributedSpeakerGroups}
       analysisClaims={analysisClaims}
       editorialPositions={editorialPositions}
+      socialObservations={socialObservations}
     />
     {contextOverview && <ContextOverviewSection
       overview={contextOverview}
@@ -335,7 +366,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
     {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
     {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
-    {socialObservations.length > 0 && <aside className="social-observation-note" aria-label="社群反應樣本"><div><p className="eyebrow">社群反應樣本</p><strong>樣本數 N = {socialSampleSize}</strong><p>非隨機樣本，不能代表民意或事件真相。</p></div><ol>{socialObservations.map((observation, index) => <li key={index}><span>樣本 {String.fromCharCode(65 + index)}</span><p>{observation.summary}</p></li>)}</ol></aside>}
+    {socialObservations.length > 0 && <SocialObservationsSection observations={socialObservations} sampleSize={socialSampleSize} sourceLinks={sourceLinks} />}
     <SourcesDisclosure sourceCount={publicSources.length}>
       <section className="sources-section" aria-label="資料與來源">
         <ol className="source-list">{publicSources.map((source, index) => { const number = String(index + 1).padStart(2, "0"); const hasCalendarDate = /^\d{4}-\d{2}(?:-\d{2})?$/.test(source.publishedAt); return <li id={source.publicRef} data-source-ref={source.publicRef} tabIndex={-1} key={source.publicRef}><span>{number}</span><div><a className="source-title" href={source.canonicalUrl} target="_blank" rel="noreferrer">{source.title} <b aria-hidden="true">↗</b></a><p className="source-meta"><span>{source.publisher}</span><i />{hasCalendarDate ? <time dateTime={source.publishedAt}>{source.publishedAt}</time> : <span>{source.publishedAt}</span>}</p></div></li>; })}</ol>
