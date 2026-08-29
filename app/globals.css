@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root { --ink:#18313d; --navy:#102936; --paper:#f5f3ee; --paper-white:#fffefa; --coral:#cf6555; --mint:#a9cbbc; --line:#d8d5cc; --soft:#617276; }
+:root { --ink:#18313d; --navy:#102936; --paper:#f5f3ee; --paper-white:#fffefa; --coral:#cf6555; --mint:#a9cbbc; --line:#d8d5cc; --soft:#52666d; --muted:#52666d; --orange:#f29b89; --focus:#102936; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",ui-sans-serif,system-ui,sans-serif; }
@@ -313,4 +313,126 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 @media (min-width:801px) {
   .evidence-board-columns { grid-template-columns:minmax(0,1.28fr) minmax(320px,1fr); align-items:start; }
   .evidence-board-column--open { border-left:1px solid var(--line); background:#f0f1ee; }
+}
+
+/* Accessible dossier navigation and case-only reading refinements. */
+html { scroll-padding-top:82px; }
+.skip-link { position:fixed; top:8px; left:8px; z-index:20; min-height:44px; padding:10px 14px; color:var(--paper-white); background:var(--navy); border:2px solid var(--orange); font-size:.82rem; font-weight:800; text-decoration:none; transform:translateY(-150%); transition:transform .16s ease; }
+.skip-link:focus-visible { transform:translateY(0); outline:3px solid var(--mint); outline-offset:3px; }
+:where(a,button,summary):focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+.hero :where(a,button,summary):focus-visible { outline-color:var(--mint); }
+.hero-detail#main-content:focus { outline:3px solid var(--mint); outline-offset:-6px; }
+.dossier-shell summary,.dossier-shell .article-nav a,.dossier-shell .citations .citation,.dossier-shell .event-item>header a,.dossier-shell .source-list .source-title,.dossier-shell .topbar a { min-height:44px; touch-action:manipulation; }
+.dossier-shell .article-nav a { display:inline-flex; align-items:center; }
+.dossier-shell .citations { gap:8px; }
+.dossier-shell .citations .citation { min-width:44px; display:inline-flex; align-items:center; justify-content:center; padding-top:8px; padding-bottom:8px; }
+.dossier-shell .claim-sources .citation { padding-top:8px; padding-bottom:8px; }
+.dossier-shell .event-item>header a,.dossier-shell .source-list .source-title { display:inline-flex; align-items:center; }
+.dossier-shell .topbar a { display:flex; align-items:center; }
+.dossier-meta--case strong { font-size:1.65rem; line-height:1.1; letter-spacing:-.04em; }
+.dossier-meta--case a { display:flex; align-items:center; min-height:44px; margin-top:12px; color:var(--mint); font-size:.78rem; font-weight:800; line-height:1.45; text-decoration:underline; text-underline-offset:3px; }
+.dossier-meta--case a:hover { color:var(--orange); }
+.dossier-meta--case span { max-width:18ch; margin-top:6px; line-height:1.55; letter-spacing:.04em; }
+.hero .eyebrow { color:var(--orange); }
+.hero-detail::before { background:var(--orange); }
+.source-list .source-title { display:inline-block; overflow:visible; -webkit-line-clamp:unset; -webkit-box-orient:initial; }
+
+/* The Hsinchu dossier is the only page using the grouped case navigation. */
+.article-nav--case { min-height:0; align-items:flex-start; gap:24px; padding-top:14px; padding-bottom:14px; }
+.article-nav--case > span { flex:0 0 auto; padding-top:10px; }
+.article-nav--case .article-nav-groups { min-width:0; flex:1 1 auto; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px 18px; }
+.article-nav--case .article-nav-group { min-width:0; display:block; }
+.article-nav--case .article-nav-group-label { margin:0 0 4px; color:var(--navy); font-size:.65rem; font-weight:850; letter-spacing:.07em; line-height:1.35; }
+.article-nav--case .article-nav-group-links { min-width:0; display:flex; flex-wrap:wrap; align-items:stretch; gap:0 10px; }
+.article-nav--case .article-nav-group-links a { min-width:0; max-width:100%; color:var(--soft); line-height:1.4; overflow-wrap:anywhere; }
+.article-nav--case .article-nav-group-links a:hover { color:var(--coral); }
+
+.case-reading-legend { width:min(1120px,calc(100% - 60px)); margin:0 auto; padding:28px 0 30px; display:grid; grid-template-columns:minmax(190px,.6fr) minmax(0,1.4fr); gap:26px; border-bottom:1px solid var(--line); }
+.case-reading-legend-intro h2 { margin:0; color:var(--navy); font-size:clamp(1.45rem,2.4vw,2rem); line-height:1.2; letter-spacing:-.055em; }
+.case-reading-legend ul { min-width:0; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; list-style:none; }
+.case-reading-legend-item { min-width:0; padding:12px 12px 13px; display:flex; align-items:flex-start; gap:9px; border:1px solid var(--line); background:var(--paper-white); }
+.case-reading-legend-item > span { flex:0 0 10px; width:10px; height:10px; margin-top:5px; border-radius:50%; background:var(--ink); box-shadow:0 0 0 2px var(--paper-white),0 0 0 3px currentColor; }
+.case-reading-legend-item > div { min-width:0; }
+.case-reading-legend-item strong { display:block; color:var(--navy); font-size:.78rem; line-height:1.4; }
+.case-reading-legend-item p { margin:4px 0 0; color:var(--muted); font-size:.76rem; line-height:1.55; }
+.case-reading-legend-item--verified { color:#1d6b5d; }
+.case-reading-legend-item--verified > span { background:#1d6b5d; }
+.case-reading-legend-item--attributed { color:#8b5d13; }
+.case-reading-legend-item--attributed > span { background:#8b5d13; }
+.case-reading-legend-item--unresolved { color:#8c463e; }
+.case-reading-legend-item--unresolved > span { background:#8c463e; }
+.case-reading-legend-item--analysis { color:#65547b; }
+.case-reading-legend-item--analysis > span { border-radius:0; background:#65547b; }
+
+/* Case lanes keep the existing facts and order while making each reading path distinct. */
+.dossier-shell--case .people-section,
+.dossier-shell--case .administration-actions-section,
+.dossier-shell--case .proceedings-section,
+.dossier-shell--case .narrative-section { border-top:4px solid var(--line); }
+.dossier-shell--case .people-section { border-top-color:var(--mint); }
+.dossier-shell--case .administration-actions-section { border-top-color:#b36a39; }
+.dossier-shell--case .proceedings-section { border-top-color:var(--coral); }
+.dossier-shell--case .narrative-section { border-top-color:#8b6b91; }
+.dossier-shell--case .people-section .section-intro,
+.dossier-shell--case .administration-actions-section .section-intro,
+.dossier-shell--case .proceedings-section .section-intro,
+.dossier-shell--case .narrative-section .section-intro { max-width:68ch; }
+.dossier-shell--case .people-grid { gap:14px; margin-top:30px; }
+.dossier-shell--case .person-card { min-width:0; padding:22px; border-color:#c5d0c9; border-top:3px solid var(--mint); background:var(--paper-white); }
+.dossier-shell--case .person-card header h3 { font-size:1.28rem; }
+.dossier-shell--case .person-summary { margin:18px 0; padding:13px 14px; border-left:3px solid var(--mint); background:#f0f4f0; font-size:1rem; font-weight:750; line-height:1.7; }
+.dossier-shell--case .administration-attribution-boundary { border-left-width:5px; }
+.dossier-shell--case .administration-action-matrix,
+.dossier-shell--case .proceeding-matrix { margin-top:30px; border-top-width:2px; }
+.dossier-shell--case .administration-action-row,
+.dossier-shell--case .proceeding-row { padding:30px 18px; border-right:1px solid var(--line); border-left:1px solid var(--line); background:rgba(255,254,250,.58); }
+.dossier-shell--case .administration-action-row + .administration-action-row,
+.dossier-shell--case .proceeding-row + .proceeding-row { border-top:0; }
+.dossier-shell--case .administration-action-body h3,
+.dossier-shell--case .proceeding-body h3 { max-width:42ch; font-size:1.42rem; line-height:1.4; }
+.dossier-shell--case .narrative-matrix { margin-top:30px; border-top:2px solid var(--line); }
+.dossier-shell--case .narrative-row { padding:24px 18px; border-right:1px solid var(--line); border-left:1px solid var(--line); background:rgba(255,254,250,.58); }
+.dossier-shell--case .narrative-row + .narrative-row { border-top:0; }
+.dossier-shell--case .narrative-row h3 { font-size:1.22rem; line-height:1.45; }
+.dossier-shell--case .person-card dd,
+.dossier-shell--case .administration-action-body dd,
+.dossier-shell--case .proceeding-body dd,
+.dossier-shell--case .narrative-row p { font-size:1rem; line-height:1.7; }
+.dossier-shell--case .event-item dd { font-size:.95rem; line-height:1.7; }
+.dossier-shell--case .section-intro > p:last-child,
+.dossier-shell--case .context-overview-heading > p:last-child { max-width:68ch; font-size:1rem; line-height:1.8; }
+
+@media (max-width:1000px) {
+  .article-nav--case .article-nav-groups { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+@media (max-width:800px) {
+  html { scroll-padding-top:20px; }
+  .article-nav > div { min-width:0; flex-wrap:wrap; gap:0 14px; overflow:visible; }
+  .article-nav > div > a { flex:0 1 auto; max-width:100%; white-space:normal; }
+  .article-nav--case { display:block; padding:14px 20px 16px; }
+  .article-nav--case > span { display:block; padding-top:0; margin-bottom:8px; }
+  .article-nav--case .article-nav-groups { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 14px; }
+  .article-nav--case .article-nav-groups,
+  .article-nav--case .article-nav-group,
+  .article-nav--case .article-nav-group-links { overflow:visible; }
+  .article-nav--case .article-nav-group-label { min-height:28px; margin-bottom:0; display:flex; align-items:center; }
+  .article-nav--case .article-nav-group-links { gap:0 10px; }
+  .case-reading-legend { width:calc(100% - 40px); padding:24px 0 26px; grid-template-columns:1fr; gap:16px; }
+  .case-reading-legend ul { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .case-reading-legend-item { padding:11px 10px 12px; }
+  .dossier-shell--case .administration-action-row,
+  .dossier-shell--case .proceeding-row,
+  .dossier-shell--case .narrative-row { padding:22px 14px; }
+  .dossier-shell--case .administration-action-body h3,
+  .dossier-shell--case .proceeding-body h3 { font-size:1.28rem; }
+}
+
+@media (max-width:520px) {
+  .article-nav--case .article-nav-groups { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .case-reading-legend ul { grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .skip-link,.article-nav a,.citation { transition:none!important; }
 }
