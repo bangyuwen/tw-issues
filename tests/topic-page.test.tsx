@@ -414,7 +414,8 @@ test("index keeps attribution and status beside real attributed and mixed latest
   const japanCard = html.match(/href="\/topics\/japan-taiwan-alliance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const treeCard = html.match(/href="\/topics\/taipei-tree-governance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   assert.match(stadiumCard, /topic-card-status--attributed[^>]*>具名說法/);
-  assert.match(stadiumCard, /新竹地方檢察署(?:表示|說明)/);
+  assert.match(stadiumCard, /高虹安與新竹市政府說明、楊玲宜具名說法/);
+  assert.match(stadiumCard, /事件類型 · 再議意向與政治回應/);
   assert.match(foodCard, /topic-card-status--attributed[^>]*>具名說法/);
   assert.match(foodCard, /跨局處查核達 2,179 案/);
   assert.match(japanCard, /topic-card-status--attributed[^>]*>具名說法/);

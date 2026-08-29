@@ -24,8 +24,8 @@
       {
         "kind": "criminal",
           "label": "刑事偵查結果",
-          "finding": "竹檢認定林智堅及相關被告犯罪嫌疑不足而不起訴；另有4名工程人員因不實施工、監造紀錄獲緩起訴。",
-          "proofScope": "不起訴回答檢方掌握的證據是否足以支持所偵辦罪嫌；不會撤銷監察院的行政違失認定，也不代表所有工程行為均無瑕疵。",
+          "finding": "原球場工程案中，竹檢認定林智堅及相關被告犯罪嫌疑不足而不起訴，4名工程人員獲緩起訴；另有檢測服務標案於2024年接受檢廉調查，公開結果尚不完整。",
+          "proofScope": "不起訴只回答原工程案現有證據是否足以支持所偵辦罪嫌；2024年檢測標案的搜索、交保也不是有罪判決。兩案不能混寫，且都不會撤銷監察院的行政違失認定。",
           "sources": [
             {
               "publicRef": "source-05",
@@ -34,6 +34,14 @@
               "publisher": "中央社／聯合新聞網",
               "publishedAt": "2026-08-28",
               "displayRole": "司法進度報導"
+            },
+            {
+              "publicRef": "source-36",
+              "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+              "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+              "publisher": "中央社",
+              "publishedAt": "2024-10-19",
+              "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       },
@@ -88,8 +96,8 @@
         {
           "kind": "operational",
           "label": "球場能否重新使用",
-          "finding": "改善工程已竣工並進入驗收，但性能測試、驗收紀錄與正式重啟日期仍待確認。",
-          "proofScope": "竣工只代表改善工程進到驗收階段；在測試及正式驗收完成前，不能寫成球場已恢復職業賽事。",
+          "finding": "改善工程已竣工並進入驗收；市府規劃高強度實戰壓力賽與性能測試，但正式驗收結果、測試紀錄及重啟日期仍待確認。",
+          "proofScope": "測試規劃與竣工只代表改善工程進到驗證階段；在測試及正式驗收完成前，不能寫成球場已恢復職業賽事。",
           "sources": [
             {
               "publicRef": "source-06",
@@ -98,6 +106,14 @@
               "publisher": "聯合報",
               "publishedAt": "2026-08-22",
               "displayRole": "主管機關公開說明"
+            },
+            {
+              "publicRef": "source-33",
+              "canonicalUrl": "https://www.cna.com.tw/news/aloc/202605280226.aspx",
+              "title": "新竹棒球場估8月中竣工 擬實戰壓力測試後啟用",
+              "publisher": "中央社",
+              "publishedAt": "2026-05-28",
+              "displayRole": "改善與測試進度報導"
             }
           ]
         }
@@ -147,10 +163,10 @@
         },
         {
         "period": "2022 年 7 月–2024 年",
-        "title": "調查、改善與選舉攻防同時展開",
-        "summary": "竹檢在事故後分案調查；球場爭議也進入市長選舉與政黨治理攻防。高虹安市府就任後續查工程，並於2024年解除部分統包契約。",
-        "turningPoint": "政治說法可以呈現爭議如何被框架，但不能代替工程文件；市府的契約處置也不等於刑事責任已成立。",
-        "eventKeys": ["event-06", "event-08"],
+        "title": "調查、改善與選舉攻防同時展開，也進入證據保全與另案偵查",
+        "summary": "竹檢在事故後分案調查；高虹安市府就任後續查工程，2024年解除部分統包契約、另案發包覆土移除，法院則先辦理證據保全鑑定。同年BrightView檢測服務標案另受檢廉調查。",
+        "turningPoint": "市府改善、法院保全證據與不同刑案各有目的；工程進度延後不能直接等同有人阻撓，標案搜索交保也不能先寫成定罪。",
+        "eventKeys": ["event-06", "event-08", "event-08-evidence-preservation", "event-08-procurement-search"],
           "sources": [
             {
               "publicRef": "source-10",
@@ -175,15 +191,31 @@
               "publisher": "中央社",
               "publishedAt": "2024-01-26",
               "displayRole": "地方議員公開說法"
+            },
+            {
+              "publicRef": "source-28",
+              "canonicalUrl": "https://www.cna.com.tw/news/aipl/202404160318.aspx",
+              "title": "竹市棒球場覆土移除工程決標 第三方鑑定後處置",
+              "publisher": "中央社",
+              "publishedAt": "2024-04-16",
+              "displayRole": "司法與工程進度報導"
+            },
+            {
+              "publicRef": "source-36",
+              "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+              "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+              "publisher": "中央社",
+              "publishedAt": "2024-10-19",
+              "displayRole": "檢廉調查與地方監督報導"
             }
           ]
         },
         {
         "period": "2025 年–2026 年 7 月",
-        "title": "民事、營運與行政調查各自出現結果",
-        "summary": "法院先就巨佳與下包商間的工程款爭議作成一審判決；市府與龍來終止原營運關係；監察院其後公布5項重大行政違失並糾正市府與運動部。",
+        "title": "開挖衍生新案，民事、營運與行政調查各自推進",
+        "summary": "覆土移除時發現異物，竹檢另行分案；法院另就巨佳與下包商間工程款作成一審判決，並指出市府後續大規模開挖使現場已無法驗收。市府與龍來終止原營運關係，監察院再公布5項重大行政違失。",
         "turningPoint": "民事判決只處理特定當事人的工程款，營運調整處理合作關係，監察糾正處理行政缺失；三者都不是林智堅刑事責任的結論。",
-        "eventKeys": ["event-09", "event-10", "event-11"],
+        "eventKeys": ["event-08-new-materials-case", "event-09", "event-10", "event-11"],
           "sources": [
             {
               "publicRef": "source-01",
@@ -208,15 +240,23 @@
               "publisher": "中央社",
               "publishedAt": "2025-11-12",
               "displayRole": "司法案件報導"
+            },
+            {
+              "publicRef": "source-31",
+              "canonicalUrl": "https://www.cna.com.tw/news/ahel/202502250154.aspx",
+              "title": "新竹棒球場移除覆土工程 竹市府：有發現廢棄物",
+              "publisher": "中央社",
+              "publishedAt": "2025-02-25",
+              "displayRole": "工程發現與司法進度報導"
             }
           ]
         },
         {
           "period": "2026 年 8 月以後",
         "title": "不起訴不是句點，焦點回到處分書、驗收與制度究責",
-        "summary": "林智堅等人不起訴後，政治攻防仍持續；但公共利益上更關鍵的後續，是完整處分理由、行政究責、改善工程驗收、性能測試與求償程序能否公開核對。",
+        "summary": "林智堅等人不起訴後，市府與高虹安宣布將提出再議並續追民事、履約責任；楊玲宜則反批過往爭議是政治操作。公共利益上仍應回到完整處分理由、正式再議文件、行政究責、驗收、測試與求償結果。",
         "turningPoint": "刑事證據不足不等於工程沒有問題；工程有重大違失，也不等於能反推特定人必然犯罪。",
-        "eventKeys": ["event-12", "event-13"],
+        "eventKeys": ["event-12", "event-13", "event-14"],
           "sources": [
             {
               "publicRef": "source-05",
@@ -233,6 +273,22 @@
               "publisher": "聯合報",
               "publishedAt": "2026-08-22",
               "displayRole": "主管機關公開說明"
+            },
+            {
+              "publicRef": "source-34",
+              "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+              "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+              "publisher": "聯合報",
+              "publishedAt": "2026-08-29",
+              "displayRole": "市府與政治人物回應報導"
+            },
+            {
+              "publicRef": "source-35",
+              "canonicalUrl": "https://udn.com/news/amp/story/7324/9721182",
+              "title": "林智堅棒球場案獲不起訴 綠營轟高虹安、柯文哲欠一個道歉",
+              "publisher": "聯合報",
+              "publishedAt": "2026-08-29",
+              "displayRole": "地方議員政治回應報導"
             }
           ]
         }
@@ -285,14 +341,15 @@
           "name": "新竹市政府工務處／工程體檢會",
           "role": "市府工程與外部專業協作"
         },
-        "headline": "成立工程體檢會並委託外部場務檢測",
+        "headline": "成立工程體檢會並委託外部場務檢測；檢測服務標案另案接受檢廉調查",
         "action": "市府成立跨領域工程體檢會，安排技師鑑定、現場開挖與土壤檢測，並邀請 BrightView 場務團隊評估場地排水與材料條件。",
-        "outcome": "市府在 2023 年 8 月公開 BrightView 報告並送交檢方，作為後續改善設計與偵查評估的材料之一。",
-        "status": "completed",
-        "proofScope": "官方資料與檢方回應可確認體檢機制、委託與報告送交；報告本身的發現只及於受檢範圍，不是完整責任判決。",
+        "outcome": "市府在 2023 年 8 月公開 BrightView 報告並送交檢方；但該檢測服務採購於 2024 年 10 月又因採樣、標案程序及疑洩密爭點接受搜索、約談，公開資料未見終結處分。",
+        "status": "mixed",
+        "proofScope": "官方資料與報導可確認體檢、委託、報告送交及後續搜索約談；技術報告不是法院鑑定，搜索、約談與交保也不是有罪判決。",
         "limitations": [
           "外部技術報告可協助判讀場地狀況，不能取代法院、監察院或契約程序的責任認定。",
-          "市府當時提出的改善與啟用時程後來持續調整，不能以早期目標當成實際完成日。"
+          "市府當時提出的改善與啟用時程後來持續調整，不能以早期目標當成實際完成日。",
+          "2026年林智堅等人主案不起訴的公開對象未包含田政弘或悍創；沒有資料可把兩案視為已併案或同一處分。"
         ],
         "sources": [
           {
@@ -318,6 +375,22 @@
             "publisher": "新竹市政府",
             "publishedAt": "2023-05-31",
             "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       },
@@ -352,15 +425,15 @@
       },
       {
         "publicKey": "action-04-internal-accountability-referral",
-        "occurredAt": "2023-07-01",
-        "period": "2023 年 7 月至 2024 年 1 月",
+        "occurredAt": "2024-01-26",
+        "period": "截至 2024 年 1 月 26 日",
         "administrationPhase": "高虹安市長任內",
         "actor": {
           "name": "新竹市政府政風處與人事單位",
           "role": "內部行政調查"
         },
         "headline": "啟動內部責任調查，懲處 2 人、函送 6 人名單",
-        "action": "市府表示內部檢視 8 名相關人員後，對 2 人作行政懲處，並將包含前市長林智堅在內的 6 人資料函送監察院調查。",
+        "action": "市府於2024年1月對外表示，內部檢視8名相關人員後已對2人作行政懲處，並將包含前市長林智堅在內的6人資料函送監察院調查。",
         "outcome": "監察院確認收到名單；其後公布的是對機關工程治理的糾正，個別人員是否另有行政責任，仍須看具體調查與處分。",
         "status": "mixed",
         "proofScope": "中央社報導可確認市府說明的內部處理及監察院收件，不足以證明名單中的任何人違法或應負刑責。",
@@ -425,6 +498,59 @@
         ]
       },
       {
+        "publicKey": "action-05b-overburden-contract-and-evidence-preservation",
+        "occurredAt": "2024-01-26",
+        "period": "2024 年 1–10 月",
+        "administrationPhase": "高虹安市長任內啟動；邱臣遠代理市長期間續辦",
+        "actor": {
+          "name": "新竹市政府工務處",
+          "role": "覆土移除採購與證據保全配合機關"
+        },
+        "headline": "限期移除覆土、另案決標後配合法院證據保全",
+        "action": "市府1月限原統包商移除覆土，未履行後改採另案發包；3月原統包商聲請證據保全，法院裁准由第三方鑑定，市府因此在處置土方前等待鑑定並先辦理地下室臨時支撐。",
+        "outcome": "覆土移除標案於4月決標，但現場土方須先保留供鑑定；截至10月臨時支撐已完成，實際大規模移除要到2025年2月鑑定報告完成後才推進。",
+        "status": "mixed",
+        "proofScope": "官方與中央社資料可確認市府限期、另案決標、法院證據保全及臨時支撐等節點；市府與廠商對結構安全、履約及延誤責任仍有不同主張。",
+        "limitations": [
+          "證據保全是民事程序中的證據保存措施，不等於法院已判定任一方應負最終責任。",
+          "法院表示未見台灣省結構工程技師公會有刻意延宕的事證，不能把等待鑑定直接寫成鑑定單位阻撓工程。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-27",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=202401260002&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300036&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "市府要求廠商5日內移除棒球場過載覆土",
+            "publisher": "新竹市政府工務處",
+            "publishedAt": "2024-01-26",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-28",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202404160318.aspx",
+            "title": "竹市棒球場覆土移除工程決標 第三方鑑定後處置",
+            "publisher": "中央社",
+            "publishedAt": "2024-04-16",
+            "displayRole": "司法與工程進度報導"
+          },
+          {
+            "publicRef": "source-29",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202408070296.aspx",
+            "title": "新竹棒球場覆土鑑定 竹市府請求限期出具報告遭駁",
+            "publisher": "中央社",
+            "publishedAt": "2024-08-07",
+            "displayRole": "法院程序報導"
+          },
+          {
+            "publicRef": "source-30",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410180321.aspx",
+            "title": "竹市府：新竹棒球場已完成地下室臨時支撐",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-18",
+            "displayRole": "工程與證據保全進度報導"
+          }
+        ]
+      },
+      {
         "publicKey": "action-06-overburden-removal",
         "occurredAt": "2025-02-20",
         "period": "2025 年 2–4 月",
@@ -433,13 +559,14 @@
           "name": "新竹市政府工務處",
           "role": "邱臣遠代理市長任內"
         },
-        "headline": "移除超載覆土並完成清運",
-        "action": "法院囑託的鑑定報告完成後，市府依證據保全程序推進覆土移除，清除地下室頂板上方超出安全載重條件的土層。",
-        "outcome": "市府表示在 4 月 12 日完成超載覆土清除與外運，讓後續回填土篩分及改善工程得以銜接。",
+        "headline": "移除超載覆土並完成清運；開挖發現異物並由竹檢另行分案",
+        "action": "法院囑託的鑑定報告完成後，市府依證據保全程序推進覆土移除；2月施工期間，市府稱發現鋼筋、磚塊及塑膠等異物，檢察官到場並另行分案調查。",
+        "outcome": "市府表示在 4 月 12 日完成超載覆土清除與外運，讓後續回填土篩分及改善工程得以銜接；另案偵查結果尚未由公開資料確認。",
         "status": "completed",
         "proofScope": "報導可確認鑑定報告的載重判讀與市府後續清運；它處理的是結構載重及證據保全範圍，不是整起案件的刑事結論。",
         "limitations": [
           "法院當時表示沒有發現受託公會故意拖延鑑定的事證，不能把工期延誤全歸因於公會。",
+          "現場發現材料與檢方分案，只能證明觀察及調查啟動，不等於已認定是非法廢棄物或任何人犯罪。",
           "完成覆土清運不等於排水、草皮、結構補強與全場驗收都已完成。"
         ],
         "sources": [
@@ -458,6 +585,14 @@
             "publisher": "新竹市政府",
             "publishedAt": "2025-11-07",
             "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-31",
+            "canonicalUrl": "https://www.cna.com.tw/news/ahel/202502250154.aspx",
+            "title": "新竹棒球場移除覆土工程 竹市府：有發現廢棄物",
+            "publisher": "中央社",
+            "publishedAt": "2025-02-25",
+            "displayRole": "工程發現與司法進度報導"
           }
         ]
       },
@@ -501,7 +636,7 @@
         },
         "headline": "另案發包改善工程，重建基底、排水、結構與草皮",
         "action": "改善工程歷經多次流標後於 2025 年 9 月 11 日決標、9 月 30 日開工，範圍包含場地基底與草皮重建、排水優化及鋼構安全補強。",
-        "outcome": "高虹安於 2025 年 12 月 18 日復職；市府稱工程在 2026 年 8 月 20 日竣工並進入驗收，但性能測試與正式重啟仍待完成。原訂時程曾多次後移。",
+        "outcome": "高虹安於 2025 年 12 月 18 日復職；市府稱工程在 2026 年 8 月 20 日竣工並進入驗收，並規劃高強度實戰壓力賽及性能測試，但正式結果與重啟仍待完成。原訂時程曾多次後移。",
         "status": "ongoing",
         "proofScope": "來源可把決標、開工、市長職務交接與竣工進入驗收串起來；它們不能替代驗收紀錄、性能測試結果或正式開場決定。",
         "limitations": [
@@ -548,6 +683,14 @@
             "publisher": "新竹市政府",
             "publishedAt": "2024-06-26",
             "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-33",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202605280226.aspx",
+            "title": "新竹棒球場估8月中竣工 擬實戰壓力測試後啟用",
+            "publisher": "中央社",
+            "publishedAt": "2026-05-28",
+            "displayRole": "改善與測試進度報導"
           }
         ]
       },
@@ -582,23 +725,39 @@
       },
       {
         "publicKey": "action-10-damages-and-procurement-review",
-        "occurredAt": "2026-08-22",
-        "period": "截至 2026 年 8 月",
-        "administrationPhase": "高虹安復職後",
+        "occurredAt": "2025-01-24",
+        "period": "2025 年 1 月起",
+        "administrationPhase": "邱臣遠代理市長任內啟動；高虹安復職後續辦",
         "actor": {
           "name": "新竹市政府",
-          "role": "契約求償與採購行政程序"
+          "role": "跨代理與復職兩階段的契約、採購程序"
         },
-        "headline": "主張逾 4 億元求償，啟動採購法第 101 條審查",
-        "action": "市府表示已就工期、缺失改善及另案支出等項目向相關廠商主張逾 4 億元損害，並依政府採購法第 101 條辦理是否刊登不良廠商的審查。",
-        "outcome": "求償與採購審查均仍在程序中；公開資訊尚無最終賠償額、確定判決或刊登結果。",
+        "headline": "2025年1月進入審查會議，2025年3月已表示啟動採購法第101條程序",
+        "action": "市府2025年7月公開資料列出1月24日、4月1日及6月23日三次第101條審查與工作小組會議；代理市長邱臣遠3月曾表示程序辦理中。市府其後稱正簽函工程會，並另主張逾4億元損害。",
+        "outcome": "只能確認市府內部審查及函送說法；公開資訊尚無政府採購公報刊登、停權生效、最終賠償額或確定判決。",
         "status": "ongoing",
-        "proofScope": "報導只能確認市府提出的金額與程序主張，不能把請求金額寫成已獲賠償，也不能把審查寫成廠商已被刊登。",
+        "proofScope": "市府資料與報導只能確認會議節點、函送與求償主張，不能把請求金額寫成已獲賠償，也不能把內部審查完成寫成廠商已被刊登或停權。",
         "limitations": [
           "市府主張、調解或訴訟請求與法院最終認定可能不同。",
           "採購法程序仍應保留廠商陳述、救濟與主管機關最終處分空間。"
         ],
         "sources": [
+          {
+            "publicRef": "source-24",
+            "canonicalUrl": "https://ltc.hccg.gov.tw/hccg/app/data/view?id=30211&module=municipalnews&serno=202507140006",
+            "title": "立委率團考察新竹棒球場 竹市府強調持續全面改善、依法究責",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-07-14",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-32",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202503050146.aspx",
+            "title": "新竹棒球場遭指結構安全問題 議員籲公開資訊",
+            "publisher": "中央社",
+            "publishedAt": "2025-03-05",
+            "displayRole": "市府與議會監督進度報導"
+          },
           {
             "publicRef": "source-06",
             "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
@@ -606,6 +765,35 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-22",
             "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-11-announced-reconsideration",
+        "occurredAt": "2026-08-29",
+        "period": "2026 年 8 月 29 日",
+        "administrationPhase": "高虹安復職後",
+        "actor": {
+          "name": "新竹市政府／高虹安",
+          "role": "告發機關與現任市長公開回應"
+        },
+        "headline": "宣布將依法提出再議，民刑事與履約程序分流",
+        "action": "不起訴消息後，市府與高虹安表示將依法提出再議，並持續處理民事求償、履約責任及採購行政程序。",
+        "outcome": "截至本頁更新時間只能確認再議意向與公開聲明；尚未取得正式聲請、受理或高檢署處分文件。",
+        "status": "ongoing",
+        "proofScope": "聯合報可確認市府與高虹安的公開回應，不能把『將提出』寫成已聲請、已受理或已撤銷不起訴。",
+        "limitations": [
+          "刑事再議、民事求償、履約爭議與採購停權是不同程序，結果不能互相代替。",
+          "市府引用處分書中的工程內容仍屬其公開轉述；完整處分書尚待取得。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-34",
+            "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+            "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "市府與政治人物回應報導"
           }
         ]
       }
@@ -622,8 +810,8 @@
           "不等於任何特定個人已成立刑事犯罪。",
           "不直接決定市府、統包商或下包商間的民事賠償。"
         ],
-        "status": "糾正已公布；個別公務員行政責任的後續處理仍待公開確認。",
-        "nextStep": "追查市府與運動部的改善回覆，以及刑案結束後個別行政究責結果。",
+        "status": "糾正已公布；監察院成果頁標示機關改善仍須持續定期追蹤，個別公務員行政責任的後續處理仍待公開確認。",
+        "nextStep": "追查市府與運動部的改善回覆、監察院定期追蹤更新，以及刑案結束後個別行政究責結果。",
         "sources": [
           {
             "publicRef": "source-01",
@@ -632,6 +820,14 @@
             "publisher": "監察院",
             "publishedAt": "2026-07-17",
             "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-38",
+            "canonicalUrl": "https://www.cy.gov.tw/CyBsBoxContent2.aspx?n=718&s=49728",
+            "title": "新竹市立棒球場新建統包工程糾正案成果頁",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-28",
+            "displayRole": "制度或機關追蹤紀錄"
           }
         ]
       },
@@ -640,22 +836,71 @@
         "label": "刑事偵查",
         "body": "新竹地方檢察署",
         "question": "林智堅、廠商及相關人員是否有足夠證據涉及貪污、採購、廢棄物、詐欺或文書等罪嫌？",
-        "conclusion": "檢方認定林智堅及相關被告犯罪嫌疑不足而不起訴；另有4名營造、監造人員因不實紀錄獲緩起訴。",
+        "conclusion": "官方偵查終結公告與媒體理由摘要顯示，林智堅及巨佳等主案被告分案不起訴；另有4名營造、監造人員因不實紀錄獲緩起訴。",
         "effect": "檢察官就本次偵辦罪嫌作成偵查終結處分；緩起訴是附條件暫不提起公訴。",
         "doesNotConclude": [
           "不起訴不是法院無罪判決，也不代表工程沒有缺失。",
-          "不會撤銷監察院的行政違失認定或處理民事求償。"
+          "不會撤銷監察院的行政違失認定或處理民事求償。",
+          "主案處分對象未提田政弘、悍創或BrightView，不能推定檢測採購案也已不起訴或已併案。"
         ],
-        "status": "媒體已報導偵結結果；完整處分書與再議後續仍待取得。",
-        "nextStep": "取得完整處分書，確認告訴人是否聲請再議及高檢署結果。",
+        "status": "媒體已報導偵結結果；市府於2026年8月29日宣布將提出再議，但正式聲請與後續結果仍待取得。",
+        "nextStep": "取得完整處分書、正式再議文件及高檢署結果。",
         "sources": [
+          {
+            "publicRef": "source-39",
+            "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+            "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+            "publisher": "新竹地方檢察署",
+            "publishedAt": "2026-08-21",
+            "displayRole": "檢察機關偵查終結公告"
+          },
           {
             "publicRef": "source-05",
             "canonicalUrl": "https://udn.com/news/story/7321/9720871",
             "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
             "publisher": "中央社／聯合新聞網",
-            "publishedAt": "2026-08-28",
-            "displayRole": "司法進度報導"
+              "publishedAt": "2026-08-28",
+              "displayRole": "司法進度報導"
+          },
+          {
+            "publicRef": "source-34",
+            "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+            "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "市府與政治人物回應報導"
+          }
+        ]
+      },
+      {
+        "kind": "criminal",
+        "label": "BrightView檢測採購／疑洩密案",
+        "body": "新竹地方檢察署、廉政署；田政弘及市府、場館相關人員",
+        "question": "2023年檢測服務採購的前置採樣、招標程序或資訊提供是否涉及刑法或採購違法？",
+        "conclusion": "檢測服務標案另案接受檢廉調查；2024年10月公開資料只確認搜索、約談、3人交保及1人請回，至2026年8月29日未找到可辨識的起訴、不起訴、併案或再議處分。",
+        "effect": "只能確認另案偵查曾進行；交保是偵查中強制處分，不是罪責結論。",
+        "doesNotConclude": [
+          "不能把田政弘或其他受查人寫成已犯罪。",
+          "不能把2026年林智堅等人主案不起訴套用到本案，也不能推定兩案已併案。"
+        ],
+        "status": "未決／公開資料未見終結；這是搜尋結果限制，不是絕對證明檢方尚未處分。",
+        "nextStep": "持續查核竹檢偵查終結公告、官方新聞稿及可識別的起訴或不起訴文件。",
+        "sources": [
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       },
@@ -691,7 +936,8 @@
         "conclusion": "一審判決巨佳應支付揚名實業約737萬4,312元及利息，案件仍可上訴。",
         "effect": "只處理特定當事人間的工程款請求，且一審尚未確定。",
         "doesNotConclude": [
-          "不等於法院已判定整座球場全部工程品質責任。",
+          "法院並指出市府後續大規模開挖使現場已無法驗收；這不等於法院已判定整座球場全部工程品質責任。",
+          "該案認為BrightView意見不能取代法院囑託的本地技師鑑定，只限於這件下包工程款訴訟的證據判斷，不能概括寫成BrightView報告全面無效。",
           "不處理林智堅或公務員的刑事責任，也不證明市府逾4億元求償成立。"
         ],
         "status": "一審判決已公布；是否上訴及判決是否確定仍待查。",
@@ -712,7 +958,7 @@
         "label": "改善工程與重新使用",
         "body": "新竹市政府驗收；場地性能測試單位",
         "question": "改善工程是否驗收合格，球場是否已具備正式重新使用條件？",
-        "conclusion": "市府表示改善工程已竣工並進入驗收，後續仍要辦理場地性能測試。",
+        "conclusion": "市府表示改善工程已竣工並進入驗收，後續仍要辦理場地性能測試，並曾規劃高強度實戰壓力賽檢驗使用狀況。",
         "effect": "只代表改善工程進入驗收程序，尚不能寫成球場已驗收合格或已恢復職棒賽事。",
         "doesNotConclude": [
           "竣工不等於驗收合格。",
@@ -728,6 +974,14 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-22",
             "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-33",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202605280226.aspx",
+            "title": "新竹棒球場估8月中竣工 擬實戰壓力測試後啟用",
+            "publisher": "中央社",
+            "publishedAt": "2026-05-28",
+            "displayRole": "改善與測試進度報導"
           }
         ]
       }
@@ -898,15 +1152,23 @@
         ]
       },
       {
-        "statement": "新竹地檢署於2026年8月28日偵結，認定林智堅、巨佳營造及相關被告涉及貪污治罪條例、政府採購法、廢棄物清理法、竊盜、詐欺及文書等罪嫌，犯罪嫌疑不足，均予不起訴。",
+        "statement": "新竹地檢署官方公告及媒體理由摘要顯示，林智堅、巨佳營造及相關被告分案獲不起訴；另有4名營造、監造人員在不同案號中獲緩起訴，不能把所有『相關被告』概括成同一處分。",
         "claimType": "law_enforcement_fact",
         "harmRisk": "high",
-        "proofScope": "只證明竹檢公布的偵結處分對象、罪名範圍及『犯罪嫌疑不足』的處分結果。",
+        "proofScope": "官方公告可確認可識別案號與處分；罪嫌範圍及理由仍主要來自媒體對竹檢說明的轉述。",
         "limitations": [
           "不起訴是檢察官偵查終結處分，不是法院判決無罪，也不會自動撤銷行政或民事責任。",
           "目前公開頁面主要是竹檢資料的媒體轉述，完整處分書與後續再議結果仍待取得。"
         ],
         "sources": [
+          {
+            "publicRef": "source-39",
+            "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+            "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+            "publisher": "新竹地方檢察署",
+            "publishedAt": "2026-08-21",
+            "displayRole": "檢察機關偵查終結公告"
+          },
           {
             "publicRef": "source-04",
             "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
@@ -944,7 +1206,8 @@
         "proofScope": "證明中央社報導的民事判決金額、可上訴狀態及案件當事人範圍。",
         "limitations": [
           "民事一審判決尚非確定判決，也不能直接推論市府或林智堅的刑事責任。",
-          "法院提到市府後續開挖使現場無法驗收，不能單獨證明任何一方對全部工程缺失負責。"
+          "法院提到市府後續開挖使現場無法驗收，不能單獨證明任何一方對全部工程缺失負責。",
+          "法院在本案中未以BrightView意見取代法定鑑定，不等於該技術報告在所有程序一律無效。"
         ],
         "sources": [
           {
@@ -973,6 +1236,34 @@
             "publisher": "中央社",
             "publishedAt": "2026-03-21",
             "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "中央社報導，廉政署於2024年10月就2023年新竹棒球場改善專業諮詢及檢測服務採購搜索、約談田政弘及市府、場館相關人員；3人交保、1人請回，竹檢當時表示案件偵辦中。",
+        "claimType": "law_enforcement_event",
+        "harmRisk": "high",
+        "proofScope": "只證明公開報導中的採購案範圍、搜索約談及當時偵查狀態。",
+        "limitations": [
+          "搜索、約談、交保與請回都不是有罪判決。",
+          "至2026年8月29日未找到可辨識的終結處分；這是公開搜尋限制，不能斷言檢方一定尚未處分，也不能拿主案不起訴替代本案結果。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       }
@@ -1339,12 +1630,12 @@
     ],
     "openQuestions": [
       {
-        "statement": "林智堅不起訴處分書全文、送再議的正式程序及高檢署後續結果為何？",
+        "statement": "市府已宣布將提出再議；正式聲請是否已送件、受理，林智堅不起訴處分書全文及高檢署後續結果為何？",
         "claimType": "open_question",
         "harmRisk": "elevated",
         "proofScope": "只確認媒體已報導不起訴及可能再議，並指出仍缺正式文件。",
         "limitations": [
-          "不能由媒體報導推論再議已受理、維持或撤銷不起訴。"
+          "『將提出再議』仍是公開意向，不能由媒體報導推論已送件、受理、維持或撤銷不起訴。"
         ],
         "sources": [
           {
@@ -1354,6 +1645,70 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-28",
             "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-34",
+            "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+            "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "市府與政治人物回應報導"
+          }
+        ]
+      },
+      {
+        "statement": "2023年BrightView檢測服務採購／疑洩密案在2024年搜索約談後，是否已有起訴、不起訴、併案或其他終結處分？",
+        "claimType": "open_question",
+        "harmRisk": "high",
+        "proofScope": "只確認中央社報導的搜索、約談、交保及竹檢當時稱偵辦中；截至2026年8月29日公開搜尋未見可辨識終結文件。",
+        "limitations": [
+          "公開資料未找到不等於檢方絕對尚未作成處分。",
+          "不能用林智堅等人主案不起訴推論田政弘、悍創或BrightView相關採購案結果。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
+          }
+        ]
+      },
+      {
+        "statement": "2025年覆土移除時發現異物並由竹檢另行分案，與2025年7月市府另案告發、2026年8月主案不起訴之間的案號與處分範圍如何對應？",
+        "claimType": "open_question",
+        "harmRisk": "high",
+        "proofScope": "只確認現場發現、市府告發及檢方不同時間的公開程序節點，公開報導未提供足以完整對照的案號。",
+        "limitations": [
+          "不能在缺少案號與完整處分書時斷言三者已併案、完全相同或彼此獨立。",
+          "發現異物與分案不等於已確認非法廢棄物或犯罪。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-31",
+            "canonicalUrl": "https://www.cna.com.tw/news/ahel/202502250154.aspx",
+            "title": "新竹棒球場移除覆土工程 竹市府：有發現廢棄物",
+            "publisher": "中央社",
+            "publishedAt": "2025-02-25",
+            "displayRole": "工程發現與司法進度報導"
+          },
+          {
+            "publicRef": "source-24",
+            "canonicalUrl": "https://ltc.hccg.gov.tw/hccg/app/data/view?id=30211&module=municipalnews&serno=202507140006",
+            "title": "立委率團考察新竹棒球場 竹市府強調持續全面改善、依法究責",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-07-14",
+            "displayRole": "主管機關公開說明"
           }
         ]
       },
@@ -1515,6 +1870,70 @@
             "publisher": "中央社",
             "publishedAt": "2022-11-25",
             "displayRole": "候選人公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "chiu-chen-yuan",
+        "name": "邱臣遠",
+        "role": "前新竹市代理市長",
+        "affiliation": "台灣民眾黨",
+        "period": "2024年7月–2025年12月代理市長",
+        "relationToTopic": "代理市長期間接續證據保全、覆土移除、另案改善招標及採購法程序",
+        "summary": "球場改善的重要執行期跨越邱臣遠代理市長任內；頁面把此段與高虹安停職前、復職後分開，避免把跨任期成果全歸於單一人物。",
+        "proofScope": "確認公開資料記錄邱臣遠任內的覆土移除、第101條程序與改善工程決標等市府行動。",
+        "limitations": [
+          "代理市長的制度角色不等於每項工程或司法決定均由本人親自執行。",
+          "市府公開說明仍須與法院、採購及驗收文件交叉核對。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-32",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202503050146.aspx",
+            "title": "新竹棒球場遭指結構安全問題 議員籲公開資訊",
+            "publisher": "中央社",
+            "publishedAt": "2025-03-05",
+            "displayRole": "市府與議會監督進度報導"
+          },
+          {
+            "publicRef": "source-25",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=8bc1e88f-947f-4cbe-9ca1-349fe21d413d&id=16&mcustomize=municipalnews_view.jsp&mserno=201604040001&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹市立棒球場改善工程順利決標將開工！邱臣遠代理市長：重返賽事舞台邁出關鍵一步",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-09-11",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "personId": "tien-cheng-hung",
+        "name": "田政弘",
+        "role": "時任新竹市工策會副總幹事、借調市長室秘書",
+        "affiliation": "新竹市政府相關職務",
+        "period": "2023–2024檢測採購與調查脈絡",
+        "relationToTopic": "2024年BrightView檢測採購／疑洩密案中遭廉政署搜索、約談的人員之一",
+        "summary": "田政弘出現在高虹安任內另一條檢測採購偵查線，不是2026年林智堅等人主案不起訴的公開處分對象。",
+        "proofScope": "只確認中央社報導的職務、搜索約談與交保等偵查節點。",
+        "limitations": [
+          "搜索、約談及交保不等於起訴或有罪。",
+          "公開資料未見可辨識的終結處分，不能寫成已起訴、已不起訴或已併入主案。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       },
@@ -1692,10 +2111,10 @@
         "name": "楊玲宜",
         "role": "新竹市議員",
         "affiliation": "民主進步黨",
-        "period": "2023–2024公開質疑",
-        "relationToTopic": "針對高虹安市府的開挖、移送與調查說法提出反駁",
-        "summary": "地方議員的監督與反駁是政治攻防的一部分，不直接改變監察院或司法文件的證明範圍。",
-        "proofScope": "確認中央社報導記錄其對市府移送與調查作為的公開評論。",
+        "period": "2023–2026公開質疑與回應",
+        "relationToTopic": "針對高虹安市府的開挖、移送、檢測採購及不起訴後政治解讀提出反駁",
+        "summary": "地方議員的監督與反駁是政治攻防的一部分；不起訴後的『政治操作』評論仍不能改變工程、行政或司法文件的證明範圍。",
+        "proofScope": "確認中央社與聯合報記錄其對市府調查作為、檢測採購及不起訴結果的公開評論。",
         "limitations": [
           "議員評論不等於已證明市府或前市府任一方的法律責任。"
         ],
@@ -1707,6 +2126,14 @@
             "publisher": "中央社",
             "publishedAt": "2024-01-26",
             "displayRole": "地方議員公開說法"
+          },
+          {
+            "publicRef": "source-35",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9721182",
+            "title": "林智堅棒球場案獲不起訴 綠營轟高虹安、柯文哲欠一個道歉",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "地方議員政治回應報導"
           }
         ]
       },
@@ -1716,7 +2143,7 @@
         "role": "新竹市議員",
         "affiliation": "民主進步黨",
         "period": "2023–2024公開質疑",
-        "relationToTopic": "針對市府移送、悍創角色與利益迴避提出公開質疑",
+        "relationToTopic": "針對市府移送、悍創與BrightView檢測採購程序及利益迴避提出公開質疑",
         "summary": "地方議員提出的監督問題，與檢方對刑事證據的判斷分開呈現。",
         "proofScope": "確認中央社報導記錄其對市府與相關業者角色的公開質疑。",
         "limitations": [
@@ -1730,6 +2157,14 @@
             "publisher": "中央社",
             "publishedAt": "2024-01-26",
             "displayRole": "地方議員公開說法"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       }
@@ -1927,6 +2362,58 @@
             "displayRole": "政治人物回應報導"
           }
         ]
+      },
+      {
+        "publicKey": "narrative-2026-yang-counterframe",
+        "occurredAt": "2026-08-29",
+        "arena": "媒體",
+        "headline": "楊玲宜以不起訴結果反批政治操作",
+        "speaker": { "name": "楊玲宜", "role": "新竹市議員", "personId": "yang-ling-yi" },
+        "statement": "聯合報報導，楊玲宜把不起訴解讀為過去球場爭議遭惡意政治操作，並要求高虹安、柯文哲向林智堅與市府同仁道歉。",
+        "frameLabel": "不起訴證明政治操作的反向框架",
+        "changeFromPrior": "同一不起訴結果被用來反批過往『大秘寶』與弊案敘事；焦點從司法信任攻防轉為誰應為政治標籤負責。",
+        "status": "attributed",
+        "proofScope": "只證明聯合報記錄的地方議員公開說法與要求。",
+        "limitations": [
+          "『惡意造謠』『政治操作』與『欠道歉』是政治評價，不是檢方已證明的事實。",
+          "刑事不起訴不等於工程合格，也不會撤銷監察院行政糾正或民事、履約程序。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-35",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9721182",
+            "title": "林智堅棒球場案獲不起訴 綠營轟高虹安、柯文哲欠一個道歉",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "地方議員政治回應報導"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2026-kao-city-response",
+        "occurredAt": "2026-08-29",
+        "arena": "市政與媒體",
+        "headline": "高虹安以「不起訴不等於工程合格」回應",
+        "speaker": { "name": "高虹安／新竹市政府", "role": "新竹市長與告發機關", "personId": "kao-hung-an" },
+        "statement": "聯合報報導，高虹安與市府主張不起訴只代表未達刑事起訴門檻，不能解讀為原工程合格，並宣布將提出再議及續追民事、履約責任。",
+        "frameLabel": "刑事門檻與工程責任分流",
+        "changeFromPrior": "市府把政治攻防重新拉回不同責任程序，但『將再議』與工程責任內容仍是市府當日公開主張，須等待正式文件。",
+        "status": "attributed",
+        "proofScope": "只證明聯合報記錄的市府及高虹安公開回應與程序意向。",
+        "limitations": [
+          "不能把『將提出再議』寫成已聲請或高檢署已有結果。",
+          "市府的工程與求償主張不能取代法院判決、驗收紀錄或完整不起訴處分書。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-34",
+            "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+            "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "市府與政治人物回應報導"
+          }
+        ]
       }
     ],
     "socialObservations": [],
@@ -1950,11 +2437,12 @@
         "searchedAt": "2026-08-29T00:00:00+08:00",
         "searchQueries": [],
         "searchScope": "公開偵結說明、監察院新聞稿與公開媒體報導",
-        "gapReason": "尚未取得不起訴處分書全文、再議結果及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
-        "gap": "尚未取得不起訴處分書全文、再議結果及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+        "gapReason": "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+        "gap": "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
         "sourceRefs": [
           "source-01",
-          "source-09"
+          "source-09",
+          "source-34"
         ],
         "sources": [
           {
@@ -1972,6 +2460,43 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-28",
             "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-34",
+            "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+            "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "市府與政治人物回應報導"
+          }
+        ]
+      },
+      {
+        "actorName": "新竹地方檢察署與廉政署",
+        "actorRole": "brightview_procurement_investigation",
+        "status": "partial",
+        "searchedAt": "2026-08-29T00:00:00+08:00",
+        "searchQueries": [],
+        "searchScope": "竹檢偵查終結公告、官方新聞稿與主流媒體對BrightView檢測採購案的後續報導",
+        "gapReason": "只找到2024年搜索、約談、交保及當時偵辦中的報導；未找到可辨識的起訴、不起訴、併案或再議處分。這是公開資料限制，不是絕對證明案件尚未處分。",
+        "gap": "BrightView檢測採購／疑洩密案的終結狀態未明，且不得與2026年林智堅等人主案處分混寫。",
+        "sourceRefs": ["source-37", "source-36"],
+        "sources": [
+          {
+            "publicRef": "source-37",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+            "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-09",
+            "displayRole": "檢廉調查進度報導"
+          },
+          {
+            "publicRef": "source-36",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+            "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+            "publisher": "中央社",
+            "publishedAt": "2024-10-19",
+            "displayRole": "檢廉調查與地方監督報導"
           }
         ]
       },
@@ -2246,6 +2771,131 @@
         ]
       },
       {
+        "publicKey": "event-08-evidence-preservation",
+        "occurredAt": "2024-03-25",
+        "reportedAt": "2024-04-16",
+        "precision": "day",
+        "kindLabel": "法院程序與改善",
+        "headline": "覆土移除標案決標，但須先完成法院證據保全鑑定",
+        "sourceRefs": [
+          "source-28",
+          "source-29"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "中央社報導，原統包商於2024年3月聲請證據保全，法院裁准由第三方勘驗鑑定；市府雖已完成覆土移除標案，仍須在處置土方前等待鑑定。其後法院駁回市府要求限期交報告的聲請，認為未見鑑定公會刻意延宕或程序不專業。",
+            "proofScope": "證明法院證據保全、第三方鑑定、覆土標案及限期聲請遭駁等程序節點。",
+            "limitations": [
+              "證據保全不是法院已判定覆土安全或責任歸屬，也不能寫成市府故意毀證。",
+              "未見刻意延宕不代表工程沒有延後，只代表法院當時沒有足夠事證限制鑑定天數。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-28",
+                "canonicalUrl": "https://www.cna.com.tw/news/aipl/202404160318.aspx",
+                "title": "竹市棒球場覆土移除工程決標 第三方鑑定後處置",
+                "publisher": "中央社",
+                "publishedAt": "2024-04-16",
+                "displayRole": "司法與工程進度報導"
+              },
+              {
+                "publicRef": "source-29",
+                "canonicalUrl": "https://www.cna.com.tw/news/aloc/202408070296.aspx",
+                "title": "新竹棒球場覆土鑑定 竹市府請求限期出具報告遭駁",
+                "publisher": "中央社",
+                "publishedAt": "2024-08-07",
+                "displayRole": "法院程序報導"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "改善工程與民事證據保存第一次正面交疊，說明進度延後不能只用單一政治說法解釋。",
+          "changeFromPrior": "市府由部分解約與另案發包，轉為須先配合法院程序保存可供日後爭訟查驗的現場證據。",
+          "evidenceBoundary": "法院裁定處理如何保全證據，不是對原工程品質、廠商履約或市府改善責任的終局判決。"
+        }
+      },
+      {
+        "publicKey": "event-08-procurement-search",
+        "occurredAt": "2024-10-09",
+        "reportedAt": "2024-10-09",
+        "precision": "day",
+        "kindLabel": "另案刑事偵查",
+        "headline": "BrightView檢測採購案搜索約談田政弘等人",
+        "sourceRefs": [
+          "source-37",
+          "source-36"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "中央社報導，廉政署就2023年檢測服務採購搜索、約談田政弘及市府、場館相關人員，3人交保、1人請回；竹檢當時只表示案件偵辦中。",
+            "proofScope": "證明報導所載的採購案範圍、搜索約談及當時偵查狀態。",
+            "limitations": [
+              "交保與請回都不是起訴或有罪判決。",
+              "本案與2026年林智堅等人主案處分對象不同，不能因主案不起訴就寫成本案也已終結。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-37",
+                "canonicalUrl": "https://www.cna.com.tw/news/asoc/202410090411.aspx",
+                "title": "竹市長室秘書田政弘遭廉政署約談 疑查棒球場案",
+                "publisher": "中央社",
+                "publishedAt": "2024-10-09",
+                "displayRole": "檢廉調查進度報導"
+              },
+              {
+                "publicRef": "source-36",
+                "canonicalUrl": "https://www.cna.com.tw/news/aloc/202410190187.aspx",
+                "title": "新竹棒球場改善標案 議員揭市府秘書疑私會廠商",
+                "publisher": "中央社",
+                "publishedAt": "2024-10-19",
+                "displayRole": "檢廉調查與地方監督報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-08-new-materials-case",
+        "occurredAt": "2025-02-25",
+        "reportedAt": "2025-02-25",
+        "precision": "day",
+        "kindLabel": "工程發現與另案偵查",
+        "headline": "覆土移除發現異物，檢察官到場並另行分案",
+        "sourceRefs": [
+          "source-31"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "中央社報導，市府稱覆土移除現場發現鋼筋、磚塊及塑膠等材料；檢察官與市府政風人員到場勘查，竹檢另行分案調查。",
+            "proofScope": "只證明市府公開描述的現場發現與檢方分案節點。",
+            "limitations": [
+              "現場材料、媒體標題中的『廢棄物』與分案都不等於已完成廢棄物法律認定或證明任何人犯罪。",
+              "此案與2025年7月告發、2026年8月主案處分的案號關係仍待完整文件對照。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹市政府／新竹地方檢察署",
+                "role": "工程發現與司法程序公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-31",
+                "canonicalUrl": "https://www.cna.com.tw/news/ahel/202502250154.aspx",
+                "title": "新竹棒球場移除覆土工程 竹市府：有發現廢棄物",
+                "publisher": "中央社",
+                "publishedAt": "2025-02-25",
+                "displayRole": "工程發現與司法進度報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "publicKey": "event-09",
         "occurredAt": "2025-10-31",
         "reportedAt": "2025-11-12",
@@ -2258,10 +2908,10 @@
         "items": [
           {
             "status": "verified",
-            "statement": "中央社報導，桃園地方法院2025年10月31日判決巨佳營造應支付揚名實業737萬4,312元及利息，案件仍可上訴；法院並認為巨佳未能具體證明排水等瑕疵由揚名造成。",
+            "statement": "中央社報導，桃園地方法院2025年10月31日判決巨佳營造應支付揚名實業737萬4,312元及利息，案件仍可上訴；法院指出市府後續大規模開挖使現場已無法驗收，且巨佳未能具體證明排水等瑕疵由揚名造成。",
             "proofScope": "證明民事判決日期、金額、可上訴狀態及法院對當事人舉證的描述。",
             "limitations": [
-              "這是統包商與下包商間的民事一審判決，不是林智堅或市府的刑事判決。"
+              "這是統包商與下包商間的民事一審判決，不是林智堅或市府的刑事判決；也不能把現場已改變簡化為市府故意破壞證據。"
             ],
             "sources": [
               {
@@ -2356,7 +3006,7 @@
         "items": [
           {
             "status": "attributed",
-            "statement": "新竹市政府表示，改善工程已竣工並自8月20日起進入驗收，後續將辦理場地性能測試；截至公開報導日期，市府仍以驗收及測試作為正式使用前的必要程序。",
+            "statement": "新竹市政府表示，改善工程已竣工並自8月20日起進入驗收，後續將辦理場地性能測試；市府先前也規劃以高強度實戰壓力賽檢視使用狀況。",
             "proofScope": "只證明市府對改善進度、驗收起始日及測試安排的公開說明。",
             "limitations": [
               "不能由竣工或進入驗收推論已驗收合格、已恢復職棒或所有安全問題已解決。"
@@ -2375,6 +3025,14 @@
                 "publisher": "聯合報",
                 "publishedAt": "2026-08-22",
                 "displayRole": "主管機關公開說明"
+              },
+              {
+                "publicRef": "source-33",
+                "canonicalUrl": "https://www.cna.com.tw/news/aloc/202605280226.aspx",
+                "title": "新竹棒球場估8月中竣工 擬實戰壓力測試後啟用",
+                "publisher": "中央社",
+                "publishedAt": "2026-05-28",
+                "displayRole": "改善與測試進度報導"
               }
             ]
           }
@@ -2393,8 +3051,8 @@
         "items": [
           {
             "status": "attributed",
-            "statement": "新竹地方檢察署表示，林智堅、巨佳營造及相關被告涉圖利、採購、廢棄物、竊盜、詐欺及文書等罪嫌，犯罪嫌疑不足而不起訴；4名營造及監造人員則因業務上登載不實文書罪緩起訴，各支付4萬元。",
-            "proofScope": "只證明竹檢偵結資料經中央社轉述的處分結果及罪名範圍。",
+            "statement": "新竹地方檢察署公告及媒體報導顯示，林智堅與巨佳等分案被告獲不起訴；另有4名營造及監造人員因業務上登載不實文書罪緩起訴，各支付4萬元。",
+            "proofScope": "官方公告確認可識別案號與處分，中央社轉述補充罪名範圍及處分理由。",
             "limitations": [
               "不起訴與緩起訴都不是法院有罪或無罪判決；完整處分書及可能的再議結果仍待取得。"
             ],
@@ -2405,6 +3063,14 @@
               }
             ],
             "sources": [
+              {
+                "publicRef": "source-39",
+                "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+                "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+                "publisher": "新竹地方檢察署",
+                "publishedAt": "2026-08-21",
+                "displayRole": "檢察機關偵查終結公告"
+              },
               {
                 "publicRef": "source-05",
                 "canonicalUrl": "https://udn.com/news/story/7321/9720871",
@@ -2420,6 +3086,75 @@
           "significance": "刑事偵查對林智堅等人的犯罪嫌疑暫以不足結案，但工程行政違失、民事求償與最終驗收仍是未完成的責任線。",
           "changeFromPrior": "焦點從『是否有刑事犯罪』轉向再議、行政究責、民事求償及球場能否安全重啟。",
           "evidenceBoundary": "不能把不起訴寫成球場沒有缺失，也不能把監察院糾正直接寫成林智堅刑事有罪。"
+        }
+      },
+      {
+        "publicKey": "event-14",
+        "occurredAt": "2026-08-29",
+        "reportedAt": "2026-08-29",
+        "precision": "day",
+        "kindLabel": "再議意向與政治回應",
+        "headline": "市府宣布將再議，不同政治人物對不起訴作相反解讀",
+        "sourceRefs": [
+          "source-34",
+          "source-35"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "高虹安與新竹市政府表示，不起訴不等於原工程合格，將依法提出再議並續追民事、履約責任。",
+            "proofScope": "只證明市府與高虹安的公開回應及再議意向。",
+            "limitations": [
+              "『將提出』不等於已聲請、受理或已有高檢署結果。",
+              "工程、民事與履約主張仍須各自的正式文件。"
+            ],
+            "speakers": [
+              {
+                "name": "高虹安／新竹市政府",
+                "role": "新竹市長與告發機關公開回應"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-34",
+                "canonicalUrl": "https://udn.com/news/amp/story/6656/9721519",
+                "title": "新竹棒球場案不起訴 竹市府：不等於工程合格",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-29",
+                "displayRole": "市府與政治人物回應報導"
+              }
+            ]
+          },
+          {
+            "status": "attributed",
+            "statement": "楊玲宜則把不起訴解讀為過往球場爭議遭政治操作，要求高虹安與柯文哲道歉。",
+            "proofScope": "只證明地方議員的公開政治解讀。",
+            "limitations": [
+              "『政治操作』『欠道歉』不是檢方處分所證明的工程或主觀意圖事實。",
+              "不起訴也不等於工程沒有行政或契約缺失。"
+            ],
+            "speakers": [
+              {
+                "name": "楊玲宜",
+                "role": "新竹市議員公開回應"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-35",
+                "canonicalUrl": "https://udn.com/news/amp/story/7324/9721182",
+                "title": "林智堅棒球場案獲不起訴 綠營轟高虹安、柯文哲欠一個道歉",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-29",
+                "displayRole": "地方議員政治回應報導"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "不起訴公布後，刑事門檻、工程品質與政治責任再次被不同陣營混用。",
+          "changeFromPrior": "司法處分不再只是案件進度，也成為雙方重新詮釋過去三年政治攻防的工具。",
+          "evidenceBoundary": "兩方說法都只能證明其公開立場；正式再議、行政、民事與驗收結果仍須各自查核。"
         }
       }
     ]
