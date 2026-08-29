@@ -99,7 +99,7 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
   </section>;
 }
 
-function ContextOverviewSection({ overview, sourceLinks, showPhases }: { overview: ContextOverview; sourceLinks: (ids: string[]) => ReactNode; showPhases: boolean }) {
+function ContextOverviewSection({ overview, sourceLinks, fallbackPhases }: { overview: ContextOverview; sourceLinks: (ids: string[]) => ReactNode; fallbackPhases: ContextOverview["phases"] }) {
   return <section className="context-overview" id="context" aria-label="脈絡總覽">
     <header className="context-overview-heading"><p className="eyebrow">先把問題拆開</p><h2>{overview.headline}</h2><p>{overview.summary}</p></header>
     <nav className="case-map-nav" aria-label="案情五問">
@@ -113,7 +113,7 @@ function ContextOverviewSection({ overview, sourceLinks, showPhases }: { overvie
     <div className="context-lanes" id="responsibility-lines" aria-label="責任與狀態分線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
       <p>{lane.label}</p><h3>{lane.finding}</h3><details><summary>證據界線</summary><p>{lane.proofScope}</p></details><div className="citations">{sourceLinks(lane.sources.map(({ publicRef }) => publicRef))}</div>
     </article>)}</div>
-    {showPhases && <div className="context-phases" aria-label="事件階段">{overview.phases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
+    {fallbackPhases.length > 0 && <div className="context-phases" aria-label="其他事件階段">{fallbackPhases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
       <div className="context-phase-index"><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div>
       <div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="context-turning-point"><strong>轉折</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div>
     </article>)}</div>}
@@ -169,7 +169,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedTimelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
@@ -184,7 +184,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
     <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
-    {contextOverview && <ContextOverviewSection overview={contextOverview} sourceLinks={sourceLinks} showPhases={timelinePhases.length === 0} />}
+    {contextOverview && <ContextOverviewSection overview={contextOverview} sourceLinks={sourceLinks} fallbackPhases={unphasedContextPhases} />}
     {timelineGroups.length > 0 && <ChronologySection phases={timelinePhases} unphasedGroups={unphasedTimelineGroups} timelineGroups={timelineGroups} sourceLinks={sourceLinks} />}
     {proceedingTracks.length > 0 && <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} />}
     {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}

@@ -25,6 +25,7 @@ export type DossierPageModel = {
   sourceById: Map<string, PublicSource>;
   timelineGroups: TimelineGroup[];
   timelinePhases: TimelinePhaseModel[];
+  unphasedContextPhases: ContextOverview["phases"];
   unphasedTimelineGroups: TimelineGroup[];
   latestTimelineEvent?: ReportedEvent;
 };
@@ -69,18 +70,21 @@ export function buildDossierPageModel(
     groups.set(key, group);
     return groups;
   }, new Map<string, { key: string; label: string; events: ReportedEvent[] }>()).values());
-  const timelinePhases = (projection.contextOverview?.phases ?? [])
-    .filter((phase) => phase.eventKeys && phase.eventKeys.length > 0)
-    .map((phase) => {
+  const contextPhases = projection.contextOverview?.phases ?? [];
+  const timelinePhaseEntries = contextPhases
+    .map((phase, phaseIndex) => {
       const eventKeys = new Set(phase.eventKeys);
       const groups = timelineGroups.flatMap((group) => {
         const events = group.events.filter((event) => eventKeys.has(event.publicKey));
         return events.length > 0 ? [{ ...group, events }] : [];
       });
-      return { ...phase, groups };
+      return { phase, phaseIndex, groups };
     })
     .filter(({ groups }) => groups.length > 0);
+  const timelinePhases = timelinePhaseEntries.map(({ phase, groups }) => ({ ...phase, groups }));
   const phasedEventKeys = new Set(timelinePhases.flatMap(({ eventKeys = [] }) => eventKeys));
+  const representedPhaseIndexes = new Set(timelinePhaseEntries.map(({ phaseIndex }) => phaseIndex));
+  const unphasedContextPhases = contextPhases.filter((_, phaseIndex) => !representedPhaseIndexes.has(phaseIndex));
   const unphasedTimelineGroups = timelinePhases.length === 0 ? timelineGroups : timelineGroups.flatMap((group) => {
     const events = group.events.filter((event) => !phasedEventKeys.has(event.publicKey));
     return events.length > 0 ? [{ ...group, events }] : [];
@@ -122,6 +126,7 @@ export function buildDossierPageModel(
     sourceById: new Map(publicSources.map((item) => [item.publicRef, item])),
     timelineGroups,
     timelinePhases,
+    unphasedContextPhases,
     unphasedTimelineGroups,
     latestTimelineEvent: timeline.at(-1),
   };

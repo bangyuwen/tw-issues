@@ -708,7 +708,7 @@ test("model preserves context overview and collects lane and phase sources", () 
   const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
   const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };
   const proceedingSource = { ...source, publicRef: "proceeding-source", publisher: "程序來源" };
-  const model = buildDossierPageModel({
+  const evidence: PublicEvidenceProjection = {
     topicId: "context-overview",
     claims: [claim],
     attributedClaims: [],
@@ -717,14 +717,23 @@ test("model preserves context overview and collects lane and phase sources", () 
       headline: "先拆開問題",
       summary: "不同程序回答不同問題。",
       lanes: [{ kind: "administrative", label: "行政", finding: "有行政缺失", proofScope: "不等於刑事責任", sources: [laneSource] }],
-      phases: [{ period: "2022", title: "爭議爆發", summary: "公開事件", turningPoint: "程序不同", eventKeys: ["event-phase"], sources: [phaseSource] }],
+      phases: [
+        { period: "2022", title: "第一階段：程序建檔", summary: "公開事件", turningPoint: "程序不同", eventKeys: ["event-phase"], sources: [phaseSource] },
+        { period: "2023", title: "沒有事件鍵的補充階段", summary: "仍應出現在脈絡總覽。", turningPoint: "保留舊資料相容性", sources: [phaseSource] },
+      ],
     },
     proceedingTracks: [{ kind: "administrative", label: "行政調查", body: "測試機關", question: "有無行政缺失？", conclusion: "已作成調查結論。", effect: "要求改善。", doesNotConclude: ["不等於刑事有罪。"], status: "已公布", nextStep: "追查改善", sources: [proceedingSource] }],
     reportedTimeline: [{ publicKey: "event-phase", occurredAt: "2022-07", precision: "month", kindLabel: "調查", headline: "爭議爆發", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] }],
-  });
-  assert.equal(model.contextOverview?.phases.length, 1);
+  };
+  const model = buildDossierPageModel(evidence);
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={evidence} />);
+
+  assert.equal(model.contextOverview?.phases.length, 2);
   assert.equal(model.timelinePhases[0]?.groups[0]?.events[0]?.publicKey, "event-phase");
+  assert.deepEqual(model.unphasedContextPhases.map(({ title }) => title), ["沒有事件鍵的補充階段"]);
   assert.equal(model.unphasedTimelineGroups.length, 0);
+  assert.equal(html.match(/第一階段：程序建檔/g)?.length, 1);
+  assert.equal(html.match(/沒有事件鍵的補充階段/g)?.length, 1);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
   assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
   assert.equal(model.sourceById.get("proceeding-source")?.publisher, "程序來源");
