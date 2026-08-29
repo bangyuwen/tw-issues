@@ -800,6 +800,12 @@ test("model preserves context overview and collects lane and phase sources", () 
   assert.equal(html.match(/沒有事件鍵的補充階段/g)?.length, 1);
   assert.equal(html.match(/第二階段：程序追蹤/g)?.length, 1);
   assert.equal(html.match(/轉折 · TW Issues 分析/g)?.length, 3);
+  assert.match(html, /從 3 個問題進入/);
+  assert.match(html, /href="#progress"/);
+  assert.match(html, /href="#responsibility-lines"/);
+  assert.match(html, /href="#proceedings"/);
+  assert.doesNotMatch(html, /href="#narratives"/);
+  assert.doesNotMatch(html, /href="#questions"/);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
   assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
   assert.equal(model.sourceById.get("proceeding-source")?.publisher, "程序來源");

@@ -99,16 +99,24 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
   </section>;
 }
 
-function ContextOverviewSection({ overview, sourceLinks, fallbackPhases }: { overview: ContextOverview; sourceLinks: (ids: string[]) => ReactNode; fallbackPhases: ContextOverview["phases"] }) {
+function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availableSections }: {
+  overview: ContextOverview;
+  sourceLinks: (ids: string[]) => ReactNode;
+  fallbackPhases: ContextOverview["phases"];
+  availableSections: { timeline: boolean; proceedings: boolean; narratives: boolean; questions: boolean };
+}) {
+  const caseMapQuestions = [
+    ...(availableSections.timeline ? [{ href: "#progress", label: "事情怎麼發生？" }] : []),
+    { href: "#responsibility-lines", label: "屬於哪條責任線？" },
+    ...(availableSections.proceedings ? [{ href: "#proceedings", label: "各程序結論了什麼？" }] : []),
+    ...(availableSections.narratives ? [{ href: "#narratives", label: "政治框架怎麼變？" }] : []),
+    ...(availableSections.questions ? [{ href: "#questions", label: "還有哪些事沒答案？" }] : []),
+  ];
   return <section className="context-overview" id="context" aria-label="脈絡總覽">
     <header className="context-overview-heading"><p className="eyebrow">先把問題拆開</p><h2>{overview.headline}</h2><p>{overview.summary}</p></header>
-    <nav className="case-map-nav" aria-label="案情五問">
-      <span>從五個問題進入</span>
-      <a href="#progress"><b>01</b>事情怎麼發生？</a>
-      <a href="#responsibility-lines"><b>02</b>屬於哪條責任線？</a>
-      <a href="#proceedings"><b>03</b>各程序結論了什麼？</a>
-      <a href="#narratives"><b>04</b>政治框架怎麼變？</a>
-      <a href="#questions"><b>05</b>還有哪些事沒答案？</a>
+    <nav className="case-map-nav" aria-label="案情問題導覽">
+      <span>從 {caseMapQuestions.length} 個問題進入</span>
+      {caseMapQuestions.map(({ href, label }, index) => <a href={href} key={href}><b>{String(index + 1).padStart(2, "0")}</b>{label}</a>)}
     </nav>
     <div className="context-lanes" id="responsibility-lines" aria-label="責任與狀態分線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
       <p>{lane.label}</p><h3>{lane.finding}</h3><details><summary>證據界線</summary><p>{lane.proofScope}</p></details><div className="citations">{sourceLinks(lane.sources.map(({ publicRef }) => publicRef))}</div>
@@ -184,7 +192,17 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
     <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
-    {contextOverview && <ContextOverviewSection overview={contextOverview} sourceLinks={sourceLinks} fallbackPhases={unphasedContextPhases} />}
+    {contextOverview && <ContextOverviewSection
+      overview={contextOverview}
+      sourceLinks={sourceLinks}
+      fallbackPhases={unphasedContextPhases}
+      availableSections={{
+        timeline: timelineGroups.length > 0,
+        proceedings: proceedingTracks.length > 0,
+        narratives: politicalNarratives.length > 0,
+        questions: unresolved.claims.length > 0,
+      }}
+    />}
     {timelineGroups.length > 0 && <ChronologySection phases={timelinePhases} unphasedGroups={unphasedTimelineGroups} timelineGroups={timelineGroups} sourceLinks={sourceLinks} />}
     {proceedingTracks.length > 0 && <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} />}
     {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}
