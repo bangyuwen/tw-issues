@@ -115,6 +115,57 @@ test("topic page publishes a proceeding-track-only projection", () => {
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 
+test("topic page publishes an administration-action-only projection with actor and evidence boundaries", () => {
+  const actionSource = { ...source, publicRef: "action-source", publisher: "行動來源" };
+  const evidence: PublicEvidenceProjection = {
+    topicId: "administration-action-only",
+    claims: [],
+    attributedClaims: [],
+    openQuestions: [],
+    administrationActions: [
+      {
+        publicKey: "action-late",
+        occurredAt: "2025-09-11",
+        period: "2025 年 9 月",
+        administrationPhase: "代理市長期間",
+        actor: { name: "測試市政府", role: "主管機關" },
+        headline: "另案辦理改善工程",
+        action: "市府完成工程決標並安排開工。",
+        outcome: "工程已開工，驗收仍待完成。",
+        status: "ongoing",
+        proofScope: "只證明市府完成決標與開工程序。",
+        limitations: ["不等於工程已驗收合格。"],
+        sources: [actionSource],
+      },
+      {
+        publicKey: "action-early",
+        occurredAt: "2023-02-15",
+        period: "2023 年 2 月",
+        administrationPhase: "市長在任期間",
+        actor: { name: "測試市政府", role: "主管機關" },
+        headline: "成立工程體檢會",
+        action: "市府邀集專家檢視工程與採購問題。",
+        outcome: "體檢會已成立。",
+        status: "completed",
+        proofScope: "只證明體檢會成立及任務範圍。",
+        limitations: ["不等於體檢結論已獲法院採認。"],
+        sources: [actionSource],
+      },
+    ],
+  };
+  const model = buildDossierPageModel(evidence);
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={evidence} />);
+
+  assert.deepEqual(model.administrationActions.map(({ publicKey }) => publicKey), ["action-early", "action-late"]);
+  assert.equal(model.sourceById.get("action-source")?.publisher, "行動來源");
+  assert.match(html, /高虹安市府上任後做了什麼？/);
+  assert.match(html, /以下整理任期內市府或所屬機關的可回查行動/);
+  assert.match(html, /測試市政府/);
+  assert.match(html, /工程已開工，驗收仍待完成。/);
+  assert.match(html, /href="#administration-actions"/);
+  assert.doesNotMatch(html, /id="proceedings"/);
+});
+
 test("topic page does not treat unrendered attributedClaims as evidence", () => {
   const html = renderToStaticMarkup(
     <TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
@@ -837,6 +888,7 @@ test("model preserves context overview and collects lane and phase sources", () 
   assert.match(html, /href="#progress"/);
   assert.match(html, /href="#responsibility-lines"/);
   assert.match(html, /href="#proceedings"/);
+  assert.doesNotMatch(html, /href="#administration-actions"/);
   assert.doesNotMatch(html, /href="#narratives"/);
   assert.doesNotMatch(html, /href="#questions"/);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");

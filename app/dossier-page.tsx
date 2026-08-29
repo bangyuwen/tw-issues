@@ -1,6 +1,6 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
-import type { ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile } from "./topic-data";
+import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel, TimelineGroup, TimelinePhaseModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -103,11 +103,12 @@ function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availab
   overview: ContextOverview;
   sourceLinks: (ids: string[]) => ReactNode;
   fallbackPhases: ContextOverview["phases"];
-  availableSections: { timeline: boolean; proceedings: boolean; narratives: boolean; questions: boolean };
+  availableSections: { timeline: boolean; administrationActions: boolean; proceedings: boolean; narratives: boolean; questions: boolean };
 }) {
   const caseMapQuestions = [
     ...(availableSections.timeline ? [{ href: "#progress", label: "事情怎麼發生？" }] : []),
     { href: "#responsibility-lines", label: "屬於哪條責任線？" },
+    ...(availableSections.administrationActions ? [{ href: "#administration-actions", label: "市府實際做了什麼？" }] : []),
     ...(availableSections.proceedings ? [{ href: "#proceedings", label: "各程序結論了什麼？" }] : []),
     ...(availableSections.narratives ? [{ href: "#narratives", label: "政治框架怎麼變？" }] : []),
     ...(availableSections.questions ? [{ href: "#questions", label: "還有哪些事沒答案？" }] : []),
@@ -171,6 +172,23 @@ function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks
   </section>;
 }
 
+const administrationActionStatusCopy = {
+  completed: "已執行",
+  ongoing: "進行中",
+  mixed: "已執行・結果未定",
+} as const;
+
+function AdministrationActionsSection({ actions, sourceLinks }: { actions: AdministrationAction[]; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <section className="evidence-section administration-actions-section" id="administration-actions" aria-label="高虹安市府治理行動">
+    <div className="section-intro"><p className="eyebrow">治理行動稽核</p><h2>高虹安市府上任後做了什麼？</h2><p>以下整理任期內市府或所屬機關的可回查行動；「市府做過」不等於高虹安本人親自執行，也不代表行動已經解決爭議。</p></div>
+    <aside className="administration-attribution-boundary"><strong>先看執行者</strong><p>卡片逐項標示當時的市長與機關。高虹安停職期間由邱臣遠代理，該段工程與行政作業列為代理市長時期的市府行動。</p></aside>
+    <div className="administration-action-matrix">{actions.map((item, index) => <article className={`administration-action-row administration-action-row--${item.status}`} key={item.publicKey}>
+      <header><span>{String(index + 1).padStart(2, "0")}</span><time dateTime={item.occurredAt}>{item.period}</time><p>{item.administrationPhase}</p><strong>{administrationActionStatusCopy[item.status]}</strong></header>
+      <div className="administration-action-body"><p className="administration-action-actor"><strong>{item.actor.name}</strong><span>{item.actor.role}</span></p><h3>{item.headline}</h3><dl><div><dt>採取行動</dt><dd>{item.action}</dd></div><div><dt>可觀察結果</dt><dd>{item.outcome}</dd></div></dl><aside><strong>證據界線</strong><p>{item.proofScope}</p><ul>{item.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></aside><div className="citations">{sourceLinks(item.sources.map(({ publicRef }) => publicRef))}</div></div>
+    </article>)}</div>
+  </section>;
+}
+
 function ProceedingTracksSection({ tracks, sourceLinks }: { tracks: ProceedingTrack[]; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="evidence-section proceedings-section" id="proceedings" aria-label="責任與程序結果對照">
     <div className="section-intro"><p className="eyebrow">責任與程序</p><h2>同一爭議，{tracks.length} 個程序各自回答什麼？</h2><p>這裡對照調查主體、問題、結論與效力。某一程序的結果，不能自動覆蓋另一條責任線。</p></div>
@@ -189,7 +207,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
@@ -203,13 +221,14 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}{verified.claims.length > 0 && <a href="#claims">已知資訊</a>}{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">案情地圖</a>}{timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>}{administrationActions.length > 0 && <a href="#administration-actions">市府行動</a>}{proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{unresolved.claims.length > 0 && <a href="#questions">未決問題</a>}{verified.claims.length > 0 && <a href="#claims">已知資訊</a>}{publicPeople.length > 0 && <a href="#people">人物索引</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
     {contextOverview && <ContextOverviewSection
       overview={contextOverview}
       sourceLinks={sourceLinks}
       fallbackPhases={unphasedContextPhases}
       availableSections={{
         timeline: timelineGroups.length > 0,
+        administrationActions: administrationActions.length > 0,
         proceedings: proceedingTracks.length > 0,
         narratives: politicalNarratives.length > 0,
         questions: unresolved.claims.length > 0,
@@ -226,6 +245,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
         unresolved: unresolved.claims.length > 0,
       }}
     />}
+    {administrationActions.length > 0 && <AdministrationActionsSection actions={administrationActions} sourceLinks={sourceLinks} />}
     {proceedingTracks.length > 0 && <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} />}
     {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}
     <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />

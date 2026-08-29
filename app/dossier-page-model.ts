@@ -1,4 +1,4 @@
-import type { AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
+import type { AdministrationAction, AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
 
 export type ClaimCollectionModel = {
   id: "claims" | "questions";
@@ -14,6 +14,7 @@ export type DossierPageModel = {
   collections: ClaimCollectionModel[];
   attributedSpeakerGroups: AttributedSpeakerGroup[];
   contextOverview?: ContextOverview;
+  administrationActions: AdministrationAction[];
   proceedingTracks: ProceedingTrack[];
   publicPeople: PublicPersonProfile[];
   politicalNarratives: PoliticalNarrative[];
@@ -93,6 +94,10 @@ export function buildDossierPageModel(
     .map((narrative, ledgerIndex) => ({ narrative, ledgerIndex }))
     .sort((a, b) => a.narrative.occurredAt.localeCompare(b.narrative.occurredAt) || a.ledgerIndex - b.ledgerIndex)
     .map(({ narrative }) => narrative);
+  const administrationActions = (projection.administrationActions ?? [])
+    .map((action, ledgerIndex) => ({ action, ledgerIndex }))
+    .sort((a, b) => a.action.occurredAt.localeCompare(b.action.occurredAt) || a.ledgerIndex - b.ledgerIndex)
+    .map(({ action }) => action);
   const publicSources = Array.from(new Map([
     ...collections.flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
     ...(projection.attributedSpeakerGroups ?? []).flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
@@ -100,6 +105,7 @@ export function buildDossierPageModel(
     ...(projection.editorialPositions ?? []).flatMap(({ sources }) => sources),
     ...(projection.contextOverview?.lanes ?? []).flatMap(({ sources }) => sources),
     ...(projection.contextOverview?.phases ?? []).flatMap(({ sources }) => sources),
+    ...administrationActions.flatMap(({ sources }) => sources),
     ...(projection.proceedingTracks ?? []).flatMap(({ sources }) => sources),
     ...(projection.publicPeople ?? []).flatMap(({ sources }) => sources),
     ...politicalNarratives.flatMap(({ sources, amplification = [] }) => [
@@ -115,6 +121,7 @@ export function buildDossierPageModel(
     collections,
     attributedSpeakerGroups: projection.attributedSpeakerGroups ?? [],
     contextOverview: projection.contextOverview,
+    administrationActions,
     proceedingTracks: projection.proceedingTracks ?? [],
     publicPeople: projection.publicPeople ?? [],
     politicalNarratives,

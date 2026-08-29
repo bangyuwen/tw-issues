@@ -7,6 +7,7 @@ export type PublicEvidenceProjection = {
   attributedClaims: PublicClaim[];
   attributedSpeakerGroups?: AttributedSpeakerGroup[];
   contextOverview?: ContextOverview;
+  administrationActions?: AdministrationAction[];
   proceedingTracks?: ProceedingTrack[];
   publicPeople?: PublicPersonProfile[];
   politicalNarratives?: PoliticalNarrative[];
@@ -43,6 +44,21 @@ export type ContextOverview = {
     eventKeys?: string[];
     sources: PublicSource[];
   }>;
+};
+
+export type AdministrationAction = {
+  publicKey: string;
+  occurredAt: string;
+  period: string;
+  administrationPhase: string;
+  actor: PublicSpeaker;
+  headline: string;
+  action: string;
+  outcome: string;
+  status: "completed" | "ongoing" | "mixed";
+  proofScope: string;
+  limitations: string[];
+  sources: PublicSource[];
 };
 
 export type ProceedingTrack = {

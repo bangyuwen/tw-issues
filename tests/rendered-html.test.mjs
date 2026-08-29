@@ -101,6 +101,18 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "從重建計畫走到統包工程",
     "調查、改善與選舉攻防同時展開",
     "不起訴不是句點",
+    "高虹安市府上任後做了什麼？",
+    "不等於高虹安本人親自執行",
+    "盤點缺失、暫不承接 WBC 熱身賽",
+    "成立工程體檢會並委託外部場務檢測",
+    "解除部分球場工程契約",
+    "邱臣遠代理市長期間",
+    "移除超載覆土並完成清運",
+    "另案發包改善工程，重建基底、排水、結構與草皮",
+    "高虹安復職後",
+    "與龍來終止原營運關係",
+    "工程已竣工並進入驗收",
+    "原訂時程曾多次後移",
     "沈慧虹",
     "林耕仁",
     "黃國昌",
@@ -123,8 +135,12 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="context-lanes"/);
   assert.match(html, /class="chronology-phases"/);
   assert.match(html, /class="proceeding-matrix"/);
+  assert.match(html, /class="administration-action-matrix"/);
+  assert.match(html, /href="#administration-actions"/);
   assert.doesNotMatch(html, /class="context-phases"/);
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
+  assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
+  assert.ok(html.indexOf('id="administration-actions"') < html.indexOf('id="proceedings"'), "administration action audit precedes proceeding outcomes");
   assert.ok(html.indexOf("朱立倫將球場爭議放入政黨治理攻防") < html.indexOf("高虹安把球場放入市政治理與廉能攻防"), "political narratives render in chronological order");
   assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).filter(Boolean).length >= 6, true);
   assert.doesNotMatch(html, /展開其餘 2 項調查中的問題/);

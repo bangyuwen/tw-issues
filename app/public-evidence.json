@@ -238,6 +238,378 @@
         }
       ]
     },
+    "administrationActions": [
+      {
+        "publicKey": "action-01-safety-pause-and-evidence-handoff",
+        "occurredAt": "2023-01-05",
+        "period": "2023 年 1 月 5–6 日",
+        "administrationPhase": "高虹安市長任內",
+        "actor": {
+          "name": "新竹市政府",
+          "role": "市長高虹安與市府團隊"
+        },
+        "headline": "盤點缺失、暫不承接 WBC 熱身賽",
+        "action": "市府公布初步盤點的 152 項待改善事項，決定不以尚未完成安全確認的球場承接經典賽熱身賽；隔日由發言人將實物與影像資料送交新竹地檢署。",
+        "outcome": "市府先把球場維持停用，並把手上資料交由檢方納入既有偵查；後續是否構成犯罪，仍由司法機關判斷。",
+        "status": "completed",
+        "proofScope": "來源可證明市府曾公布盤點、放棄承接熱身賽並送交事證，不能單靠這兩份來源確認每一項缺失的技術成因或刑事責任。",
+        "limitations": [
+          "「152 項」是市府當時的盤點口徑，不等於 152 項均已由獨立鑑定確認。",
+          "送交資料只代表提供偵查線索，不代表被點名者有罪。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-16",
+            "canonicalUrl": "https://news.pts.org.tw/article/617408",
+            "title": "新竹棒球場盤點出152項缺失 高虹安：不辦經典賽熱身賽",
+            "publisher": "公視新聞網",
+            "publishedAt": "2023-01-05",
+            "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-17",
+            "canonicalUrl": "https://dep-administration.hccg.gov.tw/ch/home.jsp?dataserno=202301060002&id=6&mcustomize=municipalnews_view.jsp&mserno=201601300333&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹市政府發言人施淑婷今赴新竹地檢署按鈴 送交棒球場事證",
+            "publisher": "新竹市政府",
+            "publishedAt": "2023-01-06",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-02-inspection-and-external-testing",
+        "occurredAt": "2023-02-15",
+        "period": "2023 年 2–8 月",
+        "administrationPhase": "高虹安市長任內",
+        "actor": {
+          "name": "新竹市政府工務處／工程體檢會",
+          "role": "市府工程與外部專業協作"
+        },
+        "headline": "成立工程體檢會並委託外部場務檢測",
+        "action": "市府成立跨領域工程體檢會，安排技師鑑定、現場開挖與土壤檢測，並邀請 BrightView 場務團隊評估場地排水與材料條件。",
+        "outcome": "市府在 2023 年 8 月公開 BrightView 報告並送交檢方，作為後續改善設計與偵查評估的材料之一。",
+        "status": "completed",
+        "proofScope": "官方資料與檢方回應可確認體檢機制、委託與報告送交；報告本身的發現只及於受檢範圍，不是完整責任判決。",
+        "limitations": [
+          "外部技術報告可協助判讀場地狀況，不能取代法院、監察院或契約程序的責任認定。",
+          "市府當時提出的改善與啟用時程後來持續調整，不能以早期目標當成實際完成日。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-18",
+            "canonicalUrl": "https://www.hccg.gov.tw/hccg/app/know/view?id=30211&module=municipalnews&serno=202302150004",
+            "title": "新竹市立棒球場工程體檢會成立暨工作說明",
+            "publisher": "新竹市政府",
+            "publishedAt": "2023-02-15",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-19",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202308240233.aspx",
+            "title": "竹檢：收到棒球場檢測報告 納偵辦案件綜合評估",
+            "publisher": "中央社",
+            "publishedAt": "2023-08-24",
+            "displayRole": "司法進度報導"
+          },
+          {
+            "publicRef": "source-20",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=202305310003&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300089&parentpath=0%2C4&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹棒球場正式開挖！高虹安市長力邀美國大聯盟場務專家進場改善修復 力拼明年啟用",
+            "publisher": "新竹市政府",
+            "publishedAt": "2023-05-31",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-03-ot-pause-and-asset-handover",
+        "occurredAt": "2023-05-01",
+        "period": "2023 年 5 月",
+        "administrationPhase": "高虹安市長任內",
+        "actor": {
+          "name": "新竹市政府教育處",
+          "role": "OT 契約主管機關"
+        },
+        "headline": "暫停龍來 OT 營運、完成資產點還",
+        "action": "市府與龍來公司協商後，自 5 月 1 日起暫停原 OT 契約履行，並完成營運資產點還，使場地回到市府可進場檢測與改善的狀態。",
+        "outcome": "球場未恢復營運，市府得以接續安排開挖、鑑定與改善；原 OT 關係當時只是暫停，直到 2026 年才另行終止。",
+        "status": "completed",
+        "proofScope": "市府資料可證明協商、暫停履約與資產點還的行政動作；不能因此推論雙方全部契約爭議已解決。",
+        "limitations": [
+          "暫停履約不等於終止契約，也不等於已決定未來球場營運者。",
+          "取得進場條件只是改善前置作業，不代表場地已可安全比賽。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-20",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=202305310003&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300089&parentpath=0%2C4&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹棒球場正式開挖！高虹安市長力邀美國大聯盟場務專家進場改善修復 力拼明年啟用",
+            "publisher": "新竹市政府",
+            "publishedAt": "2023-05-31",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-04-internal-accountability-referral",
+        "occurredAt": "2023-07-01",
+        "period": "2023 年 7 月至 2024 年 1 月",
+        "administrationPhase": "高虹安市長任內",
+        "actor": {
+          "name": "新竹市政府政風處與人事單位",
+          "role": "內部行政調查"
+        },
+        "headline": "啟動內部責任調查，懲處 2 人、函送 6 人名單",
+        "action": "市府表示內部檢視 8 名相關人員後，對 2 人作行政懲處，並將包含前市長林智堅在內的 6 人資料函送監察院調查。",
+        "outcome": "監察院確認收到名單；其後公布的是對機關工程治理的糾正，個別人員是否另有行政責任，仍須看具體調查與處分。",
+        "status": "mixed",
+        "proofScope": "中央社報導可確認市府說明的內部處理及監察院收件，不足以證明名單中的任何人違法或應負刑責。",
+        "limitations": [
+          "函送調查不是懲戒或有罪認定；報導亦收錄反對黨議員質疑，不能只呈現市府單方定性。",
+          "市府公開資訊未完整揭示個別懲處理由、證據與後續救濟結果。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-15",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202401260271.aspx",
+            "title": "新竹棒球場案6人送監察院 綠議員：至今查無不法",
+            "publisher": "中央社",
+            "publishedAt": "2024-01-26",
+            "displayRole": "地方議員公開說法"
+          },
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-05-partial-termination-and-redesign",
+        "occurredAt": "2024-03-01",
+        "period": "2024 年 3–6 月",
+        "administrationPhase": "高虹安市長任內",
+        "actor": {
+          "name": "新竹市政府工務處",
+          "role": "原工程與改善設計主管機關"
+        },
+        "headline": "解除部分球場工程契約，另定人工草皮改善方向",
+        "action": "市府在 3 月 1 日解除原統包商部分球場工程契約，將覆土移除與球場重啟改採分項辦理；6 月體檢會再決議以人工草皮作為後續設計方向。",
+        "outcome": "原統包商仍處理未解除的缺失改善，球場核心區域則另案設計與招標，形成兩條並行的工程路徑。",
+        "status": "mixed",
+        "proofScope": "市府公告可確認部分解約、分項改善與人工草皮決策；這些是契約與工程管理措施，不是法院對原統包商責任的終局判決。",
+        "limitations": [
+          "部分解約不等於解除整份契約，也不自動證明廠商所有爭議行為成立。",
+          "選定人工草皮只是設計方向，和決標、施工、驗收及正式重啟是不同節點。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-21",
+            "canonicalUrl": "https://www.hccg.gov.tw/hccg/app/know/view?id=30211&module=municipalnews&serno=202406260007",
+            "title": "市府召開棒球場第5次體檢會 棒球場重啟採人工草皮方案 統包商結構計算不符合法規",
+            "publisher": "新竹市政府",
+            "publishedAt": "2024-06-26",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-23",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=c3655c26-02b5-4c28-81c5-118c159e855a&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300036&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "竹市議會棒球場小組第6次會議 市府：安全第一、品質優先",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-11-07",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-06-overburden-removal",
+        "occurredAt": "2025-02-20",
+        "period": "2025 年 2–4 月",
+        "administrationPhase": "邱臣遠代理市長期間",
+        "actor": {
+          "name": "新竹市政府工務處",
+          "role": "邱臣遠代理市長任內"
+        },
+        "headline": "移除超載覆土並完成清運",
+        "action": "法院囑託的鑑定報告完成後，市府依證據保全程序推進覆土移除，清除地下室頂板上方超出安全載重條件的土層。",
+        "outcome": "市府表示在 4 月 12 日完成超載覆土清除與外運，讓後續回填土篩分及改善工程得以銜接。",
+        "status": "completed",
+        "proofScope": "報導可確認鑑定報告的載重判讀與市府後續清運；它處理的是結構載重及證據保全範圍，不是整起案件的刑事結論。",
+        "limitations": [
+          "法院當時表示沒有發現受託公會故意拖延鑑定的事證，不能把工期延誤全歸因於公會。",
+          "完成覆土清運不等於排水、草皮、結構補強與全場驗收都已完成。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-22",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202502200410.aspx",
+            "title": "新竹棒球場鑑定報告未達安全程度 市府移除覆土",
+            "publisher": "中央社",
+            "publishedAt": "2025-02-20",
+            "displayRole": "司法與工程進度報導"
+          },
+          {
+            "publicRef": "source-23",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=c3655c26-02b5-4c28-81c5-118c159e855a&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300036&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "竹市議會棒球場小組第6次會議 市府：安全第一、品質優先",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-11-07",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-07-additional-criminal-complaint",
+        "occurredAt": "2025-07-11",
+        "period": "2025 年 7 月 11 日",
+        "administrationPhase": "邱臣遠代理市長期間",
+        "actor": {
+          "name": "新竹市政府",
+          "role": "代理市長邱臣遠與市府團隊"
+        },
+        "headline": "依施工影像與材料爭議另案提出告發",
+        "action": "市府表示取得施工影像後，針對開挖範圍、土壤去向及填入材料等疑點另行遞狀告發，請司法機關調查可能涉及的法令責任。",
+        "outcome": "形成一條與原棒球場偵查相互關聯、但法律標的未必相同的調查線；公開來源尚無最終偵查結果。",
+        "status": "mixed",
+        "proofScope": "市府新聞稿只能證明市府宣稱已遞狀並提出哪些疑點，不能證明被指控的施工情節已由司法機關確認。",
+        "limitations": [
+          "告發不是起訴，也不是有罪判決。",
+          "這條程序是否與 2026 年 8 月公布的不起訴案件完全相同，仍須以案號與處分書確認。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-24",
+            "canonicalUrl": "https://ltc.hccg.gov.tw/hccg/app/data/view?id=30211&module=municipalnews&serno=202507140006",
+            "title": "立委率團考察新竹棒球場 竹市府強調持續全面改善、依法究責",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-07-14",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-08-rebuild-contract-to-acceptance",
+        "occurredAt": "2025-09-11",
+        "period": "2025 年 9 月至 2026 年 8 月",
+        "administrationPhase": "邱臣遠代理市長任內決標開工；高虹安復職後竣工",
+        "actor": {
+          "name": "新竹市政府工務處",
+          "role": "跨代理與復職兩階段執行"
+        },
+        "headline": "另案發包改善工程，重建基底、排水、結構與草皮",
+        "action": "改善工程歷經多次流標後於 2025 年 9 月 11 日決標、9 月 30 日開工，範圍包含場地基底與草皮重建、排水優化及鋼構安全補強。",
+        "outcome": "高虹安於 2025 年 12 月 18 日復職；市府稱工程在 2026 年 8 月 20 日竣工並進入驗收，但性能測試與正式重啟仍待完成。原訂時程曾多次後移。",
+        "status": "ongoing",
+        "proofScope": "來源可把決標、開工、市長職務交接與竣工進入驗收串起來；它們不能替代驗收紀錄、性能測試結果或正式開場決定。",
+        "limitations": [
+          "「決標」「開工」「竣工」「驗收合格」「正式重啟」是五個不同狀態，不能合併成已恢復職棒。",
+          "工程橫跨代理市長與高虹安復職兩段，不能把全部執行成果歸於單一個人。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-25",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=8bc1e88f-947f-4cbe-9ca1-349fe21d413d&id=16&mcustomize=municipalnews_view.jsp&mserno=201604040001&parentpath=&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹市立棒球場改善工程順利決標將開工！邱臣遠代理市長：重返賽事舞台邁出關鍵一步",
+            "publisher": "新竹市政府",
+            "publishedAt": "2025-09-11",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-26",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202512180034.aspx",
+            "title": "支持者簇擁復職回新竹市府 高虹安：我回來上班了",
+            "publisher": "中央社",
+            "publishedAt": "2025-12-18",
+            "displayRole": "人事與治理進度報導"
+          },
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-20",
+            "canonicalUrl": "https://dep-publicwork.hccg.gov.tw/ch/home.jsp?dataserno=202305310003&id=16&mcustomize=municipalnews_view.jsp&mserno=201601300089&parentpath=0%2C4&t=MunicipalNews&toolsflag=Y",
+            "title": "新竹棒球場正式開挖！高虹安市長力邀美國大聯盟場務專家進場改善修復 力拼明年啟用",
+            "publisher": "新竹市政府",
+            "publishedAt": "2023-05-31",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-21",
+            "canonicalUrl": "https://www.hccg.gov.tw/hccg/app/know/view?id=30211&module=municipalnews&serno=202406260007",
+            "title": "市府召開棒球場第5次體檢會 棒球場重啟採人工草皮方案 統包商結構計算不符合法規",
+            "publisher": "新竹市政府",
+            "publishedAt": "2024-06-26",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-09-operating-relationship-reset",
+        "occurredAt": "2026-03-21",
+        "period": "2026 年 3 月 21 日",
+        "administrationPhase": "高虹安復職後",
+        "actor": {
+          "name": "新竹市政府／龍來球場公司",
+          "role": "原 OT 契約雙方"
+        },
+        "headline": "與龍來終止原營運關係，轉為青少年培育合作",
+        "action": "市府與龍來公司終止原球場 OT 營運關係，另規劃自下一學年度起投入 3 年青少年棒球培育合作。",
+        "outcome": "原有營運爭議不再以恢復舊 OT 關係處理；球場未來由誰營運、何時恢復職棒，仍須另行決定。",
+        "status": "mixed",
+        "proofScope": "中央社報導可確認雙方宣布終止原營運關係及新的培育合作方向，不能證明未來營運模式或重啟日已定案。",
+        "limitations": [
+          "終止舊 OT 契約不等於球場已具備開放條件。",
+          "青少年培育合作與職棒場館營運是不同事項。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-07",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202603210129.aspx",
+            "title": "與龍來解約新竹棒球場：市府稱合作轉型培訓基層",
+            "publisher": "中央社",
+            "publishedAt": "2026-03-21",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "publicKey": "action-10-damages-and-procurement-review",
+        "occurredAt": "2026-08-22",
+        "period": "截至 2026 年 8 月",
+        "administrationPhase": "高虹安復職後",
+        "actor": {
+          "name": "新竹市政府",
+          "role": "契約求償與採購行政程序"
+        },
+        "headline": "主張逾 4 億元求償，啟動採購法第 101 條審查",
+        "action": "市府表示已就工期、缺失改善及另案支出等項目向相關廠商主張逾 4 億元損害，並依政府採購法第 101 條辦理是否刊登不良廠商的審查。",
+        "outcome": "求償與採購審查均仍在程序中；公開資訊尚無最終賠償額、確定判決或刊登結果。",
+        "status": "ongoing",
+        "proofScope": "報導只能確認市府提出的金額與程序主張，不能把請求金額寫成已獲賠償，也不能把審查寫成廠商已被刊登。",
+        "limitations": [
+          "市府主張、調解或訴訟請求與法院最終認定可能不同。",
+          "採購法程序仍應保留廠商陳述、救濟與主管機關最終處分空間。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      }
+    ],
     "proceedingTracks": [
       {
         "kind": "administrative",
