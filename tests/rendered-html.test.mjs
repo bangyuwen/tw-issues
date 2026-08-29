@@ -92,6 +92,14 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "完整處分書",
     "關鍵人物",
     "政治敘事與擴散",
+    "一座球場，四種問題，不能用同一個結論回答",
+    "工程與行政責任",
+    "刑事偵查結果",
+    "政治攻防與傳播",
+    "球場能否重新使用",
+    "從重建計畫走到統包工程",
+    "工程爭議轉化為市長選舉與政黨治理攻防",
+    "不起訴不是句點",
     "沈慧虹",
     "林耕仁",
     "黃國昌",
@@ -103,6 +111,10 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     assert.match(html, new RegExp(text));
   }
   assert.match(html, /class="event-progress-section"/);
+  assert.match(html, /class="context-overview" id="context"/);
+  assert.match(html, /class="context-lanes"/);
+  assert.match(html, /class="context-phases"/);
+  assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
   assert.match(html, /class="people-grid"/);
   assert.match(html, /class="narrative-matrix"/);
   assert.match(html, /id="people"/);

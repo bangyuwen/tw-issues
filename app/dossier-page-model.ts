@@ -1,4 +1,4 @@
-import type { AttributedSpeakerGroup, DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
+import type { AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
 
 export type ClaimCollectionModel = {
   id: "claims" | "questions";
@@ -13,6 +13,7 @@ export type DossierPageModel = {
   displayTitle?: string;
   collections: ClaimCollectionModel[];
   attributedSpeakerGroups: AttributedSpeakerGroup[];
+  contextOverview?: ContextOverview;
   publicPeople: PublicPersonProfile[];
   politicalNarratives: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
@@ -64,6 +65,8 @@ export function buildDossierPageModel(
     ...(projection.attributedSpeakerGroups ?? []).flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
     ...(projection.analysisClaims ?? []).flatMap(({ sources }) => sources),
     ...(projection.editorialPositions ?? []).flatMap(({ sources }) => sources),
+    ...(projection.contextOverview?.lanes ?? []).flatMap(({ sources }) => sources),
+    ...(projection.contextOverview?.phases ?? []).flatMap(({ sources }) => sources),
     ...(projection.publicPeople ?? []).flatMap(({ sources }) => sources),
     ...(projection.politicalNarratives ?? []).flatMap(({ sources, amplification = [] }) => [
       ...sources,
@@ -77,6 +80,7 @@ export function buildDossierPageModel(
     displayTitle: metadata?.displayTitle,
     collections,
     attributedSpeakerGroups: projection.attributedSpeakerGroups ?? [],
+    contextOverview: projection.contextOverview,
     publicPeople: projection.publicPeople ?? [],
     politicalNarratives: projection.politicalNarratives ?? [],
     analysisClaims: projection.analysisClaims ?? [],

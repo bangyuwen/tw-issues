@@ -6,6 +6,7 @@ export type PublicEvidenceProjection = {
   claims: PublicClaim[];
   attributedClaims: PublicClaim[];
   attributedSpeakerGroups?: AttributedSpeakerGroup[];
+  contextOverview?: ContextOverview;
   publicPeople?: PublicPersonProfile[];
   politicalNarratives?: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
@@ -21,6 +22,25 @@ export type PublicEvidenceProjection = {
     publicSafety: "PASS" | "BLOCKED";
     editorialReadiness: "PASS" | "LIMITED" | "BLOCKED";
   };
+};
+
+export type ContextOverview = {
+  headline: string;
+  summary: string;
+  lanes: Array<{
+    kind: "administrative" | "criminal" | "political" | "operational";
+    label: string;
+    finding: string;
+    proofScope: string;
+    sources: PublicSource[];
+  }>;
+  phases: Array<{
+    period: string;
+    title: string;
+    summary: string;
+    turningPoint: string;
+    sources: PublicSource[];
+  }>;
 };
 
 export type ReportedEvent = {
