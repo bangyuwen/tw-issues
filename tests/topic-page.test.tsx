@@ -679,12 +679,13 @@ test("source fragment helper opens the source section from its navigation anchor
   const summary = { focus: ({ preventScroll }: FocusOptions) => calls.push(`focus-summary:${preventScroll}`) } as unknown as HTMLElement;
   const disclosure = {
     open: false,
+    scrollIntoView: ({ block }: ScrollIntoViewOptions) => calls.push(`scroll:${block}`),
     querySelector: (selector: string) => selector === "summary" ? summary : null,
   } as unknown as HTMLDetailsElement;
 
   assert.equal(revealSourceFromHash(disclosure, "#sources", (callback) => callback()), true);
   assert.equal(disclosure.open, true);
-  assert.deepEqual(calls, ["focus-summary:true"]);
+  assert.deepEqual(calls, ["scroll:start", "focus-summary:true"]);
 });
 
 test("source fragment helper ignores absent and unrelated targets", () => {
@@ -713,12 +714,15 @@ test("source disclosure binds initial hash, clicks, hash changes, and cleanup", 
     open: false,
     contains: (candidate: unknown) => candidate === target,
     ownerDocument: { getElementById: (id: string) => id === "source-01" ? target : null },
+    scrollIntoView: () => calls.push("scroll-sources"),
+    querySelector: (selector: string) => selector === "summary" ? { focus: () => calls.push("focus-summary") } : null,
   } as unknown as HTMLDetailsElement;
   let hash = "#source-01";
   let hashListener: (() => void) | undefined;
   let clickListener: ((event: MouseEvent) => void) | undefined;
   const environment = {
     readHash: () => hash,
+    updateHash: (nextHash: string) => { hash = nextHash; calls.push(`update-hash:${nextHash}`); },
     addHashChangeListener: (listener: () => void) => { hashListener = listener; },
     removeHashChangeListener: (listener: () => void) => calls.push(`remove-hash:${listener === hashListener}`),
     addClickListener: (listener: (event: MouseEvent) => void) => { clickListener = listener; },
@@ -741,6 +745,13 @@ test("source disclosure binds initial hash, clicks, hash changes, and cleanup", 
     preventDefault: () => { prevented = true; },
   } as unknown as MouseEvent);
   assert.deepEqual([disclosure.open, prevented, hash], [true, false, fragmentBeforeClick]);
+
+  disclosure.open = false;
+  clickListener?.({
+    target: { closest: () => ({ getAttribute: () => "#sources" }) },
+    preventDefault: () => { prevented = true; },
+  } as unknown as MouseEvent);
+  assert.deepEqual([disclosure.open, prevented, hash], [true, true, "#sources"]);
 
   cleanup();
   assert.deepEqual(calls.slice(-2), ["remove-hash:true", "remove-click:true"]);

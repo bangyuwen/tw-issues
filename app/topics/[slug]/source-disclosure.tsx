@@ -7,6 +7,7 @@ type FrameScheduler = (callback: () => void) => void;
 
 type InteractionEnvironment = {
   readHash: () => string;
+  updateHash?: (hash: string) => void;
   addHashChangeListener: (listener: () => void) => void;
   removeHashChangeListener: (listener: () => void) => void;
   addClickListener: (listener: (event: MouseEvent) => void) => void;
@@ -24,7 +25,10 @@ export function revealSourceFromHash(
 
   if (hash === "#sources") {
     disclosure.open = true;
-    schedule(() => disclosure.querySelector("summary")?.focus({ preventScroll: true }));
+    schedule(() => {
+      disclosure.scrollIntoView?.({ block: "start" });
+      disclosure.querySelector("summary")?.focus({ preventScroll: true });
+    });
     return true;
   }
 
@@ -57,7 +61,12 @@ export function bindSourceDisclosureInteractions(
     if (typeof origin?.closest !== "function") return;
     const link = origin.closest('a[href^="#"]');
     const href = link?.getAttribute("href");
-    if (href) revealSourceFromHash(disclosure, href, schedule);
+    if (!href) return;
+    if (href === "#sources") {
+      event.preventDefault();
+      environment.updateHash?.(href);
+    }
+    revealSourceFromHash(disclosure, href, schedule);
   };
 
   revealCurrentSource();
@@ -83,6 +92,7 @@ export default function SourcesDisclosure({
     if (!disclosure) return;
     return bindSourceDisclosureInteractions(disclosure, {
       readHash: () => window.location.hash,
+      updateHash: (hash) => window.history.pushState(window.history.state, "", hash),
       addHashChangeListener: (listener) => window.addEventListener("hashchange", listener),
       removeHashChangeListener: (listener) => window.removeEventListener("hashchange", listener),
       addClickListener: (listener) => document.addEventListener("click", listener),
