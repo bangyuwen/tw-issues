@@ -22,6 +22,12 @@ export function revealSourceFromHash(
 ) {
   if (!hash.startsWith("#") || hash.length === 1) return false;
 
+  if (hash === "#sources") {
+    disclosure.open = true;
+    schedule(() => disclosure.querySelector("summary")?.focus({ preventScroll: true }));
+    return true;
+  }
+
   let sourceId: string;
   try {
     sourceId = decodeURIComponent(hash.slice(1));

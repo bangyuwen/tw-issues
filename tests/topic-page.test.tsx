@@ -674,6 +674,19 @@ test("source fragment helper opens, focuses, and scrolls the exact source", () =
   assert.deepEqual(calls, ["focus:true", "scroll:center"]);
 });
 
+test("source fragment helper opens the source section from its navigation anchor", () => {
+  const calls: string[] = [];
+  const summary = { focus: ({ preventScroll }: FocusOptions) => calls.push(`focus-summary:${preventScroll}`) } as unknown as HTMLElement;
+  const disclosure = {
+    open: false,
+    querySelector: (selector: string) => selector === "summary" ? summary : null,
+  } as unknown as HTMLDetailsElement;
+
+  assert.equal(revealSourceFromHash(disclosure, "#sources", (callback) => callback()), true);
+  assert.equal(disclosure.open, true);
+  assert.deepEqual(calls, ["focus-summary:true"]);
+});
+
 test("source fragment helper ignores absent and unrelated targets", () => {
   const unrelatedTarget = { matches: () => false } as unknown as HTMLElement;
   const disclosure = {
@@ -684,7 +697,7 @@ test("source fragment helper ignores absent and unrelated targets", () => {
   } as unknown as HTMLDetailsElement;
 
   assert.equal(revealSourceFromHash(disclosure, "#claims", (callback) => callback()), false);
-  assert.equal(revealSourceFromHash(disclosure, "#sources", (callback) => callback()), false);
+  assert.equal(revealSourceFromHash(disclosure, "#not-a-source", (callback) => callback()), false);
   assert.equal(revealSourceFromHash(disclosure, "", (callback) => callback()), false);
   assert.equal(disclosure.open, false);
 });
