@@ -1,6 +1,6 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
-import type { DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicPersonProfile } from "./topic-data";
+import type { ContextOverview, DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicPersonProfile } from "./topic-data";
 import type { ClaimCollectionModel, DossierPageModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
@@ -98,6 +98,19 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
   </section>;
 }
 
+function ContextOverviewSection({ overview, sourceLinks }: { overview: ContextOverview; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <section className="context-overview" id="context" aria-label="脈絡總覽">
+    <header className="context-overview-heading"><p className="eyebrow">先把問題拆開</p><h2>{overview.headline}</h2><p>{overview.summary}</p></header>
+    <div className="context-lanes" aria-label="責任與狀態分線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
+      <p>{lane.label}</p><h3>{lane.finding}</h3><details><summary>證據界線</summary><p>{lane.proofScope}</p></details><div className="citations">{sourceLinks(lane.sources.map(({ publicRef }) => publicRef))}</div>
+    </article>)}</div>
+    <div className="context-phases" aria-label="事件階段">{overview.phases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
+      <div className="context-phase-index"><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div>
+      <div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="context-turning-point"><strong>轉折</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div>
+    </article>)}</div>
+  </section>;
+}
+
 function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis" | "positions"; eyebrow: string; claims: PublicClaim[]; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="evidence-section editorial-section" id={id} aria-label={eyebrow}>
     <div className="section-intro"><p className="eyebrow">{eyebrow}</p><p>以下是 TW Issues 依公開前提提出的判讀或主張，不是已確認事實。</p></div>
@@ -106,7 +119,7 @@ function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis"
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
-  const { topic, displayTitle, collections, attributedSpeakerGroups, publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups } = model;
+  const { topic, displayTitle, collections, attributedSpeakerGroups, contextOverview, publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
@@ -120,7 +133,8 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。</p></div>
       <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>
     </section>
-    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{timelineGroups.length > 0 && <a href="#progress">事件進展</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">關鍵人物</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextOverview && <a href="#context">脈絡總覽</a>}{timelineGroups.length > 0 && <a href="#progress">完整時間軸</a>}<a href="#claims">已知資訊</a>{publicPeople.length > 0 && <a href="#people">關鍵人物</a>}{politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}{attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>}{analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>}{editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>}<a href="#sources">資料來源</a></div></nav>
+    {contextOverview && <ContextOverviewSection overview={contextOverview} sourceLinks={sourceLinks} />}
     {timelineGroups.length > 0 && <section className="event-progress-section" id="progress" aria-label="事件進展">
       <div className="section-intro"><p className="eyebrow">事件進展</p></div>
       <div className="event-timeline">{timelineGroups.map((group) => {

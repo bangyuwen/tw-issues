@@ -697,3 +697,23 @@ test("model collects person and narrative sources including amplification", () =
   assert.equal(model.sourceById.get("person-source")?.publisher, "人物來源");
   assert.equal(model.sourceById.get("amplification-source")?.publisher, "擴散來源");
 });
+
+test("model preserves context overview and collects lane and phase sources", () => {
+  const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
+  const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };
+  const model = buildDossierPageModel({
+    topicId: "context-overview",
+    claims: [claim],
+    attributedClaims: [],
+    openQuestions: [],
+    contextOverview: {
+      headline: "先拆開問題",
+      summary: "不同程序回答不同問題。",
+      lanes: [{ kind: "administrative", label: "行政", finding: "有行政缺失", proofScope: "不等於刑事責任", sources: [laneSource] }],
+      phases: [{ period: "2022", title: "爭議爆發", summary: "公開事件", turningPoint: "程序不同", sources: [phaseSource] }],
+    },
+  });
+  assert.equal(model.contextOverview?.phases.length, 1);
+  assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
+  assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
+});
