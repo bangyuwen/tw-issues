@@ -141,7 +141,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "相較前一階段 · TW Issues 分析",
     "2026-08-29",
     "沒有符合原始貼文、作者、日期與封存連結門檻的社群節點",
-    "社群反應樣本",
+    "非代表性社群觀察",
     "批評樣本",
     "反向聲音",
     "PTT 球迷討論把 2022 到 2026 仍在施工視為",
@@ -158,21 +158,36 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="proceeding-matrix"/);
   assert.match(html, /class="administration-action-matrix"/);
   assert.equal((html.match(/class="administration-action-row/g) ?? []).length, 12);
-  assert.match(html, /href="#administration-actions"/);
+  assert.match(html, /id="administration-actions"/);
   assert.match(html, /class="skip-link" href="#main-content"/);
   assert.match(html, /id="main-content" tabindex="-1" class="hero hero-detail"/);
   assert.match(html, /class="dossier-meta dossier-meta--case"/);
   assert.match(html, /查看已列來源/);
   assert.match(html, /57<!-- --> 筆/);
-  assert.match(html, /class="article-nav article-nav--case"/);
-  assert.match(html, /href="#social-observations">社群反應/);
-  assert.match(html, /role="group" aria-label="案情總覽"/);
+  assert.match(html, /class="article-nav article-nav--case case-toc"/);
+  assert.match(html, /id="case-contents"/);
+  assert.match(html, /href="#context"[^>]*>.*?案情範圍/);
+  assert.match(html, /href="#claims"[^>]*>.*?已知與未決/);
+  assert.match(html, /href="#progress"[^>]*>.*?時間與程序/);
+  assert.match(html, /href="#people"[^>]*>.*?人物與公開說法/);
+  assert.match(html, /href="#analysis"[^>]*>.*?TW Issues 分析/);
+  assert.match(html, /href="#social-observations"[^>]*>.*?補充社群樣本/);
+  assert.doesNotMatch(html, /class="article-nav-groups"|class="case-map-nav"|案情問題導覽/);
   assert.match(html, /class="case-reading-legend"/);
   assert.match(html, /aria-label="來源 01：/);
   assert.doesNotMatch(html, /class="context-phases"/);
-  assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
+  assert.ok(html.indexOf('id="context"') < html.indexOf('id="claims"'), "context overview precedes known and unresolved evidence");
+  assert.ok(html.indexOf('id="claims"') < html.indexOf('id="progress"'), "known and unresolved evidence precede the detailed timeline");
   assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
   assert.ok(html.indexOf('id="administration-actions"') < html.indexOf('id="proceedings"'), "administration action audit precedes proceeding outcomes");
+  assert.ok(html.indexOf('id="proceedings"') < html.indexOf('id="people"'), "procedural records precede people and public statements");
+  assert.ok(html.indexOf('id="people"') < html.indexOf('id="reports"'), "people precede grouped attributed statements");
+  assert.match(html, /id="reports"[\s\S]*?<h2>不同主體的公開說法。<\/h2>/);
+  assert.ok(html.indexOf('id="reports"') < html.indexOf('id="narratives"'), "grouped statements precede political narratives");
+  assert.ok(html.indexOf('id="narratives"') < html.indexOf('id="analysis"'), "political narratives precede editorial analysis");
+  assert.match(html, /id="analysis"[\s\S]*?<h2>TW Issues 的分析<\/h2>/);
+  assert.ok(html.indexOf('id="analysis"') < html.indexOf('id="social-observations"'), "editorial analysis precedes the supplemental social sample");
+  assert.ok(html.indexOf('id="social-observations"') < html.indexOf('id="sources"'), "the supplemental social sample precedes sources");
   assert.ok(html.indexOf("朱立倫將球場爭議放入政黨治理攻防") < html.indexOf("高虹安把球場放入市政治理與廉能攻防"), "political narratives render in chronological order");
   assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).filter(Boolean).length >= 6, true);
   assert.doesNotMatch(html, /展開其餘 2 項調查中的問題/);

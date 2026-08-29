@@ -31,6 +31,11 @@ export type DossierPageModel = {
   latestTimelineEvent?: ReportedEvent;
 };
 
+export type DossierSectionDescriptor = {
+  href: `#${"context" | "claims" | "progress" | "administration-actions" | "proceedings" | "people" | "reports" | "narratives" | "analysis" | "positions" | "social-observations" | "sources"}`;
+  label: string;
+};
+
 export type TimelineGroup = { key: string; label: string; events: ReportedEvent[] };
 
 export type TimelinePhaseModel = ContextOverview["phases"][number] & {
@@ -49,6 +54,43 @@ export function eventDateLabel(event: ReportedEvent) {
   if (event.precision === "month") return key.replace("-", " 年 ") + " 月";
   const [year, month, day] = key.split("-").map(Number);
   return `${year} 年 ${month} 月 ${day} 日`;
+}
+
+export function getHsinchuDossierSections(model: DossierPageModel): DossierSectionDescriptor[] {
+  if (model.topic?.slug !== "hsinchu-baseball-stadium") return [];
+
+  const [verified, unresolved] = model.collections;
+  const sections: DossierSectionDescriptor[] = [];
+  if (model.contextOverview) sections.push({ href: "#context", label: "案情範圍" });
+  if (verified.claims.length > 0 || unresolved.claims.length > 0) sections.push({ href: "#claims", label: "已知與未決" });
+
+  const proceduralHref = model.timelineGroups.length > 0
+    ? "#progress"
+    : model.administrationActions.length > 0
+      ? "#administration-actions"
+      : model.proceedingTracks.length > 0
+        ? "#proceedings"
+        : undefined;
+  if (proceduralHref) sections.push({ href: proceduralHref, label: "時間與程序" });
+
+  const peopleHref = model.publicPeople.length > 0
+    ? "#people"
+    : model.attributedSpeakerGroups.length > 0
+      ? "#reports"
+      : model.politicalNarratives.length > 0
+        ? "#narratives"
+        : undefined;
+  if (peopleHref) sections.push({ href: peopleHref, label: "人物與公開說法" });
+
+  const editorialHref = (model.analysisClaims?.length ?? 0) > 0
+    ? "#analysis"
+    : (model.editorialPositions?.length ?? 0) > 0
+      ? "#positions"
+      : undefined;
+  if (editorialHref) sections.push({ href: editorialHref, label: "TW Issues 分析" });
+  if ((model.socialObservations?.length ?? 0) > 0) sections.push({ href: "#social-observations", label: "補充社群樣本" });
+  sections.push({ href: "#sources", label: "資料來源" });
+  return sections;
 }
 
 export function buildDossierPageModel(
