@@ -105,12 +105,24 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "不等於高虹安本人親自執行",
     "盤點缺失、暫不承接 WBC 熱身賽",
     "成立工程體檢會並委託外部場務檢測",
+    "檢測服務標案另案接受檢廉調查",
+    "BrightView檢測採購／疑洩密案",
+    "未決／公開資料未見終結",
+    "交保是偵查中強制處分，不是罪責結論",
     "解除部分球場工程契約",
+    "限期移除覆土、另案決標後配合法院證據保全",
+    "未見台灣省結構工程技師公會有刻意延宕",
     "邱臣遠代理市長期間",
+    "邱臣遠",
+    "田政弘",
     "移除超載覆土並完成清運",
+    "開挖發現異物並由竹檢另行分案",
     "另案發包改善工程，重建基底、排水、結構與草皮",
+    "高強度實戰壓力賽",
     "高虹安復職後",
     "與龍來終止原營運關係",
+    "2025年3月已表示啟動",
+    "宣布將依法提出再議，民刑事與履約程序分流",
     "工程已竣工並進入驗收",
     "原訂時程曾多次後移",
     "沈慧虹",
@@ -118,6 +130,9 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "黃國昌",
     "林為洲",
     "高虹安以「12億元棒球場」連結政黨輪替訴求",
+    "楊玲宜以不起訴結果反批政治操作",
+    "高虹安以「不起訴不等於工程合格」回應",
+    "大規模開挖使現場已無法驗收",
     "個程序各自回答什麼",
     "市府與統包商契約爭議",
     "統包商與下包商民事案",
@@ -129,13 +144,14 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   ]) {
     assert.match(html, new RegExp(text));
   }
-  assert.match(html, /5<!-- --> 個程序各自回答什麼/);
+  assert.match(html, /6<!-- --> 個程序各自回答什麼/);
   assert.match(html, /class="event-progress-section case-chronology"/);
   assert.match(html, /class="context-overview" id="context"/);
   assert.match(html, /class="context-lanes"/);
   assert.match(html, /class="chronology-phases"/);
   assert.match(html, /class="proceeding-matrix"/);
   assert.match(html, /class="administration-action-matrix"/);
+  assert.equal((html.match(/class="administration-action-row/g) ?? []).length, 12);
   assert.match(html, /href="#administration-actions"/);
   assert.doesNotMatch(html, /class="context-phases"/);
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
@@ -152,6 +168,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="sources-disclosure" id="sources"/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
   assert.doesNotMatch(html, /data-date-key="2023-01-05"/);
+  assert.doesNotMatch(html, /市府已提出再議|廠商已遭停權|田政弘已(?:起訴|不起訴)|BrightView案已併案/);
   assert.match(html, /不能直接等同工程驗收合格/);
   assert.match(html, /不等於職業賽事已恢復/);
 });
