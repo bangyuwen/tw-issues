@@ -166,6 +166,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /id="narratives"/);
   assert.match(html, /不判定主觀操弄意圖/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
+  assert.match(html, /監察院<!-- --> · <!-- -->2026-07-22/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
   assert.doesNotMatch(html, /data-date-key="2023-01-05"/);
   assert.doesNotMatch(html, /市府已提出再議|廠商已遭停權|田政弘已(?:起訴|不起訴)|BrightView案已併案/);
