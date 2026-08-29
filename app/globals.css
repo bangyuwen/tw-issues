@@ -100,6 +100,7 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:"Noto Sa
 .narrative-row dl div { padding:10px; background:#f0f1ee; }
 .narrative-row--analysis { background:#fffaf0; }
 .narrative-amplification { margin-top:12px !important; color:var(--soft) !important; font-size:.78rem !important; }
+.narrative-status { margin-top:10px !important; color:var(--soft) !important; font-size:.78rem !important; }
 .narrative-disclosure { color:var(--muted); font-size:.88rem; max-width:58rem; }
 @media (max-width:800px) { .people-grid { grid-template-columns:1fr; gap:12px; }.person-card { padding:16px; }.narrative-row { grid-template-columns:1fr; gap:8px; padding:14px 0; }.narrative-row>header { display:grid; grid-template-columns:max-content max-content; align-items:center; gap:6px 8px; }.narrative-row>header strong { grid-column:1 / -1; }.narrative-row dl { grid-template-columns:1fr; gap:8px; } }
 @media (max-width:800px) { .event-kind-legend { align-items:flex-start; flex-direction:column; gap:10px; padding:14px; }.event-kind-legend ul { gap:8px 12px; }.statement-timeline-marker { left:-39px; width:26px; height:26px; }.statement-timeline-marker .event-kind-icon { width:14px; height:14px; }.statement-timeline-heading { gap:7px; } }
