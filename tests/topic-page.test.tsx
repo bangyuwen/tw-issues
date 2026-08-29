@@ -268,9 +268,12 @@ test("structured speakers provide conservative attribution when statement parsin
 
 test("index keeps attribution and status beside real attributed and mixed latest events", () => {
   const html = renderToStaticMarkup(<DossierIndexPage />);
+  const stadiumCard = html.match(/href="\/topics\/hsinchu-baseball-stadium"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const foodCard = html.match(/href="\/topics\/benzopyrene-food-safety"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const japanCard = html.match(/href="\/topics\/japan-taiwan-alliance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const treeCard = html.match(/href="\/topics\/taipei-tree-governance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
+  assert.match(stadiumCard, /topic-card-status--attributed[^>]*>具名說法/);
+  assert.match(stadiumCard, /新竹地方檢察署(?:表示|說明)/);
   assert.match(foodCard, /topic-card-status--attributed[^>]*>具名說法/);
   assert.match(foodCard, /跨局處查核達 2,179 案/);
   assert.match(japanCard, /topic-card-status--attributed[^>]*>具名說法/);

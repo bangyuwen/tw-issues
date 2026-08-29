@@ -6,13 +6,24 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "c168a8d30c90303a0551ef4e46ac03a0f88970f41e12415cb20c3a62f1ffe5a7"
+    "sha256": "f660873dfb44f45835ff32351e035af44cd588d9aa5f4b8efc525f63222747f8"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "b897c3cc59471d97a7a86c7a6b9a1b0836ba26111b499deda8d528fd5a52b37f"
+    "sha256": "a89cb831d8d669daa78396518467291bb162e29d56de7b9870d06447009586ad"
   },
   "topics": {
+    "hsinchu-baseball-stadium": {
+      "topic_id": "hsinchu-baseball-stadium-2026",
+      "slug": "hsinchu-baseball-stadium",
+      "visibility": "public",
+      "publication_status": "published",
+      "as_of": "2026-08-28",
+      "content_digest": "d822e10c2b54596779bb91402e5150780a8e2cfdceaa84573ee6308c8b7da82f",
+      "verification_status": "public_quality_pass",
+      "license": "source-specific",
+      "indexed_title": "新竹棒球場爭議與責任"
+    },
     "ezway-preauthorization": {
       "topic_id": "ezway-preauthorization-2026",
       "slug": "ezway-preauthorization",

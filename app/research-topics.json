@@ -1,6 +1,13 @@
 {
   "topics": [
     {
+      "topicId": "hsinchu-baseball-stadium-2026",
+      "slug": "hsinchu-baseball-stadium",
+      "title": "新竹棒球場爭議與責任",
+      "lastUpdated": "2026-08-28",
+      "publicEvidenceAvailable": true
+    },
+    {
       "topicId": "ezway-preauthorization-2026",
       "slug": "ezway-preauthorization",
       "title": "EZ WAY 易利委與跨境快遞預先委任",
@@ -79,6 +86,13 @@
     }
   ],
   "allTopics": [
+    {
+      "topicId": "hsinchu-baseball-stadium-2026",
+      "slug": "hsinchu-baseball-stadium",
+      "title": "新竹棒球場爭議與責任",
+      "lastUpdated": "2026-08-28",
+      "publicEvidenceAvailable": true
+    },
     {
       "topicId": "ezway-preauthorization-2026",
       "slug": "ezway-preauthorization",

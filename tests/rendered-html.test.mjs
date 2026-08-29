@@ -3,6 +3,7 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const routes = [
+  "/topics/hsinchu-baseball-stadium",
   "/topics/ezway-preauthorization",
   "/topics/benzopyrene-food-safety",
   "/topics/cross-border-intimidation",
@@ -39,10 +40,11 @@ function verifiedClaims(html) {
   return html.slice(start, open >= 0 ? open : html.length);
 }
 
-test("index selects the eleven most recently updated deep-research topics", async () => {
+test("index selects the twelve most recently updated deep-research topics", async () => {
   const response = await render("/");
   const html = await response.text();
   assert.equal(response.status, 200);
+  assert.match(html, /新竹棒球場爭議/);
   assert.match(html, /EZ WAY 易利委預先委任/);
   assert.match(html, /臺北樹木治理/);
   assert.match(html, /中央總預算延宕/);
@@ -64,9 +66,39 @@ test("index selects the eleven most recently updated deep-research topics", asyn
   assert.doesNotMatch(html, /公開資料補強中/);
   assert.match(html, /公開證據可讀/);
   assert.match(html, /href="\/topics\/defense-procurement"/);
+  assert.match(html, /href="\/topics\/hsinchu-baseball-stadium"/);
   assert.match(html, /href="\/topics\/taipei-tree-governance"/);
   assert.doesNotMatch(html, /href="\/topics\/energy-disinfo"/);
   assert.doesNotMatch(html, /內部議題快照|僅限內部存取|internal_only|disputed/);
+});
+
+test("Hsinchu stadium page separates administrative findings, criminal outcome, and open questions", async () => {
+  const response = await render("/topics/hsinchu-baseball-stadium");
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  for (const text of [
+    "未正式驗收即先使用",
+    "30分鐘內排水",
+    "林智堅、巨佳營造及相關被告",
+    "4名營造及監造人員",
+    "各支付4萬元",
+    "各次契約變更有具體原因",
+    "不法金流",
+    "B5類剩餘土石方",
+    "36.245立方公尺",
+    "不同主體怎麼說",
+    "改善工程已竣工",
+    "仍待釐清",
+    "完整處分書",
+  ]) {
+    assert.match(html, new RegExp(text));
+  }
+  assert.match(html, /class="event-progress-section"/);
+  assert.match(html, /class="sources-disclosure" id="sources"/);
+  assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
+  assert.doesNotMatch(html, /data-date-key="2023-01-05"/);
+  assert.match(html, /不能直接等同工程驗收合格/);
+  assert.match(html, /不等於職業賽事已恢復/);
 });
 
 test("every published route renders only claim projections and allowlisted sources", async () => {
