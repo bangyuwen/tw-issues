@@ -1,7 +1,7 @@
 import SiteLink from "./site-link";
 import type { ReactNode } from "react";
 import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicPersonProfile, PublicSource, SocialObservation } from "./topic-data";
-import type { ClaimCollectionModel, DossierPageModel, TimelineGroup, TimelinePhaseModel } from "./dossier-page-model";
+import { getHsinchuDossierSections, type ClaimCollectionModel, type DossierPageModel, type DossierSectionDescriptor, type TimelineGroup, type TimelinePhaseModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
 
@@ -31,15 +31,34 @@ export function UnavailableDossierPage({ topic, displayTitle }: { topic: DeepRes
     </main>;
 }
 
-function ClaimEvidenceBody({ claim, sourceLinks }: { claim: PublicClaim & { sampleSize?: number }; sourceLinks: (ids: string[]) => ReactNode }) {
-  return <><section className="claim-boundary" aria-label="可確認範圍與限制"><div className="claim-scope"><strong>這能確認</strong><p>{claim.proofScope}</p></div><div className="claim-limit"><strong>這不能證明</strong><p>{claim.limitations.join("；")}</p></div>{claim.sampleSize !== undefined && <p className="claim-sample"><strong>樣本數</strong>{claim.sampleSize}（N = {claim.sampleSize}）</p>}</section><div className="claim-sources" aria-label="資料來源"><div className="citations">{sourceLinks(claim.sources.map(({ publicRef }) => publicRef))}</div></div></>;
+function ClaimBoundary({ claim }: { claim: PublicClaim & { sampleSize?: number } }) {
+  return <section className="claim-boundary" aria-label="可確認範圍與限制"><div className="claim-scope"><strong>這能確認</strong><p>{claim.proofScope}</p></div><div className="claim-limit"><strong>這不能證明</strong><p>{claim.limitations.join("；")}</p></div>{claim.sampleSize !== undefined && <p className="claim-sample"><strong>樣本數</strong>{claim.sampleSize}（N = {claim.sampleSize}）</p>}</section>;
 }
 
-function ClaimCollection({ collection, sourceLinks }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
+function ClaimSources({ claim, sourceLinks }: { claim: PublicClaim; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <div className="claim-sources" aria-label="資料來源"><div className="citations">{sourceLinks(claim.sources.map(({ publicRef }) => publicRef))}</div></div>;
+}
+
+function ClaimEvidenceBody({ claim, sourceLinks }: { claim: PublicClaim & { sampleSize?: number }; sourceLinks: (ids: string[]) => ReactNode }) {
+  return <><ClaimBoundary claim={claim} /><ClaimSources claim={claim} sourceLinks={sourceLinks} /></>;
+}
+
+function ClaimCollection({ collection, sourceLinks, exposeBoundary = false }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode; exposeBoundary?: boolean }) {
   const directLimit = collection.kind === "open" ? collection.claims.length : 4;
   const direct = collection.claims.slice(0, directLimit);
   const remainder = collection.claims.slice(directLimit);
-  const rows = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className={`evidence-claim-list evidence-claim-list--${collection.kind}`}>{claims.map((claim, index) => <div data-claim-zone={zone} key={`${collection.id}-${index + offset}`}><EventDisclosure className={`evidence-claim-row evidence-claim-row--${collection.kind}`}><summary><span className="evidence-claim-ordinal">{String(index + offset + 1).padStart(2, "0")}</span><span className="evidence-claim-title">{claim.statement}</span><span className="event-disclosure-action" aria-hidden="true">展開資料</span></summary><div className="evidence-claim-body"><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure></div>)}</div>;
+  const statusLabel = collection.kind === "open" ? "仍待釐清" : "已知資訊";
+  const rows = (claims: typeof collection.claims, offset: number, zone: "direct" | "remainder") => <div className={`evidence-claim-list evidence-claim-list--${collection.kind}`}>{claims.map((claim, index) => {
+    const itemIndex = index + offset;
+    if (!exposeBoundary) {
+      return <div data-claim-zone={zone} key={`${collection.id}-${itemIndex}`}><EventDisclosure className={`evidence-claim-row evidence-claim-row--${collection.kind}`}><summary><span className="evidence-claim-ordinal">{String(itemIndex + 1).padStart(2, "0")}</span><span className="evidence-claim-title">{claim.statement}</span><span className="event-disclosure-action" aria-hidden="true">展開資料</span></summary><div className="evidence-claim-body"><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure></div>;
+    }
+    return <article className={`evidence-claim-card evidence-claim-card--${collection.kind}`} data-claim-zone={zone} key={`${collection.id}-${itemIndex}`}>
+      <header className="evidence-claim-card-heading"><span className="evidence-claim-ordinal">{String(itemIndex + 1).padStart(2, "0")}</span><div><span className="evidence-claim-status">{statusLabel}</span><p className="evidence-claim-title">{claim.statement}</p></div></header>
+      <ClaimBoundary claim={claim} />
+      <EventDisclosure className={`evidence-claim-row evidence-claim-row--${collection.kind}`}><summary><span>查看資料與來源</span><span className="event-disclosure-action" aria-hidden="true">展開</span></summary><div className="evidence-claim-body"><ClaimSources claim={claim} sourceLinks={sourceLinks} /></div></EventDisclosure>
+    </article>;
+  })}</div>;
   const items = rows;
   return <div className={`claim-collection claim-collection--${collection.kind}`}><div className="claim-direct">{items(direct, 0, "direct")}</div>{remainder.length > 0 && <details className="claim-remainder"><summary>展開其餘 {remainder.length} 項{collection.label}</summary>{items(remainder, directLimit, "remainder")}</details>}</div>;
 }
@@ -59,23 +78,23 @@ const evidenceCopy = {
   questions: { label: "仍待釐清", eyebrow: "調查中的問題", aria: "仍待釐清", intro: "這些項目已有公開調查或報導脈絡，但尚不能把任何一種解釋寫成根因或責任定論。" },
 };
 
-function EvidenceBoardColumn({ collection, sourceLinks }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
+function EvidenceBoardColumn({ collection, sourceLinks, exposeBoundary }: { collection: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode; exposeBoundary: boolean }) {
   const copy = evidenceCopy[collection.id];
-  return <div className={`evidence-board-column evidence-board-column--${collection.kind}`} id={collection.id === "questions" ? "questions" : undefined} role="group" aria-label={copy.aria} data-collection-id={collection.id}><header className="evidence-board-column-heading"><div><p className="eyebrow">{copy.eyebrow}</p><h3>{copy.label}</h3></div><span className="evidence-board-column-count">{collection.claims.length} 項</span></header><p className="evidence-board-column-intro">{copy.intro}</p><ClaimCollection collection={collection} sourceLinks={sourceLinks} /></div>;
+  return <div className={`evidence-board-column evidence-board-column--${collection.kind}`} id={collection.id === "questions" ? "questions" : undefined} role="group" aria-label={copy.aria} data-collection-id={collection.id}><header className="evidence-board-column-heading"><div><p className="eyebrow">{copy.eyebrow}</p><h3>{copy.label}</h3></div><span className="evidence-board-column-count">{collection.claims.length} 項</span></header><p className="evidence-board-column-intro">{copy.intro}</p><ClaimCollection collection={collection} sourceLinks={sourceLinks} exposeBoundary={exposeBoundary} /></div>;
 }
 
-function EvidenceBoard({ verified, unresolved, sourceLinks }: { verified: ClaimCollectionModel; unresolved: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode }) {
+function EvidenceBoard({ verified, unresolved, sourceLinks, exposeBoundary = false }: { verified: ClaimCollectionModel; unresolved: ClaimCollectionModel; sourceLinks: (ids: string[]) => ReactNode; exposeBoundary?: boolean }) {
   const hasVerified = verified.claims.length > 0;
   const hasUnresolved = unresolved.claims.length > 0;
   if (!hasVerified && !hasUnresolved) return null;
   if (!hasUnresolved) {
-    return <section className="evidence-board evidence-board--known-only" id="claims" aria-label={evidenceCopy.claims.aria}><EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} /></section>;
+    return <section className="evidence-board evidence-board--known-only" id="claims" aria-label={evidenceCopy.claims.aria}><EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} exposeBoundary={exposeBoundary} /></section>;
   }
-  return <section className={`evidence-board evidence-board--with-open${hasVerified ? " evidence-board--split" : " evidence-board--open-only"}`} id="claims" aria-label="已知資訊與仍待釐清"><header className="evidence-board-header"><p className="eyebrow">證據邊界</p><h2>知道哪裡還不知道，<br />比假裝有答案更重要。</h2><p>已知與未決內容放在同一套證據邊界中對照。</p></header><div className="evidence-board-columns">{hasVerified && <EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} />}<EvidenceBoardColumn collection={unresolved} sourceLinks={sourceLinks} /></div></section>;
+  return <section className={`evidence-board evidence-board--with-open${hasVerified ? " evidence-board--split" : " evidence-board--open-only"}`} id="claims" aria-label="已知資訊與仍待釐清"><header className="evidence-board-header"><p className="eyebrow">證據邊界</p><h2>知道哪裡還不知道，<br />比假裝有答案更重要。</h2><p>已知與未決內容放在同一套證據邊界中對照。</p></header><div className="evidence-board-columns">{hasVerified && <EvidenceBoardColumn collection={verified} sourceLinks={sourceLinks} exposeBoundary={exposeBoundary} />}<EvidenceBoardColumn collection={unresolved} sourceLinks={sourceLinks} exposeBoundary={exposeBoundary} /></div></section>;
 }
 
 function AttributedEvidenceSection({ groups, sourceLinks }: { groups: DossierPageModel["attributedSpeakerGroups"]; sourceLinks: (ids: string[]) => ReactNode }) {
-  return <section className="evidence-section" id="reports" aria-label="不同主體怎麼說"><div className="section-intro"><p className="eyebrow">不同主體怎麼說</p><p>依主體整理公開說法；不代表已確認或完整。</p></div><SpeakerGroups groups={groups} sourceLinks={sourceLinks} /></section>;
+  return <section className="evidence-section" id="reports" aria-label="不同主體怎麼說"><div className="section-intro"><p className="eyebrow">不同主體怎麼說</p><h2>不同主體的公開說法。</h2><p>依主體整理公開說法；不代表已確認或完整。</p></div><SpeakerGroups groups={groups} sourceLinks={sourceLinks} /></section>;
 }
 
 function PeopleSection({ people, sourceLinks }: { people: PublicPersonProfile[]; sourceLinks: (ids: string[]) => ReactNode }) {
@@ -101,7 +120,7 @@ function PoliticalNarrativesSection({ narratives, sourceLinks }: { narratives: P
   </section>;
 }
 
-function SocialObservationsSection({ observations, sampleSize, sourceLinks, sourceById }: { observations: SocialObservation[]; sampleSize: number; sourceLinks: (ids: string[]) => ReactNode; sourceById: Map<string, PublicSource> }) {
+function SocialObservationsSection({ observations, sampleSize, sourceLinks, sourceById, isCaseDossier = false }: { observations: SocialObservation[]; sampleSize: number; sourceLinks: (ids: string[]) => ReactNode; sourceById: Map<string, PublicSource>; isCaseDossier?: boolean }) {
   const hasKinds = observations.some(({ kind }) => kind !== undefined);
   const groups = hasKinds
     ? [
@@ -110,8 +129,8 @@ function SocialObservationsSection({ observations, sampleSize, sourceLinks, sour
     ].filter(({ items }) => items.length > 0)
     : [{ key: "observations", label: "公開樣本", items: observations }];
 
-  return <aside className="social-observation-note" id="social-observations" aria-label="社群反應樣本">
-    <div className="social-observation-intro"><p className="eyebrow">社群反應樣本</p><strong>樣本數 N = {sampleSize}</strong><p>以下整理公開貼文與媒體轉述；具備 canonical link 的樣本可回查。非隨機樣本，不能代表民意或事件真相。</p></div>
+  return <aside className="social-observation-note" id="social-observations" aria-label={isCaseDossier ? undefined : "社群反應樣本"} aria-labelledby={isCaseDossier ? "social-observation-title" : undefined}>
+    <div className="social-observation-intro">{isCaseDossier ? <><p className="eyebrow">補充樣本</p><h2 id="social-observation-title">非代表性社群觀察</h2></> : <p className="eyebrow">社群反應樣本</p>}<strong>樣本數 N = {sampleSize}</strong><p>以下整理公開貼文與媒體轉述；具備 canonical link 的樣本可回查。非隨機樣本，不能代表民意或事件真相。</p></div>
     <div className="social-observation-groups">{groups.map((group) => <section className="social-observation-group" key={group.key} aria-labelledby={`social-observation-${group.key}`}>
       <h3 id={`social-observation-${group.key}`}>{group.label}</h3>
       <ol>{group.items.map((observation, index) => {
@@ -129,10 +148,11 @@ function SocialObservationsSection({ observations, sampleSize, sourceLinks, sour
   </aside>;
 }
 
-function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availableSections }: {
+function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, showQuestionMap, availableSections }: {
   overview: ContextOverview;
   sourceLinks: (ids: string[]) => ReactNode;
   fallbackPhases: ContextOverview["phases"];
+  showQuestionMap: boolean;
   availableSections: { timeline: boolean; administrationActions: boolean; proceedings: boolean; narratives: boolean; questions: boolean };
 }) {
   const caseMapQuestions = [
@@ -145,10 +165,10 @@ function ContextOverviewSection({ overview, sourceLinks, fallbackPhases, availab
   ];
   return <section className="context-overview" id="context" aria-label="脈絡總覽">
     <header className="context-overview-heading"><p className="eyebrow">先把問題拆開</p><h2>{overview.headline}</h2><p>{overview.summary}</p></header>
-    <nav className="case-map-nav" aria-label="案情問題導覽">
+    {showQuestionMap && <nav className="case-map-nav" aria-label="案情問題導覽">
       <span>從 {caseMapQuestions.length} 個問題進入</span>
       {caseMapQuestions.map(({ href, label }, index) => <a href={href} key={href}><b>{String(index + 1).padStart(2, "0")}</b>{label}</a>)}
-    </nav>
+    </nav>}
     <div className="context-lanes" id="responsibility-lines" aria-label="責任與狀態分線">{overview.lanes.map((lane) => <article className={`context-lane context-lane--${lane.kind}`} key={lane.kind}>
       <p>{lane.label}</p><h3>{lane.finding}</h3><details><summary>證據界線</summary><p>{lane.proofScope}</p></details><div className="citations">{sourceLinks(lane.sources.map(({ publicRef }) => publicRef))}</div>
     </article>)}</div>
@@ -229,9 +249,9 @@ function ProceedingTracksSection({ tracks, sourceLinks }: { tracks: ProceedingTr
   </section>;
 }
 
-function EditorialSection({ id, eyebrow, claims, sourceLinks }: { id: "analysis" | "positions"; eyebrow: string; claims: PublicClaim[]; sourceLinks: (ids: string[]) => ReactNode }) {
+function EditorialSection({ id, eyebrow, heading, claims, sourceLinks }: { id: "analysis" | "positions"; eyebrow: string; heading?: string; claims: PublicClaim[]; sourceLinks: (ids: string[]) => ReactNode }) {
   return <section className="evidence-section editorial-section" id={id} aria-label={eyebrow}>
-    <div className="section-intro"><p className="eyebrow">{eyebrow}</p><p>以下是 TW Issues 依公開前提提出的判讀或主張，不是已確認事實。</p></div>
+    <div className="section-intro"><p className="eyebrow">{eyebrow}</p>{heading && <h2>{heading}</h2>}<p>以下是 TW Issues 依公開前提提出的判讀或主張，不是已確認事實。</p></div>
     <div className="fact-grid">{claims.map((claim, index) => <article key={`${id}-${index}`}><div className="claim-card-heading"><p>{claim.editorialLabel}</p><span className="fact-number">{String(index + 1).padStart(2, "0")}</span></div><h3>{claim.statement}</h3><dl>{claim.premises && <div><dt>依據前提</dt><dd>{claim.premises.join("；")}</dd></div>}{claim.inference && <div><dt>推論</dt><dd>{claim.inference}</dd></div>}{claim.uncertainty && <div><dt>不確定性</dt><dd>{claim.uncertainty}</dd></div>}{claim.falsifier && <div><dt>什麼會推翻這個判讀</dt><dd>{claim.falsifier}</dd></div>}{claim.consistentStandard && <div><dt>一致標準</dt><dd>{claim.consistentStandard}</dd></div>}</dl><ClaimEvidenceBody claim={claim} sourceLinks={sourceLinks} /></article>)}</div>
   </section>;
 }
@@ -250,6 +270,7 @@ function CaseReadingLegend() {
 
 function ArticleNavigation({
   isCaseDossier,
+  caseSections,
   contextOverview,
   timelineGroups,
   administrationActions,
@@ -261,9 +282,9 @@ function ArticleNavigation({
   attributedSpeakerGroups,
   analysisClaims,
   editorialPositions,
-  socialObservations,
 }: {
   isCaseDossier: boolean;
+  caseSections: DossierSectionDescriptor[];
   contextOverview?: DossierPageModel["contextOverview"];
   timelineGroups: TimelineGroup[];
   administrationActions: AdministrationAction[];
@@ -275,8 +296,16 @@ function ArticleNavigation({
   attributedSpeakerGroups: DossierPageModel["attributedSpeakerGroups"];
   analysisClaims: PublicClaim[];
   editorialPositions: PublicClaim[];
-  socialObservations: NonNullable<DossierPageModel["socialObservations"]>;
 }) {
+  if (isCaseDossier) {
+    return <nav id="case-contents" className="article-nav article-nav--case case-toc" aria-label="本頁閱讀導覽">
+      <span>本頁目錄</span>
+      <ol className="case-toc-list">{caseSections.map(({ href, label }, index) => <li className="case-toc-item" key={href}>
+        <a href={href}><b aria-hidden="true">{String(index + 1).padStart(2, "0")}</b><span>{label}</span></a>
+      </li>)}</ol>
+    </nav>;
+  }
+
   const contextLink = contextOverview && <a href="#context">案情地圖</a>;
   const timelineLink = timelineGroups.length > 0 && <a href="#progress">完整脈絡</a>;
   const administrationLink = administrationActions.length > 0 && <a href="#administration-actions">市府行動</a>;
@@ -288,16 +317,9 @@ function ArticleNavigation({
   const reportsLink = attributedSpeakerGroups.length > 0 && <a href="#reports">各方怎麼說</a>;
   const analysisLink = analysisClaims.length > 0 && <a href="#analysis">我們怎麼理解</a>;
   const positionsLink = editorialPositions.length > 0 && <a href="#positions">我們主張什麼</a>;
-  const socialLink = isCaseDossier && socialObservations.length > 0 && <a href="#social-observations">社群反應</a>;
   const sourcesLink = <a href="#sources">資料來源</a>;
-  const group = (label: string, links: ReactNode) => <div className="article-nav-group" role="group" aria-label={label}><p className="article-nav-group-label">{label}</p><div className="article-nav-group-links">{links}</div></div>;
 
-  return <nav className={`article-nav${isCaseDossier ? " article-nav--case" : ""}`} aria-label="本頁閱讀導覽"><span>本頁導覽</span>{isCaseDossier ? <div className="article-nav-groups">
-    {group("案情總覽", <>{contextLink}{timelineLink}</>)}
-    {group("證據快照", <>{questionsLink}{claimsLink}{sourcesLink}</>)}
-    {group("程序線", <>{administrationLink}{proceedingsLink}</>)}
-    {group("人物與說法／分析", <>{narrativesLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{socialLink}</>)}
-  </div> : <div>{contextLink}{timelineLink}{administrationLink}{proceedingsLink}{narrativesLink}{questionsLink}{claimsLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{sourcesLink}</div>}</nav>;
+  return <nav className="article-nav" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>{contextLink}{timelineLink}{administrationLink}{proceedingsLink}{narrativesLink}{questionsLink}{claimsLink}{peopleLink}{reportsLink}{analysisLink}{positionsLink}{sourcesLink}</div></nav>;
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
@@ -312,6 +334,40 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     return <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`來源 ${number}：${source.publisher}｜${source.title}（${source.publishedAt}）`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a>;
   });
   const [verified, unresolved] = collections;
+  const caseSections = getHsinchuDossierSections(model);
+  const contextSection = contextOverview ? <ContextOverviewSection
+    overview={contextOverview}
+    sourceLinks={sourceLinks}
+    fallbackPhases={unphasedContextPhases}
+    showQuestionMap={!isCaseDossier}
+    availableSections={{
+      timeline: timelineGroups.length > 0,
+      administrationActions: administrationActions.length > 0,
+      proceedings: proceedingTracks.length > 0,
+      narratives: politicalNarratives.length > 0,
+      questions: unresolved.claims.length > 0,
+    }}
+  /> : null;
+  const chronologySection = timelineGroups.length > 0 ? <ChronologySection
+    phases={timelinePhases}
+    unphasedGroups={unphasedTimelineGroups}
+    timelineGroups={timelineGroups}
+    sourceLinks={sourceLinks}
+    targetAvailability={{
+      verified: verified.claims.length > 0,
+      attributed: attributedSpeakerGroups.length > 0,
+      unresolved: unresolved.claims.length > 0,
+    }}
+  /> : null;
+  const administrationSection = administrationActions.length > 0 ? <AdministrationActionsSection actions={administrationActions} sourceLinks={sourceLinks} /> : null;
+  const proceedingsSection = proceedingTracks.length > 0 ? <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} /> : null;
+  const narrativesSection = politicalNarratives.length > 0 ? <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} /> : null;
+  const evidenceSection = <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} exposeBoundary={isCaseDossier} />;
+  const peopleSection = publicPeople.length > 0 ? <PeopleSection people={publicPeople} sourceLinks={sourceLinks} /> : null;
+  const reportsSection = attributedSpeakerGroups.length > 0 ? <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} /> : null;
+  const analysisSection = analysisClaims.length > 0 ? <EditorialSection id="analysis" eyebrow="我們怎麼理解" heading={isCaseDossier ? "TW Issues 的分析" : undefined} claims={analysisClaims} sourceLinks={sourceLinks} /> : null;
+  const positionsSection = editorialPositions.length > 0 ? <EditorialSection id="positions" eyebrow="我們主張什麼" heading={isCaseDossier ? "TW Issues 的主張" : undefined} claims={editorialPositions} sourceLinks={sourceLinks} /> : null;
+  const socialSection = socialObservations.length > 0 ? <SocialObservationsSection observations={socialObservations} sampleSize={socialSampleSize} sourceLinks={sourceLinks} sourceById={sourceById} isCaseDossier={isCaseDossier} /> : null;
 
   return <main className={`site-shell dossier-shell${isCaseDossier ? " dossier-shell--case" : ""}`}>
     <a className="skip-link" href="#main-content">跳至主要內容</a>
@@ -323,6 +379,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     {isCaseDossier && <CaseReadingLegend />}
     <ArticleNavigation
       isCaseDossier={isCaseDossier}
+      caseSections={caseSections}
       contextOverview={contextOverview}
       timelineGroups={timelineGroups}
       administrationActions={administrationActions}
@@ -334,40 +391,8 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       attributedSpeakerGroups={attributedSpeakerGroups}
       analysisClaims={analysisClaims}
       editorialPositions={editorialPositions}
-      socialObservations={socialObservations}
     />
-    {contextOverview && <ContextOverviewSection
-      overview={contextOverview}
-      sourceLinks={sourceLinks}
-      fallbackPhases={unphasedContextPhases}
-      availableSections={{
-        timeline: timelineGroups.length > 0,
-        administrationActions: administrationActions.length > 0,
-        proceedings: proceedingTracks.length > 0,
-        narratives: politicalNarratives.length > 0,
-        questions: unresolved.claims.length > 0,
-      }}
-    />}
-    {timelineGroups.length > 0 && <ChronologySection
-      phases={timelinePhases}
-      unphasedGroups={unphasedTimelineGroups}
-      timelineGroups={timelineGroups}
-      sourceLinks={sourceLinks}
-      targetAvailability={{
-        verified: verified.claims.length > 0,
-        attributed: attributedSpeakerGroups.length > 0,
-        unresolved: unresolved.claims.length > 0,
-      }}
-    />}
-    {administrationActions.length > 0 && <AdministrationActionsSection actions={administrationActions} sourceLinks={sourceLinks} />}
-    {proceedingTracks.length > 0 && <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} />}
-    {politicalNarratives.length > 0 && <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} />}
-    <EvidenceBoard verified={verified} unresolved={unresolved} sourceLinks={sourceLinks} />
-    {publicPeople.length > 0 && <PeopleSection people={publicPeople} sourceLinks={sourceLinks} />}
-    {attributedSpeakerGroups.length > 0 && <AttributedEvidenceSection groups={attributedSpeakerGroups} sourceLinks={sourceLinks} />}
-    {analysisClaims.length > 0 && <EditorialSection id="analysis" eyebrow="我們怎麼理解" claims={analysisClaims} sourceLinks={sourceLinks} />}
-    {editorialPositions.length > 0 && <EditorialSection id="positions" eyebrow="我們主張什麼" claims={editorialPositions} sourceLinks={sourceLinks} />}
-    {socialObservations.length > 0 && <SocialObservationsSection observations={socialObservations} sampleSize={socialSampleSize} sourceLinks={sourceLinks} sourceById={sourceById} />}
+    {isCaseDossier ? <>{contextSection}{evidenceSection}{chronologySection}{administrationSection}{proceedingsSection}{peopleSection}{reportsSection}{narrativesSection}{analysisSection}{positionsSection}{socialSection}</> : <>{contextSection}{chronologySection}{administrationSection}{proceedingsSection}{narrativesSection}{evidenceSection}{peopleSection}{reportsSection}{analysisSection}{positionsSection}{socialSection}</>}
     <SourcesDisclosure sourceCount={publicSources.length}>
       <section className="sources-section" aria-label="資料與來源">
         <ol className="source-list">{publicSources.map((source, index) => { const number = String(index + 1).padStart(2, "0"); const hasCalendarDate = /^\d{4}-\d{2}(?:-\d{2})?$/.test(source.publishedAt); return <li id={source.publicRef} data-source-ref={source.publicRef} tabIndex={-1} key={source.publicRef}><span>{number}</span><div><a className="source-title" href={source.canonicalUrl} target="_blank" rel="noreferrer">{source.title} <b aria-hidden="true">↗</b></a><p className="source-meta"><span>{source.publisher}</span><i />{hasCalendarDate ? <time dateTime={source.publishedAt}>{source.publishedAt}</time> : <span>{source.publishedAt}</span>}</p></div></li>; })}</ol>

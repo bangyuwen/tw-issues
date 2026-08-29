@@ -636,19 +636,61 @@ test("sources use a default-collapsed native disclosure with stable targets", ()
   assert.ok(html.indexOf("</details>") < html.indexOf("AI 自動製作說明"));
 });
 
-test("known and unresolved claims use compact rows with collapsed evidence details", () => {
-  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
-    topicId: "claim-boundary-disclosure",
+test("known and unresolved claims expose proof boundaries before collapsed source details", () => {
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "hsinchu-baseball-stadium" }} projectionOverride={{
+    topicId: "hsinchu-claim-boundary-disclosure",
     claims: [claim], attributedClaims: [], attributedSpeakerGroups: [], openQuestions: [{ ...claim, statement: "待釐清命題。" }],
   }} />);
 
+  assert.match(html, /<article class="evidence-claim-card evidence-claim-card--verified"/);
+  assert.match(html, /<article class="evidence-claim-card evidence-claim-card--open"/);
   assert.match(html, /<details class="evidence-claim-row evidence-claim-row--verified"><summary>/);
   assert.match(html, /<details class="evidence-claim-row evidence-claim-row--open"><summary>/);
   assert.doesNotMatch(html, /<details class="evidence-claim-row evidence-claim-row--(?:verified|open)" open/);
-  assert.match(html, /這能確認/);
-  assert.match(html, /這不能證明/);
+  for (const kind of ["verified", "open"] as const) {
+    const card = html.match(new RegExp(`<article class="evidence-claim-card evidence-claim-card--${kind}"[\\s\\S]*?<\\/article>`))?.[0] ?? "";
+    assert.ok(card.indexOf('class="claim-boundary"') >= 0);
+    assert.ok(card.indexOf('class="claim-boundary"') < card.indexOf(`<details class="evidence-claim-row evidence-claim-row--${kind}">`));
+    assert.match(card, /這能確認/);
+    assert.match(card, /這不能證明/);
+    assert.match(card, /href="#source-01"/);
+  }
   assert.doesNotMatch(html, /fact-grid--(?:verified|open)/);
   assert.doesNotMatch(html, /這一層只收錄可核對的公開命題/);
+
+  const generic = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{
+    topicId: "generic-claim-boundary-disclosure",
+    claims: [claim], attributedClaims: [], attributedSpeakerGroups: [], openQuestions: [],
+  }} />);
+  assert.match(generic, /<div data-claim-zone="direct"><details class="evidence-claim-row evidence-claim-row--verified"><summary><span class="evidence-claim-ordinal">/);
+  assert.doesNotMatch(generic, /evidence-claim-card|evidence-claim-status/);
+  assert.ok(generic.indexOf('class="evidence-claim-row evidence-claim-row--verified"') < generic.indexOf('class="claim-boundary"'));
+});
+
+test("Hsinchu uses one context-first document table of contents without changing generic navigation", () => {
+  const hsinchu = renderToStaticMarkup(
+    <TopicPage
+      params={{ slug: "hsinchu-baseball-stadium" }}
+      projectionOverride={publicEvidenceBySlug["hsinchu-baseball-stadium"]}
+    />,
+  );
+  const generic = renderToStaticMarkup(
+    <TopicPage
+      params={{ slug: "benzopyrene-food-safety" }}
+      projectionOverride={{ topicId: "generic-navigation", claims: [claim], attributedClaims: [], openQuestions: [] }}
+    />,
+  );
+
+  assert.match(hsinchu, /class="article-nav article-nav--case case-toc"/);
+  assert.match(hsinchu, /id="case-contents"/);
+  assert.doesNotMatch(hsinchu, /article-nav-groups|case-map-nav|案情問題導覽/);
+  const order = ["context", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
+    .map((id) => hsinchu.indexOf(`id="${id}"`));
+  assert.ok(order.every((position) => position >= 0));
+  assert.deepEqual(order, [...order].sort((left, right) => left - right));
+
+  assert.match(generic, /class="article-nav"/);
+  assert.doesNotMatch(generic, /article-nav--case|case-toc|case-map-nav/);
 });
 
 test("source fragment helper opens, focuses, and scrolls the exact source", () => {
