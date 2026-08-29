@@ -338,7 +338,7 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
       <p className="eyebrow">核心文件導讀</p>
       <h3 id="primary-document-title">{document.title}</h3>
       <p className="primary-document-warning" role="note"><strong>閱讀警示</strong>{document.warning}</p>
-      <p className="primary-document-intro">這份資料對理解不起訴理由很重要，但來源仍是第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
+      <p className="primary-document-intro">頁面影像呈現具紅色騎縫印文的處分書原貌；公開管道仍是第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
       <p className="primary-document-source-meta"><span>公開來源：{document.source.publisher}</span><span>發布：<time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></span><span>擷取：<time dateTime={document.capturedAt}>{document.capturedAt}</time></span></p>
       <div className="primary-document-actions">
         <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
@@ -368,7 +368,7 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
       {document.excerpts.map((excerpt) => <article className="primary-document-excerpt" key={excerpt.documentPage}>
         <header><span>{excerpt.label}</span><strong>{`文件第 ${excerpt.documentPage} 頁`}</strong></header>
         <blockquote>{excerpt.text}</blockquote>
-        <dl><div><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照第三方重製影像</dd></div><div><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{excerpt.limitations.join("；")}</dd></div></dl>
+        <dl><div><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照具印文頁面影像</dd></div><div><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{excerpt.limitations.join("；")}</dd></div></dl>
       </article>)}
     </section>
 

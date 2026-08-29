@@ -1,11 +1,11 @@
 ## Why
 
-The Hsinchu dossier now has a locally preserved reproduction and auxiliary transcript of pages 3–22 from a non-prosecution disposition, but the public page treats it as one ordinary attributed source and gives readers no structured way to understand what those pages do and do not establish. The document is central to understanding the prosecutor's reasoning, yet its third-party, redacted, and incomplete provenance creates a material risk of overstating it as an official complete record unless importance and source authority are presented separately.
+The Hsinchu dossier now has locally preserved images and an auxiliary transcript of pages 3–22 from a stamped non-prosecution disposition, but the public page treats them as one ordinary attributed source and gives readers no structured way to understand what those pages do and do not establish. The document is central to understanding the prosecutor's reasoning, yet the images' third-party publication path, redactions, and incomplete coverage create a material risk of overstating them as an official complete record unless document appearance and publication authority are presented separately.
 
 ## What Changes
 
 - Add a first-class Hsinchu "core document" section before the case-context section and make it the first item in the document-order table of contents.
-- Identify the artifact as a third-party social-media reproduction of a redacted non-prosecution disposition, not an official complete PDF or a court judgment.
+- Identify the artifact as stamped disposition-page images publicly posted through third-party social media, not a re-typeset artifact, an official complete PDF, or a court judgment.
 - Show the observed page coverage, missing-page boundary, capture metadata, and canonical Threads source before any excerpt or interpretation.
 - Add a structured, page-scoped reading guide that distinguishes the allegation section from the prosecutor's reasoning and links readers back to the original Threads post; do not republish the 20 full-page images or the full auxiliary transcript from the public site.
 - Keep three content layers semantically distinct: visible document text, the poster's attributed caption, and TW Issues analysis.
@@ -17,7 +17,7 @@ The Hsinchu dossier now has a locally preserved reproduction and auxiliary trans
 
 ### New Capabilities
 
-- `hsinchu-primary-document-reading`: Defines how the Hsinchu dossier identifies, prioritizes, scopes, and explains a partial third-party legal-document reproduction through a page-scoped reading guide without overstating provenance or conclusions.
+- `hsinchu-primary-document-reading`: Defines how the Hsinchu dossier identifies, prioritizes, scopes, and explains partial stamped legal-document page images published by a third party through a page-scoped reading guide without overstating provenance or conclusions.
 
 ### Modified Capabilities
 

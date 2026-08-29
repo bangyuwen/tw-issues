@@ -96,7 +96,7 @@ export function getEligiblePrimaryDocument(
 ) {
   return isHsinchuProjection(projection, metadata)
     && projection.primaryDocument?.source.publicRef === "source-58"
-    && projection.primaryDocument.provenanceStatus === "third_party_redacted_partial_reproduction"
+    && projection.primaryDocument.provenanceStatus === "third_party_published_stamped_redacted_partial_document_images"
     ? projection.primaryDocument
     : undefined;
 }
@@ -129,7 +129,7 @@ const approvedHsinchuProsecutorClaims: readonly HsinchuClaimSnapshot[] = [
     proofScope: "只證明媒體轉述竹檢對偵查方法、金流結果及行政疏失與刑事證據區分的說明。",
     limitations: [
       "未發現犯罪證據是檢方偵查判斷，不等同法院已對所有工程爭議作成終局認定。",
-      "目前另有第三方社群重製影像第 3–22 頁可供有限核對；官方完整不起訴處分書、缺頁及相關卷證仍待取得。",
+      "目前另有第三方社群公開之具印文頁面影像第 3–22 頁可供有限核對；官方完整不起訴處分書、缺頁及相關卷證仍待取得。",
     ],
     sourceRefs: ["source-04", "source-05"],
   },

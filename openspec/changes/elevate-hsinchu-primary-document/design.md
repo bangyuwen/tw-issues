@@ -12,7 +12,7 @@ The repository publicly deploys everything committed under `public/`, while its 
 
 **Goals:**
 
-- Make the document the first evidence locator in the Hsinchu dossier without presenting a third-party partial reproduction as an official complete record.
+- Make the document the first evidence locator in the Hsinchu dossier without presenting a third-party-published partial document-page image set as an official complete record.
 - Let readers distinguish visible document text, the poster's attributed framing, and TW Issues analysis before drawing conclusions.
 - Explain which observed pages contain allegation or referral material and which contain prosecutorial reasoning, using exact document-page locators.
 - Publish only editor-checked, necessary excerpts with explicit proof scope and limitations.
@@ -38,7 +38,7 @@ The Hsinchu table of contents will gain `#primary-document` as its first item, a
 
 The section will use a fixed visible warning equivalent to:
 
-> 第三方社群重製・不是官方完整全文・已遮蔽・僅涵蓋第 3–22 頁
+> 文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁
 
 It will call the source an `不起訴處分書社群影像節錄`, never a `判決書`. Importance will be communicated through position, heading, and explanatory anatomy rather than a verified badge or rank score.
 
@@ -89,7 +89,7 @@ This keeps the dossier linear, makes the source central, and avoids both a dashb
 
 Every relevant block will use a complete text label, not color alone:
 
-- `影像可見文字｜第三方重製`
+- `具印文頁面可見文字｜第三方公開`
 - `楊玲宜貼文摘要｜具名說法`
 - `TW Issues 分析｜非司法結論`
 

@@ -194,8 +194,8 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
   );
 
   assert.match(html, /id="primary-document"/);
-  assert.match(html, /新竹棒球場案不起訴處分書第三方重製影像/);
-  assert.match(html, /已對照第三方重製影像/);
+  assert.match(html, /新竹棒球場案不起訴處分書具印文頁面影像/);
+  assert.match(html, /已對照具印文頁面影像/);
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 
@@ -1105,8 +1105,8 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
 
   assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
     {
-      gap: "市府已宣布將提出再議；目前已有第三方社群重製的不起訴處分書第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
-      gapReason: "市府已宣布將提出再議；目前已有第三方社群重製的不起訴處分書第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gap: "市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gapReason: "市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
       sourceRefs: ["source-01", "source-09", "source-34"],
       rest: {},
     },

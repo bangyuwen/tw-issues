@@ -14,7 +14,7 @@
 
 - [x] 3.1 Add typed optional primary-document, coverage, structure-guide, checked-excerpt, and attributed-layer models to the public projection without making the field mandatory for other topics.
 - [x] 3.2 Add the Hsinchu `primaryDocument` data with `source-58` identity, third-party/redacted/partial provenance, pages 3–22 coverage, missing-page boundaries, neutral document-function ranges, and the checked page 18 excerpt.
-- [x] 3.3 Update existing Hsinchu gap and next-step language so it says the social-media reproduction of pages 3–22 is available while the official complete disposition, absent pages, formal reconsideration materials, and result remain unavailable.
+- [x] 3.3 Update existing Hsinchu gap and next-step language so it says the third-party-published stamped page images covering pages 3–22 are available while the official complete disposition, absent pages, formal reconsideration materials, and result remain unavailable.
 - [x] 3.4 Keep the poster's framing attributed, keep `大秘寶` classified as political framing rather than disposition wording, and retain the existing high-risk claim classifications, proof scopes, limitations, and canonical `source-58` URL.
 - [x] 3.5 Synchronize the Hsinchu projection and content digests in `public-bundle.json`, then verify source deduplication still produces one `source-58` registry item and the expected total source count.
 

@@ -28,7 +28,8 @@ for (const path of files.filter((candidate) => textExtensions.has(candidate.slic
 }
 
 const html = await readFile(hsinchuPage, "utf8");
-assert.match(html, /第三方社群重製・不是官方完整全文・已遮蔽・僅涵蓋第 3–22 頁/);
+assert.match(html, /文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁/);
+assert.doesNotMatch(html, /第三方(?:社群)?重製|第三方重製影像/);
 assert.match(html, /塑膠管為噴灌系統/);
 assert.match(html, /https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A/);
 
