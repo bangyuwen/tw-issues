@@ -16,6 +16,7 @@ export type PublicEvidenceProjection = {
   openQuestions: PublicClaim[];
   socialObservations?: SocialObservation[];
   socialObservationCount?: number;
+  coverageGaps?: PublicCoverageGap[];
   sectionOrder?: string[];
   dossierQuality?: "PASS" | "LEGACY_PRESERVED";
   reportedTimeline?: ReportedEvent[];
@@ -24,6 +25,14 @@ export type PublicEvidenceProjection = {
     publicSafety: "PASS" | "BLOCKED";
     editorialReadiness: "PASS" | "LIMITED" | "BLOCKED";
   };
+};
+
+/** Public projection fields approved for visible coverage-limit presentation. */
+export type PublicCoverageGap = {
+  gap: string;
+  gapReason: string;
+  sourceRefs: string[];
+  sources?: PublicSource[];
 };
 
 export type ContextOverview = {
@@ -163,7 +172,7 @@ export type PublicClaim = {
   limitations: string[];
   sources: PublicSource[];
   speakers?: PublicSpeaker[];
-  claimType?: "fact" | "attributed_statement" | "analysis" | "stance" | "proposal";
+  claimType?: "fact" | "attributed_statement" | "attributed_procedural_report" | "analysis" | "stance" | "proposal";
   harmRisk?: "low" | "elevated" | "high";
   editorialLabel?: "TW Issues 分析" | "TW Issues 主張";
   premises?: string[];

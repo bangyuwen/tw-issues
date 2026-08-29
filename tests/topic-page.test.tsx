@@ -745,7 +745,7 @@ test("source fragment helper ignores absent and unrelated targets", () => {
   assert.equal(disclosure.open, false);
 });
 
-test("source disclosure binds initial hash, clicks, hash changes, and cleanup", () => {
+test("source disclosure binds initial hash, clicks, Back/Forward hash changes, and cleanup", () => {
   const calls: string[] = [];
   const target = {
     matches: (selector: string) => selector === "[data-source-ref]",
@@ -794,6 +794,18 @@ test("source disclosure binds initial hash, clicks, hash changes, and cleanup", 
     preventDefault: () => { prevented = true; },
   } as unknown as MouseEvent);
   assert.deepEqual([disclosure.open, prevented, hash], [true, true, "#sources"]);
+
+  hash = "#reports";
+  hashListener?.();
+  disclosure.open = false;
+  hash = "#source-01";
+  hashListener?.();
+  assert.equal(disclosure.open, true, "Back restores the source disclosure when returning to a source fragment");
+  assert.deepEqual(calls.slice(-2), ["focus", "scroll"]);
+
+  hash = "#reports";
+  hashListener?.();
+  assert.equal(hash, "#reports", "Forward preserves the non-source fragment without rewriting browser history");
 
   cleanup();
   assert.deepEqual(calls.slice(-2), ["remove-hash:true", "remove-click:true"]);
@@ -1033,4 +1045,138 @@ test("every publicRef uses one canonical source metadata record within its proje
       assert.equal(fingerprints.size, 1, `${slug}:${publicRef} has conflicting source metadata`);
     }
   }
+});
+
+test("Hsinchu model exposes public-safe coverage limits and six complete chapter groups", () => {
+  const model = buildDossierPageModel(
+    publicEvidenceBySlug["hsinchu-baseball-stadium"],
+    { topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true }, displayTitle: "新竹棒球場爭議" },
+  );
+
+  assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
+    {
+      gap: "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gapReason: "市府已宣布將提出再議，但尚未取得不起訴處分書全文、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      sourceRefs: ["source-01", "source-09", "source-34"],
+      rest: {},
+    },
+    {
+      gap: "BrightView檢測採購／疑洩密案的終結狀態未明，且不得與2026年林智堅等人主案處分混寫。",
+      gapReason: "只找到2024年搜索、約談、交保及當時偵辦中的報導；未找到可辨識的起訴、不起訴、併案或再議處分。這是公開資料限制，不是絕對證明案件尚未處分。",
+      sourceRefs: ["source-37", "source-36"],
+      rest: {},
+    },
+    {
+      gap: "目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點；因此只呈現可回查的媒體傳播，不把轉發量當成民意或事實證據。",
+      gapReason: "目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點；因此只呈現可回查的媒體傳播，不把轉發量當成民意或事實證據。",
+      sourceRefs: ["source-10", "source-11"],
+      rest: {},
+    },
+  ]);
+  for (const limit of model.coverageLimits) {
+    for (const internalField of ["coverageStatus", "actorRole", "searchedAt", "searchQueries", "readiness"]) {
+      assert.equal(internalField in limit, false, `${internalField} must not enter the public-safe view model`);
+    }
+  }
+
+  assert.equal(model.hsinchuChapters.length, 6);
+  assert.deepEqual(model.hsinchuChapters.map(({ href }) => href), [
+    "#context", "#claims", "#progress", "#people", "#analysis", "#social-observations",
+  ]);
+  assert.deepEqual(model.hsinchuChapters.flatMap(({ links }) => links.map(({ href }) => href)), [
+    "#context", "#responsibility-lines", "#coverage-limits",
+    "#claims", "#questions",
+    "#progress", "#administration-actions", "#proceedings",
+    "#people", "#reports", "#narratives",
+    "#analysis",
+    "#social-observations", "#sources",
+  ]);
+  assert.equal(model.editorialPositions?.length, 0);
+  assert.doesNotMatch(JSON.stringify(model.hsinchuChapters), /positions/);
+});
+
+test("Hsinchu attribution reconciliation is positional, time-bounded, and preserves limitation variants", () => {
+  const projection = publicEvidenceBySlug["hsinchu-baseball-stadium"];
+  const model = buildDossierPageModel(projection, {
+    topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+    displayTitle: "新竹棒球場爭議",
+  });
+  const cityClaims = model.attributedSpeakerGroups[0]?.claims ?? [];
+  assert.equal(cityClaims.length, 2);
+  assert.deepEqual(cityClaims[0]?.limitations, [
+    "市府說法不是驗收合格證書，也不證明球場已重新開放職棒賽事。",
+    "衝擊吸收、垂直變形、能量返還及球滾動等測試的完整原始報告仍待公開。",
+    "完整性能測試報告仍待公開。",
+  ]);
+  assert.deepEqual(cityClaims[1]?.limitations, [
+    "市府提出告發或求償不等於司法機關已認定廠商有罪或應負最終金額。",
+    "未取得完整結算、求償起訴狀及停權審查結果，不能把主張寫成確定責任。",
+    "提出告發或求償不等於司法機關已認定廠商有罪或應負最終金額。",
+    "完整結算、求償及停權結果仍待取得。",
+  ]);
+  assert.deepEqual(model.attributedReports.map(({ category, claim }) => [category, claim.sources.map(({ publicRef }) => publicRef)]), [
+    ["institutional", ["source-06"]],
+    ["institutional", ["source-06"]],
+    ["procedural-report", ["source-09"]],
+  ]);
+  assert.equal(model.attributedReports[2]?.claim.speakers?.[0]?.name, "聯合報");
+
+  const drifted = structuredClone(projection) as typeof projection;
+  drifted.attributedClaims[0].statement = "漂移後的市府說法。";
+  assert.throws(
+    () => buildDossierPageModel(drifted, {
+      topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+      displayTitle: "新竹棒球場爭議",
+    }),
+    /Hsinchu attributed mapping drift/,
+  );
+
+  for (const [label, mutate] of [
+    ["statement", (candidate: typeof projection) => { candidate.attributedSpeakerGroups![1].claims[0].statement = "漂移後的檢方說法。"; }],
+    ["proof scope", (candidate: typeof projection) => { candidate.attributedSpeakerGroups![1].claims[0].proofScope = "漂移後的證明範圍。"; }],
+    ["limitations", (candidate: typeof projection) => { candidate.attributedSpeakerGroups![1].claims[0].limitations.push("漂移後的限制。"); }],
+    ["source reference", (candidate: typeof projection) => { candidate.attributedSpeakerGroups![1].claims[0].sources[0].publicRef = "source-drift"; }],
+  ] as const) {
+    const prosecutorDrift = structuredClone(projection) as typeof projection;
+    mutate(prosecutorDrift);
+    assert.throws(
+      () => buildDossierPageModel(prosecutorDrift, {
+        topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+        displayTitle: "新竹棒球場爭議",
+      }),
+      /Hsinchu attributed mapping drift/,
+      `must fail closed when prosecutor ${label} drifts`,
+    );
+  }
+});
+
+test("Hsinchu reconciliation requires metadata and projection identities to agree", () => {
+  const projection = publicEvidenceBySlug["hsinchu-baseball-stadium"];
+  const model = buildDossierPageModel(projection, {
+    topic: { slug: "benzopyrene-food-safety", title: "苯駢芘食安", topicId: "benzopyrene-food-safety-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+    displayTitle: "苯駢芘食安",
+  });
+
+  assert.deepEqual(model.attributedSpeakerGroups, projection.attributedSpeakerGroups);
+  assert.deepEqual(model.attributedReports, []);
+});
+
+test("Hsinchu preserves all 16 timeline events and 17 inner items with their evidence boundaries", () => {
+  const sourceProjection = publicEvidenceBySlug["hsinchu-baseball-stadium"];
+  const model = buildDossierPageModel(sourceProjection, {
+    topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+    displayTitle: "新竹棒球場爭議",
+  });
+  const items = model.timelineGroups.flatMap(({ events }) => events.flatMap(({ items: eventItems }) => eventItems));
+  assert.equal(model.timelineGroups.flatMap(({ events }) => events).length, 16);
+  assert.equal(items.length, 17);
+  assert.deepEqual(items, sourceProjection.reportedTimeline?.flatMap(({ items: eventItems }) => eventItems));
+  assert.deepEqual(model.collections.map(({ claims }) => claims.length), [12, 8]);
+  assert.equal(model.administrationActions.length, 12);
+  assert.equal(model.proceedingTracks.length, 6);
+  assert.equal(model.publicPeople.length, 13);
+  assert.equal(model.politicalNarratives.length, 9);
+  assert.equal(model.analysisClaims?.length, 5);
+  assert.equal(model.socialObservations.length, 10);
+  assert.equal(model.publicSources.length, 57);
 });

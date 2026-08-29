@@ -182,10 +182,10 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.ok(html.indexOf('id="administration-actions"') < html.indexOf('id="proceedings"'), "administration action audit precedes proceeding outcomes");
   assert.ok(html.indexOf('id="proceedings"') < html.indexOf('id="people"'), "procedural records precede people and public statements");
   assert.ok(html.indexOf('id="people"') < html.indexOf('id="reports"'), "people precede grouped attributed statements");
-  assert.match(html, /id="reports"[\s\S]*?<h2>不同主體的公開說法。<\/h2>/);
+  assert.match(html, /id="reports"[\s\S]*?<h3>不同主體的公開說法。<\/h3>/);
   assert.ok(html.indexOf('id="reports"') < html.indexOf('id="narratives"'), "grouped statements precede political narratives");
   assert.ok(html.indexOf('id="narratives"') < html.indexOf('id="analysis"'), "political narratives precede editorial analysis");
-  assert.match(html, /id="analysis"[\s\S]*?<h2>TW Issues 的分析<\/h2>/);
+  assert.match(html, /id="analysis"[\s\S]*?<h3>TW Issues 的分析<\/h3>/);
   assert.ok(html.indexOf('id="analysis"') < html.indexOf('id="social-observations"'), "editorial analysis precedes the supplemental social sample");
   assert.ok(html.indexOf('id="social-observations"') < html.indexOf('id="sources"'), "the supplemental social sample precedes sources");
   assert.ok(html.indexOf("朱立倫將球場爭議放入政黨治理攻防") < html.indexOf("高虹安把球場放入市政治理與廉能攻防"), "political narratives render in chronological order");
@@ -550,4 +550,58 @@ test("unpublished and legacy aliases have no public route", async () => {
     const response = await render(pathname);
     assert.equal(response.status, 404);
   }
+});
+
+test("Hsinchu renders six chapters, complete secondary targets, and public-safe coverage limits", async () => {
+  const response = await render("/topics/hsinchu-baseball-stadium");
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  assert.equal((html.match(/class="[^"]*\s+case-toc-chapter(?:\s|")/g) ?? []).length, 6);
+  const nav = html.match(/<nav id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  for (const target of [
+    "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
+    "administration-actions", "proceedings", "people", "reports", "narratives", "analysis",
+    "social-observations", "sources",
+  ]) {
+    assert.match(nav, new RegExp(`href="#${target}"`));
+    assert.match(html, new RegExp(`(?:id|data-target)="${target}"`));
+  }
+  const coverage = html.match(/<section[^>]+id="coverage-limits"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.ok(coverage.length > 0);
+  assert.ok(html.indexOf('id="coverage-limits"') < html.indexOf('id="case-contents"'));
+  assert.match(coverage, /市府已宣布將提出再議/);
+  assert.match(coverage, /BrightView檢測採購／疑洩密案的終結狀態未明/);
+  assert.match(coverage, /目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點/);
+  assert.doesNotMatch(coverage, /coverageStatus|actorRole|searchedAt|searchQueries|readiness|GAPS_DISCLOSED|partial|not_promoted/);
+  assert.match(html, /class="speaker-statement-date"[\s\S]*?來源日期[\s\S]*?2026-08-22/);
+  assert.match(html, /具名程序報告/);
+  assert.match(html, /聯合報/);
+  assert.match(html, /source-09/);
+  assert.match(html, /機關名稱不代表不同任期、首長或執政黨的立場相同/);
+  const visibleDocument = html.slice(0, html.indexOf("<script>self.__VINEXT_RSC_CHUNKS__"));
+  const cityStatement = "新竹市政府表示，改善工程已於日前竣工並自2026年8月20日起進入驗收，後續將進行場地性能測試；市府並稱人工草皮、紅土及排水系統已依國際標準調整。";
+  assert.equal(visibleDocument.split(cityStatement).length - 1, 1, "mapped city-government statement should render once in visible HTML");
+  assert.doesNotMatch(nav, /href="#positions"/);
+  assert.doesNotMatch(html, /id="positions"/);
+  const attributedSection = html.slice(html.indexOf('id="reports"'), html.indexOf('id="narratives"'));
+  assert.doesNotMatch(attributedSection, /民進黨|國民黨|台灣民眾黨|民主進步黨/);
+  assert.equal((html.match(/<h1>/g) ?? []).length, 1);
+  const headingLevels = [...visibleDocument.matchAll(/<h([1-6])(?:\s[^>]*)?>/g)].map((match) => Number(match[1]));
+  for (let index = 1; index < headingLevels.length; index += 1) {
+    assert.ok(headingLevels[index] <= headingLevels[index - 1] + 1, `heading level jumps from h${headingLevels[index - 1]} to h${headingLevels[index]}`);
+  }
+  assert.doesNotMatch(html, /scrollspy|localStorage|sentiment|dashboard|filter|sticky/);
+  assert.match(html, /href="#case-contents"[^>]*>回到本頁目錄/);
+});
+
+test("generic rendered topics retain the non-case navigation and disclosure contract", async () => {
+  const response = await render("/topics/benzopyrene-food-safety");
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  assert.match(html, /class="article-nav"/);
+  assert.doesNotMatch(html, /case-toc|case-toc-chapter|dossier-shell--hsinchu|id="coverage-limits"/);
+  assert.match(html, /class="sources-disclosure" id="sources"/);
+  assert.match(html, /href="#source-/);
+  assert.match(html, /class="speaker-group-details"/);
+  assert.doesNotMatch(html, /href="#case-contents"[^>]*>回到本頁目錄/);
 });
