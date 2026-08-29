@@ -2606,8 +2606,209 @@
         ]
       }
     ],
-    "socialObservations": [],
-    "socialObservationCount": 0,
+    "socialObservations": [
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "PTT 球迷討論把 2022 到 2026 仍在施工視為「一直再等半年」，批評任內仍未恢復正式比賽。",
+        "proofScope": "只證明這則公開討論出現對施工期與正式比賽進度的批評。",
+        "limitations": [
+          "匿名留言無法獨立驗證作者身分與個人經驗。",
+          "不代表整體球迷或新竹市民，也不證明延誤的單一原因。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-49",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1779948919.A.D3D.html",
+            "title": "新竹棒球場該認賠殺出了吧",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2026-05-28",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · Facebook",
+        "summary": "公開 Facebook 粉專在球場附近設置「政治提款機」意象，將開挖與選舉操作連在一起。",
+        "proofScope": "只證明媒體報導所述粉專曾以「政治提款機」意象公開批評。",
+        "limitations": [
+          "媒體轉述不等於完整原始貼文脈絡。",
+          "這是批評者的政治比喻，不證明存在操弄意圖或違法行為。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-50",
+            "canonicalUrl": "https://www.mnews.tw/story/20231019nm003",
+            "title": "棒球場前設「政治提款機」狠酸高虹安",
+            "publisher": "鏡新聞",
+            "publishedAt": "2023-10-19",
+            "displayRole": "社群事件報導"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "PTT 討論質疑「大秘寶」敘事沒有同步帶來清楚、可核對的改善時程，認為挖掘延誤了重啟。",
+        "proofScope": "只證明公開討論中有人把工程調查敘事與重啟時程放在一起質疑。",
+        "limitations": [
+          "匿名留言的因果判斷未經獨立查核。",
+          "不代表所有討論者，也不取代工程與行政程序的正式結論。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-51",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1692851730.A.299.html",
+            "title": "新竹棒球場報告公開",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2023-08-24",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "針對 531 個土壤樣本未見獨立報告，社群質疑市府以口頭說明代替完整檢測文件。",
+        "proofScope": "只證明公開討論出現對土壤檢測文件公開程度的質疑。",
+        "limitations": [
+          "討論串未必包含全部檢測文件或機關回覆。",
+          "不證明樣本未檢測、檢測結果不實或任何人的法律責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-52",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1718264872.A.C73.html",
+            "title": "認了新竹棒球場無土壤檢測報告",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2024-06-13",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "部分留言把味全龍營運關係與職棒賽程反覆不確定，解讀為市府把一座可辦職棒的場地處理到只剩三級賽事風險。",
+        "proofScope": "只證明公開討論將營運與賽程不確定視為治理風險。",
+        "limitations": [
+          "留言的責任歸因與場地評價未經獨立查核。",
+          "不證明球團已作成解約決定，也不證明場地只能舉辦三級賽事。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-53",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1762599274.A.8B9.html",
+            "title": "傳味全龍擬解約",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2025-11-08",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "居民抱怨施工期間的化學味、噪音與揚塵，將問題視為市府長期施工管理不佳。",
+        "proofScope": "只證明公開討論出現居民對施工環境影響的抱怨。",
+        "limitations": [
+          "匿名留言無法獨立驗證氣味來源、頻率與影響範圍。",
+          "不證明污染超標或市府已違反特定管理義務。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-54",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1770969216.A.5A5.html",
+            "title": "工程飄化學惡臭",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2026-02-13",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "有球迷認為先讓學生賽事做壓力測試像把球員當測試對象，質疑未完成完整安全驗證前不應宣稱可用。",
+        "proofScope": "只證明公開討論出現對學生賽事作為測試場景的安全疑慮。",
+        "limitations": [
+          "匿名留言的比喻與安全判斷未經獨立查核。",
+          "不證明學生賽事存在實際安全事故，也不代表場地驗收結果。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-49",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1779948919.A.D3D.html",
+            "title": "新竹棒球場該認賠殺出了吧",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2026-05-28",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "criticism",
+        "sourceTypeLabel": "批評樣本 · PTT",
+        "summary": "另一串討論把啟用時程再次延後與證據保存問題放在一起，認為市府應先交代可核對的重啟節點。",
+        "proofScope": "只證明公開討論要求把延期、證據保存與重啟節點一併說明。",
+        "limitations": [
+          "匿名留言可能混合不同時間點的新聞與個人推測。",
+          "不證明延期必然由單一機關或單一決策造成。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-57",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1779946160.A.610.html",
+            "title": "新竹棒球場啟用又要延了",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2026-05-28",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      },
+      {
+        "kind": "counterpoint",
+        "sourceTypeLabel": "反向聲音 · Facebook",
+        "summary": "高虹安公開貼文留言區有支持者認為市府是在收拾前朝爛攤子，肯定團隊持續施工與改善。",
+        "proofScope": "只證明媒體轉述的公開留言出現支持市府改善工作的聲音。",
+        "limitations": [
+          "媒體轉述不等於完整留言區，也不能估計支持者比例。",
+          "不證明前後任責任歸屬或工程改善已完成。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-56",
+            "canonicalUrl": "https://news.nextapple.com/local/20260822/7461C9BB96BD98D19B429867C27C599B",
+            "title": "高虹安今視察新竹棒球場 網友湧入臉書打氣",
+            "publisher": "壹蘋新聞網",
+            "publishedAt": "2026-08-22",
+            "displayRole": "社群留言轉述報導"
+          }
+        ]
+      },
+      {
+        "kind": "counterpoint",
+        "sourceTypeLabel": "反向聲音 · 公開留言",
+        "summary": "豪雨後的公開影片與留言有人肯定球場沒有積水、排水似有改善，但也把這視為單次觀察。",
+        "proofScope": "只證明公開貼文與留言對單次豪雨後排水狀況出現正面回應。",
+        "limitations": [
+          "單次降雨觀察不能代表所有天候或正式驗收結果。",
+          "留言不代表整體民意，也不取代工程檢測資料。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-55",
+            "canonicalUrl": "https://www.ptt.cc/bbs/Baseball/M.1782532067.A.3FE.html",
+            "title": "豪雨考驗過關",
+            "publisher": "PTT Baseball 板",
+            "publishedAt": "2026-06-27",
+            "displayRole": "公開社群討論串"
+          }
+        ]
+      }
+    ],
+    "socialObservationCount": 10,
     "sectionOrder": [
       "facts",
       "statements",

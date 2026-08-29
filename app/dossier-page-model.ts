@@ -113,6 +113,7 @@ export function buildDossierPageModel(
       ...amplification.flatMap(({ sources: amplificationSources }) => amplificationSources),
     ]),
     ...timeline.flatMap(({ items }) => items.flatMap(({ sources }) => sources)),
+    ...(projection.socialObservations ?? []).flatMap(({ sources = [] }) => sources),
   ].map((item) => [item.publicRef, item])).values());
   return {
     topicId: projection.topicId,

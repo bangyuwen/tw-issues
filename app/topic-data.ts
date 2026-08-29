@@ -148,6 +148,13 @@ export type PublicSource = {
 
 export type SocialObservation = {
   summary: string;
+  kind?: "criticism" | "counterpoint";
+  sourceTypeLabel?: string;
+  proofScope?: string;
+  limitations?: string[];
+  sources?: PublicSource[];
+  sourceRefs?: string[];
+  sampleSourceCount?: number;
 };
 
 export type PublicClaim = {
