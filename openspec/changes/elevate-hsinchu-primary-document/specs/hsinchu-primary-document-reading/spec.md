@@ -15,11 +15,11 @@ The system SHALL render an eligible Hsinchu primary-document section after the r
 - **AND** the topic's existing section eligibility and order SHALL remain unchanged
 
 ### Requirement: Importance and provenance authority remain separate
-The system MUST identify `source-58` as an important third-party social-media reproduction of a redacted, partial non-prosecution disposition and MUST NOT present its structural priority as official-source authority, completeness, a court judgment, or a confidence score.
+The system MUST identify `source-58` as important stamped document-page images from a redacted, partial non-prosecution disposition that were publicly posted through third-party social media, and MUST distinguish visible document appearance from official publication authority, completeness, a court judgment, or a confidence score.
 
 #### Scenario: Reader encounters the source identity
 - **WHEN** the primary-document section is rendered
-- **THEN** a visible warning SHALL state that the artifact is a third-party reproduction, is not the official complete text, is redacted, and covers only document pages 3–22
+- **THEN** a visible warning SHALL state that the document pages show red stamped seams, were publicly posted by a third party, are redacted, and cover only document pages 3–22
 - **AND** the title SHALL describe it as a social-media image excerpt from a non-prosecution disposition rather than a judgment
 - **AND** the warning SHALL be visible without opening a disclosure
 
@@ -52,7 +52,7 @@ The system SHALL provide a page-scoped reading guide that distinguishes accusati
 
 #### Scenario: Prosecutorial reasoning is described
 - **WHEN** the guide describes a page range containing the prosecutor's evidentiary analysis
-- **THEN** it SHALL label the range as visible prosecutorial reasoning from the partial reproduction
+- **THEN** it SHALL label the range as visible prosecutorial reasoning from the partial page-image set
 - **AND** it SHALL preserve the distinction between criminal sufficiency and separate administrative, contractual, civil, or safety questions
 
 ### Requirement: Only checked page-level excerpts are published
@@ -62,7 +62,7 @@ The system MUST limit primary-document excerpts to content that has been reviewe
 - **WHEN** the checked page 18 excerpt is rendered
 - **THEN** it SHALL state only that the visible passage identifies the PE net, irrigation-system plastic pipes, and electrical wiring at issue there as installed works and not waste
 - **AND** it SHALL NOT generalize that statement to every excavated object, every engineering defect, or every legal and administrative question
-- **AND** it SHALL identify the text as visible in a third-party reproduction rather than verified from an official complete disposition
+- **AND** it SHALL identify the text as visible in stamped document-page images publicly posted by a third party, not as a re-typeset artifact or an official complete publication
 
 #### Scenario: Transcript passage has not completed excerpt review
 - **WHEN** a passage exists only in the auxiliary transcript or poster summary and lacks the required image review and boundary metadata
@@ -81,7 +81,7 @@ The system SHALL render visible document text, the poster's attributed framing, 
 #### Scenario: TW Issues explains the document
 - **WHEN** TW Issues draws an inference from a checked excerpt
 - **THEN** the inference SHALL be labeled `TW Issues 分析｜非司法結論`
-- **AND** it SHALL remain distinct from `影像可見文字｜第三方重製`
+- **AND** it SHALL remain distinct from `具印文頁面可見文字｜第三方公開`
 - **AND** it SHALL state material uncertainty or a condition that could change the analysis
 
 #### Scenario: Political shorthand is discussed

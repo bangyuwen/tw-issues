@@ -147,17 +147,17 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "PTT 球迷討論把 2022 到 2026 仍在施工視為",
     "政治提款機",
     "非隨機樣本，不能代表民意或事件真相",
-    "新竹棒球場案不起訴處分書第三方重製影像",
+    "新竹棒球場案不起訴處分書具印文頁面影像",
     "公開來源：",
     "楊玲宜 Threads",
-    "第三方社群重製・不是官方完整全文・已遮蔽・僅涵蓋第 3–22 頁",
+    "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
     "第 1–2 頁未附",
     "至少第 23–25 頁未附",
     "告發與移送內容",
     "待檢驗的主張，不是檢察官已認定的事實",
-    "影像可見文字｜第三方重製",
+    "具印文頁面可見文字｜第三方公開",
     "文件第 18 頁",
-    "已對照第三方重製影像",
+    "已對照具印文頁面影像",
     "塑膠管為噴灌系統",
     "電線亦為施工公司鋪設，均非廢棄物",
     "楊玲宜貼文摘要｜具名說法",
@@ -222,7 +222,8 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.equal((html.match(/id="source-58"/g) ?? []).length, 1);
   assert.match(html, /data-document-layer="allegation_or_referral"[^>]*><span>第 3–8 頁/);
   assert.doesNotMatch(html, /data-document-layer="prosecutorial_reasoning"[^>]*><span>第 3–8 頁/);
-  assert.match(html, /data-review-status="checked_against_image"[^>]*>已對照第三方重製影像/);
+  assert.match(html, /data-review-status="checked_against_image"[^>]*>已對照具印文頁面影像/);
+  assert.doesNotMatch(html, /第三方(?:社群)?重製|第三方重製影像/);
   assert.match(html, /這不是法院判決，也不是法官對高虹安或林智堅作成的認定/);
   assert.match(html, /頁面沒有寫高虹安本人開挖、鋪設或發現這些物件/);
   assert.doesNotMatch(html, /高虹安挖到(?:管線|電線)/);

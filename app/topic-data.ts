@@ -45,7 +45,7 @@ export type PrimaryDocumentGuideEntry = {
 
 export type PrimaryDocumentExcerpt = {
   documentPage: number;
-  label: "影像可見文字｜第三方重製";
+  label: "具印文頁面可見文字｜第三方公開";
   text: string;
   reviewStatus: "checked_against_image";
   proofScope: string;
@@ -70,7 +70,7 @@ export type PrimaryDocument = {
   publicKey: string;
   title: string;
   documentKind: "non_prosecution_disposition";
-  provenanceStatus: "third_party_redacted_partial_reproduction";
+  provenanceStatus: "third_party_published_stamped_redacted_partial_document_images";
   warning: string;
   source: PublicSource;
   capturedAt: string;
