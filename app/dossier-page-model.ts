@@ -1,4 +1,4 @@
-import type { AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
+import type { AttributedSpeakerGroup, ContextOverview, DeepResearchTopic, PoliticalNarrative, ProceedingTrack, PublicClaim, PublicEvidenceProjection, PublicPersonProfile, PublicSource, ReportedEvent } from "./topic-data";
 
 export type ClaimCollectionModel = {
   id: "claims" | "questions";
@@ -14,6 +14,7 @@ export type DossierPageModel = {
   collections: ClaimCollectionModel[];
   attributedSpeakerGroups: AttributedSpeakerGroup[];
   contextOverview?: ContextOverview;
+  proceedingTracks: ProceedingTrack[];
   publicPeople: PublicPersonProfile[];
   politicalNarratives: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
@@ -22,8 +23,16 @@ export type DossierPageModel = {
   socialSampleSize: number;
   publicSources: PublicSource[];
   sourceById: Map<string, PublicSource>;
-  timelineGroups: Array<{ key: string; label: string; events: ReportedEvent[] }>;
+  timelineGroups: TimelineGroup[];
+  timelinePhases: TimelinePhaseModel[];
+  unphasedTimelineGroups: TimelineGroup[];
   latestTimelineEvent?: ReportedEvent;
+};
+
+export type TimelineGroup = { key: string; label: string; events: ReportedEvent[] };
+
+export type TimelinePhaseModel = ContextOverview["phases"][number] & {
+  groups: TimelineGroup[];
 };
 
 export function eventDateKey(event: ReportedEvent) {
@@ -60,6 +69,26 @@ export function buildDossierPageModel(
     groups.set(key, group);
     return groups;
   }, new Map<string, { key: string; label: string; events: ReportedEvent[] }>()).values());
+  const timelinePhases = (projection.contextOverview?.phases ?? [])
+    .filter((phase) => phase.eventKeys && phase.eventKeys.length > 0)
+    .map((phase) => {
+      const eventKeys = new Set(phase.eventKeys);
+      const groups = timelineGroups.flatMap((group) => {
+        const events = group.events.filter((event) => eventKeys.has(event.publicKey));
+        return events.length > 0 ? [{ ...group, events }] : [];
+      });
+      return { ...phase, groups };
+    })
+    .filter(({ groups }) => groups.length > 0);
+  const phasedEventKeys = new Set(timelinePhases.flatMap(({ eventKeys = [] }) => eventKeys));
+  const unphasedTimelineGroups = timelinePhases.length === 0 ? timelineGroups : timelineGroups.flatMap((group) => {
+    const events = group.events.filter((event) => !phasedEventKeys.has(event.publicKey));
+    return events.length > 0 ? [{ ...group, events }] : [];
+  });
+  const politicalNarratives = (projection.politicalNarratives ?? [])
+    .map((narrative, ledgerIndex) => ({ narrative, ledgerIndex }))
+    .sort((a, b) => a.narrative.occurredAt.localeCompare(b.narrative.occurredAt) || a.ledgerIndex - b.ledgerIndex)
+    .map(({ narrative }) => narrative);
   const publicSources = Array.from(new Map([
     ...collections.flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
     ...(projection.attributedSpeakerGroups ?? []).flatMap(({ claims }) => claims.flatMap(({ sources }) => sources)),
@@ -67,8 +96,9 @@ export function buildDossierPageModel(
     ...(projection.editorialPositions ?? []).flatMap(({ sources }) => sources),
     ...(projection.contextOverview?.lanes ?? []).flatMap(({ sources }) => sources),
     ...(projection.contextOverview?.phases ?? []).flatMap(({ sources }) => sources),
+    ...(projection.proceedingTracks ?? []).flatMap(({ sources }) => sources),
     ...(projection.publicPeople ?? []).flatMap(({ sources }) => sources),
-    ...(projection.politicalNarratives ?? []).flatMap(({ sources, amplification = [] }) => [
+    ...politicalNarratives.flatMap(({ sources, amplification = [] }) => [
       ...sources,
       ...amplification.flatMap(({ sources: amplificationSources }) => amplificationSources),
     ]),
@@ -81,8 +111,9 @@ export function buildDossierPageModel(
     collections,
     attributedSpeakerGroups: projection.attributedSpeakerGroups ?? [],
     contextOverview: projection.contextOverview,
+    proceedingTracks: projection.proceedingTracks ?? [],
     publicPeople: projection.publicPeople ?? [],
-    politicalNarratives: projection.politicalNarratives ?? [],
+    politicalNarratives,
     analysisClaims: projection.analysisClaims ?? [],
     editorialPositions: projection.editorialPositions ?? [],
     socialObservations: projection.socialObservations ?? [],
@@ -90,6 +121,8 @@ export function buildDossierPageModel(
     publicSources,
     sourceById: new Map(publicSources.map((item) => [item.publicRef, item])),
     timelineGroups,
+    timelinePhases,
+    unphasedTimelineGroups,
     latestTimelineEvent: timeline.at(-1),
   };
 }

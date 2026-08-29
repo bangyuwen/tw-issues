@@ -139,7 +139,7 @@ test("durable event timeline groups same-day events and starts every event close
   assert.equal((html.match(/class="event-disclosure"/g) ?? []).length, 3);
   assert.equal((html.match(/class="event-disclosure" open=""/g) ?? []).length, 0);
   assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"/);
-  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><\/div>/);
+  assert.match(html, /class="event-progress-section" id="progress" aria-label="事件進展"><div class="section-intro"><p class="eyebrow">事件進展<\/p><h2>事情怎麼走到今天？<\/h2><\/div>/);
   assert.doesNotMatch(html, /\d+ 件進展/);
   assert.match(html, /event-date-heading"><time[^>]*>2026 年 7 月 17 日<\/time><span class="event-date-multiple-label">同日 2 則<\/span><span class="event-date-statuses">/);
   assert.match(html, /class="event-date-group" data-date-key="2026-07-17"/);
@@ -602,16 +602,22 @@ test("real sparse and dense projections share density and source contracts", () 
   }
 });
 
-for (const [field, label] of [
-  ["claims", "可核對命題"], ["openQuestions", "調查中的問題"],
-] as const) test(`${field} renders four direct claims and a section-local remainder`, () => {
+test("verified claims render four direct claims and a section-local remainder", () => {
   const claims = Array.from({ length: 6 }, (_, index) => ({ ...claim, statement: `命題 ${index + 1}` }));
-  const synthetic: PublicEvidenceProjection = { topicId: "density", claims: [], attributedClaims: [], openQuestions: [], [field]: claims };
+  const synthetic: PublicEvidenceProjection = { topicId: "density", claims, attributedClaims: [], openQuestions: [] };
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={synthetic} />);
-  assert.match(html, new RegExp(`展開其餘 2 項${label}`));
+  assert.match(html, /展開其餘 2 項可核對命題/);
   assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).length, 4);
   const remainderOrdinal = "evidence-claim-ordinal";
   assert.match(html, new RegExp(`class="claim-remainder"[\\s\\S]*?${remainderOrdinal}">05<[\\s\\S]*?命題 6`));
+});
+
+test("open questions keep every title directly visible", () => {
+  const questions = Array.from({ length: 6 }, (_, index) => ({ ...claim, statement: `未決問題 ${index + 1}` }));
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={{ topicId: "open-density", claims: [], attributedClaims: [], openQuestions: questions }} />);
+  assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).length, 6);
+  assert.doesNotMatch(html, /class="claim-remainder"/);
+  assert.match(html, /未決問題 6/);
 });
 
 test("speaker groups lead with a one-line public summary before expandable details", () => {
@@ -701,6 +707,7 @@ test("model collects person and narrative sources including amplification", () =
 test("model preserves context overview and collects lane and phase sources", () => {
   const laneSource = { ...source, publicRef: "context-lane", publisher: "責任線來源" };
   const phaseSource = { ...source, publicRef: "context-phase", publisher: "階段來源" };
+  const proceedingSource = { ...source, publicRef: "proceeding-source", publisher: "程序來源" };
   const model = buildDossierPageModel({
     topicId: "context-overview",
     claims: [claim],
@@ -710,10 +717,21 @@ test("model preserves context overview and collects lane and phase sources", () 
       headline: "先拆開問題",
       summary: "不同程序回答不同問題。",
       lanes: [{ kind: "administrative", label: "行政", finding: "有行政缺失", proofScope: "不等於刑事責任", sources: [laneSource] }],
-      phases: [{ period: "2022", title: "爭議爆發", summary: "公開事件", turningPoint: "程序不同", sources: [phaseSource] }],
+      phases: [{ period: "2022", title: "爭議爆發", summary: "公開事件", turningPoint: "程序不同", eventKeys: ["event-phase"], sources: [phaseSource] }],
     },
+    proceedingTracks: [{ kind: "administrative", label: "行政調查", body: "測試機關", question: "有無行政缺失？", conclusion: "已作成調查結論。", effect: "要求改善。", doesNotConclude: ["不等於刑事有罪。"], status: "已公布", nextStep: "追查改善", sources: [proceedingSource] }],
+    reportedTimeline: [{ publicKey: "event-phase", occurredAt: "2022-07", precision: "month", kindLabel: "調查", headline: "爭議爆發", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] }],
   });
   assert.equal(model.contextOverview?.phases.length, 1);
+  assert.equal(model.timelinePhases[0]?.groups[0]?.events[0]?.publicKey, "event-phase");
+  assert.equal(model.unphasedTimelineGroups.length, 0);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
   assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
+  assert.equal(model.sourceById.get("proceeding-source")?.publisher, "程序來源");
+});
+
+test("model orders political narratives by occurrence date while preserving same-day ledger order", () => {
+  const narrative = (publicKey: string, occurredAt: string): NonNullable<PublicEvidenceProjection["politicalNarratives"]>[number] => ({ publicKey, occurredAt, arena: "選舉", headline: publicKey, speaker: { name: "測試人物", role: "候選人" }, statement: "具名說法", status: "attributed", proofScope: "只證明曾如此表示", limitations: ["不證明真相"], sources: [source] });
+  const model = buildDossierPageModel({ topicId: "narrative-order", claims: [], attributedClaims: [], openQuestions: [], politicalNarratives: [narrative("late", "2022-11-25"), narrative("same-a", "2022-11-16"), narrative("early", "2022-11-02"), narrative("same-b", "2022-11-16")] });
+  assert.deepEqual(model.politicalNarratives.map(({ publicKey }) => publicKey), ["early", "same-a", "same-b", "late"]);
 });

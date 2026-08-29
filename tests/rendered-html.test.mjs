@@ -92,29 +92,41 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "完整處分書",
     "關鍵人物",
     "政治敘事與擴散",
-    "一座球場，四種問題，不能用同一個結論回答",
+    "一座球場，五條責任線，不能用同一個結論回答",
     "工程與行政責任",
     "刑事偵查結果",
+    "民事與契約責任",
     "政治攻防與傳播",
     "球場能否重新使用",
     "從重建計畫走到統包工程",
-    "工程爭議轉化為市長選舉與政黨治理攻防",
+    "調查、改善與選舉攻防同時展開",
     "不起訴不是句點",
     "沈慧虹",
     "林耕仁",
     "黃國昌",
     "林為洲",
     "高虹安以「12億元棒球場」連結政黨輪替訴求",
+    "同一爭議，五個程序各自回答什麼",
+    "市府與統包商契約爭議",
+    "統包商與下包商民事案",
+    "巨佳營造與下包商揚名實業間約737萬元工程款民事一審",
+    "框架 · TW Issues 分析",
+    "相較前一階段 · TW Issues 分析",
     "2026-08-29",
     "沒有符合原始貼文、作者、日期與封存連結門檻的社群節點",
   ]) {
     assert.match(html, new RegExp(text));
   }
-  assert.match(html, /class="event-progress-section"/);
+  assert.match(html, /class="event-progress-section case-chronology"/);
   assert.match(html, /class="context-overview" id="context"/);
   assert.match(html, /class="context-lanes"/);
-  assert.match(html, /class="context-phases"/);
+  assert.match(html, /class="chronology-phases"/);
+  assert.match(html, /class="proceeding-matrix"/);
+  assert.doesNotMatch(html, /class="context-phases"/);
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="progress"'), "context overview precedes the detailed timeline");
+  assert.ok(html.indexOf("朱立倫將球場爭議放入政黨治理攻防") < html.indexOf("高虹安把球場放入市政治理與廉能攻防"), "political narratives render in chronological order");
+  assert.equal((html.match(/data-claim-zone="direct"/g) ?? []).filter(Boolean).length >= 6, true);
+  assert.doesNotMatch(html, /展開其餘 2 項調查中的問題/);
   assert.match(html, /class="people-grid"/);
   assert.match(html, /class="narrative-matrix"/);
   assert.match(html, /id="people"/);
