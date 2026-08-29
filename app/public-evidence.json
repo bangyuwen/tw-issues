@@ -1626,6 +1626,196 @@
             "displayRole": "媒體報導"
           }
         ]
+      },
+      {
+        "statement": "把林智堅與高虹安合併成「兩人都因貪污被判」的敘事，與目前可查的裁判及行政處分不符。",
+        "claimType": "analysis",
+        "harmRisk": "elevated",
+        "editorialLabel": "TW Issues 分析",
+        "premises": [
+          "林智堅可查到的是臺灣大學與中華大學撤銷碩士學位，以及教育部駁回中華大學學位案訴願；這是學校學倫處分與行政救濟，不是法院刑事判決。",
+          "臺北高等行政法院111年度訴字第1026號判決處理的是第三人對學位撤銷通知及訴訟要件的爭議，並未就論文抄襲實體作成刑事定罪或學倫認定。",
+          "高虹安則有臺北地院112年度自字第38號誣告案二審（高院113年度上訴字第5670號）改判有期徒刑6月、臺北地院112年度矚重訴字第1號助理費案二審（高院113年度矚上重訴字第36號）撤銷貪污罪改依使公務員登載不實罪判6月；助理費案檢方已上訴，著作權刑事案（智慧財產及商業法院113年度刑智上易字第49號）則發回臺北地院更審。",
+          "新竹棒球場主案目前公開的是監察院行政糾正與新竹地檢不起訴／緩起訴處分，並非林智堅因棒球場案遭法院判刑。"
+        ],
+        "inference": "三組資料的機關權限、罪名與審級不同；把它們壓縮成同一個「貪污定讞」標籤，會製造超出來源證明範圍的結論。",
+        "uncertainty": "截至2026年8月29日，本輪公開查詢未找到高虹安助理費案上訴後更晚的確定判決；臺大學倫完整審定資料也未全部公開。",
+        "falsifier": "若後續法院或主管機關公開新的確定裁判，改變上述案件的罪名、審級或責任對象，這項判讀應隨之更新。",
+        "proofScope": "這是依法院、教育部、監察院與檢察機關公開資料整理的程序邊界判讀，不是對任何人的道德評價或新增犯罪指控。",
+        "limitations": [
+          "法院新聞稿與媒體報導是判決理由摘要；完整法律效果仍以裁判原本及後續確定結果為準。",
+          "不起訴、緩起訴、學位撤銷與行政糾正不互相取代，也不能跨案件推定個人刑事責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-40",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202208095008.aspx",
+            "title": "台大撤銷碩士學位 林智堅：捍衛清白、不影響參選",
+            "publisher": "中央社",
+            "publishedAt": "2022-08-09",
+            "displayRole": "學校學倫處分報導"
+          },
+          {
+            "publicRef": "source-41",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202302020218.aspx",
+            "title": "中華大學碩士學位遭撤銷 教育部駁回林智堅訴願",
+            "publisher": "中央社",
+            "publishedAt": "2023-02-02",
+            "displayRole": "行政救濟報導"
+          },
+          {
+            "publicRef": "source-42",
+            "canonicalUrl": "https://judgment.judicial.gov.tw/LAW_Mobile_FJUD/FJUD/data.aspx?ty=JD&id=TPBA%2c111%2c%e8%a8%b4%2c1026%2c20230213%2c2&ot=in",
+            "title": "臺北高等行政法院111年度訴字第1026號判決（林智堅學位撤銷相關訴訟）",
+            "publisher": "臺北高等行政法院",
+            "publishedAt": "2023-02-13",
+            "displayRole": "行政法院判決"
+          },
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://udn.com/news/story/7321/9720871",
+            "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
+            "publisher": "中央社／聯合新聞網",
+            "publishedAt": "2026-08-28",
+            "displayRole": "司法進度報導"
+          },
+          {
+            "publicRef": "source-43",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1148245-a1d42-1.html",
+            "title": "臺灣臺北地方法院112年度自字第38號誣告案件新聞稿",
+            "publisher": "臺灣臺北地方法院",
+            "publishedAt": "2024-08-21",
+            "displayRole": "法院判決新聞稿"
+          },
+          {
+            "publicRef": "source-44",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202507310146.aspx",
+            "title": "高虹安涉誣告判6月　二審：惡行沒一審認定重大",
+            "publisher": "中央社",
+            "publishedAt": "2025-07-31",
+            "displayRole": "司法案件報導"
+          },
+          {
+            "publicRef": "source-45",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html",
+            "title": "113年度矚上重訴字第36號高虹安涉詐助理費案件新聞稿",
+            "publisher": "臺灣高等法院",
+            "publishedAt": "2025-12-16",
+            "displayRole": "法院判決新聞稿"
+          },
+          {
+            "publicRef": "source-46",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202601050274.aspx",
+            "title": "高虹安涉詐助理費二審改判6月　高檢署上訴",
+            "publisher": "中央社",
+            "publishedAt": "2026-01-05",
+            "displayRole": "司法程序報導"
+          },
+          {
+            "publicRef": "source-47",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1528011-c5fdb-1.html",
+            "title": "智慧財產及商業法院113年度刑智上易字第49號違反著作權法案件新聞稿",
+            "publisher": "智慧財產及商業法院",
+            "publishedAt": "2026-04-16",
+            "displayRole": "法院判決新聞稿"
+          }
+        ]
+      },
+      {
+        "statement": "高虹安相關判決的關鍵不是單一「有罪／無罪」標籤，而是罪名、審級與程序狀態不同；只截取其中一段，都會讓政治敘事失真。",
+        "claimType": "analysis",
+        "harmRisk": "elevated",
+        "editorialLabel": "TW Issues 分析",
+        "premises": [
+          "臺北地院112年度自字第38號誣告案一審以刑法誣告罪判10月，高院113年度上訴字第5670號二審仍認定構成誣告但改判6月，且報導明載仍可上訴。",
+          "臺北地院112年度矚重訴字第1號助理費案一審判利用職務機會詐取財物罪7年4月；高院113年度矚上重訴字第36號二審改判使公務員登載不實罪6月，並明確撤銷一審貪污罪部分，檢方其後向最高法院上訴。",
+          "智慧財產及商業法院113年度刑智上易字第49號著作權刑事案二審只處理告訴期間與審級利益，撤銷一審不受理判決並發回更審，不等於已作成有罪判決。"
+        ],
+        "inference": "「一審7年4月」與「二審貪污不成立」都是案件歷史的一部分，但都不能單獨代表最終確定結果；公平的敘事必須同時標示判決層級、罪名與上訴狀態。",
+        "uncertainty": "截至2026年8月29日，公開資料尚不足以確認助理費案最高法院的最終結果；誣告案二審亦非確定判決。",
+        "falsifier": "若最高法院或更審法院作成並公開確定裁判，應以新裁判更新案件狀態與敘事。",
+        "proofScope": "這是對三件法院程序的審級與法律效果整理，不是把法院理由延伸成未判決的其他事實。",
+        "limitations": [
+          "本頁引用的是法院公開新聞稿或司法案件報導；判決原本若有差異，以原本為準。",
+          "助理費案與新竹市長任內棒球場工程的時間、職務與被訴事實不同，不能互相證明。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-43",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1148245-a1d42-1.html",
+            "title": "臺灣臺北地方法院112年度自字第38號誣告案件新聞稿",
+            "publisher": "臺灣臺北地方法院",
+            "publishedAt": "2024-08-21",
+            "displayRole": "法院判決新聞稿"
+          },
+          {
+            "publicRef": "source-44",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202507310146.aspx",
+            "title": "高虹安涉誣告判6月　二審：惡行沒一審認定重大",
+            "publisher": "中央社",
+            "publishedAt": "2025-07-31",
+            "displayRole": "司法案件報導"
+          },
+          {
+            "publicRef": "source-45",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html",
+            "title": "113年度矚上重訴字第36號高虹安涉詐助理費案件新聞稿",
+            "publisher": "臺灣高等法院",
+            "publishedAt": "2025-12-16",
+            "displayRole": "法院判決新聞稿"
+          },
+          {
+            "publicRef": "source-46",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202601050274.aspx",
+            "title": "高虹安涉詐助理費二審改判6月　高檢署上訴",
+            "publisher": "中央社",
+            "publishedAt": "2026-01-05",
+            "displayRole": "司法程序報導"
+          },
+          {
+            "publicRef": "source-47",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1528011-c5fdb-1.html",
+            "title": "智慧財產及商業法院113年度刑智上易字第49號違反著作權法案件新聞稿",
+            "publisher": "智慧財產及商業法院",
+            "publishedAt": "2026-04-16",
+            "displayRole": "法院判決新聞稿"
+          }
+        ]
+      },
+      {
+        "statement": "同一組博士論文爭議在刑事誣告與民事損害賠償案件中回答的是不同法律問題，不能把其中一案的結果當成另一案的翻案或定罪。",
+        "claimType": "analysis",
+        "harmRisk": "low",
+        "editorialLabel": "TW Issues 分析",
+        "premises": [
+          "高院113年度上訴字第5670號刑事誣告案二審仍認定高虹安構成誣告，量刑改為6月。",
+          "臺北地院113年度重訴字第966號民事判決則駁回陳時奮損害賠償請求，理由摘要認為相關言論的內容並非虛構，且高虹安對是否構成誹謗所作的是法律評價判斷。"
+        ],
+        "inference": "刑事案件判斷的是誣告罪構成要件與主觀故意，民事案件判斷的是侵權損害賠償要件；同一爭議出現不同結果，不必然互相矛盾。",
+        "uncertainty": "民事判決與誣告刑事判決的完整卷證、訴訟標的與後續救濟狀態仍應以各案裁判原本核對。",
+        "falsifier": "若後續確定裁判明確否定上述案件的訴訟標的或法律效果，這項程序區分應更新。",
+        "proofScope": "這是對不同訴訟類型的比較閱讀，不是替任一判決增加原文沒有的事實。",
+        "limitations": [
+          "民事一審判決與刑事二審判決的審理標的不同，不能用新聞標題直接比較輸贏。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-44",
+            "canonicalUrl": "https://www.cna.com.tw/news/asoc/202507310146.aspx",
+            "title": "高虹安涉誣告判6月　二審：惡行沒一審認定重大",
+            "publisher": "中央社",
+            "publishedAt": "2025-07-31",
+            "displayRole": "司法案件報導"
+          },
+          {
+            "publicRef": "source-48",
+            "canonicalUrl": "https://www.judicial.gov.tw/tw/cp-1888-1299014-afdb1-1.html",
+            "title": "臺灣臺北地方法院113年度重訴字第966號判決新聞稿",
+            "publisher": "臺灣臺北地方法院",
+            "publishedAt": "2025-04-17",
+            "displayRole": "法院判決新聞稿"
+          }
+        ]
       }
     ],
     "openQuestions": [
