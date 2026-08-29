@@ -79,23 +79,39 @@ test("topic page publishes a proceeding-track-only projection", () => {
       claims: [],
       attributedClaims: [],
       openQuestions: [],
-      proceedingTracks: [{
-        kind: "administrative",
-        label: "行政調查",
-        body: "測試機關",
-        question: "程序回答什麼？",
-        conclusion: "已作成測試結論。",
-        effect: "要求改善。",
-        doesNotConclude: ["不等於刑事有罪。"],
-        status: "已公布",
-        nextStep: "追查改善結果",
-        sources: [source],
-      }],
+      proceedingTracks: [
+        {
+          kind: "administrative",
+          label: "行政調查",
+          body: "測試機關",
+          question: "程序回答什麼？",
+          conclusion: "已作成測試結論。",
+          effect: "要求改善。",
+          doesNotConclude: ["不等於刑事有罪。"],
+          status: "已公布",
+          nextStep: "追查改善結果",
+          sources: [source],
+        },
+        {
+          kind: "criminal",
+          label: "刑事偵查",
+          body: "測試地檢署",
+          question: "證據是否足以起訴？",
+          conclusion: "已作成偵查處分。",
+          effect: "偵查終結。",
+          doesNotConclude: ["不處理行政責任。"],
+          status: "已偵結",
+          nextStep: "確認後續程序",
+          sources: [source],
+        },
+      ],
     }} />,
   );
 
-  assert.match(html, /同一爭議，1 個程序各自回答什麼/);
+  assert.match(html, /同一爭議，2 個程序各自回答什麼/);
   assert.match(html, /程序回答什麼/);
+  assert.match(html, /證據是否足以起訴/);
+  assert.equal(html.match(/class="proceeding-row /g)?.length, 2);
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 
@@ -761,21 +777,29 @@ test("model preserves context overview and collects lane and phase sources", () 
       phases: [
         { period: "2022", title: "第一階段：程序建檔", summary: "公開事件", turningPoint: "程序不同", eventKeys: ["event-phase"], sources: [phaseSource] },
         { period: "2023", title: "沒有事件鍵的補充階段", summary: "仍應出現在脈絡總覽。", turningPoint: "保留舊資料相容性", sources: [phaseSource] },
+        { period: "2024", title: "第二階段：程序追蹤", summary: "另一個公開事件", turningPoint: "進入後續程序", eventKeys: ["event-phase-two"], sources: [phaseSource] },
       ],
     },
     proceedingTracks: [{ kind: "administrative", label: "行政調查", body: "測試機關", question: "有無行政缺失？", conclusion: "已作成調查結論。", effect: "要求改善。", doesNotConclude: ["不等於刑事有罪。"], status: "已公布", nextStep: "追查改善", sources: [proceedingSource] }],
-    reportedTimeline: [{ publicKey: "event-phase", occurredAt: "2022-07", precision: "month", kindLabel: "調查", headline: "爭議爆發", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] }],
+    reportedTimeline: [
+      { publicKey: "event-phase", occurredAt: "2022-07", precision: "month", kindLabel: "調查", headline: "爭議爆發", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] },
+      { publicKey: "event-phase-two", occurredAt: "2024-01", precision: "month", kindLabel: "追蹤", headline: "後續程序", sourceRefs: [phaseSource.publicRef], items: [{ status: "verified", ...claim, sources: [phaseSource] }] },
+    ],
   };
   const model = buildDossierPageModel(evidence);
   const html = renderToStaticMarkup(<TopicPage params={{ slug: "benzopyrene-food-safety" }} projectionOverride={evidence} />);
 
-  assert.equal(model.contextOverview?.phases.length, 2);
+  assert.equal(model.contextOverview?.phases.length, 3);
+  assert.equal(model.timelinePhases.length, 2);
   assert.equal(model.timelinePhases[0]?.groups[0]?.events[0]?.publicKey, "event-phase");
+  assert.equal(model.timelinePhases[1]?.groups[0]?.events[0]?.publicKey, "event-phase-two");
   assert.deepEqual(model.unphasedContextPhases.map(({ title }) => title), ["沒有事件鍵的補充階段"]);
   assert.equal(model.unphasedTimelineGroups.length, 0);
-  assert.match(html, /1 個階段，串起事件的關鍵轉折/);
+  assert.match(html, /2 個階段，串起事件的關鍵轉折/);
   assert.equal(html.match(/第一階段：程序建檔/g)?.length, 1);
   assert.equal(html.match(/沒有事件鍵的補充階段/g)?.length, 1);
+  assert.equal(html.match(/第二階段：程序追蹤/g)?.length, 1);
+  assert.equal(html.match(/轉折 · TW Issues 分析/g)?.length, 3);
   assert.equal(model.sourceById.get("context-lane")?.publisher, "責任線來源");
   assert.equal(model.sourceById.get("context-phase")?.publisher, "階段來源");
   assert.equal(model.sourceById.get("proceeding-source")?.publisher, "程序來源");

@@ -115,7 +115,7 @@ function ContextOverviewSection({ overview, sourceLinks, fallbackPhases }: { ove
     </article>)}</div>
     {fallbackPhases.length > 0 && <div className="context-phases" aria-label="其他事件階段">{fallbackPhases.map((phase, index) => <article className="context-phase" key={`${phase.period}-${phase.title}`}>
       <div className="context-phase-index"><span>{String(index + 1).padStart(2, "0")}</span><time>{phase.period}</time></div>
-      <div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="context-turning-point"><strong>轉折</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div>
+      <div><h3>{phase.title}</h3><p>{phase.summary}</p><p className="context-turning-point"><strong>轉折 · TW Issues 分析</strong>{phase.turningPoint}</p><div className="citations">{sourceLinks(phase.sources.map(({ publicRef }) => publicRef))}</div></div>
     </article>)}</div>}
   </section>;
 }
