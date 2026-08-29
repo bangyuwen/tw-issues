@@ -6,6 +6,8 @@ export type PublicEvidenceProjection = {
   claims: PublicClaim[];
   attributedClaims: PublicClaim[];
   attributedSpeakerGroups?: AttributedSpeakerGroup[];
+  publicPeople?: PublicPersonProfile[];
+  politicalNarratives?: PoliticalNarrative[];
   analysisClaims?: PublicClaim[];
   editorialPositions?: PublicClaim[];
   openQuestions: PublicClaim[];
@@ -45,6 +47,34 @@ export type ReportedEventItem = {
 export type PublicSpeaker = {
   name: string;
   role: string;
+  personId?: string;
+};
+
+export type PublicPersonProfile = {
+  personId: string;
+  name: string;
+  role: string;
+  affiliation: string;
+  period: string;
+  relationToTopic: string;
+  summary: string;
+  proofScope: string;
+  limitations: string[];
+  sources: PublicSource[];
+};
+
+export type PoliticalNarrative = {
+  publicKey: string;
+  occurredAt: string;
+  arena: "選舉" | "議會" | "政黨" | "媒體" | "司法" | "社群";
+  headline: string;
+  speaker: PublicSpeaker;
+  statement: string;
+  status: "attributed" | "analysis";
+  proofScope: string;
+  limitations: string[];
+  sources: PublicSource[];
+  amplification?: Array<{ channel: string; publishedAt: string; description: string; sources: PublicSource[] }>;
 };
 
 export type AttributedSpeakerGroup = {

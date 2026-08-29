@@ -657,3 +657,43 @@ test("model preserves ledger order and includes a timeline-only source", () => {
   assert.equal(model.latestTimelineEvent?.publicKey, "earlier-clock");
   assert.equal(model.sourceById.get("timeline-only")?.publisher, "時間軸來源");
 });
+
+test("model collects person and narrative sources including amplification", () => {
+  const personSource = { ...source, publicRef: "person-source", publisher: "人物來源" };
+  const amplificationSource = { ...source, publicRef: "amplification-source", publisher: "擴散來源" };
+  const model = buildDossierPageModel({
+    topicId: "people-narratives",
+    claims: [claim],
+    attributedClaims: [],
+    openQuestions: [],
+    publicPeople: [{
+      personId: "person-a",
+      name: "人物甲",
+      role: "候選人",
+      affiliation: "政黨甲",
+      period: "2022",
+      relationToTopic: "選舉攻防",
+      summary: "公開身分",
+      proofScope: "只證明身分",
+      limitations: ["不證明責任"],
+      sources: [personSource],
+    }],
+    politicalNarratives: [{
+      publicKey: "narrative-a",
+      occurredAt: "2022-11-16",
+      arena: "選舉",
+      headline: "敘事",
+      speaker: { name: "人物甲", role: "候選人", personId: "person-a" },
+      statement: "具名說法",
+      status: "attributed",
+      proofScope: "只證明曾如此表示",
+      limitations: ["不證明真相"],
+      sources: [source],
+      amplification: [{ channel: "媒體", publishedAt: "2022-11-16", description: "轉述", sources: [amplificationSource] }],
+    }],
+  });
+  assert.equal(model.publicPeople.length, 1);
+  assert.equal(model.politicalNarratives.length, 1);
+  assert.equal(model.sourceById.get("person-source")?.publisher, "人物來源");
+  assert.equal(model.sourceById.get("amplification-source")?.publisher, "擴散來源");
+});

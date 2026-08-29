@@ -719,6 +719,460 @@
         ]
       }
     ],
+    "publicPeople": [
+      {
+        "personId": "lin-chih-chien",
+        "name": "林智堅",
+        "role": "前新竹市長",
+        "affiliation": "民主進步黨（任內）",
+        "period": "2014–2022",
+        "relationToTopic": "任內推動球場重建，並在2022年開幕前後負責市府工程治理",
+        "summary": "公開工程與司法報導中的前任市長；本頁將其行政任期、政治說法與檢方處分分開呈現。",
+        "proofScope": "確認公開資料將林智堅列為任內市府工程與2026年偵查說法的相關人物。",
+        "limitations": [
+          "人物被列入工程或偵查脈絡，不等於已證明其有刑事責任。",
+          "2026年不起訴仍應以完整處分書與後續再議資料核對。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體轉述檢方說明"
+          }
+        ]
+      },
+      {
+        "personId": "kao-hung-an",
+        "name": "高虹安",
+        "role": "新竹市長",
+        "affiliation": "台灣民眾黨",
+        "period": "2022–現任",
+        "relationToTopic": "2022選舉攻防主角，任內處理球場調查、改善與後續驗收",
+        "summary": "以候選人及市長身分提出球場治理與前市府責任的公開說法；本頁不把政治批評直接當成工程結論。",
+        "proofScope": "確認公視與中央社報導記錄高虹安在選舉期間談及球場的公開發言。",
+        "limitations": [
+          "競選說法與市府後續處置是不同層次的資料。",
+          "市府提出的求償、停權或改善主張仍需各自的正式文件。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-11",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211250366.aspx",
+            "title": "高虹安：集中選票 投給可以下架民進黨的人",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-25",
+            "displayRole": "候選人公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "shen-hui-hung",
+        "name": "沈慧虹",
+        "role": "前新竹市副市長、2022市長候選人",
+        "affiliation": "民主進步黨",
+        "period": "2014–2022；2022選舉",
+        "relationToTopic": "前市府團隊成員及選舉期間被球場爭議指涉的政治人物",
+        "summary": "因任職前市府及參與2022選舉而出現在球場政治攻防中；未將候選人攻防等同於司法認定。",
+        "proofScope": "確認公開政見會報導將沈慧虹與前市府責任放入球場爭議脈絡。",
+        "limitations": [
+          "政治對手對前市府的批評不能單獨證明個人決策或法律責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "personId": "lin-geng-jen",
+        "name": "林耕仁",
+        "role": "2022新竹市長候選人",
+        "affiliation": "中國國民黨",
+        "period": "2022選舉",
+        "relationToTopic": "選舉期間批評球場改善進度與前市府治理的候選人",
+        "summary": "在政見會與黨內公開場合把球場列為市政監督與選舉攻防議題。",
+        "proofScope": "確認公視政見會報導與中央社黨務報導記錄其公開發言或政治位置。",
+        "limitations": [
+          "候選人批評是具名政治說法，不等於監察院或法院的獨立認定。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-12",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211020113.aspx",
+            "title": "國民黨中常會移師新竹市 朱立倫：唯一支持林耕仁",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-02",
+            "displayRole": "政黨公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "ko-chien-ming",
+        "name": "柯建銘",
+        "role": "立法委員、民進黨立法院黨團總召",
+        "affiliation": "民主進步黨",
+        "period": "2022選舉公開攻防",
+        "relationToTopic": "被候選人公開說法點名的政黨政治人物",
+        "summary": "本頁只記錄其在競選論述中被點名的政治位置，不替其補寫未有來源的球場決策。",
+        "proofScope": "確認中央社報導記錄高虹安將柯建銘與球場議題放入選舉論述。",
+        "limitations": [
+          "被對手提及不等於本人曾就工程提出相同主張，也不等於對工程負責。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-11",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211250366.aspx",
+            "title": "高虹安：集中選票 投給可以下架民進黨的人",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-25",
+            "displayRole": "候選人公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "tsai-chi-chang",
+        "name": "蔡其昌",
+        "role": "時任中華職棒大聯盟會長、立法委員",
+        "affiliation": "民主進步黨（政治身分）",
+        "period": "2022開幕相關公開場合",
+        "relationToTopic": "以職棒聯盟會長身分出現在開幕賽公共脈絡",
+        "summary": "本頁只記錄其在開幕賽脈絡中的制度角色，不把出席或職務推論為工程監造責任。",
+        "proofScope": "確認公視專題整理將職棒聯盟與開幕賽列入事件脈絡。",
+        "limitations": [
+          "職棒聯盟角色不等於工程業主、監造或驗收機關。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-03",
+            "canonicalUrl": "https://news.pts.org.tw/curation/92",
+            "title": "新竹棒球場重生為何惹議？專題整理",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-07-27",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "personId": "chu-li-lun",
+        "name": "朱立倫",
+        "role": "中國國民黨主席",
+        "affiliation": "中國國民黨",
+        "period": "2022選舉",
+        "relationToTopic": "政黨領導人於新竹選舉場合批評前市府與球場建設",
+        "summary": "代表政黨在選舉場合提出對前市府建設的政治批評；本頁與監察院行政認定分開呈現。",
+        "proofScope": "確認中央社報導記錄朱立倫在新竹黨務場合的公開談話。",
+        "limitations": [
+          "政黨領袖的選舉談話不等於工程技術或司法結論。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-12",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211020113.aspx",
+            "title": "國民黨中常會移師新竹市 朱立倫：唯一支持林耕仁",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-02",
+            "displayRole": "政黨公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "huang-kuo-chang",
+        "name": "黃國昌",
+        "role": "時任民眾黨立法院黨團總召",
+        "affiliation": "台灣民眾黨",
+        "period": "2022–2026公開攻防",
+        "relationToTopic": "曾以立法院黨團與個人公開說法批評球場工程，並於不起訴消息後回應",
+        "summary": "本頁記錄其公開政治評語與後續回應，並與檢方不起訴理由分欄。",
+        "proofScope": "確認公開報導記錄其對球場工程與2026處分消息的政治回應。",
+        "limitations": [
+          "政治評語不能取代監察院、檢方或法院文件。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-13",
+            "canonicalUrl": "https://udn.com/news/story/6656/9721324",
+            "title": "林智堅涉新竹棒球場案獲不起訴 黃國昌4字回應「黨證無敵」",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "政治人物回應報導"
+          }
+        ]
+      },
+      {
+        "personId": "lin-wei-chou",
+        "name": "林為洲",
+        "role": "立法委員",
+        "affiliation": "中國國民黨",
+        "period": "2023公開監督",
+        "relationToTopic": "以立委身分要求檢視工作日誌與監造責任",
+        "summary": "代表國會監督者提出工程監造機制失靈的公開質疑；本頁保留為具名說法。",
+        "proofScope": "確認公視報導記錄其呼籲公開工作日誌的說法。",
+        "limitations": [
+          "立委質疑不等於已完成工程責任或刑事責任認定。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-14",
+            "canonicalUrl": "https://news.pts.org.tw/article/617932",
+            "title": "新竹棒球場爭議未平 立委林為洲籲檢視工作日誌",
+            "publisher": "公視新聞網",
+            "publishedAt": "2023-01",
+            "displayRole": "國會監督說法"
+          }
+        ]
+      },
+      {
+        "personId": "yang-ling-yi",
+        "name": "楊玲宜",
+        "role": "新竹市議員",
+        "affiliation": "民主進步黨",
+        "period": "2023–2024公開質疑",
+        "relationToTopic": "針對高虹安市府的開挖、移送與調查說法提出反駁",
+        "summary": "地方議員的監督與反駁是政治攻防的一部分，不直接改變監察院或司法文件的證明範圍。",
+        "proofScope": "確認中央社報導記錄其對市府移送與調查作為的公開評論。",
+        "limitations": [
+          "議員評論不等於已證明市府或前市府任一方的法律責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-15",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202401260271.aspx",
+            "title": "新竹棒球場案6人送監察院 綠議員：至今查無不法",
+            "publisher": "中央社",
+            "publishedAt": "2024-01-26",
+            "displayRole": "地方議員公開說法"
+          }
+        ]
+      },
+      {
+        "personId": "liu-kang-yen",
+        "name": "劉康彥",
+        "role": "新竹市議員",
+        "affiliation": "民主進步黨",
+        "period": "2023–2024公開質疑",
+        "relationToTopic": "針對市府移送、悍創角色與利益迴避提出公開質疑",
+        "summary": "地方議員提出的監督問題，與檢方對刑事證據的判斷分開呈現。",
+        "proofScope": "確認中央社報導記錄其對市府與相關業者角色的公開質疑。",
+        "limitations": [
+          "公開質疑不能單獨證明利益衝突、轉包或其他違法事實。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-15",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202401260271.aspx",
+            "title": "新竹棒球場案6人送監察院 綠議員：至今查無不法",
+            "publisher": "中央社",
+            "publishedAt": "2024-01-26",
+            "displayRole": "地方議員公開說法"
+          }
+        ]
+      }
+    ],
+    "politicalNarratives": [
+      {
+        "publicKey": "narrative-2022-kao-campaign",
+        "occurredAt": "2022-11-16",
+        "arena": "選舉",
+        "headline": "高虹安把球場放入市政治理與廉能攻防",
+        "speaker": { "name": "高虹安", "role": "2022新竹市長候選人", "personId": "kao-hung-an" },
+        "statement": "公視報導，政見發表會中高虹安將新竹棒球場與前市府治理、公共建設問題連結，作為選舉攻防的一部分。",
+        "status": "attributed",
+        "proofScope": "只證明公視報導記錄的候選人公開說法與發言場合。",
+        "limitations": [
+          "競選論述不等於工程缺失、行政違失或刑事責任已被證明。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          }
+        ],
+        "amplification": [
+          {
+            "channel": "主流媒體轉述",
+            "publishedAt": "2022-11-16",
+            "description": "公視以政見發表會報導記錄候選人攻防",
+            "sources": [
+              {
+                "publicRef": "source-10",
+                "canonicalUrl": "https://news.pts.org.tw/article/609700",
+                "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+                "publisher": "公視新聞網",
+                "publishedAt": "2022-11-16",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2022-lin-geng-jen-campaign",
+        "occurredAt": "2022-11-16",
+        "arena": "選舉",
+        "headline": "林耕仁以改善進度質疑前市府治理",
+        "speaker": { "name": "林耕仁", "role": "2022新竹市長候選人", "personId": "lin-geng-jen" },
+        "statement": "公視報導，林耕仁在政見會中以球場改善仍在施工等說法，批評市府公共工程治理。",
+        "status": "attributed",
+        "proofScope": "只證明公視報導所記錄的候選人說法。",
+        "limitations": [
+          "說法不能取代工程進度紀錄、驗收文件或司法判斷。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2022-kao-12-billion",
+        "occurredAt": "2022-11-25",
+        "arena": "選舉",
+        "headline": "高虹安以「12億元棒球場」連結政黨輪替訴求",
+        "speaker": { "name": "高虹安", "role": "2022新竹市長候選人", "personId": "kao-hung-an" },
+        "statement": "中央社報導，高虹安在選舉談話中把約12億元整修棒球場與對民進黨執政的批評放在同一政治論述中。",
+        "status": "attributed",
+        "proofScope": "只證明中央社記錄的候選人公開論述與使用的金額口徑。",
+        "limitations": [
+          "政治口號中的12億元不等於監察院報告或檢方說明的任何單一工程費口徑。",
+          "政黨輪替訴求不能直接證明工程責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-11",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211250366.aspx",
+            "title": "高虹安：集中選票 投給可以下架民進黨的人",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-25",
+            "displayRole": "候選人公開說法"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2022-chu-party-framing",
+        "occurredAt": "2022-11-02",
+        "arena": "政黨",
+        "headline": "朱立倫將球場爭議放入政黨治理攻防",
+        "speaker": { "name": "朱立倫", "role": "中國國民黨主席", "personId": "chu-li-lun" },
+        "statement": "中央社報導，朱立倫批評前市府把棒球場當成政績包裝，並以此質疑公共工程治理。",
+        "status": "attributed",
+        "proofScope": "只證明中央社記錄的政黨領袖公開批評。",
+        "limitations": [
+          "政黨批評不能取代工程紀錄、監察調查或司法判斷。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-12",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211020113.aspx",
+            "title": "朱立倫批新竹棒球場是包裝式政治 林耕仁：應追究責任",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-02",
+            "displayRole": "政黨公開說法"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2023-legislative-oversight",
+        "occurredAt": "2023-01",
+        "arena": "議會",
+        "headline": "國會監督者要求公開工作日誌與監造責任",
+        "speaker": { "name": "林為洲", "role": "立法委員", "personId": "lin-wei-chou" },
+        "statement": "公視報導，林為洲要求檢視工作日誌，將爭議解讀為公共工程監造機制失靈。",
+        "status": "attributed",
+        "proofScope": "只證明公視所記錄的國會監督說法。",
+        "limitations": [
+          "監督者的解讀不等於工程或司法機關已採納的最終責任結論。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-14",
+            "canonicalUrl": "https://news.pts.org.tw/article/617932",
+            "title": "新竹棒球場爭議未平 立委林為洲籲檢視工作日誌",
+            "publisher": "公視新聞網",
+            "publishedAt": "2023-01",
+            "displayRole": "國會監督說法"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2024-local-counterclaim",
+        "occurredAt": "2024-01-26",
+        "arena": "議會",
+        "headline": "地方議員反駁移送與調查的政治解讀",
+        "speaker": { "name": "楊玲宜、劉康彥", "role": "新竹市議員" },
+        "statement": "中央社報導，楊玲宜與劉康彥對市府將相關人士送監察院、悍創角色及利益迴避提出不同看法。",
+        "status": "attributed",
+        "proofScope": "只證明中央社記錄的地方議員公開說法與質疑事項。",
+        "limitations": [
+          "議員反駁不等於已證明市府移送無理由，也不等於前市府或廠商沒有行政問題。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-15",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202401260271.aspx",
+            "title": "新竹棒球場案6人送監察院 綠議員：至今查無不法",
+            "publisher": "中央社",
+            "publishedAt": "2024-01-26",
+            "displayRole": "地方議員公開說法"
+          }
+        ]
+      },
+      {
+        "publicKey": "narrative-2026-huang-response",
+        "occurredAt": "2026-08-29",
+        "arena": "媒體",
+        "headline": "不起訴消息發布後，政治人物以政黨攻防語言回應",
+        "speaker": { "name": "黃國昌", "role": "政治人物公開回應", "personId": "huang-kuo-chang" },
+        "statement": "聯合報報導，黃國昌以「黨證無敵」回應林智堅不起訴消息；本頁將這句話列為政治回應，不當作檢方理由的反證。",
+        "status": "attributed",
+        "proofScope": "只證明媒體記錄的政治人物回應與其發言時點。",
+        "limitations": [
+          "政治回應不會改變不起訴處分的法律性質，也不能取代完整處分書。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-13",
+            "canonicalUrl": "https://udn.com/news/story/6656/9721324",
+            "title": "林智堅涉新竹棒球場案獲不起訴 黃國昌4字回應「黨證無敵」",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-29",
+            "displayRole": "政治人物回應報導"
+          }
+        ]
+      }
+    ],
     "socialObservations": [],
     "socialObservationCount": 0,
     "sectionOrder": [
@@ -762,6 +1216,35 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-28",
             "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "actorName": "社群與短影音傳播節點",
+        "actorRole": "political_narrative_amplification",
+        "status": "not_promoted",
+        "searchedAt": "2026-08-29T00:00:00+08:00",
+        "searchQueries": [],
+        "searchScope": "公開新聞、政見會報導與可回查社群頁面",
+        "gapReason": "目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點；因此只呈現可回查的媒體傳播，不把轉發量當成民意或事實證據。",
+        "gap": "目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點；因此只呈現可回查的媒體傳播，不把轉發量當成民意或事實證據。",
+        "sourceRefs": ["source-10", "source-11"],
+        "sources": [
+          {
+            "publicRef": "source-10",
+            "canonicalUrl": "https://news.pts.org.tw/article/609700",
+            "title": "九合一大選／竹市政見發表會 新竹棒球場爭議激烈攻防",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-11-16",
+            "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-11",
+            "canonicalUrl": "https://www.cna.com.tw/news/aipl/202211250366.aspx",
+            "title": "高虹安：集中選票 投給可以下架民進黨的人",
+            "publisher": "中央社",
+            "publishedAt": "2022-11-25",
+            "displayRole": "候選人公開說法"
           }
         ]
       }
