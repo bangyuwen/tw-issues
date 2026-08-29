@@ -1,4 +1,1190 @@
 {
+  "hsinchu-baseball-stadium": {
+    "topicId": "hsinchu-baseball-stadium-2026",
+    "claims": [
+      {
+        "statement": "監察院調查報告記載，新竹市政府於2016年申請3億5,300萬元重建計畫；教育部於2017年核定8億7,643萬1,580元、中央補助6億1,350萬元，另有3億1,431萬2,000元停車場工程，兩案合計中央與地方投入11億9,074萬3,580元。",
+        "claimType": "project_finance_fact",
+        "harmRisk": "low",
+        "proofScope": "只證明監察院報告所列的原始申請、教育部核定、停車場工程及合計投入金額。",
+        "limitations": [
+          "這些是不同計畫與時間點的經費口徑，不等於檢方所稱追加後工程費11億5,476萬餘元。",
+          "經費總額不等於已證明浪費、損害或任何人的刑事責任。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "監察院報告記載，艾奕康負責專案管理及監造，原決標金額1,541萬5,900元；巨佳營造於2019年1月10日以8億2,541萬元得標統包工程，2019年10月21日開工，2022年5月10日取得使用執照。",
+        "claimType": "project_contract_fact",
+        "harmRisk": "low",
+        "proofScope": "只證明監察院報告所列的主要契約角色、金額、得標、開工及使用執照日期。",
+        "limitations": [
+          "取得使用執照不等於統包工程已完成正式驗收。",
+          "契約金額與得標本身不證明履約品質或不法利益。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "監察院認定，2022年7月20日工程實際進度為99.913%，市府雖辦理5次部分空間點交，但該程序不等同於正式部分驗收或分段查驗，仍在尚未完工及未完成正式驗收的情況下於7月22日辦理開幕賽。",
+        "claimType": "administrative_finding",
+        "harmRisk": "elevated",
+        "proofScope": "證明監察院對工程進度、5次點交性質及開幕前驗收程序的調查認定。",
+        "limitations": [
+          "這是監察院的行政調查與糾正認定，不是刑事有罪判決。",
+          "市府曾主張已有使用執照、聯盟會勘與空間點交；這些說法不改變監察院對正式驗收程序的判斷。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "公視整理報導，2022年7月22日開幕戰後出現座位視線、地板塗層、外野碎石及內野紅土等問題；7月22日至23日共有3名職業球員受傷，後續賽事延期或移地。",
+        "claimType": "reported_event_fact",
+        "harmRisk": "elevated",
+        "proofScope": "只證明公視公開整理所記載的開幕賽問題、球員受傷與賽事延期脈絡。",
+        "limitations": [
+          "公視整理頁不是每名球員的完整醫療紀錄，也不能單獨證明每一項缺失的法律歸責。",
+          "球員受傷與場地缺失的因果及損害範圍仍須依專業鑑定與司法資料判斷。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-03",
+            "canonicalUrl": "https://news.pts.org.tw/curation/92",
+            "title": "新竹棒球場重生為何惹議？專題整理",
+            "publisher": "公視新聞網",
+            "publishedAt": "2022-07-27",
+            "displayRole": "媒體報導"
+          },
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "監察院認定，球場設計與施工未達契約效能，例如未能在30分鐘內排水、未清除直徑大於3公分的石礫及混凝土塊；覆土重量又超過地下停車場結構分析許可值，斷面強度未達規範所要求的安全程度。",
+        "claimType": "administrative_finding",
+        "harmRisk": "elevated",
+        "proofScope": "證明監察院對排水、場地異物、覆土載重及結構安全疑慮的調查認定。",
+        "limitations": [
+          "報告指出的是契約效能與結構安全疑慮，不等於已發生結構倒塌或立即危險。",
+          "這些工程缺失與刑事故意、收賄或圖利之間的連結仍須另有證據。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "監察院認定，艾奕康在修正監造計畫後自行核定自己的計畫，形成專案管理與監造的利益衝突；招標資格也容許不具開業建築師資格的工程顧問公司投標，且市府以不適用的政府採購法條文重新增購原先刪除的屋頂及隔音工程。",
+        "claimType": "administrative_finding",
+        "harmRisk": "elevated",
+        "proofScope": "證明監察院對監造自我核定、資格設定及契約變更法條適用的行政調查認定。",
+        "limitations": [
+          "行政法規適用錯誤不自動等於刑事圖利或貪污成立。",
+          "監察院新聞稿不能取代完整招標文件、變更契約及個別人員責任調查。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "監察院另指出，專案管理及監造服務費由1,541萬5,900元變更為2,951萬4,622元，且地下停車場已有教育部補助後又向公路總局申請補助，列為市府及交通主管機關檢討改進事項。",
+        "claimType": "administrative_finding",
+        "harmRisk": "elevated",
+        "proofScope": "證明監察院報告所列的服務費變更及停車場補助重複申請問題。",
+        "limitations": [
+          "報告將其列為行政檢討事項，不等於已證明有不法金流或個人獲利。",
+          "金額仍須配合各期契約、補助核銷及最終結算文件核對。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "新竹地檢署於2026年8月28日偵結，認定林智堅、巨佳營造及相關被告涉及貪污治罪條例、政府採購法、廢棄物清理法、竊盜、詐欺及文書等罪嫌，犯罪嫌疑不足，均予不起訴。",
+        "claimType": "law_enforcement_fact",
+        "harmRisk": "high",
+        "proofScope": "只證明竹檢公布的偵結處分對象、罪名範圍及『犯罪嫌疑不足』的處分結果。",
+        "limitations": [
+          "不起訴是檢察官偵查終結處分，不是法院判決無罪，也不會自動撤銷行政或民事責任。",
+          "目前公開頁面主要是竹檢資料的媒體轉述，完整處分書與後續再議結果仍待取得。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "竹檢資料指出，4名營造及監造人員在施工日誌、監造日報表及18份抽查紀錄中，預先登載或補簽尚未完成的工程查驗內容，涉行使業務上登載不實文書罪，均獲緩起訴並各支付4萬元。",
+        "claimType": "law_enforcement_fact",
+        "harmRisk": "high",
+        "proofScope": "只證明竹檢對4名工程人員文書行為、緩起訴及處分金的公開說明。",
+        "limitations": [
+          "緩起訴是附條件暫不提起公訴，不等於法院有罪判決。",
+          "這項處分不等同於林智堅或其他公務員已被認定共同犯罪。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-05",
+            "canonicalUrl": "https://udn.com/news/story/7321/9720871",
+            "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
+            "publisher": "中央社",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "桃園地方法院2025年10月31日判決巨佳營造應支付下包商揚名實業約737萬4,312元及利息，案件仍可上訴；判決處理的是統包商與下包商間的民事工程款爭議，不是林智堅刑事責任的判決。",
+        "claimType": "judicial_outcome",
+        "harmRisk": "high",
+        "proofScope": "證明中央社報導的民事判決金額、可上訴狀態及案件當事人範圍。",
+        "limitations": [
+          "民事一審判決尚非確定判決，也不能直接推論市府或林智堅的刑事責任。",
+          "法院提到市府後續開挖使現場無法驗收，不能單獨證明任何一方對全部工程缺失負責。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-08",
+            "canonicalUrl": "https://www.cna.com.tw/news/ahel/202511120338.aspx",
+            "title": "巨佳欠新竹棒球場下包商工程款：法院判付737萬元",
+            "publisher": "中央社",
+            "publishedAt": "2025-11-12",
+            "displayRole": "司法案件報導"
+          }
+        ]
+      },
+      {
+        "statement": "中央社報導，新竹市政府與龍來公司於2026年3月合意終止原球場營運關係，改為未來3年共同投入基層棒球培訓，提供學生聯賽及校隊使用。",
+        "claimType": "operational_fact",
+        "harmRisk": "low",
+        "proofScope": "證明市府與龍來公開說明的營運合作調整及3年培訓安排。",
+        "limitations": [
+          "合作轉型不等於職業賽事已恢復，也不證明雙方所有保證金、投資或求償爭議已結清。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-07",
+            "canonicalUrl": "https://www.cna.com.tw/news/aloc/202603210129.aspx",
+            "title": "與龍來解約新竹棒球場：市府稱合作轉型培訓基層",
+            "publisher": "中央社",
+            "publishedAt": "2026-03-21",
+            "displayRole": "媒體報導"
+          }
+        ]
+      }
+    ],
+    "attributedClaims": [
+      {
+        "statement": "新竹市政府表示，改善工程已於日前竣工並自2026年8月20日起進入驗收，後續將進行場地性能測試；市府並稱人工草皮、紅土及排水系統已依國際標準調整。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "只證明新竹市政府公開說明改善工程竣工、進入驗收及預定測試內容。",
+        "limitations": [
+          "市府說法不是驗收合格證書，也不證明球場已重新開放職棒賽事。",
+          "衝擊吸收、垂直變形、能量返還及球滾動等測試的完整原始報告仍待公開。"
+        ],
+        "speakers": [
+          {
+            "name": "新竹市政府",
+            "role": "主管機關公開說明"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "statement": "新竹市政府表示，原統包工程未解約部分已於2026年5月底完成正、複驗，並已對廠商提起刑事告發、求償逾4億元及啟動政府採購法第101條停權審查。",
+        "claimType": "attributed_statement",
+        "harmRisk": "elevated",
+        "proofScope": "只證明市府公開提出的正複驗、刑事告發、民事求償及停權審查主張。",
+        "limitations": [
+          "市府提出告發或求償不等於司法機關已認定廠商有罪或應負最終金額。",
+          "未取得完整結算、求償起訴狀及停權審查結果，不能把主張寫成確定責任。"
+        ],
+        "speakers": [
+          {
+            "name": "新竹市政府",
+            "role": "主管機關公開說明"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "statement": "聯合報報導，林智堅部分不起訴處分將依法送台灣高等檢察署再議；目前仍須以正式處分書及高檢署後續文件確認程序結果。",
+        "claimType": "attributed_procedural_report",
+        "harmRisk": "elevated",
+        "proofScope": "只證明媒體對林智堅部分再議程序的報導。",
+        "limitations": [
+          "這不是高檢署已作成再議結果的證明。",
+          "未取得正式處分書，不能判定再議是否已提出、受理或改變原處分。"
+        ],
+        "speakers": [
+          {
+            "name": "聯合報",
+            "role": "媒體報導"
+          }
+        ],
+        "sources": [
+          {
+            "publicRef": "source-09",
+            "canonicalUrl": "https://money.udn.com/money/amp/story/7307/9720741",
+            "title": "新竹市棒球場林智堅涉圖利不起訴原因曝光",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      }
+    ],
+    "attributedSpeakerGroups": [
+      {
+        "speaker": {
+          "name": "新竹市政府",
+          "role": "主管機關公開說明"
+        },
+        "claims": [
+          {
+            "statement": "新竹市政府表示，改善工程已於日前竣工並自2026年8月20日起進入驗收，後續將進行場地性能測試；市府並稱人工草皮、紅土及排水系統已依國際標準調整。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明新竹市政府公開說明改善工程竣工、進入驗收及預定測試內容。",
+            "limitations": [
+              "市府說法不是驗收合格證書，也不證明球場已重新開放職棒賽事。",
+              "完整性能測試報告仍待公開。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹市政府",
+                "role": "主管機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+                "title": "新竹棒球場改善工程竣工進入驗收",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-22",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
+          },
+          {
+            "statement": "新竹市政府表示，原統包工程未解約部分已於2026年5月底完成正、複驗，並已對廠商提起刑事告發、求償逾4億元及啟動政府採購法第101條停權審查。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明市府公開提出的正複驗、刑事告發、民事求償及停權審查主張。",
+            "limitations": [
+              "提出告發或求償不等於司法機關已認定廠商有罪或應負最終金額。",
+              "完整結算、求償及停權結果仍待取得。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹市政府",
+                "role": "主管機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+                "title": "新竹棒球場改善工程竣工進入驗收",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-22",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": {
+          "name": "新竹地方檢察署",
+          "role": "檢察機關公開說明"
+        },
+        "claims": [
+          {
+            "statement": "檢方表示，工程多次追加後總工程費由原規畫3億5,300萬元增至11億5,476萬餘元，專案管理及監造服務費增至2,951萬餘元；各次契約變更有具體原因且未逾原契約50%，因而認定未違反政府採購法。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明媒體轉述竹檢對工程追加、服務費及政府採購法適用的說明。",
+            "limitations": [
+              "這是檢方偵查結論的媒體轉述，不是法院判決。",
+              "各筆金額仍須以契約變更、補助核銷及最終結算文件逐筆核對。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "statement": "檢方表示，通訊監察、金流比對、搜索及帳務分析未發現林智堅或市府人員與巨佳、艾奕康間有不法金流、收賄或圖利事證；審計及市府調查所列角色混淆、採購督導不周及驗收不妥，屬行政疏失，尚無積極證據證明刑責。",
+            "claimType": "attributed_statement",
+            "harmRisk": "high",
+            "proofScope": "只證明媒體轉述竹檢對偵查方法、金流結果及行政疏失與刑事證據區分的說明。",
+            "limitations": [
+              "未發現犯罪證據是檢方偵查判斷，不等同法院已對所有工程爭議作成終局認定。",
+              "完整不起訴處分書及相關卷證仍待取得。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              },
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://udn.com/news/story/7321/9720871",
+                "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
+                "publisher": "中央社",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "statement": "檢方表示，工程契約及監拆計畫原本允許拆除產生的磚瓦、石塊等B5類剩餘土石方在現地破碎回填，縮時影像與證人證述未發現巨佳或力瑋自外運入廢棄物掩埋。",
+            "claimType": "attributed_statement",
+            "harmRisk": "high",
+            "proofScope": "只證明媒體轉述竹檢對B5類土石方契約規範及外運掩埋證據的說明。",
+            "limitations": [
+              "檢方未認定有刑事證據，不等同於所有異物來源、工程品質或行政責任已完成獨立鑑定。",
+              "工程契約、監拆計畫及完整影像證據仍應以原始文件核對。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "statement": "檢方表示，球場草皮植床雖以砂、黃土施作而與需求書不符，但2022年自主檢查表已註記；實際土層厚度反高於設計標準，增加成本約347萬1,351元，難認有偷工減料獲利。",
+            "claimType": "attributed_statement",
+            "harmRisk": "elevated",
+            "proofScope": "只證明媒體轉述竹檢對草皮植床材料、檢查紀錄、土層厚度及成本的說明。",
+            "limitations": [
+              "材料不符需求書與是否構成契約或行政責任，不能只由檢方不起訴結果推論。",
+              "成本與土層資料仍須對照原設計、變更及驗收文件。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          },
+          {
+            "statement": "檢方表示，開挖發現的不符規範石塊約36.245立方公尺、占拆除工程產出B5類土石方約0.75%，其餘不合格掩埋物約9.006至10.446立方公尺；查無外運賣土、故意非法掩埋或詐領工程款的證據。",
+            "claimType": "attributed_statement",
+            "harmRisk": "high",
+            "proofScope": "只證明媒體轉述竹檢對開挖異物數量、比例及外運、掩埋、詐領款項證據的說明。",
+            "limitations": [
+              "數量與比例是檢方公開說明的調查口徑，不能取代完整鑑定、契約核對或民事損害計算。",
+              "不起訴不等同於行政缺失、契約瑕疵或公共安全疑慮不存在。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-04",
+                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "analysisClaims": [
+      {
+        "statement": "本案的「工程及行政違失」與「刑事圖利、收賄是否成立」是兩個不同問題；監察院的行政糾正與檢方的不起訴結論可以同時成立，不能用其中一個取代另一個。",
+        "claimType": "analysis",
+        "harmRisk": "low",
+        "editorialLabel": "TW Issues 分析",
+        "premises": [
+          "監察院認定未正式驗收即開賽、設計施工未達契約效能及採購監督有重大違失。",
+          "檢方表示未發現林智堅等人不法金流、收賄、故意非法掩埋或足以起訴的犯罪證據。"
+        ],
+        "inference": "行政程序或契約履約出錯，不必然能證明個人具有刑事故意、對價關係或不法利益。",
+        "uncertainty": "完整不起訴處分書、再議結果及行政究責文件尚未全部公開。",
+        "falsifier": "若後續正式司法文件認定有刑事對價、故意或共同犯行，這項區分需要更新。",
+        "proofScope": "這是依監察院與檢方公開資料整理出的判讀，不是司法裁判。",
+        "limitations": [
+          "分析不能替代完整卷證或法院判決。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "專題中的「12億元」必須拆成初始規劃、教育部核定、另案停車場投資及檢方所稱追加後工程費等不同口徑，不能直接把所有數字合併成「全數浪費」。",
+        "claimType": "analysis",
+        "harmRisk": "low",
+        "editorialLabel": "TW Issues 分析",
+        "premises": [
+          "監察院報告列出3.53億元初始申請、8.7643158億元教育部核定及3.14312億元另案停車場工程。",
+          "檢方報導使用追加後11.5476億元的工程費口徑。"
+        ],
+        "inference": "若不先標示計畫範圍、時間點與是否含停車場，金額比較會產生誤導。",
+        "uncertainty": "最終結算、核銷與各次契約變更的完整對照表仍待取得。",
+        "falsifier": "若正式結算文件證明各口徑其實是同一範圍且可直接相加，這項判讀需修正。",
+        "proofScope": "這是對公開金額口徑的整理與判讀，不是對公帑損害的結論。",
+        "limitations": [
+          "不同來源的金額不能在未核對契約及結算前直接相減或相加。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-02",
+            "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+            "title": "新竹市立棒球場統包工程調查報告",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      }
+    ],
+    "openQuestions": [
+      {
+        "statement": "林智堅不起訴處分書全文、送再議的正式程序及高檢署後續結果為何？",
+        "claimType": "open_question",
+        "harmRisk": "elevated",
+        "proofScope": "只確認媒體已報導不起訴及可能再議，並指出仍缺正式文件。",
+        "limitations": [
+          "不能由媒體報導推論再議已受理、維持或撤銷不起訴。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-09",
+            "canonicalUrl": "https://money.udn.com/money/amp/story/7307/9720741",
+            "title": "新竹市棒球場林智堅涉圖利不起訴原因曝光",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "監察院在刑事案件結案後，市府及相關公務員的行政究責是否已重新處理、作成何種決定？",
+        "claimType": "open_question",
+        "harmRisk": "elevated",
+        "proofScope": "監察院新聞稿記載，當時因刑案偵辦中，公務人員行政責任擬待刑案結果再處理。",
+        "limitations": [
+          "目前資料不能證明行政究責已啟動、完成或完全沒有進度。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          }
+        ]
+      },
+      {
+        "statement": "2026年8月20日開始的改善工程驗收是否已完成？Labosport等性能測試的原始報告、驗收紀錄與正式重啟日期為何？",
+        "claimType": "open_question",
+        "harmRisk": "elevated",
+        "proofScope": "只確認市府公開說明已竣工、進入驗收並安排性能測試。",
+        "limitations": [
+          "進入驗收不等於驗收合格或已開放職棒比賽。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          }
+        ]
+      },
+      {
+        "statement": "3.53億元、8.7643158億元、11.5476億元及11.9074358億元等金額，如何依各次契約變更、補助核銷及最終結算逐筆對應？",
+        "claimType": "open_question",
+        "harmRisk": "low",
+        "proofScope": "確認公開資料存在多個經費口徑，且不同來源尚未提供一份完整對照表。",
+        "limitations": [
+          "不能以金額差異直接推論不法、損害或回扣。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-04",
+            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
+            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      },
+      {
+        "statement": "市府所稱逾4億元民事求償、原統包工程結算及政府採購法第101條停權審查，目前各自進行到哪個程序？",
+        "claimType": "open_question",
+        "harmRisk": "elevated",
+        "proofScope": "只確認市府公開提出求償與停權審查主張。",
+        "limitations": [
+          "市府主張不能取代法院判決、調解結果或採購機關的正式處分。"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-06",
+            "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+            "title": "新竹棒球場改善工程竣工進入驗收",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-22",
+            "displayRole": "主管機關公開說明"
+          },
+          {
+            "publicRef": "source-08",
+            "canonicalUrl": "https://www.cna.com.tw/news/ahel/202511120338.aspx",
+            "title": "巨佳欠新竹棒球場下包商工程款：法院判付737萬元",
+            "publisher": "中央社",
+            "publishedAt": "2025-11-12",
+            "displayRole": "司法案件報導"
+          }
+        ]
+      }
+    ],
+    "socialObservations": [],
+    "socialObservationCount": 0,
+    "sectionOrder": [
+      "facts",
+      "statements",
+      "analysis",
+      "positions",
+      "questions",
+      "social",
+      "sources"
+    ],
+    "dossierQuality": "PASS",
+    "coverageStatus": "GAPS_DISCLOSED",
+    "coverageGaps": [
+      {
+        "actorName": "新竹地方檢察署與行政究責機關",
+        "actorRole": "criminal_and_administrative_follow_up",
+        "status": "partial",
+        "searchedAt": "2026-08-29T00:00:00+08:00",
+        "searchQueries": [],
+        "searchScope": "公開偵結說明、監察院新聞稿與公開媒體報導",
+        "gapReason": "尚未取得不起訴處分書全文、再議結果及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+        "gap": "尚未取得不起訴處分書全文、再議結果及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+        "sourceRefs": [
+          "source-01",
+          "source-09"
+        ],
+        "sources": [
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
+          },
+          {
+            "publicRef": "source-09",
+            "canonicalUrl": "https://money.udn.com/money/amp/story/7307/9720741",
+            "title": "新竹市棒球場林智堅涉圖利不起訴原因曝光",
+            "publisher": "聯合報",
+            "publishedAt": "2026-08-28",
+            "displayRole": "媒體報導"
+          }
+        ]
+      }
+    ],
+    "readiness": {
+      "factVerdict": "PASS",
+      "publicSafety": "PASS",
+      "editorialReadiness": "LIMITED"
+    },
+    "reportedTimeline": [
+      {
+        "publicKey": "event-01",
+        "occurredAt": "2016-08-08",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "計畫與經費",
+        "headline": "市府提出3.53億元重建計畫",
+        "sourceRefs": [
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院報告記載，新竹市政府於2016年8月8日提出3億5,300萬元的新竹市立中正棒球場整建計畫，包含1億5,000萬元地下停車場。",
+            "proofScope": "證明監察院報告所列的原始計畫日期、金額及停車場規劃。",
+            "limitations": [
+              "原始計畫金額不等於後續核定、追加或最終結算金額。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-02",
+        "occurredAt": "2017-11-16",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "計畫與經費",
+        "headline": "教育部核定8.764億元整建計畫",
+        "sourceRefs": [
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院報告記載，教育部於2017年11月16日核定新竹市立棒球場興整建計畫8億7,643萬1,580元，中央補助6億1,350萬元。",
+            "proofScope": "證明教育部核定金額及中央補助金額。",
+            "limitations": [
+              "核定補助不等於所有工程款已支付或最終工程品質已確認。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-03",
+        "occurredAt": "2019-01-10",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "採購與施工",
+        "headline": "巨佳營造以8.2541億元得標統包工程",
+        "sourceRefs": [
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院報告記載，歷經流標後，巨佳營造於2019年1月10日以8億2,541萬元得標，1月18日簽約，10月21日開工。",
+            "proofScope": "證明得標、簽約及開工日期與金額。",
+            "limitations": [
+              "得標結果不等於後續履約、驗收或責任爭議已解決。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-04",
+        "occurredAt": "2022-05-10",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "使用與驗收",
+        "headline": "取得使用執照，但工程尚未完成正式驗收",
+        "sourceRefs": [
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院報告記載，球場於2022年5月10日取得使用執照；截至7月20日實際進度99.913%，市府先後辦理5次部分空間點交，但未找到正式部分驗收或分段查驗紀錄。",
+            "proofScope": "證明使用執照、工程進度、點交次數及監察院對驗收紀錄的查核結果。",
+            "limitations": [
+              "使用執照與空間點交各自處理建築使用及資產交接，不能直接等同工程驗收合格。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "這是後續所有責任爭議的關鍵分界：可以有使用執照，不代表已完成契約上的部分驗收或分段查驗。",
+          "evidenceBoundary": "不能只用使用執照或中職會勘，推論工程已驗收、品質已合格或任何人已負刑事責任。"
+        }
+      },
+      {
+        "publicKey": "event-05",
+        "occurredAt": "2022-07-22",
+        "reportedAt": "2022-07-27",
+        "precision": "day",
+        "kindLabel": "開幕與安全事件",
+        "headline": "開幕賽後暴露場地缺失並造成球員受傷",
+        "sourceRefs": [
+          "source-03",
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "公視整理及監察院報告記載，2022年7月22日開幕賽後出現紅土、碎石、排水、座位視線及設施等問題；7月22日至23日有3名職業球員受傷，後續比賽延期或改地。",
+            "proofScope": "證明公開報導及監察院調查所記載的開幕日期、問題類型、受傷事件與賽事調整。",
+            "limitations": [
+              "受傷的醫療原因、個別缺失的因果及損害金額仍須依專業或司法資料判斷。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://news.pts.org.tw/curation/92",
+                "title": "新竹棒球場重生為何惹議？專題整理",
+                "publisher": "公視新聞網",
+                "publishedAt": "2022-07-27",
+                "displayRole": "媒體報導"
+              },
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "工程與驗收爭議在開幕賽後轉為球員安全、公共責任及政治信任事件。",
+          "evidenceBoundary": "事件發生與工程缺失的公開紀錄，不等於已證明特定個人具有刑事故意或對價關係。"
+        }
+      },
+      {
+        "publicKey": "event-06",
+        "occurredAt": "2022-07-27",
+        "reportedAt": "2022-07-27",
+        "precision": "day",
+        "kindLabel": "司法進度",
+        "headline": "新竹地檢分案調查球場爭議",
+        "sourceRefs": [
+          "source-03"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "公視報導，新竹地檢署於2022年7月27日針對未完成驗收即舉辦比賽及球員受傷等問題分案調查。",
+            "proofScope": "證明公開報導所記載的分案調查時間及調查方向。",
+            "limitations": [
+              "分案調查不等於起訴、定罪或已確認犯罪事實。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-03",
+                "canonicalUrl": "https://news.pts.org.tw/curation/92",
+                "title": "新竹棒球場重生為何惹議？專題整理",
+                "publisher": "公視新聞網",
+                "publishedAt": "2022-07-27",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-08",
+        "occurredAt": "2024-03-01",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "履約爭議",
+        "headline": "市府解除部分球場工程契約並持續處理覆土爭議",
+        "sourceRefs": [
+          "source-02"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院調查報告記載，新竹市政府於2024年3月1日解除統包契約中的部分球場工程，原因涉及覆土載重、結構安全及巨佳營造未完成改善等履約爭議。",
+            "proofScope": "證明監察院報告所記載的解除部分契約日期及爭議範圍。",
+            "limitations": [
+              "解除契約是履約處置，不等於法院已判定所有工程缺失由單一當事人造成。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-02",
+                "canonicalUrl": "https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/76588",
+                "title": "新竹市立棒球場統包工程調查報告",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-09",
+        "occurredAt": "2025-10-31",
+        "reportedAt": "2025-11-12",
+        "precision": "day",
+        "kindLabel": "民事進度",
+        "headline": "法院判巨佳支付下包商約737萬元工程款",
+        "sourceRefs": [
+          "source-08"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "中央社報導，桃園地方法院2025年10月31日判決巨佳營造應支付揚名實業737萬4,312元及利息，案件仍可上訴；法院並認為巨佳未能具體證明排水等瑕疵由揚名造成。",
+            "proofScope": "證明民事判決日期、金額、可上訴狀態及法院對當事人舉證的描述。",
+            "limitations": [
+              "這是統包商與下包商間的民事一審判決，不是林智堅或市府的刑事判決。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-08",
+                "canonicalUrl": "https://www.cna.com.tw/news/ahel/202511120338.aspx",
+                "title": "巨佳欠新竹棒球場下包商工程款：法院判付737萬元",
+                "publisher": "中央社",
+                "publishedAt": "2025-11-12",
+                "displayRole": "司法案件報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-10",
+        "occurredAt": "2026-03-21",
+        "reportedAt": "2026-03-21",
+        "precision": "day",
+        "kindLabel": "營運調整",
+        "headline": "市府與龍來終止原營運合作，轉向基層培訓",
+        "sourceRefs": [
+          "source-07"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "中央社報導，新竹市政府與龍來公司合意終止原球場營運關係，改為未來3年共同投入基層棒球培訓。",
+            "proofScope": "證明營運合作調整及培訓安排的公開報導。",
+            "limitations": [
+              "營運合作調整不等於球場已通過改善驗收或恢復職棒賽事。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-07",
+                "canonicalUrl": "https://www.cna.com.tw/news/aloc/202603210129.aspx",
+                "title": "與龍來解約新竹棒球場：市府稱合作轉型培訓基層",
+                "publisher": "中央社",
+                "publishedAt": "2026-03-21",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-11",
+        "occurredAt": "2026-07-17",
+        "reportedAt": "2026-07-17",
+        "precision": "day",
+        "kindLabel": "行政調查",
+        "headline": "監察院列出5項重大行政違失並糾正市府、運動部",
+        "sourceRefs": [
+          "source-01"
+        ],
+        "items": [
+          {
+            "status": "verified",
+            "statement": "監察院公布調查及糾正，認定未正式驗收即先使用、設計施工未達契約效能、專案管理與監造自我核定、監造資格及工程變更法條適用等5項重大違失。",
+            "proofScope": "證明監察院新聞稿列出的行政調查結論與糾正對象。",
+            "limitations": [
+              "監察院糾正是行政監督結果，不等於法院刑事有罪判決。"
+            ],
+            "sources": [
+              {
+                "publicRef": "source-01",
+                "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+                "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+                "publisher": "監察院",
+                "publishedAt": "2026-07-17",
+                "displayRole": "制度或機關紀錄"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "監察院把球場問題正式定位為工程、採購及監督的行政違失。",
+          "changeFromPrior": "責任討論從現場缺失與政治攻防，進入正式行政調查結論。",
+          "evidenceBoundary": "這份糾正不能直接回答林智堅是否具有刑事圖利或收賄故意。"
+        }
+      },
+      {
+        "publicKey": "event-12",
+        "occurredAt": "2026-08-20",
+        "reportedAt": "2026-08-22",
+        "precision": "day",
+        "kindLabel": "改善與驗收",
+        "headline": "改善工程竣工並進入驗收，性能測試尚待完成",
+        "sourceRefs": [
+          "source-06"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "新竹市政府表示，改善工程已竣工並自8月20日起進入驗收，後續將辦理場地性能測試；截至公開報導日期，市府仍以驗收及測試作為正式使用前的必要程序。",
+            "proofScope": "只證明市府對改善進度、驗收起始日及測試安排的公開說明。",
+            "limitations": [
+              "不能由竣工或進入驗收推論已驗收合格、已恢復職棒或所有安全問題已解決。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹市政府",
+                "role": "主管機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-06",
+                "canonicalUrl": "https://udn.com/news/amp/story/7324/9707651",
+                "title": "新竹棒球場改善工程竣工進入驗收",
+                "publisher": "聯合報",
+                "publishedAt": "2026-08-22",
+                "displayRole": "主管機關公開說明"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publicKey": "event-13",
+        "occurredAt": "2026-08-28",
+        "reportedAt": "2026-08-28",
+        "precision": "day",
+        "kindLabel": "司法進度",
+        "headline": "林智堅等人不起訴，4名工程人員緩起訴",
+        "sourceRefs": [
+          "source-05"
+        ],
+        "items": [
+          {
+            "status": "attributed",
+            "statement": "新竹地方檢察署表示，林智堅、巨佳營造及相關被告涉圖利、採購、廢棄物、竊盜、詐欺及文書等罪嫌，犯罪嫌疑不足而不起訴；4名營造及監造人員則因業務上登載不實文書罪緩起訴，各支付4萬元。",
+            "proofScope": "只證明竹檢偵結資料經中央社轉述的處分結果及罪名範圍。",
+            "limitations": [
+              "不起訴與緩起訴都不是法院有罪或無罪判決；完整處分書及可能的再議結果仍待取得。"
+            ],
+            "speakers": [
+              {
+                "name": "新竹地方檢察署",
+                "role": "檢察機關公開說明"
+              }
+            ],
+            "sources": [
+              {
+                "publicRef": "source-05",
+                "canonicalUrl": "https://udn.com/news/story/7321/9720871",
+                "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
+                "publisher": "中央社",
+                "publishedAt": "2026-08-28",
+                "displayRole": "媒體報導"
+              }
+            ]
+          }
+        ],
+        "commentary": {
+          "significance": "刑事偵查對林智堅等人的犯罪嫌疑暫以不足結案，但工程行政違失、民事求償與最終驗收仍是未完成的責任線。",
+          "changeFromPrior": "焦點從『是否有刑事犯罪』轉向再議、行政究責、民事求償及球場能否安全重啟。",
+          "evidenceBoundary": "不能把不起訴寫成球場沒有缺失，也不能把監察院糾正直接寫成林智堅刑事有罪。"
+        }
+      }
+    ]
+  },
   "ezway-preauthorization": {
     "topicId": "ezway-preauthorization-2026",
     "claims": [
