@@ -130,10 +130,10 @@ function AttributedEvidenceSection({ groups, reports, sourceLinks, showSourceDat
   return <section className="evidence-section" id="reports" aria-label="不同主體怎麼說"><div className="section-intro"><p className="eyebrow">不同主體怎麼說</p><Heading level={headingLevel}>不同主體的公開說法。</Heading><p>{showSourceDates ? "依主體與來源日期整理公開說法；機關名稱不代表不同任期、首長或執政黨的立場相同，也不代表說法已確認或完整。" : "依主體整理公開說法；不代表已確認或完整。"}</p></div><SpeakerGroups groups={groups} sourceLinks={sourceLinks} showSourceDates={showSourceDates} /><ProceduralReportRows reports={reports} sourceLinks={sourceLinks} headingLevel={nextHeadingLevel(headingLevel)} /></section>;
 }
 
-function CoverageLimitsSection({ limits, sourceLinks }: { limits: CoverageLimitViewModel[]; sourceLinks: (ids: string[]) => ReactNode }) {
+function CoverageLimitsSection({ limits, sourceLinks, headingLevel = 2 }: { limits: CoverageLimitViewModel[]; sourceLinks: (ids: string[]) => ReactNode; headingLevel?: HeadingLevel }) {
   if (limits.length === 0) return null;
   return <section className="coverage-limits" id="coverage-limits" aria-labelledby="coverage-limits-title">
-    <div className="coverage-limits-intro"><p className="eyebrow">公開資料界線</p><h2 id="coverage-limits-title">這份公開紀錄還缺哪些文件？</h2><p>以下只列出公開投影已記錄的覆蓋缺口；未取得文件不等於文件不存在，也不構成責任或結果判定。</p></div>
+    <div className="coverage-limits-intro"><p className="eyebrow">公開資料界線</p><Heading level={headingLevel} id="coverage-limits-title">這份公開紀錄還缺哪些文件？</Heading><p>以下只列出公開投影已記錄的覆蓋缺口；未取得文件不等於文件不存在，也不構成責任或結果判定。</p></div>
     <ol className="coverage-limits-list">{limits.map((limit, index) => <li className="coverage-limit-row" key={`${limit.gap}-${index}`}>
       <span className="coverage-limit-ordinal">{String(index + 1).padStart(2, "0")}</span>
       <div><p className="coverage-limit-gap">{limit.gap}</p><p className="coverage-limit-reason"><strong>缺口原因</strong>{limit.gapReason}</p><div className="citations" aria-label="覆蓋缺口來源">{sourceLinks(limit.sourceRefs)}</div></div>
@@ -332,12 +332,11 @@ function CaseReadingLegend() {
   </section>;
 }
 
-function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
-  const documentLayerLabel = document.excerpts[0]?.label ?? "具印文頁面可見文字｜第三方公開";
-  return <section className="primary-document" id="primary-document" aria-labelledby="primary-document-title">
+function PrimaryDocumentGateway({ document }: { document: PrimaryDocument }) {
+  return <section className="primary-document primary-document-gateway" id="primary-document" aria-labelledby="primary-document-title">
     <header className="primary-document-heading">
-      <p className="eyebrow">核心文件導讀</p>
-      <h3 id="primary-document-title">{document.title}</h3>
+      <p className="eyebrow">核心文件</p>
+      <h2 id="primary-document-title">{document.title}</h2>
       <aside className="primary-document-warning" role="note" aria-label="來源與文書本別警示">
         <strong>閱讀警示</strong>
         <p>{document.warning}</p>
@@ -352,7 +351,7 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
     </header>
 
     <section className="primary-document-panel primary-document-coverage" aria-labelledby="primary-document-coverage-title">
-      <h4 id="primary-document-coverage-title">目前看得到哪些頁？</h4>
+      <h3 id="primary-document-coverage-title">目前看得到哪些頁？</h3>
       <dl>
         <div><dt>可見範圍</dt><dd>文件第 {document.coverage.firstObservedPage}–{document.coverage.lastObservedPage} 頁</dd></div>
         <div><dt>前段缺頁</dt><dd>{document.coverage.missingBefore}</dd></div>
@@ -362,8 +361,21 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
       <div className="primary-document-actions" aria-label="核心文件查驗路徑">
         <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
         <a href={"#" + document.source.publicRef}>查看來源登錄</a>
+        <a href="#primary-document-reading">閱讀文件頁段導讀</a>
       </div>
     </section>
+  </section>;
+}
+
+function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument }) {
+  const documentLayerLabel = document.excerpts[0]?.label ?? "具印文頁面可見文字｜第三方公開";
+  return <section className="primary-document primary-document-reading" id="primary-document-reading" aria-labelledby="primary-document-reading-title" aria-describedby="primary-document-reading-boundary">
+    <header className="primary-document-heading primary-document-reading-heading">
+      <p className="eyebrow">文件頁段導讀</p>
+      <h3 id="primary-document-reading-title">如何閱讀這份部分文件</h3>
+      <p className="primary-document-reading-intro" id="primary-document-reading-boundary">本段只整理頁段結構、核對摘錄與解讀界線；來源身分與可見頁面範圍由上方核心文件說明統一界定。</p>
+      <a className="primary-document-reading-source-link" href="#primary-document">回看核心文件來源與可見頁面範圍</a>
+    </header>
 
     <section className="primary-document-panel" aria-labelledby="primary-document-guide-title">
       <h4 id="primary-document-guide-title">先分辨文件每一段在做什麼</h4>
@@ -498,7 +510,8 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   });
   const [verified, unresolved] = collections;
   const caseChapters = hsinchuChapters.length > 0 ? hsinchuChapters : getHsinchuDossierChapters(model);
-  const primaryDocumentSection = primaryDocument ? <PrimaryDocumentSection document={primaryDocument} /> : null;
+  const primaryDocumentGateway = primaryDocument ? <PrimaryDocumentGateway document={primaryDocument} /> : null;
+  const primaryDocumentReadingSection = primaryDocument ? <PrimaryDocumentReadingSection document={primaryDocument} /> : null;
   const contextSection = contextOverview ? <ContextOverviewSection
     overview={contextOverview}
     sourceLinks={sourceLinks}
@@ -526,6 +539,9 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     headingLevel={isCaseDossier ? 3 : 2}
   /> : null;
   const sectionHeadingLevel: HeadingLevel = isCaseDossier ? 3 : 2;
+  const coverageLimitsSection = isCaseDossier && coverageLimits.length > 0
+    ? <CoverageLimitsSection limits={coverageLimits} sourceLinks={sourceLinks} headingLevel={3} />
+    : null;
   const administrationSection = administrationActions.length > 0 ? <AdministrationActionsSection actions={administrationActions} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
   const proceedingsSection = proceedingTracks.length > 0 ? <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
   const narrativesSection = politicalNarratives.length > 0 ? <PoliticalNarrativesSection narratives={politicalNarratives} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
@@ -543,7 +559,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   </SourcesDisclosure>;
 
   const caseContent = isCaseDossier ? <>
-    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{primaryDocumentSection}{contextSection}</HsinchuChapter>}
+    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{primaryDocumentReadingSection}{contextSection}{coverageLimitsSection}</HsinchuChapter>}
     {caseChapters[1] && <HsinchuChapter chapter={caseChapters[1]}>{evidenceSection}</HsinchuChapter>}
     {caseChapters[2] && <HsinchuChapter chapter={caseChapters[2]}>{chronologySection}{administrationSection}{proceedingsSection}</HsinchuChapter>}
     {caseChapters[3] && <HsinchuChapter chapter={caseChapters[3]}>{peopleSection}{reportsSection}{narrativesSection}</HsinchuChapter>}
@@ -555,11 +571,11 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     <a className="skip-link" href="#main-content">跳至主要內容</a>
     <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
     <section id="main-content" tabIndex={-1} className="hero hero-detail">
-      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。{isCaseDossier ? "先界定案情與證據邊界，再分辨已知與未決、時間與程序、人物說法，以及 TW Issues 的分析。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
+      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。{isCaseDossier ? primaryDocument ? "先核對核心文件的來源與可見範圍，再界定案情與證據邊界，並分辨已知與未決、時間與程序、人物說法，以及 TW Issues 的分析。" : "先界定案情與證據邊界，再分辨已知與未決、時間與程序、人物說法，以及 TW Issues 的分析。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
       {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
     </section>
+    {primaryDocumentGateway}
     {isCaseDossier && <CaseReadingLegend />}
-    {isCaseDossier && <CoverageLimitsSection limits={coverageLimits} sourceLinks={sourceLinks} />}
     <ArticleNavigation
       isCaseDossier={isCaseDossier}
       caseChapters={caseChapters}
