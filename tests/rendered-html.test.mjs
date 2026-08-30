@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
+const publicEvidence = JSON.parse(await readFile(new URL("app/public-evidence.json", root), "utf8"));
+const hsinchuPrimaryDocument = publicEvidence["hsinchu-baseball-stadium"].primaryDocument;
 const routes = [
   "/topics/hsinchu-baseball-stadium",
   "/topics/ezway-preauthorization",
@@ -197,8 +200,10 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /58<!-- --> 筆/);
   assert.match(html, /class="article-nav article-nav--case case-toc"/);
   assert.match(html, /id="case-contents"/);
-  assert.match(html, /href="#primary-document"[^>]*>.*?案情範圍與證據界線/);
-  assert.match(html, /href="#primary-document"[^>]*>核心文件導讀/);
+  assert.match(html, /href="#primary-document-reading"[^>]*>.*?案情範圍與證據界線/);
+  assert.match(html, /href="#primary-document-reading"[^>]*>文件頁段導讀/);
+  const hsinchuNav = html.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  assert.doesNotMatch(hsinchuNav, /href="#primary-document"/);
   assert.match(html, /href="#context"[^>]*>.*?案情範圍/);
   assert.match(html, /href="#claims"[^>]*>.*?已知與未決/);
   assert.match(html, /href="#progress"[^>]*>.*?時間與程序/);
@@ -209,7 +214,18 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="case-reading-legend"/);
   assert.match(html, /aria-label="來源 01：/);
   assert.doesNotMatch(html, /class="context-phases"/);
-  assert.ok(html.indexOf('id="primary-document"') < html.indexOf('id="context"'), "primary document precedes case context");
+  const sourceFirstOrder = [
+    'id="main-content"',
+    'id="primary-document"',
+    'class="case-reading-legend"',
+    'id="case-contents"',
+    'id="primary-document-reading"',
+    'id="context"',
+    'id="responsibility-lines"',
+    'id="coverage-limits"',
+  ].map((token) => html.indexOf(token));
+  assert.ok(sourceFirstOrder.every((position) => position >= 0), "every source-first Hsinchu landmark is rendered");
+  assert.deepEqual(sourceFirstOrder, [...sourceFirstOrder].sort((left, right) => left - right));
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="claims"'), "context overview precedes known and unresolved evidence");
   assert.ok(html.indexOf('id="claims"') < html.indexOf('id="progress"'), "known and unresolved evidence precede the detailed timeline");
   assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
@@ -606,17 +622,45 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.equal((html.match(/class="[^"]*\s+case-toc-chapter(?:\s|")/g) ?? []).length, 6);
   const nav = html.match(/<nav id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
   for (const target of [
-    "primary-document", "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
+    "primary-document-reading", "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
     "administration-actions", "proceedings", "people", "reports", "narratives", "analysis",
     "social-observations", "sources",
   ]) {
     assert.match(nav, new RegExp(`href="#${target}"`));
     assert.match(html, new RegExp(`(?:id|data-target)="${target}"`));
   }
+  assert.doesNotMatch(nav, /href="#primary-document"/);
+  const chapterOneTargets = ["primary-document-reading", "context", "responsibility-lines", "coverage-limits"]
+    .map((target) => nav.indexOf(`href="#${target}"`));
+  assert.ok(chapterOneTargets.every((position) => position >= 0));
+  assert.deepEqual(chapterOneTargets, [...chapterOneTargets].sort((left, right) => left - right));
   const coverage = html.match(/<section[^>]+id="coverage-limits"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.ok(coverage.length > 0);
-  assert.ok(html.indexOf('id="coverage-limits"') < html.indexOf('id="case-contents"'));
-  assert.match(coverage, /市府已宣布將提出再議/);
+  const renderedOrder = [
+    'id="main-content"',
+    'id="primary-document"',
+    'class="case-reading-legend"',
+    'id="case-contents"',
+    'id="primary-document-reading"',
+    'id="context"',
+    'id="responsibility-lines"',
+    'id="coverage-limits"',
+  ].map((token) => html.indexOf(token));
+  assert.ok(renderedOrder.every((position) => position >= 0));
+  assert.deepEqual(renderedOrder, [...renderedOrder].sort((left, right) => left - right));
+  assert.match(html, /<section[^>]+id="primary-document"[^>]+aria-labelledby="primary-document-title"/);
+  assert.match(html, /<h2 id="primary-document-title">新竹棒球場案不起訴處分書具印文頁面影像<\/h2>/);
+  assert.match(html, /<section[^>]+id="primary-document-reading"[^>]+aria-labelledby="primary-document-reading-title"/);
+  assert.match(html, /<h3 id="primary-document-reading-title">[^<]+<\/h3>/);
+  assert.match(coverage, /<h3 id="coverage-limits-title">這份公開紀錄還缺哪些文件？<\/h3>/);
+  const firstCoverageGap = "主案不起訴已獲公開報導；後續仍待補齊官方完整處分書、第三方公開影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。";
+  const firstCoverageGapReason = "目前可核對的是第三方社群公開之具印文處分書頁面影像第 3–22 頁；市府在不起訴消息公布後表示將提出再議。這些材料仍不能替代官方完整全文，也不能證明正式再議已送件、受理、維持或撤銷不起訴；缺口不代表任何一方沒有立場或責任。";
+  assert.ok(coverage.includes(`<p class="coverage-limit-gap">${firstCoverageGap}</p>`));
+  assert.ok(coverage.includes(`<p class="coverage-limit-reason"><strong>缺口原因</strong>${firstCoverageGapReason}</p>`));
+  assert.equal(coverage.split(firstCoverageGap).length - 1, 1);
+  assert.equal(coverage.split(firstCoverageGapReason).length - 1, 1);
+  assert.ok(coverage.indexOf("主案不起訴已獲公開報導") < coverage.indexOf("市府在不起訴消息公布後表示將提出再議"));
+  assert.doesNotMatch(coverage, /市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁/);
   assert.match(coverage, /BrightView檢測採購／疑洩密案的終結狀態未明/);
   assert.match(coverage, /目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點/);
   assert.doesNotMatch(coverage, /coverageStatus|actorRole|searchedAt|searchQueries|readiness|GAPS_DISCLOSED|partial|not_promoted/);
@@ -626,6 +670,68 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.match(html, /source-09/);
   assert.match(html, /機關名稱不代表不同任期、首長或執政黨的立場相同/);
   const visibleDocument = html.slice(0, html.indexOf("<script>self.__VINEXT_RSC_CHUNKS__"));
+  const gatewayStart = visibleDocument.indexOf('id="primary-document"');
+  const guideStart = visibleDocument.indexOf('id="primary-document-reading"');
+  const contextStart = visibleDocument.indexOf('id="context"');
+  const gateway = visibleDocument.slice(gatewayStart, visibleDocument.indexOf('class="case-reading-legend"'));
+  const guide = visibleDocument.slice(guideStart, contextStart);
+  assert.ok(gatewayStart >= 0 && guideStart >= 0 && contextStart >= 0);
+  for (const gatewayOnlyText of [
+    "新竹棒球場案不起訴處分書具印文頁面影像",
+    "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
+    "影像呈現具紅色騎縫印文的文件頁面原貌",
+    "第 1–2 頁未附",
+    "至少第 23–25 頁未附",
+    "不能僅由印文判定持有人紙本為正本或副本。",
+  ]) {
+    const escaped = gatewayOnlyText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert.equal(visibleDocument.split(gatewayOnlyText).length - 1, 1, `${gatewayOnlyText} has one visible owner`);
+    assert.match(gateway, new RegExp(escaped));
+    assert.doesNotMatch(guide, new RegExp(escaped));
+  }
+  assert.equal((visibleDocument.match(/class="primary-document-source-meta"/g) ?? []).length, 1);
+  assert.equal((visibleDocument.match(/href="https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A"/g) ?? []).length, 2, "one gateway action plus one source-registry canonical link");
+  assert.equal((gateway.match(/href="#source-58"/g) ?? []).length, 1);
+  assert.doesNotMatch(guide, /href="#source-58"/);
+  assert.match(gateway, /href="#primary-document-reading"/);
+  assert.match(guide, /href="#primary-document"/);
+  for (const guideOnlyText of [
+    "先分辨文件每一段在做什麼",
+    "已對照具印文頁面影像",
+    "內容層次 1／3",
+    "內容層次 2／3",
+    "內容層次 3／3",
+    "這份文件不能直接推出",
+    "這不是法院判決，也不是法官對高虹安或林智堅作成的認定",
+  ]) {
+    assert.equal(visibleDocument.split(guideOnlyText).length - 1, 1, `${guideOnlyText} remains once`);
+    assert.match(guide, new RegExp(guideOnlyText));
+  }
+  const detailedGuideValues = [
+    ...hsinchuPrimaryDocument.guide.flatMap(({ pageRange, label, summary }) => [pageRange, label, summary]),
+    ...hsinchuPrimaryDocument.excerpts.flatMap(({ text, proofScope, limitations }) => [text, proofScope, ...limitations]),
+    hsinchuPrimaryDocument.posterAttribution.proofScope,
+    ...hsinchuPrimaryDocument.posterAttribution.limitations,
+    hsinchuPrimaryDocument.analysisBoundary.summary,
+    ...hsinchuPrimaryDocument.analysisBoundary.limitations,
+    ...hsinchuPrimaryDocument.nonConclusions,
+  ];
+  for (const value of new Set(detailedGuideValues)) {
+    assert.equal(visibleDocument.split(value).length - 1, 1, `${value} remains once in visible HTML`);
+    assert.ok(guide.includes(value), `${value} remains owned by the detailed guide`);
+  }
+  assert.equal((guide.match(/class="primary-document-guide"/g) ?? []).length, 1);
+  assert.equal((guide.match(/data-document-layer=/g) ?? []).length, hsinchuPrimaryDocument.guide.length);
+  assert.equal((guide.match(/class="primary-document-excerpt" aria-label=/g) ?? []).length, hsinchuPrimaryDocument.excerpts.length);
+  assert.equal((guide.match(/class="primary-document-layer-item /g) ?? []).length, 3);
+  for (const id of [
+    "primary-document", "primary-document-title", "primary-document-coverage-title", "primary-document-reading",
+    "primary-document-reading-title", "primary-document-guide-title", "primary-document-layers-title",
+    "primary-document-document-layer-title", "primary-document-excerpt-title", "primary-document-attribution-title",
+    "primary-document-analysis-title", "primary-document-non-conclusions-title", "coverage-limits",
+  ]) {
+    assert.equal((visibleDocument.match(new RegExp(`id="${id}"`, "g")) ?? []).length, 1, `${id} is unique`);
+  }
   const cityStatement = "新竹市政府表示，改善工程已於日前竣工並自2026年8月20日起進入驗收，後續將進行場地性能測試；市府並稱人工草皮、紅土及排水系統已依國際標準調整。";
   assert.equal(visibleDocument.split(cityStatement).length - 1, 1, "mapped city-government statement should render once in visible HTML");
   assert.doesNotMatch(nav, /href="#positions"/);
@@ -646,7 +752,7 @@ test("generic rendered topics retain the non-case navigation and disclosure cont
   const html = await response.text();
   assert.equal(response.status, 200);
   assert.match(html, /class="article-nav"/);
-  assert.doesNotMatch(html, /case-toc|case-toc-chapter|dossier-shell--hsinchu|id="coverage-limits"/);
+  assert.doesNotMatch(html, /case-toc|case-toc-chapter|dossier-shell--hsinchu|id="coverage-limits"|id="primary-document(?:-reading)?"|href="#primary-document(?:-reading)?"/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
   assert.match(html, /href="#source-/);
   assert.match(html, /class="speaker-group-details"/);

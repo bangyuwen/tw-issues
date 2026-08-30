@@ -36,7 +36,7 @@ export type DossierPageModel = {
 };
 
 export type DossierSectionDescriptor = {
-  href: `#${"primary-document" | "context" | "responsibility-lines" | "coverage-limits" | "claims" | "questions" | "progress" | "administration-actions" | "proceedings" | "people" | "reports" | "narratives" | "analysis" | "positions" | "social-observations" | "sources"}`;
+  href: `#${"primary-document" | "primary-document-reading" | "context" | "responsibility-lines" | "coverage-limits" | "claims" | "questions" | "progress" | "administration-actions" | "proceedings" | "people" | "reports" | "narratives" | "analysis" | "positions" | "social-observations" | "sources"}`;
   label: string;
 };
 
@@ -275,7 +275,7 @@ export function getHsinchuDossierChapters(model: DossierPageModel): HsinchuChapt
       number: "01",
       label: "案情範圍與證據界線",
       links: [
-        ...link("#primary-document", "核心文件導讀", Boolean(model.primaryDocument)),
+        ...link("#primary-document-reading", "文件頁段導讀", Boolean(model.primaryDocument)),
         ...link("#context", "案情範圍", Boolean(model.contextOverview)),
         ...link("#responsibility-lines", "責任與狀態", Boolean(model.contextOverview?.lanes.length)),
         ...link("#coverage-limits", "證據覆蓋界線", model.coverageLimits.length > 0),

@@ -194,6 +194,9 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
   );
 
   assert.match(html, /id="primary-document"/);
+  assert.match(html, /id="primary-document-reading"/);
+  assert.match(html, /href="#primary-document-reading"/);
+  assert.match(html, /href="#primary-document"/);
   assert.match(html, /新竹棒球場案不起訴處分書具印文頁面影像/);
   assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
   assert.match(html, /不能僅由印文判定持有人紙本為正本或副本。/);
@@ -232,6 +235,8 @@ test("topic page rejects non-Hsinchu and ineligible primary-document-only projec
   for (const html of [nonHsinchuHtml, ineligibleHsinchuHtml]) {
     assert.match(html, /公開資料補強中/);
     assert.doesNotMatch(html, /id="primary-document"/);
+    assert.doesNotMatch(html, /id="primary-document-reading"/);
+    assert.doesNotMatch(html, /href="#primary-document(?:-reading)?"/);
   }
 });
 
@@ -722,7 +727,7 @@ test("known and unresolved claims expose proof boundaries before collapsed sourc
   assert.ok(generic.indexOf('class="evidence-claim-row evidence-claim-row--verified"') < generic.indexOf('class="claim-boundary"'));
 });
 
-test("Hsinchu uses one primary-document-first table of contents without changing generic navigation", () => {
+test("Hsinchu uses one downstream-only table of contents without changing generic navigation", () => {
   const hsinchu = renderToStaticMarkup(
     <TopicPage
       params={{ slug: "hsinchu-baseball-stadium" }}
@@ -739,7 +744,14 @@ test("Hsinchu uses one primary-document-first table of contents without changing
   assert.match(hsinchu, /class="article-nav article-nav--case case-toc"/);
   assert.match(hsinchu, /id="case-contents"/);
   assert.doesNotMatch(hsinchu, /article-nav-groups|case-map-nav|案情問題導覽/);
-  const order = ["primary-document", "context", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
+  const nav = hsinchu.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  const chapterOneTargets = ["primary-document-reading", "context", "responsibility-lines", "coverage-limits"];
+  const chapterOneLinkPositions = chapterOneTargets.map((id) => nav.indexOf(`href="#${id}"`));
+  assert.ok(chapterOneLinkPositions.every((position) => position >= 0));
+  assert.doesNotMatch(nav, /href="#primary-document"/);
+  assert.deepEqual(chapterOneLinkPositions, [...chapterOneLinkPositions].sort((left, right) => left - right));
+  assert.match(nav, /href="#primary-document-reading"[^>]*>文件頁段導讀/);
+  const order = ["primary-document", "case-contents", "primary-document-reading", "context", "responsibility-lines", "coverage-limits", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
     .map((id) => hsinchu.indexOf(`id="${id}"`));
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
@@ -1110,8 +1122,8 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
 
   assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
     {
-      gap: "市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
-      gapReason: "市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁，但尚未取得官方完整全文、缺頁、正式再議聲請與結果，以及刑案結束後的行政究責文件；缺口不代表任何一方沒有立場或責任。",
+      gap: "主案不起訴已獲公開報導；後續仍待補齊官方完整處分書、第三方公開影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
+      gapReason: "目前可核對的是第三方社群公開之具印文處分書頁面影像第 3–22 頁；市府在不起訴消息公布後表示將提出再議。這些材料仍不能替代官方完整全文，也不能證明正式再議已送件、受理、維持或撤銷不起訴；缺口不代表任何一方沒有立場或責任。",
       sourceRefs: ["source-01", "source-09", "source-34"],
       rest: {},
     },
@@ -1128,6 +1140,7 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
       rest: {},
     },
   ]);
+  assert.notEqual(model.coverageLimits[0].gap, model.coverageLimits[0].gapReason);
   for (const limit of model.coverageLimits) {
     for (const internalField of ["coverageStatus", "actorRole", "searchedAt", "searchQueries", "readiness"]) {
       assert.equal(internalField in limit, false, `${internalField} must not enter the public-safe view model`);
@@ -1141,10 +1154,10 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
   assert.equal(model.publicSources.filter(({ publicRef }) => publicRef === "source-58").length, 1);
   assert.equal(model.hsinchuChapters.length, 6);
   assert.deepEqual(model.hsinchuChapters.map(({ href }) => href), [
-    "#primary-document", "#claims", "#progress", "#people", "#analysis", "#social-observations",
+    "#primary-document-reading", "#claims", "#progress", "#people", "#analysis", "#social-observations",
   ]);
   assert.deepEqual(model.hsinchuChapters.flatMap(({ links }) => links.map(({ href }) => href)), [
-    "#primary-document", "#context", "#responsibility-lines", "#coverage-limits",
+    "#primary-document-reading", "#context", "#responsibility-lines", "#coverage-limits",
     "#claims", "#questions",
     "#progress", "#administration-actions", "#proceedings",
     "#people", "#reports", "#narratives",
@@ -1177,6 +1190,10 @@ test("primary-document data is omitted from sparse and non-Hsinchu models", () =
   assert.equal(nonHsinchu.primaryDocument, undefined);
   assert.equal(nonHsinchu.hsinchuChapters.length, 0);
   assert.equal(nonHsinchu.sourceById.has("source-58"), false);
+  for (const model of [sparseHsinchu, nonHsinchu]) {
+    const chapterLinks = model.hsinchuChapters.flatMap(({ href, links }) => [href, ...links.map((link) => link.href)]);
+    assert.doesNotMatch(JSON.stringify(chapterLinks), /#primary-document(?:-reading)?/);
+  }
 });
 
 test("Hsinchu attribution reconciliation is positional, time-bounded, and preserves limitation variants", () => {
