@@ -195,7 +195,12 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
 
   assert.match(html, /id="primary-document"/);
   assert.match(html, /新竹棒球場案不起訴處分書具印文頁面影像/);
+  assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
+  assert.match(html, /不能僅由印文判定持有人紙本為正本或副本。/);
   assert.match(html, /已對照具印文頁面影像/);
+  for (const label of ["內容層次 1／3", "內容層次 2／3", "內容層次 3／3"]) {
+    assert.match(html, new RegExp(label));
+  }
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 

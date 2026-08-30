@@ -151,21 +151,36 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "公開來源：",
     "楊玲宜 Threads",
     "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
+    "影像呈現具紅色騎縫印文的文件頁面原貌",
+    "不能僅由印文判定持有人紙本為正本或副本。",
     "第 1–2 頁未附",
     "至少第 23–25 頁未附",
     "告發與移送內容",
     "待檢驗的主張，不是檢察官已認定的事實",
+    "三個資訊層次，不能互相替代",
+    "內容層次 1／3",
     "具印文頁面可見文字｜第三方公開",
     "文件第 18 頁",
     "已對照具印文頁面影像",
     "塑膠管為噴灌系統",
     "電線亦為施工公司鋪設，均非廢棄物",
+    "內容層次 2／3",
     "楊玲宜貼文摘要｜具名說法",
+    "內容層次 3／3",
     "TW Issues 分析｜非司法結論",
     "「大秘寶」屬政治傳播框架，不是這份處分書的法律用語",
   ]) {
     assert.match(html, new RegExp(text));
   }
+  assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
+  assert.match(html, /<dt>公開來源：<\/dt><dd>楊玲宜 Threads<\/dd>/);
+  assert.match(html, /<ol class="primary-document-layer-list">/);
+  assert.match(html, /<h5 id="primary-document-document-layer-title">具印文頁面可見文字｜第三方公開<\/h5>/);
+  assert.match(html, /<h5 id="primary-document-attribution-title">楊玲宜貼文摘要｜具名說法<\/h5>/);
+  assert.match(html, /<h5 id="primary-document-analysis-title">TW Issues 分析｜非司法結論<\/h5>/);
+  const primaryDocumentLayers = ["內容層次 1／3", "內容層次 2／3", "內容層次 3／3"].map((label) => html.indexOf(label));
+  assert.ok(primaryDocumentLayers.every((position) => position >= 0));
+  assert.deepEqual(primaryDocumentLayers, [...primaryDocumentLayers].sort((left, right) => left - right));
   assert.match(html, /6<!-- --> 個程序各自回答什麼/);
   assert.match(html, /class="event-progress-section case-chronology"/);
   assert.match(html, /class="context-overview" id="context"/);
