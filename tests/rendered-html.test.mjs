@@ -653,13 +653,29 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.match(html, /<section[^>]+id="primary-document-reading"[^>]+aria-labelledby="primary-document-reading-title"/);
   assert.match(html, /<h3 id="primary-document-reading-title">[^<]+<\/h3>/);
   assert.match(coverage, /<h3 id="coverage-limits-title">這份公開紀錄還缺哪些文件？<\/h3>/);
-  const firstCoverageGap = "主案不起訴已獲公開報導；後續仍待補齊官方完整處分書、第三方公開影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。";
-  const firstCoverageGapReason = "目前可核對的是第三方社群公開之具印文處分書頁面影像第 3–22 頁；市府在不起訴消息公布後表示將提出再議。這些材料仍不能替代官方完整全文，也不能證明正式再議已送件、受理、維持或撤銷不起訴；缺口不代表任何一方沒有立場或責任。";
+  const firstCoverageGap = "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待補齊官方完整處分書、影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。";
+  const firstCoverageGapReason = "本頁對不起訴理由的整理以這批可見文件頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道，媒體報導只用來交代市府其後表示將提出再議。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽，因此不能補推缺頁內容、把影像視為官方完整全文，或認定再議已送件、受理或已有結果；缺口不代表任何一方沒有立場或責任。";
   assert.ok(coverage.includes(`<p class="coverage-limit-gap">${firstCoverageGap}</p>`));
   assert.ok(coverage.includes(`<p class="coverage-limit-reason"><strong>缺口原因</strong>${firstCoverageGapReason}</p>`));
   assert.equal(coverage.split(firstCoverageGap).length - 1, 1);
   assert.equal(coverage.split(firstCoverageGapReason).length - 1, 1);
-  assert.ok(coverage.indexOf("主案不起訴已獲公開報導") < coverage.indexOf("市府在不起訴消息公布後表示將提出再議"));
+  assert.ok(coverage.indexOf("主案不起訴已有官方偵結公告") < coverage.indexOf("第 3–22 頁處分書影像可供有限核對"));
+  const coverageReasonOrder = [
+    "這批可見文件頁面為第一依據",
+    "Threads 貼文只作為影像的第三方公開管道",
+    "媒體報導只用來交代市府其後表示將提出再議",
+    "第 3–22 頁以外仍有未附頁面",
+    "不能補推缺頁內容",
+    "認定再議已送件、受理或已有結果",
+  ].map((text) => coverage.indexOf(text));
+  assert.ok(coverageReasonOrder.every((position) => position >= 0));
+  assert.deepEqual(coverageReasonOrder, [...coverageReasonOrder].sort((left, right) => left - right));
+  const firstCoverageRow = coverage.match(/<li class="coverage-limit-row">[\s\S]*?<\/li>/)?.[0] ?? "";
+  const firstCoverageSourceOrder = ["source-58", "source-39", "source-34", "source-01"]
+    .map((sourceRef) => firstCoverageRow.indexOf(`href="#${sourceRef}"`));
+  assert.ok(firstCoverageSourceOrder.every((position) => position >= 0));
+  assert.deepEqual(firstCoverageSourceOrder, [...firstCoverageSourceOrder].sort((left, right) => left - right));
+  assert.equal((firstCoverageRow.match(/class="citation"/g) ?? []).length, 4);
   assert.doesNotMatch(coverage, /市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁/);
   assert.match(coverage, /BrightView檢測採購／疑洩密案的終結狀態未明/);
   assert.match(coverage, /目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點/);
@@ -675,7 +691,10 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const contextStart = visibleDocument.indexOf('id="context"');
   const gateway = visibleDocument.slice(gatewayStart, visibleDocument.indexOf('class="case-reading-legend"'));
   const guide = visibleDocument.slice(guideStart, contextStart);
+  const gatewayText = gateway.replaceAll("<!-- -->", "");
   assert.ok(gatewayStart >= 0 && guideStart >= 0 && contextStart >= 0);
+  assert.match(gatewayText, /這批可見文件頁面是本頁整理與核對不起訴理由的第一依據/);
+  assert.match(gatewayText, /Threads[^<]*(?:只是|僅是|只作為)[^<]*第三方社群公開管道/);
   for (const gatewayOnlyText of [
     "新竹棒球場案不起訴處分書具印文頁面影像",
     "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
@@ -717,11 +736,14 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
     ...hsinchuPrimaryDocument.nonConclusions,
   ];
   for (const value of new Set(detailedGuideValues)) {
-    assert.equal(visibleDocument.split(value).length - 1, 1, `${value} remains once in visible HTML`);
-    assert.ok(guide.includes(value), `${value} remains owned by the detailed guide`);
+    assert.equal(guide.split(value).length - 1, 1, `${value} remains once in the detailed guide`);
   }
   assert.equal((guide.match(/class="primary-document-guide"/g) ?? []).length, 1);
   assert.equal((guide.match(/data-document-layer=/g) ?? []).length, hsinchuPrimaryDocument.guide.length);
+  assert.deepEqual(
+    [...guide.matchAll(/<span>(第 (?:3–8 頁|8 頁後段|9–11 頁|12–17 頁|18–22 頁))<\/span>/g)].map((match) => match[1]),
+    ["第 3–8 頁", "第 8 頁後段", "第 9–11 頁", "第 12–17 頁", "第 18–22 頁"],
+  );
   assert.equal((guide.match(/class="primary-document-excerpt" aria-label=/g) ?? []).length, hsinchuPrimaryDocument.excerpts.length);
   assert.equal((guide.match(/class="primary-document-layer-item /g) ?? []).length, 3);
   for (const id of [
@@ -738,6 +760,13 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.doesNotMatch(html, /id="positions"/);
   const attributedSection = html.slice(html.indexOf('id="reports"'), html.indexOf('id="narratives"'));
   assert.doesNotMatch(attributedSection, /民進黨|國民黨|台灣民眾黨|民主進步黨/);
+  assert.equal((attributedSection.match(/href="#source-58"/g) ?? []).length, 5, "each prosecutor document-content claim cites source-58 once");
+  assert.doesNotMatch(attributedSection, /href="#source-(?:04|05)"/);
+  assert.match(attributedSection, /href="#source-09"/, "media remains available for the separate procedural report");
+  for (const pageScope of ["第 9–11 頁", "第 10–11 頁", "第 15–17 頁", "第 16–17 頁", "第 18–20 頁"]) {
+    assert.match(attributedSection, new RegExp(pageScope));
+  }
+  assert.doesNotMatch(visibleDocument, /(?:市府|高虹安)(?:已|已經)(?:提出|送出|聲請)[^<]{0,20}再議|高檢署已(?:受理|維持|撤銷)/);
   assert.equal((html.match(/<h1>/g) ?? []).length, 1);
   const headingLevels = [...visibleDocument.matchAll(/<h([1-6])(?:\s[^>]*)?>/g)].map((match) => Number(match[1]));
   for (let index = 1; index < headingLevels.length; index += 1) {

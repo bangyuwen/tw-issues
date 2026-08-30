@@ -37,9 +37,21 @@
           "layer": "legal_standard"
         },
         {
-          "pageRange": "第 9–22 頁",
-          "label": "檢察官的調查與判斷理由",
-          "summary": "按不同罪嫌檢視契約變更、金流、施工、回填、開挖物與證人證述；此處仍只是可見頁面的理由範圍。",
+          "pageRange": "第 9–11 頁",
+          "label": "契約、費用與金流內容",
+          "summary": "整理可見頁段中的契約變更、工程費用、服務費與金流相關說明；這只是文件頁段導讀，不是對完整處分理由的重建。",
+          "layer": "prosecutorial_reasoning"
+        },
+        {
+          "pageRange": "第 12–17 頁",
+          "label": "施工、材料與回填內容",
+          "summary": "整理可見頁段中的施工材料、草皮植床、B5類土石方與回填相關說明；不能由此單獨判定全部工程品質或責任。",
+          "layer": "prosecutorial_reasoning"
+        },
+        {
+          "pageRange": "第 18–22 頁",
+          "label": "開挖物與證據內容",
+          "summary": "整理可見頁段中的開挖物、管線、影像與證人證述相關說明；仍受頁次不完整與遮蔽限制。",
           "layer": "prosecutorial_reasoning"
         }
       ],
@@ -109,16 +121,24 @@
       {
         "kind": "criminal",
           "label": "刑事偵查結果",
-          "finding": "原球場工程案中，竹檢認定林智堅及相關被告犯罪嫌疑不足而不起訴，4名工程人員獲緩起訴；另有檢測服務標案於2024年接受檢廉調查，公開結果尚不完整。",
-          "proofScope": "不起訴只回答原工程案現有證據是否足以支持所偵辦罪嫌；2024年檢測標案的搜索、交保也不是有罪判決。兩案不能混寫，且都不會撤銷監察院的行政違失認定。",
+          "finding": "原球場工程案中，竹檢官方偵查終結公告列示林智堅及相關被告分案不起訴；第三方公開之具印文處分書頁面影像可有限核對部分理由，4名工程人員獲緩起訴；另有檢測服務標案於2024年接受檢廉調查，公開結果尚不完整。",
+          "proofScope": "官方公告可確認主案偵查終結與可識別處分；第三方公開影像僅能核對第 3–22 頁可見的部分理由；2024年檢測標案的搜索、交保也不是有罪判決。兩案不能混寫，且都不會撤銷監察院的行政違失認定。",
           "sources": [
             {
-              "publicRef": "source-05",
-              "canonicalUrl": "https://udn.com/news/story/7321/9720871",
-              "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
-              "publisher": "中央社／聯合新聞網",
-              "publishedAt": "2026-08-28",
-              "displayRole": "司法進度報導"
+              "publicRef": "source-39",
+              "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+              "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+              "publisher": "新竹地方檢察署",
+              "publishedAt": "2026-08-21",
+              "displayRole": "檢察機關偵查終結公告"
+            },
+            {
+              "publicRef": "source-58",
+              "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+              "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+              "publisher": "楊玲宜 Threads",
+              "publishedAt": "2026-08-29",
+              "displayRole": "社群公開之具印文處分書頁面影像"
             },
             {
               "publicRef": "source-36",
@@ -339,17 +359,25 @@
         {
           "period": "2026 年 8 月以後",
         "title": "不起訴不是句點，焦點回到處分書、驗收與制度究責",
-        "summary": "林智堅等人不起訴後，市府與高虹安宣布將提出再議並續追民事、履約責任；楊玲宜則反批過往爭議是政治操作。公共利益上仍應回到完整處分理由、正式再議文件、行政究責、驗收、測試與求償結果。",
+        "summary": "林智堅等人主案不起訴後，官方偵查終結公告與第三方公開具印文頁面影像分別提供偵結發生與部分理由的可見依據；市府與高虹安宣布將提出再議並續追民事、履約責任；楊玲宜則反批過往爭議是政治操作。公共利益上仍應回到完整處分理由、正式再議文件、行政究責、驗收、測試與求償結果。",
         "turningPoint": "刑事證據不足不等於工程沒有問題；工程有重大違失，也不等於能反推特定人必然犯罪。",
         "eventKeys": ["event-12", "event-13", "event-14"],
           "sources": [
             {
-              "publicRef": "source-05",
-              "canonicalUrl": "https://udn.com/news/story/7321/9720871",
-              "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
-              "publisher": "中央社／聯合新聞網",
-              "publishedAt": "2026-08-28",
-              "displayRole": "司法進度報導"
+              "publicRef": "source-39",
+              "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+              "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+              "publisher": "新竹地方檢察署",
+              "publishedAt": "2026-08-21",
+              "displayRole": "檢察機關偵查終結公告"
+            },
+            {
+              "publicRef": "source-58",
+              "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+              "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+              "publisher": "楊玲宜 Threads",
+              "publishedAt": "2026-08-29",
+              "displayRole": "社群公開之具印文處分書頁面影像"
             },
             {
               "publicRef": "source-06",
@@ -921,15 +949,15 @@
         "label": "刑事偵查",
         "body": "新竹地方檢察署",
         "question": "林智堅、廠商及相關人員是否有足夠證據涉及貪污、採購、廢棄物、詐欺或文書等罪嫌？",
-        "conclusion": "官方偵查終結公告與媒體理由摘要顯示，林智堅及巨佳等主案被告分案不起訴；另有4名營造、監造人員因不實紀錄獲緩起訴。",
+        "conclusion": "官方偵查終結公告顯示，林智堅及巨佳等主案被告分案不起訴；第三方公開之具印文處分書頁面影像可有限核對第 3–22 頁所見部分理由；另有4名營造、監造人員因不實紀錄獲緩起訴。",
         "effect": "檢察官就本次偵辦罪嫌作成偵查終結處分；緩起訴是附條件暫不提起公訴。",
         "doesNotConclude": [
           "不起訴不是法院無罪判決，也不代表工程沒有缺失。",
           "不會撤銷監察院的行政違失認定或處理民事求償。",
           "主案處分對象未提田政弘、悍創或BrightView，不能推定檢測採購案也已不起訴或已併案。"
         ],
-        "status": "媒體已報導偵結結果；市府於2026年8月29日宣布將提出再議，但正式聲請與後續結果仍待取得。",
-        "nextStep": "核對現有第三方社群公開之具印文頁面影像第 3–22 頁，並取得官方完整處分書、缺頁、正式再議文件及高檢署結果。",
+        "status": "官方偵查終結公告已確認偵結；市府於2026年8月29日表示將提出再議，但正式聲請與後續結果仍待取得。",
+        "nextStep": "取得官方完整處分書、第三方影像未涵蓋的頁面、正式再議文件及高檢署結果。",
         "sources": [
           {
             "publicRef": "source-39",
@@ -940,12 +968,12 @@
             "displayRole": "檢察機關偵查終結公告"
           },
           {
-            "publicRef": "source-05",
-            "canonicalUrl": "https://udn.com/news/story/7321/9720871",
-            "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
-            "publisher": "中央社／聯合新聞網",
-              "publishedAt": "2026-08-28",
-              "displayRole": "司法進度報導"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
           },
           {
             "publicRef": "source-34",
@@ -1237,13 +1265,13 @@
         ]
       },
       {
-        "statement": "新竹地檢署官方公告及媒體理由摘要顯示，林智堅、巨佳營造及相關被告分案獲不起訴；另有4名營造、監造人員在不同案號中獲緩起訴，不能把所有『相關被告』概括成同一處分。",
+        "statement": "新竹地檢署官方偵查終結公告確認，林智堅、巨佳營造及相關被告分案獲不起訴；第 3–22 頁處分書影像可有限核對其中可見理由。另有4名營造、監造人員在不同案號中獲緩起訴，不能把所有『相關被告』概括成同一處分。",
         "claimType": "law_enforcement_fact",
         "harmRisk": "high",
-        "proofScope": "官方公告可確認可識別案號與處分；罪嫌範圍及理由仍主要來自媒體對竹檢說明的轉述。",
+        "proofScope": "官方公告只確認可識別案號與處分；第三方公開影像只直接支撐第 3–22 頁可見的部分理由。",
         "limitations": [
           "不起訴是檢察官偵查終結處分，不是法院判決無罪，也不會自動撤銷行政或民事責任。",
-          "目前另有第三方社群公開之具印文頁面影像第 3–22 頁可供有限核對；官方完整處分書、缺頁與後續再議結果仍待取得。"
+          "第三方公開影像有缺頁與遮蔽，不能視為官方完整處分書；缺頁、相關卷證與後續再議結果仍待取得。"
         ],
         "sources": [
           {
@@ -1255,12 +1283,12 @@
             "displayRole": "檢察機關偵查終結公告"
           },
           {
-            "publicRef": "source-04",
-            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-            "publisher": "聯合報",
-            "publishedAt": "2026-08-28",
-            "displayRole": "媒體報導"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
           }
         ]
       },
@@ -1504,10 +1532,11 @@
             "statement": "檢方表示，工程多次追加後總工程費由原規畫3億5,300萬元增至11億5,476萬餘元，專案管理及監造服務費增至2,951萬餘元；各次契約變更有具體原因且未逾原契約50%，因而認定未違反政府採購法。",
             "claimType": "attributed_statement",
             "harmRisk": "elevated",
-            "proofScope": "只證明媒體轉述竹檢對工程追加、服務費及政府採購法適用的說明。",
+            "proofScope": "只確認第三方公開之具印文處分書影像第 9–11 頁，可見檢察官如此說明工程預算、服務費、契約變更與政府採購法判斷。",
             "limitations": [
-              "這是檢方偵查結論的媒體轉述，不是法院判決。",
-              "各筆金額仍須以契約變更、補助核銷及最終結算文件逐筆核對。"
+              "這是可見處分書頁面的檢方理由，不是法院判決。",
+              "各筆金額仍須以契約變更、補助核銷及最終結算文件逐筆核對。",
+              "第三方公開附件僅涵蓋第 3–22 頁，且有遮蔽；不能據此補寫缺頁、還原被遮蔽內容或視為官方完整處分書。"
             ],
             "speakers": [
               {
@@ -1517,12 +1546,12 @@
             ],
             "sources": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-                "publisher": "聯合報",
-                "publishedAt": "2026-08-28",
-                "displayRole": "媒體報導"
+                "publicRef": "source-58",
+                "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+                "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+                "publisher": "楊玲宜 Threads",
+                "publishedAt": "2026-08-29",
+                "displayRole": "社群公開之具印文處分書頁面影像"
               }
             ]
           },
@@ -1530,10 +1559,10 @@
             "statement": "檢方表示，通訊監察、金流比對、搜索及帳務分析未發現林智堅或市府人員與巨佳、艾奕康間有不法金流、收賄或圖利事證；審計及市府調查所列角色混淆、採購督導不周及驗收不妥，屬行政疏失，尚無積極證據證明刑責。",
             "claimType": "attributed_statement",
             "harmRisk": "high",
-            "proofScope": "只證明媒體轉述竹檢對偵查方法、金流結果及行政疏失與刑事證據區分的說明。",
+            "proofScope": "只確認第三方公開之具印文處分書影像第 10–11 頁，可見檢察官如此說明通訊監察、金流、搜索、帳務與行政疏失／刑事證據區分。",
             "limitations": [
               "未發現犯罪證據是檢方偵查判斷，不等同法院已對所有工程爭議作成終局認定。",
-              "目前另有第三方社群公開之具印文頁面影像第 3–22 頁可供有限核對；官方完整不起訴處分書、缺頁及相關卷證仍待取得。"
+              "第三方公開附件僅涵蓋第 3–22 頁，且有遮蔽；不能據此補寫缺頁、還原被遮蔽內容或視為官方完整處分書。"
             ],
             "speakers": [
               {
@@ -1543,20 +1572,12 @@
             ],
             "sources": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-                "publisher": "聯合報",
-                "publishedAt": "2026-08-28",
-                "displayRole": "媒體報導"
-              },
-              {
-                "publicRef": "source-05",
-                "canonicalUrl": "https://udn.com/news/story/7321/9720871",
-                "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
-                "publisher": "中央社／聯合新聞網",
-                "publishedAt": "2026-08-28",
-                "displayRole": "司法進度報導"
+                "publicRef": "source-58",
+                "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+                "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+                "publisher": "楊玲宜 Threads",
+                "publishedAt": "2026-08-29",
+                "displayRole": "社群公開之具印文處分書頁面影像"
               }
             ]
           },
@@ -1564,10 +1585,11 @@
             "statement": "檢方表示，工程契約及監拆計畫原本允許拆除產生的磚瓦、石塊等B5類剩餘土石方在現地破碎回填，縮時影像與證人證述未發現巨佳或力瑋自外運入廢棄物掩埋。",
             "claimType": "attributed_statement",
             "harmRisk": "high",
-            "proofScope": "只證明媒體轉述竹檢對B5類土石方契約規範及外運掩埋證據的說明。",
+            "proofScope": "只確認第三方公開之具印文處分書影像第 15–17 頁，可見檢察官如此說明B5類土石方回填規範、縮時影像與證人證述。",
             "limitations": [
               "檢方未認定有刑事證據，不等同於所有異物來源、工程品質或行政責任已完成獨立鑑定。",
-              "工程契約、監拆計畫及完整影像證據仍應以原始文件核對。"
+              "工程契約、監拆計畫及完整影像證據仍應以原始文件核對。",
+              "第三方公開附件僅涵蓋第 3–22 頁，且有遮蔽；不能據此補寫缺頁、還原被遮蔽內容或視為官方完整處分書。"
             ],
             "speakers": [
               {
@@ -1577,12 +1599,12 @@
             ],
             "sources": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-                "publisher": "聯合報",
-                "publishedAt": "2026-08-28",
-                "displayRole": "媒體報導"
+                "publicRef": "source-58",
+                "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+                "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+                "publisher": "楊玲宜 Threads",
+                "publishedAt": "2026-08-29",
+                "displayRole": "社群公開之具印文處分書頁面影像"
               }
             ]
           },
@@ -1590,10 +1612,11 @@
             "statement": "檢方表示，球場草皮植床雖以砂、黃土施作而與需求書不符，但2022年自主檢查表已註記；實際土層厚度反高於設計標準，增加成本約347萬1,351元，難認有偷工減料獲利。",
             "claimType": "attributed_statement",
             "harmRisk": "elevated",
-            "proofScope": "只證明媒體轉述竹檢對草皮植床材料、檢查紀錄、土層厚度及成本的說明。",
+            "proofScope": "只確認第三方公開之具印文處分書影像第 16–17 頁，可見檢察官如此說明草皮植床材料、檢查紀錄、土層厚度與成本。",
             "limitations": [
               "材料不符需求書與是否構成契約或行政責任，不能只由檢方不起訴結果推論。",
-              "成本與土層資料仍須對照原設計、變更及驗收文件。"
+              "成本與土層資料仍須對照原設計、變更及驗收文件。",
+              "第三方公開附件僅涵蓋第 3–22 頁，且有遮蔽；不能據此補寫缺頁、還原被遮蔽內容或視為官方完整處分書。"
             ],
             "speakers": [
               {
@@ -1603,12 +1626,12 @@
             ],
             "sources": [
               {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-                "publisher": "聯合報",
-                "publishedAt": "2026-08-28",
-                "displayRole": "媒體報導"
+                "publicRef": "source-58",
+                "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+                "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+                "publisher": "楊玲宜 Threads",
+                "publishedAt": "2026-08-29",
+                "displayRole": "社群公開之具印文處分書頁面影像"
               }
             ]
           },
@@ -1616,11 +1639,11 @@
             "statement": "檢方表示，兩次開挖所見部分物件其實是依設計或施工鋪設的PE網、噴灌管線及電線，均非廢棄物；不符規範石塊約36.245立方公尺、占拆除工程產出B5類土石方約0.75%，其餘不合格掩埋物約9.006至10.446立方公尺；查無外運賣土、故意非法掩埋或詐領工程款的證據。",
             "claimType": "attributed_statement",
             "harmRisk": "high",
-            "proofScope": "只證明聯合報轉述竹檢的偵結說明，以及楊玲宜 Threads 所公開遮蔽影像第18頁的可見文字；社群影像不是檢方官方全文。",
+            "proofScope": "只確認第三方公開之具印文處分書影像第 18–20 頁，可見檢察官如此說明PE網、噴灌管線、電線、石塊比例、不合格物數量及未見故意非法掩埋的判斷。",
             "limitations": [
               "數量與比例是檢方公開說明的調查口徑，不能取代完整鑑定、契約核對或民事損害計算。",
               "不起訴不等同於行政缺失、契約瑕疵或公共安全疑慮不存在。",
-              "Threads 附件僅涵蓋處分書第3至22頁，且姓名、公司名稱已遮蔽；不能據此補寫缺頁、確認完整文脈或還原被遮蔽內容。"
+              "第三方公開附件僅涵蓋第 3–22 頁，且有遮蔽；不能據此補寫缺頁、還原被遮蔽內容或視為官方完整處分書。"
             ],
             "speakers": [
               {
@@ -1629,14 +1652,6 @@
               }
             ],
             "sources": [
-              {
-                "publicRef": "source-04",
-                "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-                "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-                "publisher": "聯合報",
-                "publishedAt": "2026-08-28",
-                "displayRole": "媒體報導"
-              },
               {
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
@@ -1663,7 +1678,7 @@
         "inference": "行政程序或契約履約出錯，不必然能證明個人具有刑事故意、對價關係或不法利益。",
         "uncertainty": "目前只有第三方社群公開之具印文頁面影像第 3–22 頁；官方完整不起訴處分書、缺頁、再議結果及行政究責文件尚未全部公開。",
         "falsifier": "若後續正式司法文件認定有刑事對價、故意或共同犯行，這項區分需要更新。",
-        "proofScope": "這是依監察院與檢方公開資料整理出的判讀，不是司法裁判。",
+        "proofScope": "這是依監察院資料與第 3–22 頁可見處分書理由整理出的判讀，不是司法裁判。",
         "limitations": [
           "分析不能替代完整卷證或法院判決。"
         ],
@@ -1677,12 +1692,12 @@
             "displayRole": "制度或機關紀錄"
           },
           {
-            "publicRef": "source-04",
-            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-            "publisher": "聯合報",
-            "publishedAt": "2026-08-28",
-            "displayRole": "媒體報導"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
           }
         ]
       },
@@ -1693,7 +1708,7 @@
         "editorialLabel": "TW Issues 分析",
         "premises": [
           "監察院報告列出3.53億元初始申請、8.7643158億元教育部核定及3.14312億元另案停車場工程。",
-          "檢方報導使用追加後11.5476億元的工程費口徑。"
+          "第三方公開之具印文處分書影像第 9 頁使用追加後11.5476億元的工程費口徑。"
         ],
         "inference": "若不先標示計畫範圍、時間點與是否含停車場，金額比較會產生誤導。",
         "uncertainty": "最終結算、核銷與各次契約變更的完整對照表仍待取得。",
@@ -1712,12 +1727,12 @@
             "displayRole": "制度或機關紀錄"
           },
           {
-            "publicRef": "source-04",
-            "canonicalUrl": "https://udn.com/news/amp/story/7321/9720825",
-            "title": "新竹棒球場追加逾11.5億：檢說明未違採購法、查無林智堅不法金流",
-            "publisher": "聯合報",
-            "publishedAt": "2026-08-28",
-            "displayRole": "媒體報導"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
           }
         ]
       },
@@ -1914,21 +1929,29 @@
     ],
     "openQuestions": [
       {
-        "statement": "市府已宣布將提出再議；正式聲請是否已送件、受理，官方完整不起訴處分書、社群公開頁面影像缺頁及高檢署後續結果為何？",
+        "statement": "市府其後表示將提出再議；正式聲請是否已送件、受理，官方完整不起訴處分書、社群公開頁面影像缺頁及高檢署後續結果為何？",
         "claimType": "open_question",
         "harmRisk": "elevated",
-        "proofScope": "只確認媒體已報導不起訴及可能再議，並指出仍缺正式文件。",
+        "proofScope": "官方公告只確認偵查終結處分；第三方影像只確認第 3–22 頁可見內容；媒體只記錄市府其後的再議意向。",
         "limitations": [
           "『將提出再議』仍是公開意向，不能由媒體報導推論已送件、受理、維持或撤銷不起訴。"
         ],
         "sources": [
           {
-            "publicRef": "source-09",
-            "canonicalUrl": "https://money.udn.com/money/amp/story/7307/9720741",
-            "title": "新竹市棒球場林智堅涉圖利不起訴原因曝光",
-            "publisher": "聯合報",
-            "publishedAt": "2026-08-28",
-            "displayRole": "媒體報導"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
+          },
+          {
+            "publicRef": "source-39",
+            "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+            "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+            "publisher": "新竹地方檢察署",
+            "publishedAt": "2026-08-21",
+            "displayRole": "檢察機關偵查終結公告"
           },
           {
             "publicRef": "source-34",
@@ -2921,30 +2944,31 @@
         "status": "partial",
         "searchedAt": "2026-08-29T00:00:00+08:00",
         "searchQueries": [],
-        "searchScope": "公開偵結說明、監察院新聞稿與公開媒體報導",
-        "gapReason": "目前可核對的是第三方社群公開之具印文處分書頁面影像第 3–22 頁；市府在不起訴消息公布後表示將提出再議。這些材料仍不能替代官方完整全文，也不能證明正式再議已送件、受理、維持或撤銷不起訴；缺口不代表任何一方沒有立場或責任。",
-        "gap": "主案不起訴已獲公開報導；後續仍待補齊官方完整處分書、第三方公開影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
+        "searchScope": "官方偵結公告、第三方公開處分書頁面影像、監察院新聞稿與後續媒體回應",
+        "gapReason": "本頁對不起訴理由的整理以這批可見文件頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道，媒體報導只用來交代市府其後表示將提出再議。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽，因此不能補推缺頁內容、把影像視為官方完整全文，或認定再議已送件、受理或已有結果；缺口不代表任何一方沒有立場或責任。",
+        "gap": "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待補齊官方完整處分書、影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
         "sourceRefs": [
-          "source-01",
-          "source-09",
-          "source-34"
+          "source-58",
+          "source-39",
+          "source-34",
+          "source-01"
         ],
         "sources": [
           {
-            "publicRef": "source-01",
-            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
-            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
-            "publisher": "監察院",
-            "publishedAt": "2026-07-17",
-            "displayRole": "制度或機關紀錄"
+            "publicRef": "source-58",
+            "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+            "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+            "publisher": "楊玲宜 Threads",
+            "publishedAt": "2026-08-29",
+            "displayRole": "社群公開之具印文處分書頁面影像"
           },
           {
-            "publicRef": "source-09",
-            "canonicalUrl": "https://money.udn.com/money/amp/story/7307/9720741",
-            "title": "新竹市棒球場林智堅涉圖利不起訴原因曝光",
-            "publisher": "聯合報",
-            "publishedAt": "2026-08-28",
-            "displayRole": "媒體報導"
+            "publicRef": "source-39",
+            "canonicalUrl": "https://www.scc.moj.gov.tw/media/450351/2026-8-21%E5%85%AC%E5%91%8A%E6%B8%85%E5%96%AE.pdf?mediaDL=true",
+            "title": "新竹地方檢察署2026年8月21日偵查終結公告清單",
+            "publisher": "新竹地方檢察署",
+            "publishedAt": "2026-08-21",
+            "displayRole": "檢察機關偵查終結公告"
           },
           {
             "publicRef": "source-34",
@@ -2953,6 +2977,14 @@
             "publisher": "聯合報",
             "publishedAt": "2026-08-29",
             "displayRole": "市府與政治人物回應報導"
+          },
+          {
+            "publicRef": "source-01",
+            "canonicalUrl": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=37720&sms=8912",
+            "title": "新竹市立棒球場工程重大違失糾正新聞稿",
+            "publisher": "監察院",
+            "publishedAt": "2026-07-17",
+            "displayRole": "制度或機關紀錄"
           }
         ]
       },
@@ -3531,15 +3563,16 @@
         "kindLabel": "司法進度",
         "headline": "林智堅等人不起訴，4名工程人員緩起訴",
         "sourceRefs": [
-          "source-05"
+          "source-39",
+          "source-58"
         ],
         "items": [
           {
             "status": "attributed",
-            "statement": "新竹地方檢察署公告及媒體報導顯示，林智堅與巨佳等分案被告獲不起訴；另有4名營造及監造人員因業務上登載不實文書罪緩起訴，各支付4萬元。",
-            "proofScope": "官方公告確認可識別案號與處分，中央社轉述補充罪名範圍及處分理由。",
+            "statement": "新竹地方檢察署官方偵查終結公告確認，林智堅與巨佳等分案被告獲不起訴，另有4名營造及監造人員獲緩起訴；第三方公開第 3–22 頁影像只供核對其中可見的不起訴理由。",
+            "proofScope": "官方公告確認可識別案號與處分；第三方公開影像只直接支撐第 3–22 頁可見的部分理由。",
             "limitations": [
-              "不起訴與緩起訴都不是法院有罪或無罪判決；目前僅有第三方社群公開之具印文頁面影像第 3–22 頁，官方完整處分書、缺頁及可能的再議結果仍待取得。"
+                "不起訴與緩起訴都不是法院有罪或無罪判決；第三方影像有缺頁與遮蔽，官方完整處分書、缺頁及可能的再議結果仍待取得。"
             ],
             "speakers": [
               {
@@ -3557,12 +3590,12 @@
                 "displayRole": "檢察機關偵查終結公告"
               },
               {
-                "publicRef": "source-05",
-                "canonicalUrl": "https://udn.com/news/story/7321/9720871",
-                "title": "新竹棒球場案林智堅不起訴：營造、監造4人緩起訴",
-                "publisher": "中央社／聯合新聞網",
-                "publishedAt": "2026-08-28",
-                "displayRole": "司法進度報導"
+                "publicRef": "source-58",
+                "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
+                "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
+                "publisher": "楊玲宜 Threads",
+                "publishedAt": "2026-08-29",
+                "displayRole": "社群公開之具印文處分書頁面影像"
               }
             ]
           }

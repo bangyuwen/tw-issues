@@ -10,6 +10,7 @@ The Hsinchu dossier currently places its central non-prosecution-disposition rea
 - Make the Hsinchu table of contents reflect downward document order: Chapter 01 links to `#primary-document-reading`, `#context`, `#responsibility-lines`, and `#coverage-limits`; it does not point back to the source gateway above it.
 - Move dossier-wide public coverage limits into Chapter 01 after case context, separating overall evidence gaps from the primary document's page-specific coverage boundary.
 - Remove the red rectangular fragment-target outline while retaining visible keyboard focus indicators on interactive controls.
+- For non-prosecution-disposition content visible in the partial images, treat the page images represented by `source-58` as the first evidentiary basis. Treat Threads only as the third-party publication channel, and keep media sources limited to attributed later reactions, reporting, or procedural status that the visible pages do not establish.
 - Preserve all existing factual wording, evidence classifications, proof scope, limitations, canonical links, stable existing anchors, server-rendered readability, native Back/Forward behavior, and the same semantic DOM across breakpoints.
 
 ## Capabilities
@@ -28,4 +29,4 @@ None. The repository has no synchronized main OpenSpec capability for this page;
 - Hsinchu-scoped layout and target styling in `app/globals.css`.
 - Hsinchu structural, rendered-HTML, accessibility, fragment, and cross-topic regression tests.
 - The prior `elevate-hsinchu-primary-document` placement decision is superseded only for source-gateway position and table-of-contents behavior; its provenance, coverage, excerpt, classification, canonical-source, and public-output boundaries remain unchanged.
-- No new runtime dependency, client state, private producer input, public evidence rewrite, or non-Hsinchu behavior change.
+- No new runtime dependency, client state, private producer input, or non-Hsinchu behavior change. Hsinchu source ordering and proof-scope wording may change only where needed to enforce the document/channel/media role boundary.

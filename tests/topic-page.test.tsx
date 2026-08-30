@@ -207,6 +207,18 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 
+test("Hsinchu primary-document guide partitions every visible reason page range", () => {
+  const primaryDocument = publicEvidenceBySlug["hsinchu-baseball-stadium"].primaryDocument;
+  assert.ok(primaryDocument);
+  assert.deepEqual(primaryDocument.guide.map(({ pageRange }) => pageRange), [
+    "第 3–8 頁",
+    "第 8 頁後段",
+    "第 9–11 頁",
+    "第 12–17 頁",
+    "第 18–22 頁",
+  ]);
+});
+
 test("topic page rejects non-Hsinchu and ineligible primary-document-only projections", () => {
   const primaryDocument = publicEvidenceBySlug["hsinchu-baseball-stadium"].primaryDocument;
   assert.ok(primaryDocument);
@@ -1122,9 +1134,9 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
 
   assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
     {
-      gap: "主案不起訴已獲公開報導；後續仍待補齊官方完整處分書、第三方公開影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
-      gapReason: "目前可核對的是第三方社群公開之具印文處分書頁面影像第 3–22 頁；市府在不起訴消息公布後表示將提出再議。這些材料仍不能替代官方完整全文，也不能證明正式再議已送件、受理、維持或撤銷不起訴；缺口不代表任何一方沒有立場或責任。",
-      sourceRefs: ["source-01", "source-09", "source-34"],
+      gap: "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待補齊官方完整處分書、影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
+      gapReason: "本頁對不起訴理由的整理以這批可見文件頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道，媒體報導只用來交代市府其後表示將提出再議。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽，因此不能補推缺頁內容、把影像視為官方完整全文，或認定再議已送件、受理或已有結果；缺口不代表任何一方沒有立場或責任。",
+      sourceRefs: ["source-58", "source-39", "source-34", "source-01"],
       rest: {},
     },
     {
@@ -1166,6 +1178,43 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
   ]);
   assert.equal(model.editorialPositions?.length, 0);
   assert.doesNotMatch(JSON.stringify(model.hsinchuChapters), /positions/);
+});
+
+test("Hsinchu document-content claims use only source-58 with page-scoped proof boundaries", () => {
+  const model = buildDossierPageModel(
+    publicEvidenceBySlug["hsinchu-baseball-stadium"],
+    { topic: { slug: "hsinchu-baseball-stadium", title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true }, displayTitle: "新竹棒球場爭議" },
+  );
+  const prosecutorGroup = model.attributedSpeakerGroups.find(({ speaker }) => speaker.name === "新竹地方檢察署");
+  assert.ok(prosecutorGroup);
+  assert.equal(prosecutorGroup.claims.length, 5);
+
+  const pageScopes = ["第 9–11 頁", "第 10–11 頁", "第 15–17 頁", "第 16–17 頁", "第 18–20 頁"];
+  for (const [index, claim] of prosecutorGroup.claims.entries()) {
+    assert.deepEqual(claim.sources.map(({ publicRef }) => publicRef), ["source-58"], `document-content claim ${index + 1} uses only source-58`);
+    assert.match(claim.proofScope, new RegExp(pageScopes[index].replace("–", "[–至-]")), `document-content claim ${index + 1} keeps its visible page scope`);
+    assert.match(claim.proofScope, /可見|頁面影像/, `document-content claim ${index + 1} stays grounded in visible pages`);
+    assert.ok(claim.limitations.some((limitation) => /第\s*3(?:–|至|-)?22\s*頁|缺頁|遮蔽|完整/.test(limitation)), `document-content claim ${index + 1} preserves incomplete-document limits`);
+  }
+});
+
+test("Hsinchu keeps official disposition, visible reasons, and later reconsideration in separate source roles", () => {
+  const evidence = publicEvidenceBySlug["hsinchu-baseball-stadium"];
+  const criminalLane = evidence.contextOverview?.lanes.find(({ kind }) => kind === "criminal");
+  const criminalTrack = evidence.proceedingTracks?.find(({ label }) => label === "刑事偵查");
+  const dispositionClaim = evidence.claims?.find(({ statement }) => statement.startsWith("新竹地檢署官方偵查終結公告確認"));
+  const dispositionEvent = evidence.reportedTimeline?.find(({ publicKey }) => publicKey === "event-13");
+  const reactionEvent = evidence.reportedTimeline?.find(({ publicKey }) => publicKey === "event-14");
+
+  assert.deepEqual(criminalLane?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58", "source-36"]);
+  assert.deepEqual(criminalTrack?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58", "source-34"]);
+  assert.doesNotMatch(criminalTrack?.conclusion ?? "", /媒體理由摘要/);
+  assert.deepEqual(dispositionClaim?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58"]);
+  assert.deepEqual(evidence.analysisClaims?.[0]?.sources.map(({ publicRef }) => publicRef), ["source-01", "source-58"]);
+  assert.deepEqual(evidence.analysisClaims?.[1]?.sources.map(({ publicRef }) => publicRef), ["source-02", "source-58"]);
+  assert.deepEqual(evidence.openQuestions?.[0]?.sources.map(({ publicRef }) => publicRef), ["source-58", "source-39", "source-34"]);
+  assert.deepEqual(dispositionEvent?.sourceRefs, ["source-39", "source-58"]);
+  assert.deepEqual(reactionEvent?.sourceRefs, ["source-34", "source-35"]);
 });
 
 test("primary-document data is omitted from sparse and non-Hsinchu models", () => {

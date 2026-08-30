@@ -123,6 +123,18 @@ The public projection will therefore keep the existing two-field renderer and ch
 
 The wording must not conflate the third-party partial images with an official complete publication, or a stated intent with a filed, accepted, upheld, or reversed reconsideration result. No shared rendering component, source classification, proof scope, canonical link, or non-Hsinchu data changes.
 
+### 7. Make the visible document pages the first basis for document content
+
+The public projection will use three explicit source roles for the non-prosecution disposition:
+
+- `source-58` represents only the document content actually visible in the partial page images, limited to pages 3–22. Page-specific claims must retain their page range, redaction, missing-page, and incomplete-context limits.
+- 楊玲宜 Threads is only the third-party publication channel for those images. The poster's summaries and political evaluations remain attributed statements and cannot be promoted into document text or prosecutorial findings.
+- Media sources may support later reactions, attributed reporting, or procedural status not established by the visible pages. They cannot replace the visible document pages or manufacture the impression of a complete disposition rationale.
+
+This priority is an evidence, citation, and rendered-reading priority. It does not renumber `source-58`, make it the first item in every page-wide source registry, or promote the third-party post into an official complete publication. If one claim mixes content visible in the images with information supported only by media, the claim must be split or its proof scope narrowed; reversing the source array alone is insufficient.
+
+The first dossier-wide coverage gap will therefore cite `source-58` first for the currently inspectable page scope, `source-39` for the official occurrence of the disposition, `source-34` only for the city's later stated intent to seek reconsideration, and `source-01` only for the still-missing administrative-accountability record. Media reporting of a possible reconsideration must not imply that a request was filed, accepted, upheld, or reversed.
+
 ## Risks / Trade-offs
 
 - **[Risk] Two sections backed by one model may look like duplicated documents.** -> Use distinct headings (`核心文件` source identity versus `文件頁段導讀`), non-overlapping content, and reciprocal native links; assert single ownership in rendered HTML.
@@ -132,6 +144,7 @@ The wording must not conflate the third-party partial images with an official co
 - **[Risk] Removing `:target` decoration could be confused with removing focus.** -> Change only non-interactive fragment styling and independently verify every operable control's `:focus-visible` indicator.
 - **[Trade-off] The directory no longer lists the source gateway.** -> The gateway is already encountered before the directory, retains its stable direct fragment, and links forward to the detailed guide; excluding it restores honest document-order navigation.
 - **[Risk] Correcting chronology could accidentally promote media reporting into an official-document claim.** -> Keep the result explicitly attributed to public reporting, identify the inspectable material as third-party partial images, and assert the remaining official and procedural gaps separately.
+- **[Risk] Putting `source-58` first could overstate a third-party post as a complete official publication.** -> Limit it to the content visible on pages 3–22, identify Threads only as the publication channel, and use `source-39` separately for the official disposition occurrence.
 
 ## Migration Plan
 
@@ -143,6 +156,7 @@ The wording must not conflate the third-party partial images with an official co
 6. Inspect server-rendered and runtime output at 390px, 799px, 800px, 801px, desktop, and a 200-percent-zoom equivalent; verify keyboard focus, direct fragments, Back/Forward, reduced motion, no JavaScript, contrast, and overflow.
 7. Correct the duplicated first Hsinchu dossier gap in the public projection, assert distinct field roles and non-prosecution-before-reconsideration order in model and rendered output, and recheck narrow-screen wrapping.
 8. Submit only after a fresh independent-reviewer gate accepts the fixed diff. Roll back by reverting this delta; no producer migration is required.
+9. Reconcile Hsinchu disposition-content claims and coverage references to the visible-page, publication-channel, and later-reaction roles; rerun the full validation and reviewer gate on the revised fixed diff.
 
 ## Open Questions
 
