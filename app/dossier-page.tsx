@@ -333,17 +333,22 @@ function CaseReadingLegend() {
 }
 
 function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
+  const documentLayerLabel = document.excerpts[0]?.label ?? "具印文頁面可見文字｜第三方公開";
   return <section className="primary-document" id="primary-document" aria-labelledby="primary-document-title">
     <header className="primary-document-heading">
       <p className="eyebrow">核心文件導讀</p>
       <h3 id="primary-document-title">{document.title}</h3>
-      <p className="primary-document-warning" role="note"><strong>閱讀警示</strong>{document.warning}</p>
-      <p className="primary-document-intro">頁面影像呈現具紅色騎縫印文的處分書原貌；公開管道仍是第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
-      <p className="primary-document-source-meta"><span>公開來源：{document.source.publisher}</span><span>發布：<time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></span><span>擷取：<time dateTime={document.capturedAt}>{document.capturedAt}</time></span></p>
-      <div className="primary-document-actions">
-        <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
-        <a href={`#${document.source.publicRef}`}>查看來源登錄</a>
-      </div>
+      <aside className="primary-document-warning" role="note" aria-label="來源與文書本別警示">
+        <strong>閱讀警示</strong>
+        <p>{document.warning}</p>
+        <p className="primary-document-copy-boundary">「具印文」只描述影像可見外觀；不能僅由印文判定持有人紙本為正本或副本。</p>
+      </aside>
+      <p className="primary-document-intro">影像呈現具紅色騎縫印文的文件頁面原貌；公開管道是 {document.source.publisher} 的第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
+      <dl className="primary-document-source-meta" aria-label="文件來源與擷取資訊">
+        <div><dt>公開來源：</dt><dd>{document.source.publisher}</dd></div>
+        <div><dt>發布：</dt><dd><time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></dd></div>
+        <div><dt>擷取：</dt><dd><time dateTime={document.capturedAt}>{document.capturedAt}</time></dd></div>
+      </dl>
     </header>
 
     <section className="primary-document-panel primary-document-coverage" aria-labelledby="primary-document-coverage-title">
@@ -354,6 +359,10 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
         <div><dt>後段缺頁</dt><dd>{document.coverage.missingAfter}</dd></div>
         <div><dt>遮蔽狀態</dt><dd>{document.coverage.redactionStatus}</dd></div>
       </dl>
+      <div className="primary-document-actions" aria-label="核心文件查驗路徑">
+        <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
+        <a href={"#" + document.source.publicRef}>查看來源登錄</a>
+      </div>
     </section>
 
     <section className="primary-document-panel" aria-labelledby="primary-document-guide-title">
@@ -363,30 +372,56 @@ function PrimaryDocumentSection({ document }: { document: PrimaryDocument }) {
       </li>)}</ol>
     </section>
 
-    <section className="primary-document-panel" aria-labelledby="primary-document-excerpt-title">
-      <h4 id="primary-document-excerpt-title">核對過的關鍵摘錄</h4>
-      {document.excerpts.map((excerpt) => <article className="primary-document-excerpt" key={excerpt.documentPage}>
-        <header><span>{excerpt.label}</span><strong>{`文件第 ${excerpt.documentPage} 頁`}</strong></header>
-        <blockquote>{excerpt.text}</blockquote>
-        <dl><div><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照具印文頁面影像</dd></div><div><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div><div><dt>這不能證明</dt><dd>{excerpt.limitations.join("；")}</dd></div></dl>
-      </article>)}
+    <section className="primary-document-panel primary-document-layer-group" aria-labelledby="primary-document-layers-title">
+      <h4 id="primary-document-layers-title">三個資訊層次，不能互相替代</h4>
+      <ol className="primary-document-layer-list">
+        <li className="primary-document-layer-item primary-document-layer-item--document">
+          <section className="primary-document-layer primary-document-layer--document" aria-labelledby="primary-document-document-layer-title">
+            <header className="primary-document-layer-heading">
+              <span>內容層次 1／3</span>
+              <h5 id="primary-document-document-layer-title">{documentLayerLabel}</h5>
+            </header>
+            <h6 className="primary-document-excerpt-list-title" id="primary-document-excerpt-title">核對過的關鍵摘錄</h6>
+            <div className="primary-document-excerpts">{document.excerpts.map((excerpt) => <article className="primary-document-excerpt" aria-label={"文件第 " + excerpt.documentPage + " 頁核對摘錄"} key={excerpt.documentPage}>
+              <header className="primary-document-excerpt-heading"><strong>{"文件第 " + excerpt.documentPage + " 頁"}</strong></header>
+              <blockquote>{excerpt.text}</blockquote>
+              <dl className="primary-document-excerpt-boundaries">
+                <div className="primary-document-boundary-row primary-document-boundary-row--review"><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照具印文頁面影像</dd></div>
+                <div className="primary-document-boundary-row"><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div>
+                <div className="primary-document-boundary-row primary-document-boundary-row--limit"><dt>這不能證明</dt><dd><ul>{excerpt.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
+              </dl>
+            </article>)}</div>
+          </section>
+        </li>
+        <li className="primary-document-layer-item primary-document-layer-item--attributed">
+          <section className="primary-document-layer primary-document-layer--attributed" aria-labelledby="primary-document-attribution-title">
+            <header className="primary-document-layer-heading">
+              <span>內容層次 2／3</span>
+              <h5 id="primary-document-attribution-title">{document.posterAttribution.label}</h5>
+            </header>
+            <p className="primary-document-layer-subject"><strong>{document.posterAttribution.speaker.name}</strong><span>{document.posterAttribution.speaker.role}</span></p>
+            <p className="primary-document-layer-summary">{document.posterAttribution.summary}</p>
+            <dl className="primary-document-layer-boundaries">
+              <div><dt>這能確認</dt><dd>{document.posterAttribution.proofScope}</dd></div>
+              <div><dt>限制</dt><dd><ul>{document.posterAttribution.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
+            </dl>
+          </section>
+        </li>
+        <li className="primary-document-layer-item primary-document-layer-item--analysis">
+          <section className="primary-document-layer primary-document-layer--analysis" aria-labelledby="primary-document-analysis-title">
+            <header className="primary-document-layer-heading">
+              <span>內容層次 3／3</span>
+              <h5 id="primary-document-analysis-title">{document.analysisBoundary.label}</h5>
+            </header>
+            <p className="primary-document-layer-subject"><strong>把第 18 頁放回正確範圍</strong></p>
+            <p className="primary-document-layer-summary">{document.analysisBoundary.summary}</p>
+            <dl className="primary-document-layer-boundaries">
+              <div><dt>限制</dt><dd><ul>{document.analysisBoundary.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
+            </dl>
+          </section>
+        </li>
+      </ol>
     </section>
-
-    <div className="primary-document-layers" aria-label="貼文、文件與分析的分層">
-      <section className="primary-document-layer primary-document-layer--attributed" aria-labelledby="primary-document-attribution-title">
-        <p id="primary-document-attribution-title">{document.posterAttribution.label}</p>
-        <h4>{document.posterAttribution.speaker.name}</h4>
-        <span>{document.posterAttribution.speaker.role}</span>
-        <p>{document.posterAttribution.summary}</p>
-        <dl><div><dt>這能確認</dt><dd>{document.posterAttribution.proofScope}</dd></div><div><dt>限制</dt><dd>{document.posterAttribution.limitations.join("；")}</dd></div></dl>
-      </section>
-      <section className="primary-document-layer primary-document-layer--analysis" aria-labelledby="primary-document-analysis-title">
-        <p id="primary-document-analysis-title">{document.analysisBoundary.label}</p>
-        <h4>把第 18 頁放回正確範圍</h4>
-        <p>{document.analysisBoundary.summary}</p>
-        <dl><div><dt>限制</dt><dd>{document.analysisBoundary.limitations.join("；")}</dd></div></dl>
-      </section>
-    </div>
 
     <section className="primary-document-non-conclusions" aria-labelledby="primary-document-non-conclusions-title">
       <h4 id="primary-document-non-conclusions-title">這份文件不能直接推出</h4>
