@@ -335,72 +335,71 @@ function CaseReadingLegend() {
 function PrimaryDocumentGateway({ document }: { document: PrimaryDocument }) {
   return <section className="primary-document primary-document-gateway" id="primary-document" aria-labelledby="primary-document-title">
     <header className="primary-document-heading">
-      <p className="eyebrow">核心文件</p>
+      <p className="eyebrow">可核對的核心文件</p>
       <h2 id="primary-document-title">{document.title}</h2>
-      <aside className="primary-document-warning" role="note" aria-label="來源與文書本別警示">
-        <strong>閱讀警示</strong>
-        <p>{document.warning}</p>
-        <p className="primary-document-copy-boundary">「具印文」只描述影像可見外觀；不能僅由印文判定持有人紙本為正本或副本。</p>
-      </aside>
-      <p className="primary-document-intro">這批可見文件頁面是本頁整理與核對不起訴理由的第一依據；影像呈現具紅色騎縫印文的文件頁面原貌，{document.source.publisher} 只作為第三方社群公開管道。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
+      <p className="primary-document-intro">{document.lead}</p>
+      <section className="primary-document-support" aria-labelledby="primary-document-support-title">
+        <h3 id="primary-document-support-title">可見頁面可直接支持什麼？</h3>
+        <p>{document.directSupportSummary}</p>
+      </section>
       <dl className="primary-document-source-meta" aria-label="文件來源與擷取資訊">
-        <div><dt>公開來源：</dt><dd>{document.source.publisher}</dd></div>
+        <div><dt>公開者／平台：</dt><dd>{document.source.publisher}</dd></div>
         <div><dt>發布：</dt><dd><time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></dd></div>
         <div><dt>擷取：</dt><dd><time dateTime={document.capturedAt}>{document.capturedAt}</time></dd></div>
       </dl>
     </header>
 
     <section className="primary-document-panel primary-document-coverage" aria-labelledby="primary-document-coverage-title">
-      <h3 id="primary-document-coverage-title">目前看得到哪些頁？</h3>
+      <h3 id="primary-document-coverage-title">文件範圍</h3>
       <dl>
         <div><dt>可見範圍</dt><dd>文件第 {document.coverage.firstObservedPage}–{document.coverage.lastObservedPage} 頁</dd></div>
         <div><dt>前段缺頁</dt><dd>{document.coverage.missingBefore}</dd></div>
         <div><dt>後段缺頁</dt><dd>{document.coverage.missingAfter}</dd></div>
         <div><dt>遮蔽狀態</dt><dd>{document.coverage.redactionStatus}</dd></div>
       </dl>
+      <p className="primary-document-copy-boundary">{document.coverage.copyStatus}</p>
       <div className="primary-document-actions" aria-label="核心文件查驗路徑">
-        <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟原始 Threads 貼文 <span aria-hidden="true">↗</span></a>
-        <a href={"#" + document.source.publicRef}>查看來源登錄</a>
-        <a href="#primary-document-reading">閱讀文件頁段導讀</a>
+        <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟楊玲宜原始 Threads 貼文（另開新分頁）</a>
+        <a href={"#" + document.source.publicRef}>前往來源 58 登錄</a>
+        <a href="#primary-document-reading">閱讀第 3–22 頁導讀</a>
       </div>
     </section>
   </section>;
 }
 
 function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument }) {
-  const documentLayerLabel = document.excerpts[0]?.label ?? "具印文頁面可見文字｜第三方公開";
+  const documentLayerLabel = document.excerpts[0]?.label ?? "文件頁面核對";
   return <section className="primary-document primary-document-reading" id="primary-document-reading" aria-labelledby="primary-document-reading-title" aria-describedby="primary-document-reading-boundary">
     <header className="primary-document-heading primary-document-reading-heading">
-      <p className="eyebrow">文件頁段導讀</p>
-      <h3 id="primary-document-reading-title">如何閱讀這份部分文件</h3>
-      <p className="primary-document-reading-intro" id="primary-document-reading-boundary">本段只整理頁段結構、核對摘錄與解讀界線；來源身分與可見頁面範圍由上方核心文件說明統一界定。</p>
-      <a className="primary-document-reading-source-link" href="#primary-document">回看核心文件來源與可見頁面範圍</a>
+      <p className="eyebrow">文件導讀</p>
+      <h3 id="primary-document-reading-title">第 3–22 頁在說什麼</h3>
+      <p className="primary-document-reading-intro" id="primary-document-reading-boundary">以下依可見頁次整理文件結構，再以第 18 頁示範「文件寫了什麼」與「本頁如何解讀」的差別。</p>
+      <a className="primary-document-reading-source-link" href="#primary-document">回看核心文件來源與可見頁面</a>
     </header>
 
     <section className="primary-document-panel" aria-labelledby="primary-document-guide-title">
-      <h4 id="primary-document-guide-title">先分辨文件每一段在做什麼</h4>
+      <h4 id="primary-document-guide-title">可見頁段</h4>
       <ol className="primary-document-guide">{document.guide.map((entry) => <li data-document-layer={entry.layer} key={`${entry.pageRange}-${entry.label}`}>
         <span>{entry.pageRange}</span><div><strong>{entry.label}</strong><p>{entry.summary}</p></div>
       </li>)}</ol>
     </section>
 
     <section className="primary-document-panel primary-document-layer-group" aria-labelledby="primary-document-layers-title">
-      <h4 id="primary-document-layers-title">兩個資訊層次，不能互相替代</h4>
+      <h4 id="primary-document-layers-title">文件內容與 TW Issues 解讀</h4>
       <ol className="primary-document-layer-list">
         <li className="primary-document-layer-item primary-document-layer-item--document">
           <section className="primary-document-layer primary-document-layer--document" aria-labelledby="primary-document-document-layer-title">
             <header className="primary-document-layer-heading">
-              <span>內容層次 1／2</span>
+              <span>文件頁面</span>
               <h5 id="primary-document-document-layer-title">{documentLayerLabel}</h5>
             </header>
-            <h6 className="primary-document-excerpt-list-title" id="primary-document-excerpt-title">核對過的關鍵摘錄</h6>
+            <h6 className="primary-document-excerpt-list-title" id="primary-document-excerpt-title">第 18 頁：PE 網、噴灌管與電線</h6>
             <div className="primary-document-excerpts">{document.excerpts.map((excerpt) => <article className="primary-document-excerpt" aria-label={"文件第 " + excerpt.documentPage + " 頁核對摘錄"} key={excerpt.documentPage}>
-              <header className="primary-document-excerpt-heading"><strong>{"文件第 " + excerpt.documentPage + " 頁"}</strong></header>
               <blockquote>{excerpt.text}</blockquote>
               <dl className="primary-document-excerpt-boundaries">
-                <div className="primary-document-boundary-row primary-document-boundary-row--review"><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照具印文頁面影像</dd></div>
-                <div className="primary-document-boundary-row"><dt>這能確認</dt><dd>{excerpt.proofScope}</dd></div>
-                <div className="primary-document-boundary-row primary-document-boundary-row--limit"><dt>這不能證明</dt><dd><ul>{excerpt.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
+                <div className="primary-document-boundary-row primary-document-boundary-row--review"><dt>核對狀態</dt><dd data-review-status={excerpt.reviewStatus}>已對照由新竹市議員楊玲宜公開的第 {excerpt.documentPage} 頁具印文影像</dd></div>
+                <div className="primary-document-boundary-row"><dt>頁面可直接確認</dt><dd>{excerpt.proofScope}</dd></div>
+                <div className="primary-document-boundary-row primary-document-boundary-row--limit"><dt>這段的範圍</dt><dd>{excerpt.limitation}</dd></div>
               </dl>
             </article>)}</div>
           </section>
@@ -408,23 +407,15 @@ function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument
         <li className="primary-document-layer-item primary-document-layer-item--analysis">
           <section className="primary-document-layer primary-document-layer--analysis" aria-labelledby="primary-document-analysis-title">
             <header className="primary-document-layer-heading">
-              <span>內容層次 2／2</span>
+              <span>本頁解讀</span>
               <h5 id="primary-document-analysis-title">{document.analysisBoundary.label}</h5>
             </header>
-            <p className="primary-document-layer-subject"><strong>把第 18 頁放回正確範圍</strong></p>
             <p className="primary-document-layer-summary">{document.analysisBoundary.summary}</p>
-            <dl className="primary-document-layer-boundaries">
-              <div><dt>限制</dt><dd><ul>{document.analysisBoundary.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
-            </dl>
           </section>
         </li>
       </ol>
     </section>
 
-    <section className="primary-document-non-conclusions" aria-labelledby="primary-document-non-conclusions-title">
-      <h4 id="primary-document-non-conclusions-title">這份文件不能直接推出</h4>
-      <ul>{document.nonConclusions.map((item) => <li key={item}>{item}</li>)}</ul>
-    </section>
   </section>;
 }
 

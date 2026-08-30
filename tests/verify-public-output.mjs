@@ -28,7 +28,11 @@ for (const path of files.filter((candidate) => textExtensions.has(candidate.slic
 }
 
 const html = await readFile(hsinchuPage, "utf8");
-assert.match(html, /文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁/);
+assert.match(html, /新竹棒球場案不起訴處分書影像（第 3–22 頁）/);
+assert.match(html, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
+assert.match(html, /第 18 頁明載：該頁所述的 PE 網、噴灌管與電線，檢察官認為均非廢棄物/);
+assert.match(html, /頁面可見紅色騎縫印文，但「具印文」只描述影像外觀，不能僅由印文判定持有人紙本為正本或副本/);
+assert.doesNotMatch(html, /primary-document-warning|文件頁面可見紅色騎縫印文・由第三方社群公開/);
 assert.doesNotMatch(html, /第三方(?:社群)?重製|第三方重製影像/);
 assert.match(html, /塑膠管為噴灌系統/);
 assert.match(html, /https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A/);

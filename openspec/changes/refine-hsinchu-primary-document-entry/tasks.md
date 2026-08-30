@@ -46,3 +46,10 @@
 - [x] 7.2 Remove `posterAttribution` from the Hsinchu primary-document data/type contract, remove its card and ARIA ID, delete the attributed-only primary-document style, and keep every source, coverage, excerpt, limitation, anchor, and non-Hsinchu behavior intact.
 - [x] 7.3 Refresh public-bundle digests, run focused and full tests, lint, build, GitHub Pages build, and verify the changed guide at required responsive, zoom, keyboard, fragment, and no-JavaScript states.
 - [x] 7.4 Dispatch a fresh registered `independent-reviewer` against the exact fixed diff, resolve blocking findings, and record the verified local result plus the next external action requiring authorization.
+
+## 8. Affirmative Document Reading Flow
+
+- [x] 8.1 Add model and rendered-HTML tests for the affirmative gateway order, councilor publisher context, content-only page guide, one global document-scope boundary, one local excerpt boundary, and absence of repeated warning or non-conclusion surfaces.
+- [x] 8.2 Update the Hsinchu primary-document data contract, renderer, and topic-scoped styles while preserving source metadata, canonical actions, stable anchors, later attributed political narratives, and all non-Hsinchu behavior.
+- [x] 8.3 Refresh public-bundle digests and run focused tests, public-output checks, full tests, lint, build, GitHub Pages build, plus desktop/mobile, breakpoint, zoom, keyboard, fragment-history, reduced-motion, overflow, contrast, and no-JavaScript runtime verification.
+- [ ] 8.4 Dispatch the registered `independent-reviewer` through the Desktop review adapter against the exact fixed diff, resolve blocking findings, and record the verified local result plus the next external action requiring authorization.

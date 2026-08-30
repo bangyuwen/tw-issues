@@ -34,6 +34,7 @@ export type PrimaryDocumentCoverage = {
   missingBefore: string;
   missingAfter: string;
   redactionStatus: string;
+  copyStatus: string;
 };
 
 export type PrimaryDocumentGuideEntry = {
@@ -45,18 +46,17 @@ export type PrimaryDocumentGuideEntry = {
 
 export type PrimaryDocumentExcerpt = {
   documentPage: number;
-  label: "具印文頁面可見文字｜第三方公開";
+  label: "文件頁面核對";
   text: string;
   reviewStatus: "checked_against_image";
   proofScope: string;
-  limitations: string[];
+  limitation: string;
 };
 
 
 export type PrimaryDocumentAnalysisBoundary = {
-  label: "TW Issues 分析｜非司法結論";
+  label: "TW Issues 對第 18 頁的解讀";
   summary: string;
-  limitations: string[];
 };
 
 export type PrimaryDocument = {
@@ -64,14 +64,14 @@ export type PrimaryDocument = {
   title: string;
   documentKind: "non_prosecution_disposition";
   provenanceStatus: "third_party_published_stamped_redacted_partial_document_images";
-  warning: string;
+  lead: string;
+  directSupportSummary: string;
   source: PublicSource;
   capturedAt: string;
   coverage: PrimaryDocumentCoverage;
   guide: PrimaryDocumentGuideEntry[];
   excerpts: PrimaryDocumentExcerpt[];
   analysisBoundary: PrimaryDocumentAnalysisBoundary;
-  nonConclusions: string[];
 };
 
 /** Public projection fields approved for visible coverage-limit presentation. */

@@ -3,15 +3,16 @@
     "topicId": "hsinchu-baseball-stadium-2026",
     "primaryDocument": {
       "publicKey": "primary-document-source-58",
-      "title": "新竹棒球場案不起訴處分書具印文頁面影像",
+      "title": "新竹棒球場案不起訴處分書影像（第 3–22 頁）",
       "documentKind": "non_prosecution_disposition",
       "provenanceStatus": "third_party_published_stamped_redacted_partial_document_images",
-      "warning": "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
+      "lead": "這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開。TW Issues 已對照可見頁面，以下先說明文件涵蓋的內容，再核對第 18 頁的關鍵段落。",
+      "directSupportSummary": "第 3–22 頁可見檢方對告發與移送內容、刑事證據門檻、契約與金流、施工與回填，以及開挖物與證據的部分說明。第 18 頁明載：該頁所述的 PE 網、噴灌管與電線，檢察官認為均非廢棄物。",
       "source": {
         "publicRef": "source-58",
         "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
         "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-        "publisher": "楊玲宜 Threads",
+        "publisher": "新竹市議員楊玲宜（Threads）",
         "publishedAt": "2026-08-29",
         "displayRole": "社群公開之具印文處分書頁面影像"
       },
@@ -21,69 +22,55 @@
         "lastObservedPage": 22,
         "missingBefore": "第 1–2 頁未附",
         "missingAfter": "附件止於第 22 頁；貼文另提第 24–25 頁，因此至少第 23–25 頁未附",
-        "redactionStatus": "頁面可見紅色騎縫印文；原貼文已遮蔽部分人名與公司名稱，TW Issues 不推測或還原"
+        "redactionStatus": "原貼文已遮蔽部分人名與公司名稱，TW Issues 不推測或還原",
+        "copyStatus": "這批材料是透過 Threads 第三方社群貼文公開的部分頁面影像；頁面可見紅色騎縫印文，但「具印文」只描述影像外觀，不能僅由印文判定持有人紙本為正本或副本。"
       },
       "guide": [
         {
           "pageRange": "第 3–8 頁",
           "label": "告發與移送內容",
-          "summary": "列出被告身分、工程背景及告發或移送的指控；這些是待檢驗的主張，不是檢察官已認定的事實。",
+          "summary": "列出被告身分、工程背景，以及告發或移送的指控。",
           "layer": "allegation_or_referral"
         },
         {
           "pageRange": "第 8 頁後段",
           "label": "證據門檻與法律標準",
-          "summary": "說明刑事犯罪須依證據認定，以及證據不足時不得作不利認定的標準。",
+          "summary": "說明刑事犯罪須依證據認定，以及證據不足時不得作不利認定的法律標準。",
           "layer": "legal_standard"
         },
         {
           "pageRange": "第 9–11 頁",
           "label": "契約、費用與金流內容",
-          "summary": "整理可見頁段中的契約變更、工程費用、服務費與金流相關說明；這只是文件頁段導讀，不是對完整處分理由的重建。",
+          "summary": "說明契約變更、工程費用、服務費與金流。",
           "layer": "prosecutorial_reasoning"
         },
         {
           "pageRange": "第 12–17 頁",
           "label": "施工、材料與回填內容",
-          "summary": "整理可見頁段中的施工材料、草皮植床、B5類土石方與回填相關說明；不能由此單獨判定全部工程品質或責任。",
+          "summary": "說明施工材料、草皮植床、B5 類土石方與回填。",
           "layer": "prosecutorial_reasoning"
         },
         {
           "pageRange": "第 18–22 頁",
           "label": "開挖物與證據內容",
-          "summary": "整理可見頁段中的開挖物、管線、影像與證人證述相關說明；仍受頁次不完整與遮蔽限制。",
+          "summary": "說明開挖物、管線、影像與證人證述。",
           "layer": "prosecutorial_reasoning"
         }
       ],
       "excerpts": [
         {
           "documentPage": 18,
-          "label": "具印文頁面可見文字｜第三方公開",
+          "label": "文件頁面核對",
           "text": "開挖時土層內所見塑膠布為變更設計埋設的 PE 網；地面挖出的塑膠管為噴灌系統，電線亦為施工公司鋪設，均非廢棄物。",
           "reviewStatus": "checked_against_image",
-          "proofScope": "只確認楊玲宜 Threads 公開之具印文頁面影像第 18 頁，可見檢察官如此說明該批 PE 網、噴灌管與電線。",
-          "limitations": [
-            "這些是具紅色騎縫印文的文件頁面影像，不是重新排版的重製稿；但公開管道不是新竹地檢署官網，且頁次不完整。",
-            "僅憑貼文影像不能判定持有人取得的紙本文書本別為正本或副本。",
-            "不能外推為所有開挖物都合格，或工程、行政與政治責任均不存在。",
-            "頁面沒有寫高虹安本人開挖、鋪設或發現這些物件。"
-          ]
+          "proofScope": "第 18 頁確有上述說明，且檢察官對該頁所述的 PE 網、噴灌管與電線作成「均非廢棄物」的判斷。",
+          "limitation": "這段只回答該頁所述的特定物件，不涵蓋所有開挖物，也不回答整體工程品質、行政責任或政治責任。"
         }
       ],
       "analysisBoundary": {
-        "label": "TW Issues 分析｜非司法結論",
-        "summary": "第 18 頁能回答檢察官如何看待當次開挖中的 PE 網、噴灌管與電線；它不能單獨回答整座球場的施工品質、行政責任或政治責任。",
-        "limitations": [
-          "「大秘寶」屬政治傳播框架，不是這份處分書的法律用語。",
-          "具印文頁面影像提高文件原貌辨識度，但不使第三方公開管道、缺頁與遮蔽限制消失。"
-        ]
-      },
-      "nonConclusions": [
-        "這不是法院判決，也不是法官對高虹安或林智堅作成的認定。",
-        "可見頁面沒有寫高虹安本人挖到管線；第 18 頁寫的是施工公司鋪設的噴灌管與電線被挖出，檢察官認為均非廢棄物。",
-        "這段理由不代表全部開挖物都符合契約或施工品質沒有問題。",
-        "「大秘寶」不是處分書用語，不能當成司法結論。"
-      ]
+        "label": "TW Issues 對第 18 頁的解讀",
+        "summary": "就第 18 頁所述的特定物件，可以確認檢察官的判斷是「均非廢棄物」。這個判斷不等同「所有開挖物都合格」或「整體工程沒有問題」；「大秘寶」也是政治傳播用語，不是處分書的法律結論。"
+      }
     },
     "contextOverview": {
       "headline": "一座球場，五條責任線，不能用同一個結論回答。",
@@ -123,7 +110,7 @@
               "publicRef": "source-58",
               "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
               "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-              "publisher": "楊玲宜 Threads",
+              "publisher": "新竹市議員楊玲宜（Threads）",
               "publishedAt": "2026-08-29",
               "displayRole": "社群公開之具印文處分書頁面影像"
             },
@@ -362,7 +349,7 @@
               "publicRef": "source-58",
               "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
               "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-              "publisher": "楊玲宜 Threads",
+              "publisher": "新竹市議員楊玲宜（Threads）",
               "publishedAt": "2026-08-29",
               "displayRole": "社群公開之具印文處分書頁面影像"
             },
@@ -958,7 +945,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           },
@@ -1273,7 +1260,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           }
@@ -1536,7 +1523,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
@@ -1562,7 +1549,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
@@ -1589,7 +1576,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
@@ -1616,7 +1603,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
@@ -1643,7 +1630,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
@@ -1682,7 +1669,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           }
@@ -1717,7 +1704,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           }
@@ -1928,7 +1915,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           },
@@ -2945,7 +2932,7 @@
             "publicRef": "source-58",
             "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
             "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-            "publisher": "楊玲宜 Threads",
+            "publisher": "新竹市議員楊玲宜（Threads）",
             "publishedAt": "2026-08-29",
             "displayRole": "社群公開之具印文處分書頁面影像"
           },
@@ -3580,7 +3567,7 @@
                 "publicRef": "source-58",
                 "canonicalUrl": "https://www.threads.com/@yanglingyi2022/post/DcnfYAXEo-A",
                 "title": "楊玲宜公開之新竹棒球場案不起訴處分書影像（第3至22頁）",
-                "publisher": "楊玲宜 Threads",
+                "publisher": "新竹市議員楊玲宜（Threads）",
                 "publishedAt": "2026-08-29",
                 "displayRole": "社群公開之具印文處分書頁面影像"
               }
