@@ -52,13 +52,6 @@ export type PrimaryDocumentExcerpt = {
   limitations: string[];
 };
 
-export type PrimaryDocumentAttribution = {
-  label: "楊玲宜貼文摘要｜具名說法";
-  speaker: PublicSpeaker;
-  summary: string;
-  proofScope: string;
-  limitations: string[];
-};
 
 export type PrimaryDocumentAnalysisBoundary = {
   label: "TW Issues 分析｜非司法結論";
@@ -77,7 +70,6 @@ export type PrimaryDocument = {
   coverage: PrimaryDocumentCoverage;
   guide: PrimaryDocumentGuideEntry[];
   excerpts: PrimaryDocumentExcerpt[];
-  posterAttribution: PrimaryDocumentAttribution;
   analysisBoundary: PrimaryDocumentAnalysisBoundary;
   nonConclusions: string[];
 };

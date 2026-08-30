@@ -160,16 +160,14 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "至少第 23–25 頁未附",
     "告發與移送內容",
     "待檢驗的主張，不是檢察官已認定的事實",
-    "三個資訊層次，不能互相替代",
-    "內容層次 1／3",
+    "兩個資訊層次，不能互相替代",
+    "內容層次 1／2",
     "具印文頁面可見文字｜第三方公開",
     "文件第 18 頁",
     "已對照具印文頁面影像",
     "塑膠管為噴灌系統",
     "電線亦為施工公司鋪設，均非廢棄物",
-    "內容層次 2／3",
-    "楊玲宜貼文摘要｜具名說法",
-    "內容層次 3／3",
+    "內容層次 2／2",
     "TW Issues 分析｜非司法結論",
     "「大秘寶」屬政治傳播框架，不是這份處分書的法律用語",
   ]) {
@@ -179,9 +177,8 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /<dt>公開來源：<\/dt><dd>楊玲宜 Threads<\/dd>/);
   assert.match(html, /<ol class="primary-document-layer-list">/);
   assert.match(html, /<h5 id="primary-document-document-layer-title">具印文頁面可見文字｜第三方公開<\/h5>/);
-  assert.match(html, /<h5 id="primary-document-attribution-title">楊玲宜貼文摘要｜具名說法<\/h5>/);
   assert.match(html, /<h5 id="primary-document-analysis-title">TW Issues 分析｜非司法結論<\/h5>/);
-  const primaryDocumentLayers = ["內容層次 1／3", "內容層次 2／3", "內容層次 3／3"].map((label) => html.indexOf(label));
+  const primaryDocumentLayers = ["內容層次 1／2", "內容層次 2／2"].map((label) => html.indexOf(label));
   assert.ok(primaryDocumentLayers.every((position) => position >= 0));
   assert.deepEqual(primaryDocumentLayers, [...primaryDocumentLayers].sort((left, right) => left - right));
   assert.match(html, /6<!-- --> 個程序各自回答什麼/);
@@ -714,12 +711,18 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.doesNotMatch(guide, /href="#source-58"/);
   assert.match(gateway, /href="#primary-document-reading"/);
   assert.match(guide, /href="#primary-document"/);
+  for (const removedPrimaryDocumentAttribution of [
+    "楊玲宜貼文摘要｜具名說法",
+    "新竹市議員／Threads 貼文作者",
+    "楊玲宜以這批影像主張，高虹安與市府過往對球場爭議的說法屬政治操作，並在貼文中摘要若干頁面的處分理由。",
+  ]) {
+    assert.doesNotMatch(guide, new RegExp(removedPrimaryDocumentAttribution));
+  }
   for (const guideOnlyText of [
     "先分辨文件每一段在做什麼",
     "已對照具印文頁面影像",
-    "內容層次 1／3",
-    "內容層次 2／3",
-    "內容層次 3／3",
+    "內容層次 1／2",
+    "內容層次 2／2",
     "這份文件不能直接推出",
     "這不是法院判決，也不是法官對高虹安或林智堅作成的認定",
   ]) {
@@ -729,8 +732,6 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const detailedGuideValues = [
     ...hsinchuPrimaryDocument.guide.flatMap(({ pageRange, label, summary }) => [pageRange, label, summary]),
     ...hsinchuPrimaryDocument.excerpts.flatMap(({ text, proofScope, limitations }) => [text, proofScope, ...limitations]),
-    hsinchuPrimaryDocument.posterAttribution.proofScope,
-    ...hsinchuPrimaryDocument.posterAttribution.limitations,
     hsinchuPrimaryDocument.analysisBoundary.summary,
     ...hsinchuPrimaryDocument.analysisBoundary.limitations,
     ...hsinchuPrimaryDocument.nonConclusions,
@@ -745,11 +746,11 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
     ["第 3–8 頁", "第 8 頁後段", "第 9–11 頁", "第 12–17 頁", "第 18–22 頁"],
   );
   assert.equal((guide.match(/class="primary-document-excerpt" aria-label=/g) ?? []).length, hsinchuPrimaryDocument.excerpts.length);
-  assert.equal((guide.match(/class="primary-document-layer-item /g) ?? []).length, 3);
+  assert.equal((guide.match(/class="primary-document-layer-item /g) ?? []).length, 2);
   for (const id of [
     "primary-document", "primary-document-title", "primary-document-coverage-title", "primary-document-reading",
     "primary-document-reading-title", "primary-document-guide-title", "primary-document-layers-title",
-    "primary-document-document-layer-title", "primary-document-excerpt-title", "primary-document-attribution-title",
+    "primary-document-document-layer-title", "primary-document-excerpt-title",
     "primary-document-analysis-title", "primary-document-non-conclusions-title", "coverage-limits",
   ]) {
     assert.equal((visibleDocument.match(new RegExp(`id="${id}"`, "g")) ?? []).length, 1, `${id} is unique`);

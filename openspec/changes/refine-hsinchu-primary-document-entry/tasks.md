@@ -9,7 +9,7 @@
 
 - [x] 2.1 Split the eligible primary-document presentation into a top-level `#primary-document` source gateway and Chapter 01 `#primary-document-reading` detailed guide without changing the public projection or source eligibility rules.
 - [x] 2.2 Make the gateway the sole owner of the existing title, exact warning, document coverage, source metadata, canonical Threads link, and `#source-58` link; add an ordinary forward link to the detailed guide.
-- [x] 2.3 Keep the guide, checked excerpts, three evidence layers, proof boundaries, limitations, and non-conclusions in the downstream reading section; add a visible non-duplicating return reference to the gateway.
+- [x] 2.3 Keep the guide, checked excerpts, evidence-layer separation, proof boundaries, limitations, and non-conclusions in the downstream reading section; add a visible non-duplicating return reference to the gateway.
 - [x] 2.4 Move dossier-wide `#coverage-limits` into Chapter 01 after context, give it an enclosing-level heading, and update the Hsinchu chapter descriptor and hero signposting to match the new source-first order.
 
 ## 3. Scoped Presentation And Accessibility
@@ -39,3 +39,10 @@
 - [x] 6.3 Put `source-58` first in the first coverage-gap references, retain an official source for disposition occurrence, and keep reconsideration reporting explicitly short of filed or accepted status.
 - [x] 6.4 Add model and rendered-HTML regressions for source priority, page scope, channel/media separation, and reconsideration non-promotion.
 - [x] 6.5 Rerun affected validation and a fresh registered independent-reviewer gate on the exact revised diff.
+
+## 7. Source Provenance Hierarchy
+
+- [x] 7.1 Update structural and rendered contracts so the primary-document guide contains visible-document and TW Issues-analysis layers only, while gateway provenance and later attributed political narratives remain unchanged.
+- [x] 7.2 Remove `posterAttribution` from the Hsinchu primary-document data/type contract, remove its card and ARIA ID, delete the attributed-only primary-document style, and keep every source, coverage, excerpt, limitation, anchor, and non-Hsinchu behavior intact.
+- [x] 7.3 Refresh public-bundle digests, run focused and full tests, lint, build, GitHub Pages build, and verify the changed guide at required responsive, zoom, keyboard, fragment, and no-JavaScript states.
+- [x] 7.4 Dispatch a fresh registered `independent-reviewer` against the exact fixed diff, resolve blocking findings, and record the verified local result plus the next external action requiring authorization.

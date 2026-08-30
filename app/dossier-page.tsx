@@ -385,12 +385,12 @@ function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument
     </section>
 
     <section className="primary-document-panel primary-document-layer-group" aria-labelledby="primary-document-layers-title">
-      <h4 id="primary-document-layers-title">三個資訊層次，不能互相替代</h4>
+      <h4 id="primary-document-layers-title">兩個資訊層次，不能互相替代</h4>
       <ol className="primary-document-layer-list">
         <li className="primary-document-layer-item primary-document-layer-item--document">
           <section className="primary-document-layer primary-document-layer--document" aria-labelledby="primary-document-document-layer-title">
             <header className="primary-document-layer-heading">
-              <span>內容層次 1／3</span>
+              <span>內容層次 1／2</span>
               <h5 id="primary-document-document-layer-title">{documentLayerLabel}</h5>
             </header>
             <h6 className="primary-document-excerpt-list-title" id="primary-document-excerpt-title">核對過的關鍵摘錄</h6>
@@ -405,24 +405,10 @@ function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument
             </article>)}</div>
           </section>
         </li>
-        <li className="primary-document-layer-item primary-document-layer-item--attributed">
-          <section className="primary-document-layer primary-document-layer--attributed" aria-labelledby="primary-document-attribution-title">
-            <header className="primary-document-layer-heading">
-              <span>內容層次 2／3</span>
-              <h5 id="primary-document-attribution-title">{document.posterAttribution.label}</h5>
-            </header>
-            <p className="primary-document-layer-subject"><strong>{document.posterAttribution.speaker.name}</strong><span>{document.posterAttribution.speaker.role}</span></p>
-            <p className="primary-document-layer-summary">{document.posterAttribution.summary}</p>
-            <dl className="primary-document-layer-boundaries">
-              <div><dt>這能確認</dt><dd>{document.posterAttribution.proofScope}</dd></div>
-              <div><dt>限制</dt><dd><ul>{document.posterAttribution.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}</ul></dd></div>
-            </dl>
-          </section>
-        </li>
         <li className="primary-document-layer-item primary-document-layer-item--analysis">
           <section className="primary-document-layer primary-document-layer--analysis" aria-labelledby="primary-document-analysis-title">
             <header className="primary-document-layer-heading">
-              <span>內容層次 3／3</span>
+              <span>內容層次 2／2</span>
               <h5 id="primary-document-analysis-title">{document.analysisBoundary.label}</h5>
             </header>
             <p className="primary-document-layer-subject"><strong>把第 18 頁放回正確範圍</strong></p>
