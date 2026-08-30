@@ -30,7 +30,7 @@ The source facts and evidence boundaries remain authoritative and unchanged. The
 
 **Non-Goals:**
 
-- Rewriting, promoting, suppressing, or inferring any fact, legal conclusion, responsibility, causality, evidence level, proof scope, limitation, or source authority.
+- Rewriting, promoting, or inferring any fact, legal conclusion, responsibility, causality, evidence level, proof scope, limitation, or source authority; the only content omission is the explicitly selected poster-summary card from the primary-document guide, while later attributed political narrative remains unchanged.
 - Republishing source images or transcript material, changing canonical source metadata, or reading private producer inputs.
 - Collapsing the document guide, adding client state, sticky navigation, scrollspy, filters, scores, local storage, hover-only behavior, or breakpoint-specific DOM.
 - Changing non-Hsinchu topic rendering.
@@ -67,10 +67,12 @@ The source gateway uses an `h2`; its document-coverage subheading uses an `h3`. 
 
 - the neutral page-range structure guide;
 - checked page-level excerpts and their proof boundaries;
-- the three separate document, poster, and TW Issues analysis layers; and
+- the separate visible-document and TW Issues analysis layers; and
 - the existing non-conclusions.
 
 It uses an `h3` under the Chapter 01 `h2`, followed by existing `h4`, `h5`, and `h6` descendants. A visible introductory boundary sentence links back to `#primary-document` so direct entry never leaves the provenance owner undiscoverable. This reference may describe the relationship but must not repeat the warning, metadata, coverage values, or canonical actions.
+
+The poster is not a third primary-document content layer. Publisher identity and platform remain source provenance in the gateway, while the poster's political evaluation is omitted from the guide rather than relocated or duplicated. Existing later attributed political-narrative surfaces remain unchanged.
 
 Alternatives considered:
 
@@ -93,11 +95,11 @@ Alternative considered:
 
 - **Keep `#primary-document` as the first directory link above the directory:** rejected because a document-order directory must not present an already-passed destination as its first forward step. The stable fragment remains available through direct URLs and the detailed guide's visible return link.
 
-### 3. Preserve one data owner and one eligibility boundary
+### 3. Preserve one eligibility boundary and narrow the primary-document data owner
 
-The existing `primaryDocument` projection, model eligibility, source deduplication, public evidence fields, and source registry remain unchanged. Presentation may split the model across two components, but it must not clone, reshape, or infer public data. Both sections render only when the existing Hsinchu eligibility guard returns a primary document; sparse and non-Hsinchu topics render neither section nor the new directory link.
+The existing model eligibility, source deduplication, source metadata, page coverage, excerpts, analysis boundary, non-conclusions, and source registry remain unchanged. The `primaryDocument.posterAttribution` field and its dedicated type are removed because the poster's political evaluation is no longer part of the primary-document reading entity. Both sections render only when the existing Hsinchu eligibility guard returns a primary document; sparse and non-Hsinchu topics render neither section nor the new directory link. The later `politicalNarratives` data remains unchanged.
 
-Rendered-HTML tests will prove that the document title, complete warning, coverage values, source metadata, and canonical actions appear once, while guide entries, excerpts, layer labels, proof scope, limitations, and non-conclusions remain present once.
+Rendered-HTML tests will prove that the document title, complete warning, coverage values, source metadata, and canonical actions appear once, while guide entries, excerpts, document/analysis labels, proof scope, limitations, and non-conclusions remain present once. They will also prove that the removed poster label, speaker role, summary, and attribution ID do not appear in the primary-document flow.
 
 ### 4. Remove fragment decoration that resembles an error state
 
@@ -128,7 +130,7 @@ The wording must not conflate the third-party partial images with an official co
 The public projection will use three explicit source roles for the non-prosecution disposition:
 
 - `source-58` represents only the document content actually visible in the partial page images, limited to pages 3–22. Page-specific claims must retain their page range, redaction, missing-page, and incomplete-context limits.
-- 楊玲宜 Threads is only the third-party publication channel for those images. The poster's summaries and political evaluations remain attributed statements and cannot be promoted into document text or prosecutorial findings.
+- 楊玲宜 Threads is only the third-party publication channel for those images. Publisher identity remains in the source gateway; the poster's summaries and political evaluations do not render as primary-document content, while any later dossier occurrence remains separately attributed and cannot be promoted into document text or prosecutorial findings.
 - Media sources may support later reactions, attributed reporting, or procedural status not established by the visible pages. They cannot replace the visible document pages or manufacture the impression of a complete disposition rationale.
 
 This priority is an evidence, citation, and rendered-reading priority. It does not renumber `source-58`, make it the first item in every page-wide source registry, or promote the third-party post into an official complete publication. If one claim mixes content visible in the images with information supported only by media, the claim must be split or its proof scope narrowed; reversing the source array alone is insufficient.
@@ -145,6 +147,7 @@ The first dossier-wide coverage gap will therefore cite `source-58` first for th
 - **[Trade-off] The directory no longer lists the source gateway.** -> The gateway is already encountered before the directory, retains its stable direct fragment, and links forward to the detailed guide; excluding it restores honest document-order navigation.
 - **[Risk] Correcting chronology could accidentally promote media reporting into an official-document claim.** -> Keep the result explicitly attributed to public reporting, identify the inspectable material as third-party partial images, and assert the remaining official and procedural gaps separately.
 - **[Risk] Putting `source-58` first could overstate a third-party post as a complete official publication.** -> Limit it to the content visible on pages 3–22, identify Threads only as the publication channel, and use `source-39` separately for the official disposition occurrence.
+- **[Trade-off] Removing the poster layer omits one attributed summary from the core guide.** -> Retain publisher/platform/canonical provenance in the gateway and leave the existing later political narrative unchanged; do not recreate the summary in another primary-document card.
 
 ## Migration Plan
 
@@ -157,6 +160,7 @@ The first dossier-wide coverage gap will therefore cite `source-58` first for th
 7. Correct the duplicated first Hsinchu dossier gap in the public projection, assert distinct field roles and non-prosecution-before-reconsideration order in model and rendered output, and recheck narrow-screen wrapping.
 8. Submit only after a fresh independent-reviewer gate accepts the fixed diff. Roll back by reverting this delta; no producer migration is required.
 9. Reconcile Hsinchu disposition-content claims and coverage references to the visible-page, publication-channel, and later-reaction roles; rerun the full validation and reviewer gate on the revised fixed diff.
+10. Remove the poster-attribution field, primary-document card, ARIA ID, and attributed-only style; update the guide to two linear layers while preserving gateway provenance, later attributed narratives, and every page/limitation boundary.
 
 ## Open Questions
 

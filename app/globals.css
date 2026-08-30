@@ -555,7 +555,6 @@ html { scroll-padding-top:82px; }
 .dossier-shell--hsinchu .primary-document-layer { min-width:0; }
 .dossier-shell--hsinchu .primary-document-layer-heading { display:grid; grid-template-columns:minmax(110px,.3fr) minmax(0,1fr); align-items:baseline; gap:16px; }
 .dossier-shell--hsinchu .primary-document-layer-heading > span { color:#4d5d69; font-size:.72rem; font-weight:900; letter-spacing:.05em; line-height:1.5; }
-.dossier-shell--hsinchu .primary-document-layer--attributed .primary-document-layer-heading > span { color:#8c463e; }
 .dossier-shell--hsinchu .primary-document-layer--analysis .primary-document-layer-heading > span { color:#65547b; }
 .dossier-shell--hsinchu .primary-document-layer-heading h5 { margin:0; color:var(--navy); font-size:1.08rem; line-height:1.5; }
 .dossier-shell--hsinchu .primary-document-excerpt-list-title { margin:22px 0 12px; color:#4d5d69; font-size:.76rem; font-weight:900; letter-spacing:.04em; line-height:1.5; }

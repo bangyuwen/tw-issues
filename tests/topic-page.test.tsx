@@ -201,9 +201,13 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
   assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
   assert.match(html, /不能僅由印文判定持有人紙本為正本或副本。/);
   assert.match(html, /已對照具印文頁面影像/);
-  for (const label of ["內容層次 1／3", "內容層次 2／3", "內容層次 3／3"]) {
+  for (const label of ["內容層次 1／2", "內容層次 2／2"]) {
     assert.match(html, new RegExp(label));
   }
+  assert.doesNotMatch(
+    html,
+    /楊玲宜貼文摘要｜具名說法|新竹市議員／Threads 貼文作者|楊玲宜以這批影像主張，高虹安與市府過往對球場爭議的說法屬政治操作/,
+  );
   assert.doesNotMatch(html, /公開資料補強中/);
 });
 

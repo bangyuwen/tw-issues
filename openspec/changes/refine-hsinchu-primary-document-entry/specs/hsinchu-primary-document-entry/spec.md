@@ -27,10 +27,10 @@ The source gateway MUST be the only visible owner of the document title, complet
 #### Scenario: Rendered ownership is inspected
 - **WHEN** the server-rendered Hsinchu HTML is checked
 - **THEN** the document title, complete warning, page-coverage values, source metadata, and canonical actions SHALL each appear in one visible ownership block
-- **AND** the downstream detailed guide MUST NOT duplicate those provenance fields
+- **AND** the downstream detailed guide MUST NOT duplicate those provenance fields or elevate the publisher's political evaluation into a primary-document content layer
 
 ### Requirement: Detailed document reading remains downstream and complete
-The system SHALL render `#primary-document-reading` inside Chapter 01 after the table of contents and before case context, containing the existing page-range guide, checked excerpts, evidence-layer separation, proof boundaries, limitations, and non-conclusions without changing their factual content or classifications.
+The system SHALL render `#primary-document-reading` inside Chapter 01 after the table of contents and before case context, containing the existing page-range guide, checked excerpts, document-content/TW Issues-analysis separation, proof boundaries, limitations, and non-conclusions without changing their factual content or classifications.
 
 #### Scenario: Reader follows the source gateway into the guide
 - **WHEN** the reader activates the gateway's ordinary link to `#primary-document-reading`
@@ -40,7 +40,7 @@ The system SHALL render `#primary-document-reading` inside Chapter 01 after the 
 
 #### Scenario: Reader enters the detailed guide directly
 - **WHEN** the page is opened with `#primary-document-reading`
-- **THEN** the guide heading, page-range structure, checked excerpts, document/poster/TW Issues layer labels, proof scope, limitations, and non-conclusions SHALL be present in server-rendered HTML
+- **THEN** the guide heading, page-range structure, checked excerpts, document-content and TW Issues-analysis labels, proof scope, limitations, and non-conclusions SHALL be present in server-rendered HTML
 - **AND** a visible boundary reference SHALL identify `#primary-document` as the source and coverage owner without repeating its warning or metadata
 
 ### Requirement: Table of contents reflects downward document order
@@ -95,7 +95,8 @@ The system SHALL use `source-58` as the first direct basis for non-prosecution-d
 #### Scenario: Publication channel is identified
 - **WHEN** the source gateway or a document-content claim identifies how the images became public
 - **THEN** 楊玲宜 Threads SHALL be described only as the third-party publication channel
-- **AND** the poster's summaries or political evaluations SHALL remain attributed and MUST NOT be presented as document text or a prosecutorial finding
+- **AND** publisher identity, platform, canonical link, and source limitations SHALL remain owned by the source gateway
+- **AND** the poster's summaries or political evaluations MUST NOT render as primary-document content; any later dossier occurrence SHALL remain explicitly attributed and MUST NOT be presented as document text or a prosecutorial finding
 
 #### Scenario: Media coverage is used
 - **WHEN** media supports the Hsinchu non-prosecution narrative
