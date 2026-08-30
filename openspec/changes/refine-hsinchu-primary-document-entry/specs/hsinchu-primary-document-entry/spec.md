@@ -73,15 +73,42 @@ The system SHALL keep page-specific coverage for the partial non-prosecution-dis
 - **AND** its existing visible limitations and source citations SHALL remain available without a client-only interaction
 
 ### Requirement: Coverage status follows the observed chronology without duplicate field content
-The first Hsinchu dossier coverage limit SHALL present the publicly reported non-prosecution disposition before the city's later stated intent to seek reconsideration, and SHALL give its gap and gap-reason fields distinct visible responsibilities.
+The first Hsinchu dossier coverage limit SHALL present the official disposition occurrence supported by `source-39` before the city's later stated intent to seek reconsideration, and SHALL give its gap and gap-reason fields distinct visible responsibilities.
 
 #### Scenario: Reader checks the first dossier-wide gap
 - **WHEN** the first item in `#coverage-limits` is rendered
-- **THEN** its main gap SHALL first state that the non-prosecution disposition has been publicly reported, then concisely identify the still-unavailable official complete disposition, pages outside the observed third-party image range, formal reconsideration filing and result, and later administrative-accountability records
+- **THEN** its main gap SHALL first state that the non-prosecution disposition has an official occurrence record, then concisely identify the still-unavailable official complete disposition, pages outside the observed third-party image range, formal reconsideration filing and result, and later administrative-accountability records
 - **AND** its gap reason SHALL identify the third-party page 3–22 images already available before the city's later stated reconsideration intent
 - **AND** the main gap and gap reason MUST NOT repeat the same complete paragraph
 - **AND** the wording SHALL preserve that the official complete text, missing pages, formal filing or acceptance, reconsideration result, and administrative-accountability records remain unavailable in the public projection
 - **AND** the wording SHALL NOT imply that missing records do not exist or that any responsibility, causality, or outcome has been established
+
+### Requirement: Visible disposition pages control document-content claims
+The system SHALL use `source-58` as the first direct basis for non-prosecution-disposition content actually visible on pages 3–22, while preserving separate roles for the third-party publication channel, official disposition occurrence, and later media reporting.
+
+#### Scenario: Document content is presented
+- **WHEN** a statement describes content visible in the partial disposition images
+- **THEN** `source-58` SHALL be its first direct evidentiary basis
+- **AND** page-specific proof scope SHALL retain the visible page range, missing-page, redaction, and incomplete-context limits
+- **AND** information outside the visible pages MUST NOT be attributed to `source-58`
+
+#### Scenario: Publication channel is identified
+- **WHEN** the source gateway or a document-content claim identifies how the images became public
+- **THEN** 楊玲宜 Threads SHALL be described only as the third-party publication channel
+- **AND** the poster's summaries or political evaluations SHALL remain attributed and MUST NOT be presented as document text or a prosecutorial finding
+
+#### Scenario: Media coverage is used
+- **WHEN** media supports the Hsinchu non-prosecution narrative
+- **THEN** it SHALL be limited to later reactions, attributed reporting, or procedural status not established by the visible pages
+- **AND** it MUST NOT replace the visible document pages as the basis for page-visible content
+- **AND** reporting that the city will seek reconsideration MUST NOT be promoted into a filed, accepted, upheld, or reversed procedural status
+
+#### Scenario: Coverage-gap citations are rendered
+- **WHEN** the first Hsinchu dossier-wide coverage gap is rendered
+- **THEN** `source-58` SHALL appear first for the currently inspectable page scope
+- **AND** `source-39` SHALL separately support the official disposition occurrence
+- **AND** later reaction and missing administrative-accountability records SHALL retain their own scoped sources
+- **AND** the priority of `source-58` MUST NOT imply an official complete text or a complete disposition rationale
 
 ### Requirement: Fragment location and keyboard focus remain visually distinct
 The system MUST NOT draw a red rectangular outline, rail, animation, or color-only state cue around either primary-document section merely because its fragment is targeted, and MUST preserve visible focus indication for every operable link and control.

@@ -342,7 +342,7 @@ function PrimaryDocumentGateway({ document }: { document: PrimaryDocument }) {
         <p>{document.warning}</p>
         <p className="primary-document-copy-boundary">「具印文」只描述影像可見外觀；不能僅由印文判定持有人紙本為正本或副本。</p>
       </aside>
-      <p className="primary-document-intro">影像呈現具紅色騎縫印文的文件頁面原貌；公開管道是 {document.source.publisher} 的第三方社群貼文。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
+      <p className="primary-document-intro">這批可見文件頁面是本頁整理與核對不起訴理由的第一依據；影像呈現具紅色騎縫印文的文件頁面原貌，{document.source.publisher} 只作為第三方社群公開管道。以下只整理可見頁面、核對過的摘錄與不能外推的界線。</p>
       <dl className="primary-document-source-meta" aria-label="文件來源與擷取資訊">
         <div><dt>公開來源：</dt><dd>{document.source.publisher}</dd></div>
         <div><dt>發布：</dt><dd><time dateTime={document.source.publishedAt}>{document.source.publishedAt}</time></dd></div>
