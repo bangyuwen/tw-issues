@@ -195,8 +195,8 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
 
   assert.match(html, /id="primary-document"/);
   assert.match(html, /id="primary-document-reading"/);
-  assert.match(html, /href="#primary-document-reading"/);
-  assert.match(html, /href="#primary-document"/);
+  assert.doesNotMatch(html, /href="#primary-document-reading"/);
+  assert.doesNotMatch(html, /href="#primary-document"/);
   assert.match(html, /新竹棒球場案不起訴處分書影像（第 3–22 頁）/);
   assert.match(html, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
   assert.match(html, /可見頁面可直接支持什麼？/);
@@ -765,13 +765,12 @@ test("Hsinchu uses one downstream-only table of contents without changing generi
   assert.match(hsinchu, /id="case-contents"/);
   assert.doesNotMatch(hsinchu, /article-nav-groups|case-map-nav|案情問題導覽/);
   const nav = hsinchu.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  const chapterOneTargets = ["primary-document-reading", "context", "responsibility-lines", "coverage-limits"];
+  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits"];
   const chapterOneLinkPositions = chapterOneTargets.map((id) => nav.indexOf(`href="#${id}"`));
   assert.ok(chapterOneLinkPositions.every((position) => position >= 0));
-  assert.doesNotMatch(nav, /href="#primary-document"/);
+  assert.doesNotMatch(nav, /href="#primary-document(?:-reading)?"/);
   assert.deepEqual(chapterOneLinkPositions, [...chapterOneLinkPositions].sort((left, right) => left - right));
-  assert.match(nav, /href="#primary-document-reading"[^>]*>文件頁段導讀/);
-  const order = ["primary-document", "case-contents", "primary-document-reading", "context", "responsibility-lines", "coverage-limits", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
+  const order = ["primary-document", "primary-document-reading", "case-contents", "context", "responsibility-lines", "coverage-limits", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
     .map((id) => hsinchu.indexOf(`id="${id}"`));
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
@@ -1174,10 +1173,10 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
   assert.equal(model.publicSources.filter(({ publicRef }) => publicRef === "source-58").length, 1);
   assert.equal(model.hsinchuChapters.length, 6);
   assert.deepEqual(model.hsinchuChapters.map(({ href }) => href), [
-    "#primary-document-reading", "#claims", "#progress", "#people", "#analysis", "#social-observations",
+    "#context", "#claims", "#progress", "#people", "#analysis", "#social-observations",
   ]);
   assert.deepEqual(model.hsinchuChapters.flatMap(({ links }) => links.map(({ href }) => href)), [
-    "#primary-document-reading", "#context", "#responsibility-lines", "#coverage-limits",
+    "#context", "#responsibility-lines", "#coverage-limits",
     "#claims", "#questions",
     "#progress", "#administration-actions", "#proceedings",
     "#people", "#reports", "#narratives",

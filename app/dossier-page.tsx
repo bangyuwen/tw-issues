@@ -361,7 +361,6 @@ function PrimaryDocumentGateway({ document }: { document: PrimaryDocument }) {
       <div className="primary-document-actions" aria-label="核心文件查驗路徑">
         <a href={document.source.canonicalUrl} target="_blank" rel="noreferrer">開啟楊玲宜原始 Threads 貼文（另開新分頁）</a>
         <a href={"#" + document.source.publicRef}>前往來源 58 登錄</a>
-        <a href="#primary-document-reading">閱讀第 3–22 頁導讀</a>
       </div>
     </section>
   </section>;
@@ -374,7 +373,6 @@ function PrimaryDocumentReadingSection({ document }: { document: PrimaryDocument
       <p className="eyebrow">文件導讀</p>
       <h3 id="primary-document-reading-title">第 3–22 頁在說什麼</h3>
       <p className="primary-document-reading-intro" id="primary-document-reading-boundary">以下依可見頁次整理文件結構，再以第 18 頁示範「文件寫了什麼」與「本頁如何解讀」的差別。</p>
-      <a className="primary-document-reading-source-link" href="#primary-document">回看核心文件來源與可見頁面</a>
     </header>
 
     <section className="primary-document-panel" aria-labelledby="primary-document-guide-title">
@@ -536,7 +534,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   </SourcesDisclosure>;
 
   const caseContent = isCaseDossier ? <>
-    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{primaryDocumentReadingSection}{contextSection}{coverageLimitsSection}</HsinchuChapter>}
+    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{contextSection}{coverageLimitsSection}</HsinchuChapter>}
     {caseChapters[1] && <HsinchuChapter chapter={caseChapters[1]}>{evidenceSection}</HsinchuChapter>}
     {caseChapters[2] && <HsinchuChapter chapter={caseChapters[2]}>{chronologySection}{administrationSection}{proceedingsSection}</HsinchuChapter>}
     {caseChapters[3] && <HsinchuChapter chapter={caseChapters[3]}>{peopleSection}{reportsSection}{narrativesSection}</HsinchuChapter>}
@@ -552,6 +550,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
     </section>
     {primaryDocumentGateway}
+    {primaryDocumentReadingSection}
     {isCaseDossier && <CaseReadingLegend />}
     <ArticleNavigation
       isCaseDossier={isCaseDossier}

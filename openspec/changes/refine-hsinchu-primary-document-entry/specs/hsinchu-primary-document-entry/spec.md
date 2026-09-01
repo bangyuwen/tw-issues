@@ -44,34 +44,33 @@ The source gateway SHALL explain what the visible disposition pages directly sup
 - **THEN** page-range summaries SHALL describe document content without repeating global provenance caveats
 - **AND** the checked excerpt SHALL retain one page-specific proof scope and one local non-generalization boundary, while a separate analysis-limitations list and standalone non-conclusions checklist SHALL be omitted
 
-### Requirement: Detailed document reading remains downstream and complete
-The system SHALL render `#primary-document-reading` inside Chapter 01 after the table of contents and before case context, containing a content-first page-range guide, checked excerpts, document-content/TW Issues-analysis separation, one local proof scope, and one local non-generalization boundary without changing their underlying facts or classifications.
+### Requirement: Detailed document reading completes the source-first flow
+The system SHALL render `#primary-document-reading` immediately after `#primary-document` and before the reading legend, table of contents, and case context, containing a content-first page-range guide, checked excerpts, document-content/TW Issues-analysis separation, one local proof scope, and one local non-generalization boundary without changing their underlying facts or classifications.
 
-#### Scenario: Reader follows the source gateway into the guide
-- **WHEN** the reader activates the gateway's ordinary link to `#primary-document-reading`
-- **THEN** the browser SHALL navigate to the detailed guide using a native fragment
-- **AND** the guide SHALL expose a visible link back to `#primary-document` for source identity and page coverage
-- **AND** neither direction SHALL require JavaScript or client state
+#### Scenario: Reader continues from source identity into document content
+- **WHEN** the reader reaches the end of `#primary-document`
+- **THEN** `#primary-document-reading` SHALL follow without an intervening reading legend, directory, chapter heading, or reciprocal jump link
+- **AND** both sections SHALL remain independently addressable using their stable native fragments without JavaScript or client state
 
 #### Scenario: Reader enters the detailed guide directly
 - **WHEN** the page is opened with `#primary-document-reading`
 - **THEN** the guide heading, page-range structure, checked excerpts, document-content and TW Issues-analysis labels, local proof scope, and local non-generalization boundary SHALL be present in server-rendered HTML
-- **AND** a visible source reference SHALL identify `#primary-document` as the source and coverage owner without repeating its scope facts or metadata
+- **AND** the immediately preceding `#primary-document` SHALL remain the sole source and coverage owner without repeated scope facts, metadata, or a return link
 
 ### Requirement: Table of contents reflects downward document order
 The Hsinchu directory SHALL describe downstream chapter content only and SHALL order every Chapter 01 destination according to its semantic DOM position.
 
 #### Scenario: Chapter 01 directory is rendered
 - **WHEN** an eligible Hsinchu primary document and coverage limits are available
-- **THEN** Chapter 01 SHALL link in order to `#primary-document-reading`, `#context`, `#responsibility-lines`, and `#coverage-limits`
-- **AND** the directory SHALL NOT contain an upward link to the already-visible `#primary-document` gateway
-- **AND** the Chapter 01 primary destination SHALL be `#primary-document-reading`
+- **THEN** Chapter 01 SHALL link in order to `#context`, `#responsibility-lines`, and `#coverage-limits`
+- **AND** the directory SHALL NOT contain an upward link to either already-visible primary-document section
+- **AND** the Chapter 01 primary destination SHALL be `#context`
 
 #### Scenario: Chapter 01 content is read linearly
 - **WHEN** the Hsinchu dossier is inspected in DOM order
-- **THEN** `#primary-document-reading` SHALL precede `#context`
+- **THEN** `#primary-document` and `#primary-document-reading` SHALL precede the reading legend and `#case-contents`
 - **AND** `#context` and its `#responsibility-lines` content SHALL precede `#coverage-limits`
-- **AND** all four directory destinations SHALL occur after `#case-contents`
+- **AND** all three Chapter 01 directory destinations SHALL occur after `#case-contents`
 
 ### Requirement: Document coverage and dossier coverage remain distinct
 The system SHALL keep page-specific coverage for the partial non-prosecution-disposition images in the source gateway and SHALL render dossier-wide public evidence gaps as the separate `#coverage-limits` section inside Chapter 01 after case context.
@@ -135,7 +134,7 @@ The system MUST NOT draw a red rectangular outline, rail, animation, or color-on
 - **AND** native browser Back and Forward navigation SHALL preserve the fragment history
 
 #### Scenario: Reader uses the keyboard
-- **WHEN** keyboard focus moves through gateway actions, directory links, guide links, citations, disclosures, and chapter-return links
+- **WHEN** keyboard focus moves through gateway actions, directory links, citations, disclosures, and chapter-return links
 - **THEN** each interactive target SHALL retain a visible high-contrast `:focus-visible` indicator
 - **AND** removing fragment decoration SHALL NOT remove or weaken the focus indicator
 

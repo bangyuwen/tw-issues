@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
+const globalCss = await readFile(new URL("app/globals.css", root), "utf8");
 const publicEvidence = JSON.parse(await readFile(new URL("app/public-evidence.json", root), "utf8"));
 const hsinchuPrimaryDocument = publicEvidence["hsinchu-baseball-stadium"].primaryDocument;
 const routes = [
@@ -42,6 +43,13 @@ function verifiedClaims(html) {
   const open = html.indexOf('data-collection-id="questions"', start);
   return html.slice(start, open >= 0 ? open : html.length);
 }
+
+test("Hsinchu primary-document reading keeps its mobile gutter", () => {
+  assert.match(
+    globalCss,
+    /@media \(max-width:800px\) \{[\s\S]*?\.dossier-shell--hsinchu \.primary-document-reading \{ width:calc\(100% - 40px\); \}/,
+  );
+});
 
 test("index selects the twelve most recently updated deep-research topics", async () => {
   const response = await render("/");
@@ -204,10 +212,9 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /58<!-- --> 筆/);
   assert.match(html, /class="article-nav article-nav--case case-toc"/);
   assert.match(html, /id="case-contents"/);
-  assert.match(html, /href="#primary-document-reading"[^>]*>.*?案情範圍與證據界線/);
-  assert.match(html, /href="#primary-document-reading"[^>]*>文件頁段導讀/);
+  assert.match(html, /href="#context"[^>]*>.*?案情範圍與證據界線/);
   const hsinchuNav = html.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  assert.doesNotMatch(hsinchuNav, /href="#primary-document"/);
+  assert.doesNotMatch(hsinchuNav, /href="#primary-document(?:-reading)?"/);
   assert.match(html, /href="#context"[^>]*>.*?案情範圍/);
   assert.match(html, /href="#claims"[^>]*>.*?已知與未決/);
   assert.match(html, /href="#progress"[^>]*>.*?時間與程序/);
@@ -221,9 +228,9 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   const sourceFirstOrder = [
     'id="main-content"',
     'id="primary-document"',
+    'id="primary-document-reading"',
     'class="case-reading-legend"',
     'id="case-contents"',
-    'id="primary-document-reading"',
     'id="context"',
     'id="responsibility-lines"',
     'id="coverage-limits"',
@@ -626,15 +633,16 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.equal((html.match(/class="[^"]*\s+case-toc-chapter(?:\s|")/g) ?? []).length, 6);
   const nav = html.match(/<nav id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
   for (const target of [
-    "primary-document-reading", "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
+    "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
     "administration-actions", "proceedings", "people", "reports", "narratives", "analysis",
     "social-observations", "sources",
   ]) {
     assert.match(nav, new RegExp(`href="#${target}"`));
     assert.match(html, new RegExp(`(?:id|data-target)="${target}"`));
   }
-  assert.doesNotMatch(nav, /href="#primary-document"/);
-  const chapterOneTargets = ["primary-document-reading", "context", "responsibility-lines", "coverage-limits"]
+  assert.doesNotMatch(nav, /href="#primary-document(?:-reading)?"/);
+  assert.match(html, /id="primary-document-reading"/);
+  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits"]
     .map((target) => nav.indexOf(`href="#${target}"`));
   assert.ok(chapterOneTargets.every((position) => position >= 0));
   assert.deepEqual(chapterOneTargets, [...chapterOneTargets].sort((left, right) => left - right));
@@ -643,9 +651,9 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const renderedOrder = [
     'id="main-content"',
     'id="primary-document"',
+    'id="primary-document-reading"',
     'class="case-reading-legend"',
     'id="case-contents"',
-    'id="primary-document-reading"',
     'id="context"',
     'id="responsibility-lines"',
     'id="coverage-limits"',
@@ -692,13 +700,14 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const visibleDocument = html.slice(0, html.indexOf("<script>self.__VINEXT_RSC_CHUNKS__"));
   const gatewayStart = visibleDocument.indexOf('id="primary-document"');
   const guideStart = visibleDocument.indexOf('id="primary-document-reading"');
+  const legendStart = visibleDocument.indexOf('class="case-reading-legend"');
   const contextStart = visibleDocument.indexOf('id="context"');
-  const gateway = visibleDocument.slice(gatewayStart, visibleDocument.indexOf('class="case-reading-legend"'));
-  const guide = visibleDocument.slice(guideStart, contextStart);
+  const gateway = visibleDocument.slice(gatewayStart, guideStart);
+  const guide = visibleDocument.slice(guideStart, legendStart);
   const gatewayText = gateway.replaceAll("<!-- -->", "");
   const visibleText = visibleDocument.replaceAll("<!-- -->", "");
   const guideText = guide.replaceAll("<!-- -->", "");
-  assert.ok(gatewayStart >= 0 && guideStart >= 0 && contextStart >= 0);
+  assert.ok(gatewayStart >= 0 && guideStart >= 0 && legendStart >= 0 && contextStart >= 0);
   assert.match(gatewayText, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
   assert.match(gatewayText, /可見頁面可直接支持什麼？/);
   const gatewayOrder = [
@@ -725,8 +734,8 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.equal((visibleDocument.match(/href="https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A"/g) ?? []).length, 2, "one gateway action plus one source-registry canonical link");
   assert.equal((gateway.match(/href="#source-58"/g) ?? []).length, 1);
   assert.doesNotMatch(guide, /href="#source-58"/);
-  assert.match(gateway, /href="#primary-document-reading"/);
-  assert.match(guide, /href="#primary-document"/);
+  assert.doesNotMatch(gateway, /href="#primary-document-reading"/);
+  assert.doesNotMatch(guide, /href="#primary-document"/);
   for (const removedPrimaryDocumentAttribution of [
     "楊玲宜貼文摘要｜具名說法",
     "新竹市議員／Threads 貼文作者",

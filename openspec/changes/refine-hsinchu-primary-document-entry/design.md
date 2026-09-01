@@ -44,10 +44,10 @@ The eligible Hsinchu primary-document model will render into two semantic sectio
 ```text
 Hero
 -> section#primary-document (source gateway)
+-> section#primary-document-reading (detailed guide)
 -> reading legend
 -> table of contents
 -> Chapter 01
-   -> section#primary-document-reading (detailed guide)
    -> section#context
    -> section#coverage-limits
 ```
@@ -57,30 +57,29 @@ Hero
 - the document title, affirmative source-backed lead, and directly supported document summary;
 - the publisher, publication channel, publication date, and capture date;
 - one neutral document-scope boundary containing the observed page range, missing-before, missing-after, redaction, and copy-status facts;
-- the canonical Threads action and `#source-58` registry action; and
-- one ordinary internal link to `#primary-document-reading`.
+- the canonical Threads action and `#source-58` registry action.
 
 The source gateway uses an `h2`; its document-coverage subheading uses an `h3`. The Hsinchu hero lede may be adjusted only to signpost the new order, for example by telling readers to verify the core document's source and range before proceeding. It must not add a factual claim.
 
-`#primary-document-reading` stays inside Chapter 01 and owns only:
+`#primary-document-reading` immediately follows the source gateway, before the reading legend and table of contents, and owns only:
 
 - a neutral page-range structure guide written as document-content summaries;
 - checked page-level excerpts with one local proof scope and one local non-generalization boundary; and
 - the separate visible-document and TW Issues analysis layers.
 
-It uses an `h3` under the Chapter 01 `h2`, followed by existing `h4`, `h5`, and `h6` descendants. A visible introductory sentence links back to `#primary-document` so direct entry never leaves the source and coverage owner undiscoverable. This reference may describe the relationship but must not repeat scope facts, metadata, coverage values, or canonical actions.
+It uses an `h3` as the continuation of the preceding primary-document `h2`, followed by existing `h4`, `h5`, and `h6` descendants. Because the two sections are adjacent in one semantic flow, redundant forward and return links are omitted; both stable fragments remain available for direct entry and native history.
 
 The poster is not a third primary-document content layer. Publisher identity and platform remain source provenance in the gateway, while the poster's political evaluation is omitted from the guide rather than relocated or duplicated. Existing later attributed political-narrative surfaces remain unchanged.
 
 Alternatives considered:
 
-- **Move the entire primary-document module above navigation:** rejected because the current mobile module is roughly 3,300 CSS pixels tall, delaying the reading legend and directory and forcing the directory's first document link to point upward.
+- **Keep the detailed guide below navigation:** rejected after production feedback because the reading legend and directory interrupt the source-to-document narrative before the page guide and checked excerpt.
 - **Duplicate a compact summary above the existing full module:** rejected because duplicated provenance can drift and makes it unclear which block owns the source boundary.
 - **Keep the current order and remove only the outline:** rejected because it leaves the core IA and bidirectional directory problem unchanged.
 
 ### 2. Make the directory describe only downstream content
 
-The source gateway is already visible before the directory and therefore is not repeated as a directory destination. Chapter 01 begins with a link labelled `文件頁段導讀` to `#primary-document-reading`, followed by the existing `#context`, `#responsibility-lines`, and `#coverage-limits` destinations.
+The source gateway and detailed guide are already read before the directory and therefore are not repeated as directory destinations. Chapter 01 begins at `#context`, followed by the existing `#responsibility-lines` and `#coverage-limits` destinations.
 
 The detailed DOM order must match that link order. `CoverageLimitsSection` moves from the top-level pre-directory flow into Chapter 01 after the case-context section. This deliberately distinguishes:
 
@@ -91,7 +90,7 @@ The detailed DOM order must match that link order. `CoverageLimitsSection` moves
 
 Alternative considered:
 
-- **Keep `#primary-document` as the first directory link above the directory:** rejected because a document-order directory must not present an already-passed destination as its first forward step. The stable fragment remains available through direct URLs and the detailed guide's visible return link.
+- **Keep `#primary-document` as the first directory link above the directory:** rejected because a document-order directory must not present an already-passed destination as its first forward step. Both stable primary-document fragments remain directly addressable through native URLs.
 
 ### 3. Preserve one eligibility boundary and narrow the primary-document data owner
 
@@ -162,12 +161,12 @@ Alternatives considered:
 
 ## Risks / Trade-offs
 
-- **[Risk] Two sections backed by one model may look like duplicated documents.** -> Use distinct headings (`核心文件` source identity versus `文件頁段導讀`), non-overlapping content, and reciprocal native links; assert single ownership in rendered HTML.
+- **[Risk] Two adjacent sections backed by one model may look like duplicated documents.** -> Use distinct headings (`核心文件` source identity versus `文件頁段導讀`), non-overlapping content, and continuous spacing; assert single ownership in rendered HTML.
 - **[Risk] A new fragment could break heading or directory assumptions.** -> Preserve `#primary-document`, add `#primary-document-reading`, keep all existing anchors, and assert exact Hsinchu-only order and sequential heading levels.
 - **[Risk] Moving coverage limits could obscure evidence gaps.** -> Keep the section permanently visible in Chapter 01, retain its directory link and wording, and place it immediately after the context that makes the gaps understandable.
 - **[Risk] The top-level gateway may lose chapter gutters.** -> Give the Hsinchu-scoped gateway an explicit responsive measure and verify 390px, 800px boundaries, desktop, and zoom.
 - **[Risk] Removing `:target` decoration could be confused with removing focus.** -> Change only non-interactive fragment styling and independently verify every operable control's `:focus-visible` indicator.
-- **[Trade-off] The directory no longer lists the source gateway.** -> The gateway is already encountered before the directory, retains its stable direct fragment, and links forward to the detailed guide; excluding it restores honest document-order navigation.
+- **[Trade-off] The directory no longer lists either primary-document section.** -> Both are already encountered before the directory and retain stable direct fragments; excluding them keeps the directory limited to unread downstream dossier content.
 - **[Risk] Correcting chronology could accidentally promote media reporting into an official-document claim.** -> Keep the result explicitly attributed to public reporting, identify the inspectable material as third-party partial images, and assert the remaining official and procedural gaps separately.
 - **[Risk] Putting `source-58` first could overstate a third-party post as a complete official publication.** -> Limit it to the content visible on pages 3–22, identify Threads only as the publication channel, and use `source-39` separately for the official disposition occurrence.
 - **[Trade-off] Removing the poster layer omits one attributed summary from the core guide.** -> Retain publisher/platform/canonical provenance in the gateway and leave the existing later political narrative unchanged; do not recreate the summary in another primary-document card.
@@ -176,7 +175,7 @@ Alternatives considered:
 
 1. Add structural tests for the source-first order, forward-only directory, unique content ownership, heading hierarchy, and non-Hsinchu omission before changing the renderer.
 2. Split the existing primary-document presentation into the source gateway and detailed guide without changing its public data model or factual text.
-3. Move dossier-wide coverage limits into Chapter 01 and update the Hsinchu chapter descriptor to target `#primary-document-reading` first.
+3. Move dossier-wide coverage limits into Chapter 01 and update the Hsinchu chapter descriptor to target `#context` first after the complete primary-document reading.
 4. Add only Hsinchu-scoped responsive styles, remove the red fragment outline, and preserve focus-visible rules.
 5. Run focused tests, `npm test`, `npm run lint`, `npm run build`, and `npm run build:github-pages`.
 6. Inspect server-rendered and runtime output at 390px, 799px, 800px, 801px, desktop, and a 200-percent-zoom equivalent; verify keyboard focus, direct fragments, Back/Forward, reduced motion, no JavaScript, contrast, and overflow.
