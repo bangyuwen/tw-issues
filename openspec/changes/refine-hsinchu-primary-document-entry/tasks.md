@@ -1,5 +1,7 @@
 ## 1. Structural Contracts
 
+> Sections 1–8 record completed intermediate states. Their superseded primary-document navigation, ordering, layer, and link descriptions are historical only; Section 9 and the current proposal, design, and spec define the final acceptance contract.
+
 - [x] 1.1 Update Hsinchu model tests so Chapter 01 targets `#primary-document-reading` first, retains the remaining downstream links in order, and omits both primary-document destinations for sparse or non-Hsinchu projections.
 - [x] 1.2 Add rendered-HTML tests for `#main-content` → `#primary-document` → reading legend → `#case-contents` → `#primary-document-reading` → `#context` → `#responsibility-lines` → `#coverage-limits` order.
 - [x] 1.3 Add rendered ownership assertions proving that gateway provenance, document coverage, metadata, and canonical actions occur once while every guide, excerpt, layer, proof boundary, limitation, and non-conclusion remains present once.
@@ -52,4 +54,11 @@
 - [x] 8.1 Add model and rendered-HTML tests for the affirmative gateway order, councilor publisher context, content-only page guide, one global document-scope boundary, one local excerpt boundary, and absence of repeated warning or non-conclusion surfaces.
 - [x] 8.2 Update the Hsinchu primary-document data contract, renderer, and topic-scoped styles while preserving source metadata, canonical actions, stable anchors, later attributed political narratives, and all non-Hsinchu behavior.
 - [x] 8.3 Refresh public-bundle digests and run focused tests, public-output checks, full tests, lint, build, GitHub Pages build, plus desktop/mobile, breakpoint, zoom, keyboard, fragment-history, reduced-motion, overflow, contrast, and no-JavaScript runtime verification.
-- [ ] 8.4 Dispatch the registered `independent-reviewer` through the Desktop review adapter against the exact fixed diff, resolve blocking findings, and record the verified local result plus the next external action requiring authorization.
+- [x] 8.4 Dispatch the registered `independent-reviewer` against the exact fixed diff, resolve blocking findings, and record the explicit release-scoped sandbox-metadata waiver together with unchanged revision, patch, and worktree fingerprints.
+
+## 9. Continuous Primary-Document Narrative
+
+- [x] 9.1 Move `#primary-document-reading` directly after `#primary-document`, before the reading legend and directory, without changing its content, anchors, or evidence boundaries.
+- [x] 9.2 Remove the now-redundant forward and return links, and start Chapter 01 navigation at `#context` while retaining every downstream destination in DOM order.
+- [x] 9.3 Update model and rendered-HTML regressions for the continuous source-to-document flow and the downstream-only directory.
+- [x] 9.4 Run required validation and runtime checks, then complete a fresh fixed-diff independent review before release.
