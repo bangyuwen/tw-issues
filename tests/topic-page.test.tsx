@@ -197,13 +197,17 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
   assert.match(html, /id="primary-document-reading"/);
   assert.match(html, /href="#primary-document-reading"/);
   assert.match(html, /href="#primary-document"/);
-  assert.match(html, /新竹棒球場案不起訴處分書具印文頁面影像/);
+  assert.match(html, /新竹棒球場案不起訴處分書影像（第 3–22 頁）/);
+  assert.match(html, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
+  assert.match(html, /可見頁面可直接支持什麼？/);
   assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
+  assert.match(html, /<dt>公開者／平台：<\/dt><dd>新竹市議員楊玲宜（Threads）<\/dd>/);
   assert.match(html, /不能僅由印文判定持有人紙本為正本或副本。/);
-  assert.match(html, /已對照具印文頁面影像/);
-  for (const label of ["內容層次 1／2", "內容層次 2／2"]) {
+  assert.match(html, /已對照由新竹市議員楊玲宜公開的第 18 頁具印文影像/);
+  for (const label of ["文件頁面核對", "TW Issues 對第 18 頁的解讀"]) {
     assert.match(html, new RegExp(label));
   }
+  assert.doesNotMatch(html, /primary-document-warning|primary-document-non-conclusions|閱讀警示|內容層次 [12]／2|這份文件不能直接推出/);
   assert.doesNotMatch(
     html,
     /楊玲宜貼文摘要｜具名說法|新竹市議員／Threads 貼文作者|楊玲宜以這批影像主張，高虹安與市府過往對球場爭議的說法屬政治操作/,

@@ -15,22 +15,37 @@ The system SHALL render an eligible Hsinchu primary-document source gateway imme
 - **AND** it SHALL omit `#primary-document-reading` from the directory without changing the remaining topic order
 
 ### Requirement: Source provenance has one visible owner
-The source gateway MUST be the only visible owner of the document title, complete provenance and copy-status warning, observed and missing-page boundaries, redaction status, source metadata, canonical Threads action, and `#source-58` registry action.
+The source gateway MUST be the only visible owner of the document title, affirmative source-backed lead, directly supported document summary, one neutral document-scope boundary, source metadata, canonical Threads action, and `#source-58` registry action.
 
 #### Scenario: Reader encounters the source gateway
 - **WHEN** `#primary-document` is rendered
-- **THEN** it SHALL preserve the exact statement that the images present document pages with visible red stamped seams and were publicly distributed through 楊玲宜's third-party Threads post
+- **THEN** it SHALL identify Hsinchu City Councilor Yang Ling-yi as the publisher and Threads as the third-party publication channel for document pages whose images visibly show red stamped seams
 - **AND** it SHALL preserve that only pages 3–22 are visible, pages outside the observed range are missing, the material is redacted, and missing or hidden context cannot be inferred
 - **AND** it SHALL preserve that stamped appearance alone cannot determine whether the holder's paper copy is an original or a copy
-- **AND** the canonical Threads URL, source publisher, publication date, capture date, and `#source-58` registry destination SHALL remain unchanged
+- **AND** the canonical Threads URL, publication date, capture date, and `#source-58` registry destination SHALL remain unchanged
+- **AND** the publisher label SHALL add the verified Hsinchu City Councilor role without changing the Threads platform or third-party publication-channel classification
 
 #### Scenario: Rendered ownership is inspected
 - **WHEN** the server-rendered Hsinchu HTML is checked
-- **THEN** the document title, complete warning, page-coverage values, source metadata, and canonical actions SHALL each appear in one visible ownership block
-- **AND** the downstream detailed guide MUST NOT duplicate those provenance fields or elevate the publisher's political evaluation into a primary-document content layer
+- **THEN** the document title, affirmative lead, direct-support summary, neutral scope boundary, page-coverage values, source metadata, and canonical actions SHALL each appear in one visible ownership block
+- **AND** the downstream detailed guide MUST NOT duplicate those scope or provenance fields, use a warning-style alert for them, or elevate the publisher's political evaluation into a primary-document content layer
+
+### Requirement: Affirmative document hierarchy precedes the scope boundary
+The source gateway SHALL explain what the visible disposition pages directly support before presenting one neutral document-scope boundary, and the detailed guide SHALL avoid repeating global or local limits as multiple warning surfaces.
+
+#### Scenario: Reader starts with the core document
+- **WHEN** `#primary-document` is read in semantic order
+- **THEN** the document identity, source-backed lead, and direct-support summary SHALL precede source metadata and the neutral document-scope section
+- **AND** Hsinchu City Councilor Yang Ling-yi's public role SHALL be visible as publisher context but MUST NOT change the evidence classification of her political evaluation
+- **AND** the document-scope facts MUST NOT be rendered as an alert, trust badge, score, or error-like warning
+
+#### Scenario: Reader continues through the detailed guide
+- **WHEN** `#primary-document-reading` is read in semantic order
+- **THEN** page-range summaries SHALL describe document content without repeating global provenance caveats
+- **AND** the checked excerpt SHALL retain one page-specific proof scope and one local non-generalization boundary, while a separate analysis-limitations list and standalone non-conclusions checklist SHALL be omitted
 
 ### Requirement: Detailed document reading remains downstream and complete
-The system SHALL render `#primary-document-reading` inside Chapter 01 after the table of contents and before case context, containing the existing page-range guide, checked excerpts, document-content/TW Issues-analysis separation, proof boundaries, limitations, and non-conclusions without changing their factual content or classifications.
+The system SHALL render `#primary-document-reading` inside Chapter 01 after the table of contents and before case context, containing a content-first page-range guide, checked excerpts, document-content/TW Issues-analysis separation, one local proof scope, and one local non-generalization boundary without changing their underlying facts or classifications.
 
 #### Scenario: Reader follows the source gateway into the guide
 - **WHEN** the reader activates the gateway's ordinary link to `#primary-document-reading`
@@ -40,8 +55,8 @@ The system SHALL render `#primary-document-reading` inside Chapter 01 after the 
 
 #### Scenario: Reader enters the detailed guide directly
 - **WHEN** the page is opened with `#primary-document-reading`
-- **THEN** the guide heading, page-range structure, checked excerpts, document-content and TW Issues-analysis labels, proof scope, limitations, and non-conclusions SHALL be present in server-rendered HTML
-- **AND** a visible boundary reference SHALL identify `#primary-document` as the source and coverage owner without repeating its warning or metadata
+- **THEN** the guide heading, page-range structure, checked excerpts, document-content and TW Issues-analysis labels, local proof scope, and local non-generalization boundary SHALL be present in server-rendered HTML
+- **AND** a visible source reference SHALL identify `#primary-document` as the source and coverage owner without repeating its scope facts or metadata
 
 ### Requirement: Table of contents reflects downward document order
 The Hsinchu directory SHALL describe downstream chapter content only and SHALL order every Chapter 01 destination according to its semantic DOM position.
@@ -89,13 +104,13 @@ The system SHALL use `source-58` as the first direct basis for non-prosecution-d
 #### Scenario: Document content is presented
 - **WHEN** a statement describes content visible in the partial disposition images
 - **THEN** `source-58` SHALL be its first direct evidentiary basis
-- **AND** page-specific proof scope SHALL retain the visible page range, missing-page, redaction, and incomplete-context limits
+- **AND** page-specific proof scope SHALL retain its exact page locator and local non-generalization boundary, while the gateway retains the visible-range, missing-page, redaction, and copy-status limits once
 - **AND** information outside the visible pages MUST NOT be attributed to `source-58`
 
 #### Scenario: Publication channel is identified
 - **WHEN** the source gateway or a document-content claim identifies how the images became public
-- **THEN** 楊玲宜 Threads SHALL be described only as the third-party publication channel
-- **AND** publisher identity, platform, canonical link, and source limitations SHALL remain owned by the source gateway
+- **THEN** Hsinchu City Councilor Yang Ling-yi SHALL be identified as the publisher and Threads SHALL be identified as the third-party publication channel
+- **AND** publisher identity, public role, platform, canonical link, and the single global document-scope boundary SHALL remain owned by the source gateway
 - **AND** the poster's summaries or political evaluations MUST NOT render as primary-document content; any later dossier occurrence SHALL remain explicitly attributed and MUST NOT be presented as document text or a prosecutorial finding
 
 #### Scenario: Media coverage is used
@@ -135,7 +150,7 @@ The source gateway and detailed guide SHALL use one server-rendered semantic ord
 
 #### Scenario: JavaScript is unavailable
 - **WHEN** JavaScript is disabled or enhancement fails
-- **THEN** both primary-document sections, the directory, source and guide cross-links, warning, coverage, excerpts, proof boundaries, limitations, canonical links, and chapter content SHALL remain readable and navigable
+- **THEN** both primary-document sections, the directory, source and guide cross-links, document-scope boundary, excerpts, local proof boundary, canonical links, and chapter content SHALL remain readable and navigable
 - **AND** no filter, disclosure replacement, local storage, scrollspy, sticky rail, hover-only interaction, or client navigation state SHALL be required
 
 #### Scenario: Public and cross-topic boundaries are checked

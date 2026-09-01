@@ -78,6 +78,7 @@ test("index selects the twelve most recently updated deep-research topics", asyn
 test("Hsinchu stadium page presents people, political narratives, and evidence boundaries", async () => {
   const response = await render("/topics/hsinchu-baseball-stadium");
   const html = await response.text();
+  const readableHtml = html.replaceAll("<!-- -->", "");
   assert.equal(response.status, 200);
   for (const text of [
     "未正式驗收即先使用",
@@ -150,35 +151,41 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "PTT 球迷討論把 2022 到 2026 仍在施工視為",
     "政治提款機",
     "非隨機樣本，不能代表民意或事件真相",
-    "新竹棒球場案不起訴處分書具印文頁面影像",
-    "公開來源：",
-    "楊玲宜 Threads",
-    "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
-    "影像呈現具紅色騎縫印文的文件頁面原貌",
+    "可核對的核心文件",
+    "新竹棒球場案不起訴處分書影像（第 3–22 頁）",
+    "這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開",
+    "可見頁面可直接支持什麼？",
+    "第 18 頁明載",
+    "檢察官認為均非廢棄物",
+    "公開者／平台：",
+    "新竹市議員楊玲宜（Threads）",
+    "文件範圍",
     "不能僅由印文判定持有人紙本為正本或副本。",
     "第 1–2 頁未附",
     "至少第 23–25 頁未附",
+    "文件導讀",
+    "第 3–22 頁在說什麼",
+    "可見頁段",
     "告發與移送內容",
-    "待檢驗的主張，不是檢察官已認定的事實",
-    "兩個資訊層次，不能互相替代",
-    "內容層次 1／2",
-    "具印文頁面可見文字｜第三方公開",
-    "文件第 18 頁",
-    "已對照具印文頁面影像",
+    "文件內容與 TW Issues 解讀",
+    "文件頁面核對",
+    "第 18 頁：PE 網、噴灌管與電線",
+    "已對照由新竹市議員楊玲宜公開的第 18 頁具印文影像",
+    "頁面可直接確認",
+    "這段的範圍",
     "塑膠管為噴灌系統",
     "電線亦為施工公司鋪設，均非廢棄物",
-    "內容層次 2／2",
-    "TW Issues 分析｜非司法結論",
-    "「大秘寶」屬政治傳播框架，不是這份處分書的法律用語",
+    "TW Issues 對第 18 頁的解讀",
+    "「大秘寶」也是政治傳播用語，不是處分書的法律結論",
   ]) {
-    assert.match(html, new RegExp(text));
+    assert.match(readableHtml, new RegExp(text));
   }
   assert.match(html, /<dl class="primary-document-source-meta" aria-label="文件來源與擷取資訊">/);
-  assert.match(html, /<dt>公開來源：<\/dt><dd>楊玲宜 Threads<\/dd>/);
+  assert.match(html, /<dt>公開者／平台：<\/dt><dd>新竹市議員楊玲宜（Threads）<\/dd>/);
   assert.match(html, /<ol class="primary-document-layer-list">/);
-  assert.match(html, /<h5 id="primary-document-document-layer-title">具印文頁面可見文字｜第三方公開<\/h5>/);
-  assert.match(html, /<h5 id="primary-document-analysis-title">TW Issues 分析｜非司法結論<\/h5>/);
-  const primaryDocumentLayers = ["內容層次 1／2", "內容層次 2／2"].map((label) => html.indexOf(label));
+  assert.match(html, /<h5 id="primary-document-document-layer-title">文件頁面核對<\/h5>/);
+  assert.match(html, /<h5 id="primary-document-analysis-title">TW Issues 對第 18 頁的解讀<\/h5>/);
+  const primaryDocumentLayers = ["<span>文件頁面</span>", "<span>本頁解讀</span>"].map((label) => html.indexOf(label));
   assert.ok(primaryDocumentLayers.every((position) => position >= 0));
   assert.deepEqual(primaryDocumentLayers, [...primaryDocumentLayers].sort((left, right) => left - right));
   assert.match(html, /6<!-- --> 個程序各自回答什麼/);
@@ -250,10 +257,10 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.equal((html.match(/id="source-58"/g) ?? []).length, 1);
   assert.match(html, /data-document-layer="allegation_or_referral"[^>]*><span>第 3–8 頁/);
   assert.doesNotMatch(html, /data-document-layer="prosecutorial_reasoning"[^>]*><span>第 3–8 頁/);
-  assert.match(html, /data-review-status="checked_against_image"[^>]*>已對照具印文頁面影像/);
+  assert.match(readableHtml, /data-review-status="checked_against_image"[^>]*>已對照由新竹市議員楊玲宜公開的第 18 頁具印文影像/);
   assert.doesNotMatch(html, /第三方(?:社群)?重製|第三方重製影像/);
-  assert.match(html, /這不是法院判決，也不是法官對高虹安或林智堅作成的認定/);
-  assert.match(html, /頁面沒有寫高虹安本人開挖、鋪設或發現這些物件/);
+  assert.doesNotMatch(html, /這不是法院判決，也不是法官對高虹安或林智堅作成的認定/);
+  assert.doesNotMatch(html, /頁面沒有寫高虹安本人開挖、鋪設或發現這些物件/);
   assert.doesNotMatch(html, /高虹安挖到(?:管線|電線)/);
   assert.doesNotMatch(html, /法官認定[^<]*(?:PE 網|噴灌管|電線)/);
   assert.doesNotMatch(html, /處分書(?:稱|認定)[^<]*大秘寶/);
@@ -646,7 +653,7 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.ok(renderedOrder.every((position) => position >= 0));
   assert.deepEqual(renderedOrder, [...renderedOrder].sort((left, right) => left - right));
   assert.match(html, /<section[^>]+id="primary-document"[^>]+aria-labelledby="primary-document-title"/);
-  assert.match(html, /<h2 id="primary-document-title">新竹棒球場案不起訴處分書具印文頁面影像<\/h2>/);
+  assert.match(html, /<h2 id="primary-document-title">新竹棒球場案不起訴處分書影像（第 3–22 頁）<\/h2>/);
   assert.match(html, /<section[^>]+id="primary-document-reading"[^>]+aria-labelledby="primary-document-reading-title"/);
   assert.match(html, /<h3 id="primary-document-reading-title">[^<]+<\/h3>/);
   assert.match(coverage, /<h3 id="coverage-limits-title">這份公開紀錄還缺哪些文件？<\/h3>/);
@@ -689,16 +696,25 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const gateway = visibleDocument.slice(gatewayStart, visibleDocument.indexOf('class="case-reading-legend"'));
   const guide = visibleDocument.slice(guideStart, contextStart);
   const gatewayText = gateway.replaceAll("<!-- -->", "");
+  const visibleText = visibleDocument.replaceAll("<!-- -->", "");
+  const guideText = guide.replaceAll("<!-- -->", "");
   assert.ok(gatewayStart >= 0 && guideStart >= 0 && contextStart >= 0);
-  assert.match(gatewayText, /這批可見文件頁面是本頁整理與核對不起訴理由的第一依據/);
-  assert.match(gatewayText, /Threads[^<]*(?:只是|僅是|只作為)[^<]*第三方社群公開管道/);
+  assert.match(gatewayText, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
+  assert.match(gatewayText, /可見頁面可直接支持什麼？/);
+  const gatewayOrder = [
+    'id="primary-document-title"',
+    "這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開",
+    'id="primary-document-support-title"',
+    'class="primary-document-source-meta"',
+    'id="primary-document-coverage-title"',
+  ].map((marker) => gateway.indexOf(marker));
+  assert.ok(gatewayOrder.every((position) => position >= 0) && gatewayOrder.every((position, index) => index === 0 || gatewayOrder[index - 1] < position));
   for (const gatewayOnlyText of [
-    "新竹棒球場案不起訴處分書具印文頁面影像",
-    "文件頁面可見紅色騎縫印文・由第三方社群公開・已遮蔽・僅涵蓋第 3–22 頁",
-    "影像呈現具紅色騎縫印文的文件頁面原貌",
+    "新竹棒球場案不起訴處分書影像（第 3–22 頁）",
+    "第 3–22 頁可見檢方對告發與移送內容、刑事證據門檻、契約與金流、施工與回填，以及開挖物與證據的部分說明。第 18 頁明載：該頁所述的 PE 網、噴灌管與電線，檢察官認為均非廢棄物。",
+    "這批材料是透過 Threads 第三方社群貼文公開的部分頁面影像；頁面可見紅色騎縫印文，但「具印文」只描述影像外觀，不能僅由印文判定持有人紙本為正本或副本。",
     "第 1–2 頁未附",
     "至少第 23–25 頁未附",
-    "不能僅由印文判定持有人紙本為正本或副本。",
   ]) {
     const escaped = gatewayOnlyText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     assert.equal(visibleDocument.split(gatewayOnlyText).length - 1, 1, `${gatewayOnlyText} has one visible owner`);
@@ -718,23 +734,23 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   ]) {
     assert.doesNotMatch(guide, new RegExp(removedPrimaryDocumentAttribution));
   }
+  assert.equal(visibleDocument.split("文件範圍").length - 1, 1, "the global document scope has one visible owner");
+  assert.doesNotMatch(visibleDocument, /class="primary-document-warning"|class="primary-document-non-conclusions"|閱讀警示|內容層次 [12]／2|這份文件不能直接推出/);
+  assert.doesNotMatch(guide, /待檢驗的主張|這只是文件頁段導讀|不能由此單獨判定|仍受頁次不完整|primary-document-layer-boundaries/);
   for (const guideOnlyText of [
-    "先分辨文件每一段在做什麼",
-    "已對照具印文頁面影像",
-    "內容層次 1／2",
-    "內容層次 2／2",
-    "這份文件不能直接推出",
-    "這不是法院判決，也不是法官對高虹安或林智堅作成的認定",
+    "可見頁段",
+    "已對照由新竹市議員楊玲宜公開的第 18 頁具印文影像",
+    "頁面可直接確認",
+    "這段的範圍",
+    "TW Issues 對第 18 頁的解讀",
   ]) {
-    assert.equal(visibleDocument.split(guideOnlyText).length - 1, 1, `${guideOnlyText} remains once`);
-    assert.match(guide, new RegExp(guideOnlyText));
+    assert.equal(visibleText.split(guideOnlyText).length - 1, 1, `${guideOnlyText} remains once`);
+    assert.match(guideText, new RegExp(guideOnlyText));
   }
   const detailedGuideValues = [
     ...hsinchuPrimaryDocument.guide.flatMap(({ pageRange, label, summary }) => [pageRange, label, summary]),
-    ...hsinchuPrimaryDocument.excerpts.flatMap(({ text, proofScope, limitations }) => [text, proofScope, ...limitations]),
+    ...hsinchuPrimaryDocument.excerpts.flatMap(({ text, proofScope, limitation }) => [text, proofScope, limitation]),
     hsinchuPrimaryDocument.analysisBoundary.summary,
-    ...hsinchuPrimaryDocument.analysisBoundary.limitations,
-    ...hsinchuPrimaryDocument.nonConclusions,
   ];
   for (const value of new Set(detailedGuideValues)) {
     assert.equal(guide.split(value).length - 1, 1, `${value} remains once in the detailed guide`);
@@ -748,10 +764,10 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.equal((guide.match(/class="primary-document-excerpt" aria-label=/g) ?? []).length, hsinchuPrimaryDocument.excerpts.length);
   assert.equal((guide.match(/class="primary-document-layer-item /g) ?? []).length, 2);
   for (const id of [
-    "primary-document", "primary-document-title", "primary-document-coverage-title", "primary-document-reading",
+    "primary-document", "primary-document-title", "primary-document-support-title", "primary-document-coverage-title", "primary-document-reading",
     "primary-document-reading-title", "primary-document-guide-title", "primary-document-layers-title",
     "primary-document-document-layer-title", "primary-document-excerpt-title",
-    "primary-document-analysis-title", "primary-document-non-conclusions-title", "coverage-limits",
+    "primary-document-analysis-title", "coverage-limits",
   ]) {
     assert.equal((visibleDocument.match(new RegExp(`id="${id}"`, "g")) ?? []).length, 1, `${id} is unique`);
   }

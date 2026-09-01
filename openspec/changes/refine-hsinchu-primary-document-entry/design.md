@@ -30,7 +30,7 @@ The source facts and evidence boundaries remain authoritative and unchanged. The
 
 **Non-Goals:**
 
-- Rewriting, promoting, or inferring any fact, legal conclusion, responsibility, causality, evidence level, proof scope, limitation, or source authority; the only content omission is the explicitly selected poster-summary card from the primary-document guide, while later attributed political narrative remains unchanged.
+- Changing, promoting, or inferring any underlying fact, legal conclusion, responsibility, causality, evidence level, proof scope, limitation meaning, or source authority; presentation copy may be rewritten only to improve order and remove repetition, while later attributed political narrative remains unchanged.
 - Republishing source images or transcript material, changing canonical source metadata, or reading private producer inputs.
 - Collapsing the document guide, adding client state, sticky navigation, scrollspy, filters, scores, local storage, hover-only behavior, or breakpoint-specific DOM.
 - Changing non-Hsinchu topic rendering.
@@ -54,10 +54,9 @@ Hero
 
 `#primary-document` remains the stable existing fragment and becomes a top-level source gateway immediately after the hero. It owns, exactly once:
 
-- the existing document title and eyebrow;
-- the complete visible provenance and copy-status warning;
-- the existing source-introduction text and publisher, publication, and capture metadata;
-- the observed page range, missing-before, missing-after, and redaction status;
+- the document title, affirmative source-backed lead, and directly supported document summary;
+- the publisher, publication channel, publication date, and capture date;
+- one neutral document-scope boundary containing the observed page range, missing-before, missing-after, redaction, and copy-status facts;
 - the canonical Threads action and `#source-58` registry action; and
 - one ordinary internal link to `#primary-document-reading`.
 
@@ -65,12 +64,11 @@ The source gateway uses an `h2`; its document-coverage subheading uses an `h3`. 
 
 `#primary-document-reading` stays inside Chapter 01 and owns only:
 
-- the neutral page-range structure guide;
-- checked page-level excerpts and their proof boundaries;
-- the separate visible-document and TW Issues analysis layers; and
-- the existing non-conclusions.
+- a neutral page-range structure guide written as document-content summaries;
+- checked page-level excerpts with one local proof scope and one local non-generalization boundary; and
+- the separate visible-document and TW Issues analysis layers.
 
-It uses an `h3` under the Chapter 01 `h2`, followed by existing `h4`, `h5`, and `h6` descendants. A visible introductory boundary sentence links back to `#primary-document` so direct entry never leaves the provenance owner undiscoverable. This reference may describe the relationship but must not repeat the warning, metadata, coverage values, or canonical actions.
+It uses an `h3` under the Chapter 01 `h2`, followed by existing `h4`, `h5`, and `h6` descendants. A visible introductory sentence links back to `#primary-document` so direct entry never leaves the source and coverage owner undiscoverable. This reference may describe the relationship but must not repeat scope facts, metadata, coverage values, or canonical actions.
 
 The poster is not a third primary-document content layer. Publisher identity and platform remain source provenance in the gateway, while the poster's political evaluation is omitted from the guide rather than relocated or duplicated. Existing later attributed political-narrative surfaces remain unchanged.
 
@@ -97,9 +95,9 @@ Alternative considered:
 
 ### 3. Preserve one eligibility boundary and narrow the primary-document data owner
 
-The existing model eligibility, source deduplication, source metadata, page coverage, excerpts, analysis boundary, non-conclusions, and source registry remain unchanged. The `primaryDocument.posterAttribution` field and its dedicated type are removed because the poster's political evaluation is no longer part of the primary-document reading entity. Both sections render only when the existing Hsinchu eligibility guard returns a primary document; sparse and non-Hsinchu topics render neither section nor the new directory link. The later `politicalNarratives` data remains unchanged.
+The existing model eligibility, source deduplication, source metadata, page coverage, excerpts, analysis boundary, and source registry remain unchanged. The `primaryDocument.posterAttribution` field and its dedicated type remain removed. The primary-document model adds data-owned lead and direct-support text, removes the duplicated warning and non-conclusion fields, and reduces the analysis boundary to one integrated summary. Both sections render only when the existing Hsinchu eligibility guard returns a primary document; sparse and non-Hsinchu topics render neither section nor the new directory link. The later `politicalNarratives` data remains unchanged.
 
-Rendered-HTML tests will prove that the document title, complete warning, coverage values, source metadata, and canonical actions appear once, while guide entries, excerpts, document/analysis labels, proof scope, limitations, and non-conclusions remain present once. They will also prove that the removed poster label, speaker role, summary, and attribution ID do not appear in the primary-document flow.
+Rendered-HTML tests will prove that the document title, affirmative lead, direct-support summary, neutral scope boundary, coverage values, source metadata, and canonical actions appear once, while guide entries, excerpts, document/analysis labels, local proof scope, and local limitation remain present once. They will also prove that the former warning block, standalone non-conclusion checklist, removed poster label, speaker role, summary, and attribution ID do not appear in the primary-document flow.
 
 ### 4. Remove fragment decoration that resembles an error state
 
@@ -136,6 +134,31 @@ The public projection will use three explicit source roles for the non-prosecuti
 This priority is an evidence, citation, and rendered-reading priority. It does not renumber `source-58`, make it the first item in every page-wide source registry, or promote the third-party post into an official complete publication. If one claim mixes content visible in the images with information supported only by media, the claim must be split or its proof scope narrowed; reversing the source array alone is insufficient.
 
 The first dossier-wide coverage gap will therefore cite `source-58` first for the currently inspectable page scope, `source-39` for the official occurrence of the disposition, `source-34` only for the city's later stated intent to seek reconsideration, and `source-01` only for the still-missing administrative-accountability record. Media reporting of a possible reconsideration must not imply that a request was filed, accepted, upheld, or reversed.
+
+### 8. Lead with inspectable document content and consolidate boundaries
+
+The source gateway remains immediately after the hero because the user explicitly selected the non-prosecution disposition as the page's first substantive evidence. Within that position, the reading order becomes:
+
+```text
+Document identity
+-> affirmative source-backed lead
+-> what the visible pages directly support
+-> publisher and dates
+-> one neutral document-scope boundary
+-> canonical inspection actions
+```
+
+The lead identifies the publisher as Hsinchu City Councilor Yang Ling-yi and identifies Threads as the publication channel. Her office is relevant attribution context, but it is not itself a trust badge or an evidence-classification upgrade. Confidence in document-content claims comes from the visible page images and their page locators; her later political evaluation remains attributed elsewhere.
+
+The gateway's document-scope section owns global limits exactly once: visible pages 3–22, missing pages before and after that range, redaction, the appearance of red stamped seams, and the inability to determine original-versus-copy status from the stamps alone. These facts use neutral “document scope” language rather than an alert treatment.
+
+The downstream guide summarizes only what each visible page range covers. The page 18 excerpt retains one exact proof scope and one local statement of what that paragraph does not generalize to. The TW Issues interpretation integrates its boundary into one paragraph. Separate guide-entry caveats, an analysis-limitations list, and a standalone non-conclusions block are removed because they repeat the same global or local boundaries without adding evidence.
+
+Alternatives considered:
+
+- **Move the gateway into Chapter 01:** rejected because it would contradict the selected source-first hierarchy and move the disposition below navigation again.
+- **Use the councilor title as a credibility indicator:** rejected because a source's office does not convert a unilateral political interpretation into a prosecutorial finding.
+- **Remove all limitations:** rejected because page, redaction, copy-status, and non-generalization boundaries remain necessary to describe what the public material can establish.
 
 ## Risks / Trade-offs
 
