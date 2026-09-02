@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: The repository exposes a deterministic prepublish data check
-The repository SHALL expose `npm run check:prepublish-data`. The command MUST read local public files, Git objects, and a caller-supplied receipt only; it MUST NOT use the network or modify the worktree.
+The repository SHALL expose `npm run check:prepublish-data`. The command MUST derive public scope and fingerprints from Git blobs, verify that the three public worktree paths equal current `HEAD`, and read a caller-supplied receipt; it MUST NOT use the network or modify the worktree.
 
 #### Scenario: A factual release is checked
 - **WHEN** the command receives a resolvable full base revision and a receipt for current `HEAD`
@@ -13,7 +13,7 @@ The repository SHALL expose `npm run check:prepublish-data`. The command MUST re
 - **THEN** it SHALL return `NOT_APPLICABLE` without requiring a receipt or research
 
 ### Requirement: Scope contains every changed mutable proposition exactly once
-The check SHALL derive changed topics from `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed timeline entry ordered by `occurredAt` then `reportedAt`, changed topic `as_of`/public-index update dates, and changed strings containing configured temporal wording.
+The check SHALL derive changed topics from the base and `HEAD` Git blobs of `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed timeline entry ordered by `occurredAt` then `reportedAt`, changed topic `as_of`/public-index update dates, and changed visible strings containing configured temporal wording. Temporal matching SHALL be Unicode-normalized and case-insensitive and SHALL exclude identifier, canonical-URL, digest, and machine-only timestamp fields.
 
 #### Scenario: One topic changes
 - **WHEN** only one topic contains changed mutable propositions
@@ -23,6 +23,10 @@ The check SHALL derive changed topics from `public-bundle.json`, `app/public-evi
 #### Scenario: Scope is missing or widened
 - **WHEN** a receipt omits, duplicates, or adds a candidate proposition
 - **THEN** the check SHALL return `BLOCKED_STALE_DATA`
+
+#### Scenario: A public worktree input differs from HEAD
+- **WHEN** any of the three public input paths has staged, unstaged, or untracked content that differs from its `HEAD` blob
+- **THEN** the check SHALL fail before evaluating the receipt
 
 #### Scenario: A stale temporal wording is still published
 - **WHEN** a changed proposition says `仍`, `尚未`, `將`, `截至`, `still`, `not yet`, `will`, or `as of` but the receipt supplies no direct current support, retrieval cutoff, or bounded limitation
@@ -35,7 +39,7 @@ Each audited proposition SHALL record a source role, publisher, canonical HTTPS 
 #### Scenario: A newer official result resolves an open question
 - **WHEN** an official record establishes a newer result
 - **THEN** the proposition SHALL use `MOVE_OUT_OF_OPEN_QUESTIONS` or `UPDATE_REQUIRED` according to the target data
-- **AND** a ready outcome SHALL require the resolved proposition to be represented outside `openQuestions`
+- **AND** `MOVE_OUT_OF_OPEN_QUESTIONS` SHALL name a `target_path` that exists in current `HEAD`, is outside `openQuestions`, and contains the receipt-bound replacement text
 
 #### Scenario: Search finds no public result by the cutoff
 - **WHEN** a bounded search locates no identifiable result
@@ -49,7 +53,7 @@ Each audited proposition SHALL record a source role, publisher, canonical HTTPS 
 - **AND** promotion to a verified official outcome SHALL be blocked
 
 ### Requirement: The receipt is external and bound to the release candidate
-The receipt SHALL remain outside the repository and public output. It SHALL bind its schema version, full base revision, current full HEAD, public-data fingerprint, scoped paths and before/after text, retrieval cutoff, and overall outcome. A revision or scoped-data change SHALL invalidate it.
+The receipt SHALL be a regular, non-symlink file whose canonical path is outside the repository root and public output. It SHALL bind its schema version, full base revision, current full HEAD, public-data fingerprint, scoped paths and before/after text, retrieval cutoff, and overall outcome. A revision or scoped-data change SHALL invalidate it. The validator SHALL reject keys named `secret`, `token`, `password`, `private_key`, `ledger_id`, or `deployment_project_id`, and string values containing `context/`, `account/`, `.claude/`, or `evidence-ledger`.
 
 #### Scenario: Receipt bindings match
 - **WHEN** the base, HEAD, public inputs, scope, and text match the receipt
@@ -62,6 +66,10 @@ The receipt SHALL remain outside the repository and public output. It SHALL bind
 #### Scenario: Receipt contains private material
 - **WHEN** a receipt includes a private producer path, account data, ledger identifier, secret, deployment ID, or raw private research
 - **THEN** the check SHALL reject it
+
+#### Scenario: Receipt path is inside the repository
+- **WHEN** the receipt resolves inside the canonical repository root or through a symlink
+- **THEN** the check SHALL reject it before parsing
 
 ### Requirement: Dispositions reduce to one bounded release outcome
 Each scoped proposition SHALL have exactly one of `CURRENT`, `UPDATE_REQUIRED`, `OPEN_WITH_CUTOFF`, `MOVE_OUT_OF_OPEN_QUESTIONS`, or `BLOCKED`. The check SHALL derive `READY` for current or valid moved propositions, `READY_WITH_OPEN_GAPS` when only valid cutoff-bounded gaps remain, and `BLOCKED_STALE_DATA` for any required update, blocked proposition, unsupported evidence, invalid binding, or inconsistent declared outcome.
