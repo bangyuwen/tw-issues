@@ -197,10 +197,17 @@ function deriveEvidenceScope(base, head) {
     const oldTracks = oldTopic.proceedingTracks ?? [];
     const newTracks = newTopic.proceedingTracks ?? [];
     for (let index = 0; index < Math.max(oldTracks.length, newTracks.length); index += 1) {
+      const oldTrack = oldTracks[index] ?? {};
+      const newTrack = newTracks[index] ?? {};
       for (const field of ["status", "conclusion"]) {
-        const before = oldTracks[index]?.[field];
-        const after = newTracks[index]?.[field];
+        const before = oldTrack[field];
+        const after = newTrack[field];
         if (!same(before, after)) result.push(proposition(slug, `app/public-evidence.json:${slug}.proceedingTracks[${index}].${field}`, "proceeding", before, after, retainsNamedAttribution(newTracks[index])));
+      }
+      for (const field of new Set([...Object.keys(oldTrack), ...Object.keys(newTrack)])) {
+        if (!["status", "conclusion"].includes(field)) {
+          visibleTemporalDiff(oldTrack[field], newTrack[field], `app/public-evidence.json:${slug}.proceedingTracks[${index}].${field}`, slug, result);
+        }
       }
     }
     const oldTimeline = timelineMap(oldTopic, slug, "base");
@@ -214,6 +221,10 @@ function deriveEvidenceScope(base, head) {
       const key = event.publicKey;
       const after = newTimeline.get(key);
       result.push(proposition(slug, `app/public-evidence.json:${slug}.reportedTimeline[publicKey=${key}]`, "timeline", oldTimeline.get(key), after, retainsNamedAttribution(after)));
+      for (const changedEvent of changed.slice(0, -1)) {
+        const changedKey = changedEvent.publicKey;
+        visibleTemporalDiff(oldTimeline.get(changedKey), newTimeline.get(changedKey), `app/public-evidence.json:${slug}.reportedTimeline[publicKey=${changedKey}]`, slug, result);
+      }
     }
     visibleTemporalDiff(oldTopic, newTopic, `app/public-evidence.json:${slug}`, slug, result);
   }

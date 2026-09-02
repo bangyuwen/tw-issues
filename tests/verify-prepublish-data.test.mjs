@@ -222,6 +222,25 @@ test("latest changed timeline uses occurredAt, reportedAt, then publicKey tie-br
   assert.deepEqual(derived.scope.map((item) => item.path), ["app/public-evidence.json:alpha.reportedTimeline[publicKey=event-b]"]);
 });
 
+test("temporal scope includes non-status proceedings and non-latest changed events", async (t) => {
+  await t.test("proceeding note", async () => {
+    const fx = await fixture((docs) => { docs.evidence.alpha.proceedingTracks[0].note = "Review is still pending"; });
+    const scope = (await derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base })).scope;
+    assert.deepEqual(scope.map((item) => item.path), ["app/public-evidence.json:alpha.proceedingTracks[0].note"]);
+  });
+  await t.test("non-latest timeline event", async () => {
+    const fx = await fixture((docs) => {
+      docs.evidence.alpha.reportedTimeline[0].headline = "Earlier review is still pending";
+      docs.evidence.alpha.reportedTimeline[1].headline = "Latest event changed";
+    });
+    const scope = (await derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base })).scope;
+    assert.deepEqual(scope.map((item) => item.path), [
+      "app/public-evidence.json:alpha.reportedTimeline[publicKey=event-a].headline",
+      "app/public-evidence.json:alpha.reportedTimeline[publicKey=event-b]",
+    ]);
+  });
+});
+
 test("lastUpdated mirrors must match and freshness creates one canonical proposition", async () => {
   const fx = await fixture((docs) => { docs.index.topics[0].lastUpdated = "2026-02-02"; });
   await assert.rejects(derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base }), /mirror mismatch/);
