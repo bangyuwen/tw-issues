@@ -9,11 +9,11 @@ The repository SHALL expose `npm run check:prepublish-data`. The command MUST de
 - **AND** it SHALL succeed only for `READY` or `READY_WITH_OPEN_GAPS`
 
 #### Scenario: A presentation-only release is checked
-- **WHEN** the base-to-HEAD diff changes no public input or mutable public proposition
+- **WHEN** the base-to-HEAD diff yields no mutable public proposition
 - **THEN** it SHALL return `NOT_APPLICABLE` without requiring a receipt or research
 
 ### Requirement: Scope contains every changed mutable proposition exactly once
-The check SHALL derive changed topics from the base and `HEAD` Git blobs of `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed timeline entry ordered by `occurredAt` then `reportedAt`, changed topic `as_of`/public-index update dates, and changed visible strings containing configured temporal wording. Temporal matching SHALL be Unicode-normalized and case-insensitive and SHALL exclude identifier, canonical-URL, digest, and machine-only timestamp fields.
+The check SHALL derive changed topics from the base and `HEAD` Git blobs of `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed `reportedTimeline` entry ordered by `occurredAt` then `reportedAt`, `public-bundle.json:topics.<slug>.as_of`, `app/research-topics.json:topics[slug].lastUpdated`, and changed visible strings containing configured temporal wording. The matching `allTopics[slug].lastUpdated` value SHALL equal the canonical `topics[slug].lastUpdated` value and SHALL NOT create a duplicate proposition. Temporal matching SHALL be Unicode-normalized and case-insensitive and SHALL exclude identifier, canonical-URL, digest, and machine-only timestamp fields.
 
 #### Scenario: One topic changes
 - **WHEN** only one topic contains changed mutable propositions
@@ -27,6 +27,11 @@ The check SHALL derive changed topics from the base and `HEAD` Git blobs of `pub
 #### Scenario: A public worktree input differs from HEAD
 - **WHEN** any of the three public input paths has staged, unstaged, or untracked content that differs from its `HEAD` blob
 - **THEN** the check SHALL fail before evaluating the receipt
+
+#### Scenario: Only a canonical freshness date changes
+- **WHEN** a public topic's `as_of` or `lastUpdated` date changes without another mutable text change
+- **THEN** the date SHALL appear once in scope under its slug-keyed semantic path
+- **AND** mismatched `topics` and `allTopics` mirrors SHALL be blocked
 
 #### Scenario: A stale temporal wording is still published
 - **WHEN** a changed proposition says `仍`, `尚未`, `將`, `截至`, `still`, `not yet`, `will`, or `as of` but the receipt supplies no direct current support, retrieval cutoff, or bounded limitation
@@ -53,7 +58,7 @@ Each audited proposition SHALL record a source role, publisher, canonical HTTPS 
 - **AND** promotion to a verified official outcome SHALL be blocked
 
 ### Requirement: The receipt is external and bound to the release candidate
-The receipt SHALL be a regular, non-symlink file whose canonical path is outside the repository root and public output. It SHALL bind its schema version, full base revision, current full HEAD, public-data fingerprint, scoped paths and before/after text, retrieval cutoff, and overall outcome. A revision or scoped-data change SHALL invalidate it. The validator SHALL reject keys named `secret`, `token`, `password`, `private_key`, `ledger_id`, or `deployment_project_id`, and string values containing `context/`, `account/`, `.claude/`, or `evidence-ledger`.
+The receipt SHALL be a regular, non-symlink file whose canonical path is outside the repository root and public output. It SHALL use a closed schema whose root, fingerprint, scope, proposition, audit, and source objects reject unknown keys. It SHALL allow bounded free text only in `finding`, `proof_scope`, and `limitations`; it SHALL NOT allow attachment, blob, notes, or arbitrary metadata fields. It SHALL bind its schema version, full base revision, current full HEAD, public-data fingerprint, scoped paths and before/after text, retrieval cutoff, and overall outcome. A revision or scoped-data change SHALL invalidate it. The validator SHALL recursively reject keys named `secret`, `token`, `password`, `private_key`, `ledger_id`, or `deployment_project_id`, and any string value containing `context/`, `account/`, `.claude/`, or `evidence-ledger`.
 
 #### Scenario: Receipt bindings match
 - **WHEN** the base, HEAD, public inputs, scope, and text match the receipt
@@ -70,6 +75,10 @@ The receipt SHALL be a regular, non-symlink file whose canonical path is outside
 #### Scenario: Receipt path is inside the repository
 - **WHEN** the receipt resolves inside the canonical repository root or through a symlink
 - **THEN** the check SHALL reject it before parsing
+
+#### Scenario: Private material is hidden in a nested field
+- **WHEN** an unknown nested key carries raw notes or an allowed text field contains a forbidden private path or identifier
+- **THEN** the check SHALL reject the receipt
 
 ### Requirement: Dispositions reduce to one bounded release outcome
 Each scoped proposition SHALL have exactly one of `CURRENT`, `UPDATE_REQUIRED`, `OPEN_WITH_CUTOFF`, `MOVE_OUT_OF_OPEN_QUESTIONS`, or `BLOCKED`. The check SHALL derive `READY` for current or valid moved propositions, `READY_WITH_OPEN_GAPS` when only valid cutoff-bounded gaps remain, and `BLOCKED_STALE_DATA` for any required update, blocked proposition, unsupported evidence, invalid binding, or inconsistent declared outcome.

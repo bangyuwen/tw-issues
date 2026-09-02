@@ -29,15 +29,17 @@ The control has two phases: an agent or human researches current public evidence
 
 The receipt is created after the release-candidate commit and is not committed. This avoids a circular requirement where a tracked receipt would need to name the hash of the commit that contains itself. Any new commit or public-data change invalidates it.
 
-The validator resolves the receipt to a regular file outside the canonical repository root. It rejects symlinks, repository-contained receipts, forbidden keys (`secret`, `token`, `password`, `private_key`, `ledger_id`, and `deployment_project_id`), and string values containing `context/`, `account/`, `.claude/`, or `evidence-ledger`.
+The validator resolves the receipt to a regular file outside the canonical repository root. The receipt is a closed schema: root, fingerprint, scope, proposition, audit, and source objects each reject unknown keys; no attachment, blob, notes, or arbitrary metadata field is allowed. Free text exists only in bounded `finding`, `proof_scope`, and `limitations` fields. The validator recursively rejects forbidden keys (`secret`, `token`, `password`, `private_key`, `ledger_id`, and `deployment_project_id`) and forbidden string values (`context/`, `account/`, `.claude/`, and `evidence-ledger`), including when nested inside an otherwise allowed field.
 
 ### 2. Derive the smallest factual scope
 
-The validator reads `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json` from the base and `HEAD` Git blobs, not from unchecked working files, and fails if any corresponding worktree path differs from `HEAD`. Candidate propositions are changed `openQuestions`, proceeding-track status or conclusions, latest timeline content, and changed strings with temporal markers such as `目前`, `仍`, `尚未`, `將`, `進行中`, `截至`, `current`, `still`, `not yet`, `will`, `in progress`, or `as of`.
+The validator reads `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json` from the base and `HEAD` Git blobs, not from unchecked working files, and fails if any corresponding worktree path differs from `HEAD`. Candidate propositions are changed `openQuestions`, proceeding-track status or conclusions, the latest changed `reportedTimeline` entry ordered by `occurredAt` then `reportedAt`, freshness dates, and changed strings with temporal markers such as `目前`, `仍`, `尚未`, `將`, `進行中`, `截至`, `current`, `still`, `not yet`, `will`, `in progress`, or `as of`.
 
 Temporal matching uses Unicode-normalized, case-insensitive substring matching on changed visible string leaves. Identifier, canonical-URL, digest, and machine-only timestamp fields are excluded. `MOVE_OUT_OF_OPEN_QUESTIONS` requires a `target_path` that exists in the `HEAD` public data, is outside `openQuestions`, and contains the receipt-bound replacement text.
 
-Every candidate must appear exactly once in the receipt. A diff with no changed public input or mutable candidate returns `NOT_APPLICABLE` without requiring a receipt. The validator never widens the audit to unchanged topics.
+Freshness dates use semantic slug-keyed paths: `public-bundle.json:topics.<slug>.as_of` and `app/research-topics.json:topics[slug].lastUpdated`. The matching `allTopics[slug].lastUpdated` mirror is validated for equality but does not create a duplicate proposition. A mismatch between mirrored dates is blocking. `reportedTimeline` is the only timeline collection in scope.
+
+Every candidate must appear exactly once in the receipt. A diff with no mutable candidate returns `NOT_APPLICABLE` without requiring a receipt. The validator never widens the audit to unchanged topics.
 
 ### 3. Keep evidence judgment explicit
 
