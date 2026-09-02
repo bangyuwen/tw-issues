@@ -88,6 +88,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   const html = await response.text();
   const readableHtml = html.replaceAll("<!-- -->", "");
   assert.equal(response.status, 200);
+  assert.match(readableHtml, /更新於 2026-09-02。/);
   for (const text of [
     "未正式驗收即先使用",
     "30分鐘內排水",
@@ -102,6 +103,8 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "改善工程已竣工",
     "仍待釐清",
     "完整處分書",
+    "覆土異物分案",
+    "各次契約變更、補助核銷與最終結算",
     "關鍵人物",
     "政治敘事與擴散",
     "一座球場，五條責任線，不能用同一個結論回答",
@@ -134,7 +137,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
     "高虹安復職後",
     "與龍來終止原營運關係",
     "2025年3月已表示啟動",
-    "宣布將依法提出再議，民刑事與履約程序分流",
+    "市府宣布將再議；另有依法送高檢署再議的程序報導",
     "工程已竣工並進入驗收",
     "原訂時程曾多次後移",
     "沈慧虹",
@@ -665,29 +668,29 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.match(html, /<section[^>]+id="primary-document-reading"[^>]+aria-labelledby="primary-document-reading-title"/);
   assert.match(html, /<h3 id="primary-document-reading-title">[^<]+<\/h3>/);
   assert.match(coverage, /<h3 id="coverage-limits-title">這份公開紀錄還缺哪些文件？<\/h3>/);
-  const firstCoverageGap = "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待補齊官方完整處分書、影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。";
-  const firstCoverageGapReason = "本頁對不起訴理由的整理以這批可見文件頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道，媒體報導只用來交代市府其後表示將提出再議。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽，因此不能補推缺頁內容、把影像視為官方完整全文，或認定再議已送件、受理或已有結果；缺口不代表任何一方沒有立場或責任。";
+  const firstCoverageGap = "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待官方完整處分書、影像未涵蓋頁面、高檢署再議結果、市府是否另行聲請的正式文件，以及刑案結束後的個別行政究責結果。";
+  const firstCoverageGapReason = "本頁對不起訴理由的整理以可見處分書頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽。媒體另報導林智堅部分將依法送高檢署再議，市府則另表示將提出再議；兩者不能合併寫成市府已送件或高檢署已有結果。缺口不代表任何一方沒有立場或責任。";
   assert.ok(coverage.includes(`<p class="coverage-limit-gap">${firstCoverageGap}</p>`));
   assert.ok(coverage.includes(`<p class="coverage-limit-reason"><strong>缺口原因</strong>${firstCoverageGapReason}</p>`));
   assert.equal(coverage.split(firstCoverageGap).length - 1, 1);
   assert.equal(coverage.split(firstCoverageGapReason).length - 1, 1);
   assert.ok(coverage.indexOf("主案不起訴已有官方偵結公告") < coverage.indexOf("第 3–22 頁處分書影像可供有限核對"));
   const coverageReasonOrder = [
-    "這批可見文件頁面為第一依據",
+    "可見處分書頁面為第一依據",
     "Threads 貼文只作為影像的第三方公開管道",
-    "媒體報導只用來交代市府其後表示將提出再議",
     "第 3–22 頁以外仍有未附頁面",
-    "不能補推缺頁內容",
-    "認定再議已送件、受理或已有結果",
+    "依法送高檢署再議",
+    "市府則另表示將提出再議",
+    "不能合併寫成市府已送件或高檢署已有結果",
   ].map((text) => coverage.indexOf(text));
   assert.ok(coverageReasonOrder.every((position) => position >= 0));
   assert.deepEqual(coverageReasonOrder, [...coverageReasonOrder].sort((left, right) => left - right));
   const firstCoverageRow = coverage.match(/<li class="coverage-limit-row">[\s\S]*?<\/li>/)?.[0] ?? "";
-  const firstCoverageSourceOrder = ["source-58", "source-39", "source-34", "source-01"]
+  const firstCoverageSourceOrder = ["source-58", "source-39", "source-34", "source-01", "source-09", "source-38"]
     .map((sourceRef) => firstCoverageRow.indexOf(`href="#${sourceRef}"`));
   assert.ok(firstCoverageSourceOrder.every((position) => position >= 0));
   assert.deepEqual(firstCoverageSourceOrder, [...firstCoverageSourceOrder].sort((left, right) => left - right));
-  assert.equal((firstCoverageRow.match(/class="citation"/g) ?? []).length, 4);
+  assert.equal((firstCoverageRow.match(/class="citation"/g) ?? []).length, 6);
   assert.doesNotMatch(coverage, /市府已宣布將提出再議；目前已有第三方社群公開之具印文處分書頁面影像第 3–22 頁/);
   assert.match(coverage, /BrightView檢測採購／疑洩密案的終結狀態未明/);
   assert.match(coverage, /目前未取得同時具備原始貼文、作者、日期及可封存連結的社群節點/);
