@@ -13,7 +13,7 @@ The repository SHALL expose `npm run check:prepublish-data`. The command MUST de
 - **THEN** it SHALL return `NOT_APPLICABLE` without requiring a receipt or research
 
 ### Requirement: Scope contains every changed mutable proposition exactly once
-The check SHALL derive changed topics from the base and `HEAD` Git blobs of `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed `reportedTimeline` entry ordered by `occurredAt` then `reportedAt`, `public-bundle.json:topics.<slug>.as_of`, `app/research-topics.json:topics[slug].lastUpdated`, and changed visible strings containing configured temporal wording. The matching `allTopics[slug].lastUpdated` value SHALL equal the canonical `topics[slug].lastUpdated` value and SHALL NOT create a duplicate proposition. Temporal matching SHALL be Unicode-normalized and case-insensitive and SHALL exclude identifier, canonical-URL, digest, and machine-only timestamp fields.
+The check SHALL derive changed topics from the base and `HEAD` Git blobs of `public-bundle.json`, `app/public-evidence.json`, and `app/research-topics.json`. Mutable propositions SHALL include changed open questions, proceeding status or conclusions, the latest changed `reportedTimeline` entry ordered by `occurredAt`, `reportedAt`, then `publicKey`, `public-bundle.json:topics.<slug>.as_of`, `app/research-topics.json:topics[slug].lastUpdated`, and changed visible strings containing configured temporal wording. Timeline entries SHALL match across revisions by unique `publicKey`; a missing/duplicate key SHALL block derivation and array-only reordering SHALL create no proposition. The matching `allTopics[slug].lastUpdated` value SHALL equal the canonical `topics[slug].lastUpdated` value and SHALL NOT create a duplicate proposition. Temporal matching SHALL be Unicode-normalized and case-insensitive and SHALL exclude identifier, canonical-URL, digest, and machine-only timestamp fields.
 
 #### Scenario: One topic changes
 - **WHEN** only one topic contains changed mutable propositions
@@ -33,13 +33,18 @@ The check SHALL derive changed topics from the base and `HEAD` Git blobs of `pub
 - **THEN** the date SHALL appear once in scope under its slug-keyed semantic path
 - **AND** mismatched `topics` and `allTopics` mirrors SHALL be blocked
 
+#### Scenario: Timeline entries are reordered
+- **WHEN** `reportedTimeline` array order changes but each unique `publicKey` entry is unchanged
+- **THEN** the reorder SHALL create no mutable proposition
+- **AND** missing or duplicate `publicKey` values SHALL block scope derivation
+
 #### Scenario: A stale temporal wording is still published
 - **WHEN** a changed proposition says `仍`, `尚未`, `將`, `截至`, `still`, `not yet`, `will`, or `as of` but the receipt supplies no direct current support, retrieval cutoff, or bounded limitation
 - **THEN** the proposition SHALL be `BLOCKED`
 - **AND** the overall outcome SHALL be `BLOCKED_STALE_DATA`
 
 ### Requirement: Evidence retains its authority and limits
-Each audited proposition SHALL record a source role, publisher, canonical HTTPS URL, publication date, proof scope, limitations, and retrieval cutoff. An official or primary record MAY support an outcome; an attributed source MUST remain attributed; an inconclusive search MUST record its bounded `search_scope` and MUST NOT be treated as proof that no outcome exists.
+Each audited proposition SHALL record a `publicRef` whose publisher, canonical HTTPS URL, and publication date exactly match a source in current `HEAD`, a source role from `official_record`, `primary_document`, `attributed_report`, or `bounded_search`, plus proof scope, limitations, and retrieval cutoff. `official_record` SHALL additionally require a canonical hostname ending in `.gov.tw`. `primary_document` SHALL require the source to match the topic's published `primaryDocument.source` and SHALL retain its provenance and coverage boundaries. Proceeding outcomes and `MOVE_OUT_OF_OPEN_QUESTIONS` SHALL require `official_record` or `primary_document`. `attributed_report` SHALL support only a target proposition retaining named attribution. `bounded_search` SHALL support only `OPEN_WITH_CUTOFF`. `CURRENT` and `UPDATE_REQUIRED` SHALL use the role allowed for the proposition type; evidence that cannot meet a stricter role SHALL remain attributed.
 
 #### Scenario: A newer official result resolves an open question
 - **WHEN** an official record establishes a newer result
@@ -56,6 +61,10 @@ Each audited proposition SHALL record a source role, publisher, canonical HTTPS 
 - **WHEN** a named speaker or report is the only evidence
 - **THEN** it SHALL support only an attributed statement or reported procedure
 - **AND** promotion to a verified official outcome SHALL be blocked
+
+#### Scenario: A source self-labels as official without official authority
+- **WHEN** a receipt labels evidence `official_record` but its `publicRef` metadata does not match `HEAD` or its canonical hostname is not `.gov.tw`
+- **THEN** the evidence SHALL be blocked
 
 ### Requirement: The receipt is external and bound to the release candidate
 The receipt SHALL be a regular, non-symlink file whose canonical path is outside the repository root and public output. It SHALL use a closed schema whose root, fingerprint, scope, proposition, audit, and source objects reject unknown keys. It SHALL allow bounded free text only in `finding`, `proof_scope`, and `limitations`; it SHALL NOT allow attachment, blob, notes, or arbitrary metadata fields. It SHALL bind its schema version, full base revision, current full HEAD, public-data fingerprint, scoped paths and before/after text, retrieval cutoff, and overall outcome. A revision or scoped-data change SHALL invalidate it. The validator SHALL recursively reject keys named `secret`, `token`, `password`, `private_key`, `ledger_id`, or `deployment_project_id`, and any string value containing `context/`, `account/`, `.claude/`, or `evidence-ledger`.
