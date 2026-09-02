@@ -481,7 +481,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     const source = sourceById.get(id);
     if (!source) return null;
     const number = sourceNumberByRef.get(source.publicRef) ?? "—";
-    return <a className="citation" href={`#${source.publicRef}`} key={source.publicRef} aria-label={`來源 ${number}：${source.publisher}｜${source.title}（${source.publishedAt}）`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊跳至完整來源</small></span></a>;
+    return <a className="citation" data-source-ref={source.publicRef} href={source.canonicalUrl} target="_blank" rel="noreferrer" key={source.publicRef} aria-label={`來源 ${number}：${source.publisher}｜${source.title}（${source.publishedAt}，另開新分頁）`}><span aria-hidden="true">{source.publisher}</span><span className="citation-tooltip" role="tooltip"><span>{source.publisher} · {source.publishedAt}</span><strong>{source.title}</strong><small>點擊開啟完整來源（另開新分頁）</small></span></a>;
   });
   const [verified, unresolved] = collections;
   const caseChapters = hsinchuChapters.length > 0 ? hsinchuChapters : getHsinchuDossierChapters(model);
