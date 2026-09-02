@@ -39,6 +39,16 @@ npm run build
 
 公開網站的建置、測試與 lint 不需要私有研究倉庫、evidence ledger、帳號資料、研究筆記、部署 project ID 或 secrets。公開資料只能透過已驗證的單向 bundle 進入網站；不要把私有 ledger、內部 claim/source ID 或 production readback metadata 放入這個專案。
 
+## Factual pre-release check
+
+若 release candidate 變更公開議題的可變事實，先固定並記下完整的 base 與 HEAD commit。以這個固定 HEAD 的公開資料做範圍受限的查核，保留來源角色、proof scope、limitations、canonical HTTPS URL、publication date 與 retrieval cutoff，並把 JSON receipt 寫在 repository 與靜態輸出之外；receipt 不得是 symlink，也不得包含私有 producer 路徑、ledger／帳號識別碼、secret 或 deployment project ID。
+
+```bash
+npm run check:prepublish-data -- --base-ref <full-base-commit> --receipt </absolute/external/receipt.json>
+```
+
+Validator 只讀取 base／HEAD Git blobs、目前三個公開輸入與外部 receipt，不連網也不改寫工作樹。若 diff 只有 presentation change，結果是 `NOT_APPLICABLE`，不需要 receipt。結果為 `READY` 或 `READY_WITH_OPEN_GAPS` 後，才依序繼續既有的 `npm test`、`npm run lint`、`npm run build`、固定 diff review、PR、GitHub Pages deployment 與 production readback；此 check 不取代或包裝任何既有 gate。
+
 ## Development notes
 
 - `app/`：TW Issues index、topic pages、shared evidence rendering。
