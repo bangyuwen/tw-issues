@@ -12,7 +12,7 @@ const OFFICIAL = {
   title: "Official result",
   publisher: "Agency",
   publishedAt: "2026-02-01",
-  displayRole: "official record",
+  displayRole: "制度或機關紀錄",
 };
 const PRIMARY = {
   publicRef: "source-2",
@@ -290,6 +290,16 @@ test("public-path worktree drift fails before receipt evaluation", async () => {
   await assert.rejects(validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }), /differs from HEAD/);
 });
 
+test("public-path staged drift fails even when the worktree matches HEAD", async () => {
+  const fx = await fixture();
+  const built = await receiptFor(fx);
+  const path = join(fx.root, "public-bundle.json");
+  await writeFile(path, "{}\n");
+  run(fx.root, ["add", "public-bundle.json"]);
+  run(fx.root, ["restore", "--worktree", "public-bundle.json"]);
+  await assert.rejects(validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }), /staged public input differs from HEAD/);
+});
+
 test("receipt must be external regular non-symlink file", async (t) => {
   const fx = await fixture();
   const built = await receiptFor(fx);
@@ -326,6 +336,22 @@ test("official, primary, attributed, cutoff, and outcome roles remain bounded", 
     }
   }, /publication date must not be after retrieval cutoff/));
   await t.test("official domain", () => rejects(fx, (r) => { r.scope[0].propositions[0].audit.sources[0].canonical_url = "https://example.com/result"; }, /metadata does not exactly match HEAD|\.gov\.tw/));
+  await t.test("government statement cannot self-classify as official record", async () => {
+    const statementFx = await fixture((docs) => {
+      const relabel = (value) => {
+        if (Array.isArray(value)) return value.forEach(relabel);
+        if (!value || typeof value !== "object") return;
+        if (value.publicRef === OFFICIAL.publicRef) value.displayRole = "主管機關公開說明";
+        Object.values(value).forEach(relabel);
+      };
+      relabel(docs.evidence);
+    });
+    const built = await receiptFor(statementFx);
+    await assert.rejects(
+      validatePrepublishData({ repoRoot: statementFx.root, baseRef: statementFx.base, receiptPath: built.path }),
+      /official_record requires record-classified published metadata/,
+    );
+  });
   await t.test("primary binding", async () => {
     const built = await receiptFor(fx, "CURRENT", () => source("primary_document"));
     assert.equal((await validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path })).outcome, "READY");

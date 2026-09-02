@@ -44,7 +44,7 @@ The check SHALL derive changed topics from the base and `HEAD` Git blobs of `pub
 - **AND** the overall outcome SHALL be `BLOCKED_STALE_DATA`
 
 ### Requirement: Evidence retains its authority and limits
-Each audited proposition SHALL record a `publicRef` whose publisher, canonical HTTPS URL, and publication date exactly match a source in current `HEAD`, a source role from `official_record`, `primary_document`, `attributed_report`, or `bounded_search`, plus proof scope, limitations, and retrieval cutoff. `official_record` SHALL additionally require a canonical hostname ending in `.gov.tw`. `primary_document` SHALL require the source to match the topic's published `primaryDocument.source` and SHALL retain its provenance and coverage boundaries. Proceeding outcomes and `MOVE_OUT_OF_OPEN_QUESTIONS` SHALL require `official_record` or `primary_document`. `attributed_report` SHALL support only a target proposition retaining named attribution. `bounded_search` SHALL support only `OPEN_WITH_CUTOFF`. `CURRENT` and `UPDATE_REQUIRED` SHALL use the role allowed for the proposition type; evidence that cannot meet a stricter role SHALL remain attributed.
+Each audited proposition SHALL record a `publicRef` whose publisher, canonical HTTPS URL, and publication date exactly match a source in current `HEAD`, a source role from `official_record`, `primary_document`, `attributed_report`, or `bounded_search`, plus proof scope, limitations, and retrieval cutoff. `official_record` SHALL additionally require a canonical hostname ending in `.gov.tw` and a current published `displayRole` of `制度或機關紀錄`, `原始紀錄`, `檢察機關偵查終結公告`, or `行政法院判決`; a government statement or press release without one of those classifications SHALL remain attributed. `primary_document` SHALL require the source to match the topic's published `primaryDocument.source` and SHALL retain its provenance and coverage boundaries. Proceeding outcomes and `MOVE_OUT_OF_OPEN_QUESTIONS` SHALL require `official_record` or `primary_document`. `attributed_report` SHALL support only a target proposition retaining named attribution. `bounded_search` SHALL support only `OPEN_WITH_CUTOFF`. `CURRENT` and `UPDATE_REQUIRED` SHALL use the role allowed for the proposition type; evidence that cannot meet a stricter role SHALL remain attributed.
 
 #### Scenario: A newer official result resolves an open question
 - **WHEN** an official record establishes a newer result
@@ -63,7 +63,7 @@ Each audited proposition SHALL record a `publicRef` whose publisher, canonical H
 - **AND** promotion to a verified official outcome SHALL be blocked
 
 #### Scenario: A source self-labels as official without official authority
-- **WHEN** a receipt labels evidence `official_record` but its `publicRef` metadata does not match `HEAD` or its canonical hostname is not `.gov.tw`
+- **WHEN** a receipt labels evidence `official_record` but its `publicRef` metadata does not match `HEAD`, its canonical hostname is not `.gov.tw`, or its current published `displayRole` is not record-classified
 - **THEN** the evidence SHALL be blocked
 
 ### Requirement: The receipt is external and bound to the release candidate

@@ -5,13 +5,13 @@
 
 ## 2. Implement the deterministic check
 
-- [x] 2.1 Add the dependency-free Node validator that reads base/HEAD Git blobs, rejects public-path worktree drift, matches timeline entries by unique `publicKey`, and validates a closed receipt schema, exact bindings, evidence-role matrix, dispositions, and outcomes.
+- [x] 2.1 Add the dependency-free Node validator that reads base/HEAD Git blobs, rejects public-path staged or worktree drift, matches timeline entries by unique `publicKey`, and validates a closed receipt schema, exact bindings, evidence-role matrix, dispositions, and outcomes.
 - [x] 2.2 Add `npm run check:prepublish-data` without wrapping or changing existing release commands.
 - [x] 2.3 Document the short operator flow in `README.md`: fix HEAD, gather bounded public evidence, write the external receipt, run the check, then continue existing gates.
 
 ## 3. Verify the contract
 
-- [x] 3.1 Add focused tests for one-topic factual scope, timeline reorder/ties/missing or duplicate `publicKey`, date-only `as_of`/`lastUpdated` scope and mirror mismatch, presentation-only `NOT_APPLICABLE`, `publicRef`/official-domain/primary-document role binding, attributed-source non-promotion, and honest `OPEN_WITH_CUTOFF` gaps.
-- [x] 3.2 Add focused tests for omitted or duplicate scope, revision/data/worktree drift, move target paths, invalid outcomes, unknown or nested private receipt fields, every forbidden receipt boundary, no network calls, and no worktree mutation.
+- [x] 3.1 Add focused tests for one-topic factual scope, timeline reorder/ties/missing or duplicate `publicKey`, date-only `as_of`/`lastUpdated` scope and mirror mismatch, presentation-only `NOT_APPLICABLE`, `publicRef`/official-domain/published-role/primary-document binding, attributed-source non-promotion, and honest `OPEN_WITH_CUTOFF` gaps.
+- [x] 3.2 Add focused tests for omitted or duplicate scope, revision/data/staged/worktree drift, move target paths, invalid outcomes, unknown or nested private receipt fields, every forbidden receipt boundary, no network calls, and no worktree mutation.
 - [x] 3.3 Run the focused tests, `npm test`, `npm run lint`, `npm run build`, and `npm run build:github-pages`.
 - [x] 3.4 Inspect the fixed diff and static output to confirm the receipt is absent, rendering is unchanged, and no private producer, global skill, CI search, deployment, or secret surface was added.

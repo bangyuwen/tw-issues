@@ -20,6 +20,12 @@ const DISPOSITIONS = new Set([
 const OUTCOMES = new Set(["READY", "READY_WITH_OPEN_GAPS", "BLOCKED_STALE_DATA"]);
 const PASSING_OUTCOMES = new Set(["READY", "READY_WITH_OPEN_GAPS", "NOT_APPLICABLE"]);
 const ROLES = new Set(["official_record", "primary_document", "attributed_report", "bounded_search"]);
+const OFFICIAL_RECORD_DISPLAY_ROLES = new Set([
+  "制度或機關紀錄",
+  "原始紀錄",
+  "檢察機關偵查終結公告",
+  "行政法院判決",
+]);
 const FORBIDDEN_KEYS = new Set(["secret", "token", "password", "private_key", "ledger_id", "deployment_project_id"]);
 const FORBIDDEN_VALUES = ["context/", "account/", ".claude/", "evidence-ledger"];
 const TEMPORAL_MARKERS = ["目前", "仍", "尚未", "將", "進行中", "截至", "current", "still", "not yet", "will", "in progress", "as of"];
@@ -284,7 +290,7 @@ function collectSources(value, result = new Map()) {
     value.forEach((item) => collectSources(item, result));
   } else if (value && typeof value === "object") {
     if (["publicRef", "publisher", "canonicalUrl", "publishedAt"].every((key) => typeof value[key] === "string")) {
-      const source = { publicRef: value.publicRef, publisher: value.publisher, canonical_url: value.canonicalUrl, publication_date: value.publishedAt };
+      const source = { publicRef: value.publicRef, publisher: value.publisher, canonical_url: value.canonicalUrl, publication_date: value.publishedAt, displayRole: value.displayRole };
       const existing = result.get(value.publicRef);
       if (existing && !same(existing, source)) fail(`${value.publicRef}: conflicting public source metadata`);
       result.set(value.publicRef, source);
@@ -319,8 +325,14 @@ function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
   try { url = new URL(source.canonical_url); } catch { fail(`${source.publicRef}: canonical_url is invalid`); }
   if (url.protocol !== "https:") fail(`${source.publicRef}: canonical_url must use HTTPS`);
   const published = sourceMap.get(source.publicRef);
-  if (!published || !same(published, { publicRef: source.publicRef, publisher: source.publisher, canonical_url: source.canonical_url, publication_date: source.publication_date })) fail(`${source.publicRef}: metadata does not exactly match HEAD`);
-  if (source.role === "official_record" && !url.hostname.toLowerCase().endsWith(".gov.tw")) fail(`${source.publicRef}: official_record must use a .gov.tw hostname`);
+  const binding = { publicRef: source.publicRef, publisher: source.publisher, canonical_url: source.canonical_url, publication_date: source.publication_date };
+  if (!published || !same(binding, {
+    publicRef: published.publicRef, publisher: published.publisher, canonical_url: published.canonical_url, publication_date: published.publication_date,
+  })) fail(`${source.publicRef}: metadata does not exactly match HEAD`);
+  if (source.role === "official_record") {
+    if (!url.hostname.toLowerCase().endsWith(".gov.tw")) fail(`${source.publicRef}: official_record must use a .gov.tw hostname`);
+    if (!OFFICIAL_RECORD_DISPLAY_ROLES.has(published.displayRole)) fail(`${source.publicRef}: official_record requires record-classified published metadata`);
+  }
   if (source.role === "primary_document") {
     const primary = topic?.primaryDocument;
     if (!primary?.source || primary.source.publicRef !== source.publicRef || !primary.provenanceStatus || !primary.coverage
@@ -422,6 +434,8 @@ export async function derivePrepublishData({ repoRoot = scriptRoot, baseRef } = 
   const baseBlobs = PUBLIC_PATHS.map((path) => readBlob(root, base, path));
   const headBlobs = PUBLIC_PATHS.map((path) => readBlob(root, head, path));
   for (const [index, path] of PUBLIC_PATHS.entries()) {
+    const staged = git(root, ["show", `:${path}`], null);
+    if (!staged.equals(headBlobs[index].bytes)) fail(`${path}: staged public input differs from HEAD`);
     const worktree = await readFile(resolve(root, path)).catch(() => fail(`${path}: public worktree input is missing`));
     if (!worktree.equals(headBlobs[index].bytes)) fail(`${path}: public worktree input differs from HEAD`);
   }
