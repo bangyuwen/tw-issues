@@ -733,7 +733,7 @@ test("known and unresolved claims expose proof boundaries before collapsed sourc
     assert.ok(card.indexOf('class="claim-boundary"') < card.indexOf(`<details class="evidence-claim-row evidence-claim-row--${kind}">`));
     assert.match(card, /這能確認/);
     assert.match(card, /這不能證明/);
-    assert.match(card, /href="#source-01"/);
+    assert.match(card, /data-source-ref="source-01" href="https:\/\/example\.com\/source"/);
   }
   assert.doesNotMatch(html, /fact-grid--(?:verified|open)/);
   assert.doesNotMatch(html, /這一層只收錄可核對的公開命題/);

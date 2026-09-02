@@ -274,7 +274,7 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.doesNotMatch(html, /高虹安挖到(?:管線|電線)/);
   assert.doesNotMatch(html, /法官認定[^<]*(?:PE 網|噴灌管|電線)/);
   assert.doesNotMatch(html, /處分書(?:稱|認定)[^<]*大秘寶/);
-  assert.match(html, /href="#source-49"/);
+  assert.match(html, /data-source-ref="source-49" href="https?:\/\//);
   assert.match(html, /監察院<!-- --> · <!-- -->2026-07-22/);
   assert.doesNotMatch(html, /data-claim-id|clm-|src-|internal_only|disputed/);
   assert.doesNotMatch(html, /data-date-key="2023-01-05"/);
@@ -687,7 +687,7 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.deepEqual(coverageReasonOrder, [...coverageReasonOrder].sort((left, right) => left - right));
   const firstCoverageRow = coverage.match(/<li class="coverage-limit-row">[\s\S]*?<\/li>/)?.[0] ?? "";
   const firstCoverageSourceOrder = ["source-58", "source-39", "source-34", "source-01", "source-09", "source-38"]
-    .map((sourceRef) => firstCoverageRow.indexOf(`href="#${sourceRef}"`));
+    .map((sourceRef) => firstCoverageRow.indexOf(`data-source-ref="${sourceRef}"`));
   assert.ok(firstCoverageSourceOrder.every((position) => position >= 0));
   assert.deepEqual(firstCoverageSourceOrder, [...firstCoverageSourceOrder].sort((left, right) => left - right));
   assert.equal((firstCoverageRow.match(/class="citation"/g) ?? []).length, 6);
@@ -734,7 +734,7 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
     assert.doesNotMatch(guide, new RegExp(escaped));
   }
   assert.equal((visibleDocument.match(/class="primary-document-source-meta"/g) ?? []).length, 1);
-  assert.equal((visibleDocument.match(/href="https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A"/g) ?? []).length, 2, "one gateway action plus one source-registry canonical link");
+  assert.equal((gateway.match(/href="https:\/\/www\.threads\.com\/@yanglingyi2022\/post\/DcnfYAXEo-A"/g) ?? []).length, 1, "the gateway action opens the canonical source directly");
   assert.equal((gateway.match(/href="#source-58"/g) ?? []).length, 1);
   assert.doesNotMatch(guide, /href="#source-58"/);
   assert.doesNotMatch(gateway, /href="#primary-document-reading"/);
@@ -789,9 +789,9 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.doesNotMatch(html, /id="positions"/);
   const attributedSection = html.slice(html.indexOf('id="reports"'), html.indexOf('id="narratives"'));
   assert.doesNotMatch(attributedSection, /民進黨|國民黨|台灣民眾黨|民主進步黨/);
-  assert.equal((attributedSection.match(/href="#source-58"/g) ?? []).length, 5, "each prosecutor document-content claim cites source-58 once");
-  assert.doesNotMatch(attributedSection, /href="#source-(?:04|05)"/);
-  assert.match(attributedSection, /href="#source-09"/, "media remains available for the separate procedural report");
+  assert.equal((attributedSection.match(/data-source-ref="source-58"/g) ?? []).length, 5, "each prosecutor document-content claim cites source-58 once");
+  assert.doesNotMatch(attributedSection, /data-source-ref="source-(?:04|05)"/);
+  assert.match(attributedSection, /data-source-ref="source-09"/, "media remains available for the separate procedural report");
   for (const pageScope of ["第 9–11 頁", "第 10–11 頁", "第 15–17 頁", "第 16–17 頁", "第 18–20 頁"]) {
     assert.match(attributedSection, new RegExp(pageScope));
   }
