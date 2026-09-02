@@ -63,6 +63,14 @@ function same(left, right) {
   return stable(left) === stable(right);
 }
 
+function isCalendarDate(value) {
+  if (!DATE.test(value)) return false;
+  const [year, month, day] = value.split("-").map(Number);
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return month >= 1 && month <= 12 && day >= 1 && day <= days[month - 1];
+}
+
 function assertObject(value, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) fail(`${label} must be an object`);
 }
@@ -115,6 +123,9 @@ function topicIndex(index) {
   };
   const topics = toMap(index.topics, "topics");
   const allTopics = toMap(index.allTopics, "allTopics");
+  if (topics.size !== allTopics.size || [...allTopics.keys()].some((slug) => !topics.has(slug))) {
+    fail("topics/allTopics slug set mismatch");
+  }
   for (const [slug, topic] of topics) {
     if (!allTopics.has(slug) || allTopics.get(slug).lastUpdated !== topic.lastUpdated) {
       fail(`${slug}: topics/allTopics lastUpdated mirror mismatch`);
@@ -294,7 +305,7 @@ function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
   assertKeys(source, allowed, baseKeys, `source ${source?.publicRef ?? "?"}`);
   if (!ROLES.has(source.role)) fail(`${source.publicRef}: invalid source role`);
   for (const key of ["publicRef", "publisher", "canonical_url", "publication_date", "proof_scope", "limitations", "retrieval_cutoff"]) assertText(source[key], `${source.publicRef}.${key}`);
-  if (!DATE.test(source.publication_date) || !DATE.test(source.retrieval_cutoff) || source.retrieval_cutoff !== cutoff) fail(`${source.publicRef}: invalid publication/retrieval date binding`);
+  if (!isCalendarDate(source.publication_date) || !isCalendarDate(source.retrieval_cutoff) || source.retrieval_cutoff !== cutoff) fail(`${source.publicRef}: invalid publication/retrieval date binding`);
   let url;
   try { url = new URL(source.canonical_url); } catch { fail(`${source.publicRef}: canonical_url is invalid`); }
   if (url.protocol !== "https:") fail(`${source.publicRef}: canonical_url must use HTTPS`);
@@ -322,7 +333,7 @@ function validateReceipt(receipt, expected, headDocs) {
     ["schema_version", "base_revision", "head_revision", "fingerprint", "retrieval_cutoff", "outcome", "scope"], "$receipt");
   if (receipt.schema_version !== RECEIPT_VERSION) fail("receipt schema_version is unsupported");
   if (receipt.base_revision !== expected.base || receipt.head_revision !== expected.head) fail("receipt revision binding drifted");
-  if (!DATE.test(receipt.retrieval_cutoff ?? "")) fail("receipt retrieval_cutoff must be YYYY-MM-DD");
+  if (!isCalendarDate(receipt.retrieval_cutoff ?? "")) fail("receipt retrieval_cutoff must be a valid YYYY-MM-DD calendar date");
   if (!OUTCOMES.has(receipt.outcome)) fail("receipt outcome is invalid");
   assertKeys(receipt.fingerprint, [...PUBLIC_PATHS, "combined_sha256"], [...PUBLIC_PATHS, "combined_sha256"], "fingerprint");
   if (!same(receipt.fingerprint, expected.fingerprint)) fail("receipt public-data fingerprint drifted");

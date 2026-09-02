@@ -252,6 +252,13 @@ test("lastUpdated mirrors must match and freshness creates one canonical proposi
   assert.deepEqual(scope.map((item) => item.path), ["app/research-topics.json:topics[alpha].lastUpdated"]);
 });
 
+test("research topic mirrors require identical slug sets", async () => {
+  const fx = await fixture((docs) => {
+    docs.index.allTopics.push({ slug: "extra", lastUpdated: "2026-02-02", title: "Review is still pending" });
+  });
+  await assert.rejects(derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base }), /slug set mismatch/);
+});
+
 test("scope omissions, duplicates, widening, revisions, and fingerprints are blocked", async (t) => {
   const fx = await fixture();
   await t.test("omitted", () => rejects(fx, (r) => r.scope[0].propositions.pop(), /omits/));
@@ -293,6 +300,10 @@ test("closed schema and every forbidden private boundary are rejected", async (t
 
 test("official, primary, attributed, cutoff, and outcome roles remain bounded", async (t) => {
   const fx = await fixture();
+  await t.test("receipt calendar date", () => rejects(fx, (r) => { r.retrieval_cutoff = "2026-02-31"; }, /valid YYYY-MM-DD calendar date/));
+  for (const field of ["publication_date", "retrieval_cutoff"]) {
+    await t.test(`source ${field} calendar date`, () => rejects(fx, (r) => { r.scope[0].propositions[0].audit.sources[0][field] = "2026-99-99"; }, /invalid publication\/retrieval date binding/));
+  }
   await t.test("official domain", () => rejects(fx, (r) => { r.scope[0].propositions[0].audit.sources[0].canonical_url = "https://example.com/result"; }, /metadata does not exactly match HEAD|\.gov\.tw/));
   await t.test("primary binding", async () => {
     const built = await receiptFor(fx, "CURRENT", () => source("primary_document"));
