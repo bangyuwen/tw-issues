@@ -1141,9 +1141,9 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
 
   assert.deepEqual(model.coverageLimits.map(({ gap, gapReason, sourceRefs, ...rest }) => ({ gap, gapReason, sourceRefs, rest })), [
     {
-      gap: "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待補齊官方完整處分書、影像未涵蓋的頁面、正式再議聲請與結果，以及刑案結束後的行政究責文件。",
-      gapReason: "本頁對不起訴理由的整理以這批可見文件頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道，媒體報導只用來交代市府其後表示將提出再議。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽，因此不能補推缺頁內容、把影像視為官方完整全文，或認定再議已送件、受理或已有結果；缺口不代表任何一方沒有立場或責任。",
-      sourceRefs: ["source-58", "source-39", "source-34", "source-01"],
+      gap: "主案不起訴已有官方偵結公告，並有第 3–22 頁處分書影像可供有限核對；仍待官方完整處分書、影像未涵蓋頁面、高檢署再議結果、市府是否另行聲請的正式文件，以及刑案結束後的個別行政究責結果。",
+      gapReason: "本頁對不起訴理由的整理以可見處分書頁面為第一依據；楊玲宜 Threads 貼文只作為影像的第三方公開管道。第 3–22 頁以外仍有未附頁面，影像亦有遮蔽。媒體另報導林智堅部分將依法送高檢署再議，市府則另表示將提出再議；兩者不能合併寫成市府已送件或高檢署已有結果。缺口不代表任何一方沒有立場或責任。",
+      sourceRefs: ["source-58", "source-39", "source-34", "source-01", "source-09", "source-38"],
       rest: {},
     },
     {
@@ -1214,12 +1214,12 @@ test("Hsinchu keeps official disposition, visible reasons, and later reconsidera
   const reactionEvent = evidence.reportedTimeline?.find(({ publicKey }) => publicKey === "event-14");
 
   assert.deepEqual(criminalLane?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58", "source-36"]);
-  assert.deepEqual(criminalTrack?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58", "source-34"]);
+  assert.deepEqual(criminalTrack?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58", "source-34", "source-09"]);
   assert.doesNotMatch(criminalTrack?.conclusion ?? "", /媒體理由摘要/);
   assert.deepEqual(dispositionClaim?.sources.map(({ publicRef }) => publicRef), ["source-39", "source-58"]);
   assert.deepEqual(evidence.analysisClaims?.[0]?.sources.map(({ publicRef }) => publicRef), ["source-01", "source-58"]);
   assert.deepEqual(evidence.analysisClaims?.[1]?.sources.map(({ publicRef }) => publicRef), ["source-02", "source-58"]);
-  assert.deepEqual(evidence.openQuestions?.[0]?.sources.map(({ publicRef }) => publicRef), ["source-58", "source-39", "source-34"]);
+  assert.deepEqual(evidence.openQuestions?.[0]?.sources.map(({ publicRef }) => publicRef), ["source-58", "source-39", "source-34", "source-09"]);
   assert.deepEqual(dispositionEvent?.sourceRefs, ["source-39", "source-58"]);
   assert.deepEqual(reactionEvent?.sourceRefs, ["source-34", "source-35"]);
 });
@@ -1329,6 +1329,8 @@ test("Hsinchu preserves all 16 timeline events and 17 inner items with their evi
   assert.equal(items.length, 17);
   assert.deepEqual(items, sourceProjection.reportedTimeline?.flatMap(({ items: eventItems }) => eventItems));
   assert.deepEqual(model.collections.map(({ claims }) => claims.length), [12, 8]);
+  assert.ok(sourceProjection.openQuestions.some(({ statement }) => statement.includes("覆土異物分案")));
+  assert.ok(sourceProjection.openQuestions.some(({ statement }) => statement.includes("各次契約變更、補助核銷與最終結算")));
   assert.equal(model.administrationActions.length, 12);
   assert.equal(model.proceedingTracks.length, 6);
   assert.equal(model.publicPeople.length, 13);

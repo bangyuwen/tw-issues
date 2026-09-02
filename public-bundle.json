@@ -6,11 +6,11 @@
   "license_policy": "source-specific",
   "projection": {
     "path": "app/public-evidence.json",
-    "sha256": "03bb5fcdc0b1fc793d4ba9ba05aa8c24138dd895030274f9e2040c65759a20ff"
+    "sha256": "172cb2bd78fbcfb84b11a2b25e8e01426a9b32a97258bffc49bdfb58e0e9d426"
   },
   "research_index": {
     "path": "app/research-topics.json",
-    "sha256": "501e8138bc2b4fdf4c18b1323fd7851fbdcab83d5b0ad1aff44b1e388bb9189f"
+    "sha256": "7002faa8b6a693dc3f0daabb006aada4dd423ff2b2cb8b675110eed079685ebc"
   },
   "topics": {
     "hsinchu-baseball-stadium": {
@@ -18,8 +18,8 @@
       "slug": "hsinchu-baseball-stadium",
       "visibility": "public",
       "publication_status": "published",
-      "as_of": "2026-08-29",
-      "content_digest": "7cd30f7da078907dd087ee62fb680b9ff764c5ace262b71b459f68ec47d52afe",
+      "as_of": "2026-09-02",
+      "content_digest": "5049e53e895d790810b2bae9d6e5dfb83d3a0bf3ab55ef9f6ddd8c78f370e89a",
       "verification_status": "public_quality_pass",
       "license": "source-specific",
       "indexed_title": "新竹棒球場爭議與責任"
