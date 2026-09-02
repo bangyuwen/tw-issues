@@ -97,7 +97,7 @@ async function fixture(mutator = (docs) => {
 
 function source(role = "official_record", overrides = {}) {
   const published = role === "primary_document" ? PRIMARY : OFFICIAL;
-  return {
+  const result = {
     publicRef: published.publicRef,
     role,
     publisher: published.publisher,
@@ -106,8 +106,12 @@ function source(role = "official_record", overrides = {}) {
     proof_scope: "Direct support for only this proposition.",
     limitations: "Does not establish facts outside the cited record.",
     retrieval_cutoff: "2026-02-02",
-    ...overrides,
   };
+  if (role === "primary_document") {
+    result.provenance_status = "published_partial";
+    result.coverage_boundary = '{"limitation":"partial"}';
+  }
+  return { ...result, ...overrides };
 }
 
 async function receiptFor(fx, disposition = "CURRENT", sourceFactory = () => source()) {
@@ -175,6 +179,24 @@ test("removing temporal wording remains in scope while machine fields stay exclu
   await writeDocuments(root, head); run(root, ["add", "."]); run(root, ["commit", "-qm", "head"]);
   const scope = (await derivePrepublishData({ repoRoot: root, baseRef })).scope;
   assert.deepEqual(scope.map((item) => item.path), ["app/public-evidence.json:alpha.contextOverview"]);
+});
+
+test("temporal wording is scoped in every canonical public document", async (t) => {
+  for (const owner of ["bundle", "index"]) {
+    await t.test(owner, async () => {
+      const fx = await fixture((docs) => {
+        if (owner === "bundle") docs.bundle.topics.alpha.indexed_title = "Case is still pending";
+        else {
+          docs.index.topics[0].title = "Case is still pending";
+          docs.index.allTopics[0].title = "Case is still pending";
+        }
+      });
+      const scope = (await derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base })).scope;
+      assert.deepEqual(scope.map((item) => item.path), [owner === "bundle"
+        ? "public-bundle.json:topics.alpha.indexed_title"
+        : "app/research-topics.json:topics[alpha].title"]);
+    });
+  }
 });
 
 test("timeline reorder is ignored and missing or duplicate publicKey blocks derivation", async (t) => {
@@ -257,9 +279,22 @@ test("official, primary, attributed, cutoff, and outcome roles remain bounded", 
     const built = await receiptFor(fx, "CURRENT", () => source("primary_document"));
     assert.equal((await validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path })).outcome, "READY");
   });
+  await t.test("primary provenance and coverage drift", async () => {
+    const built = await receiptFor(fx, "CURRENT", () => source("primary_document", { coverage_boundary: '{"limitation":"complete"}' }));
+    await assert.rejects(validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }), /exactly match published provenance and coverage/);
+  });
   await t.test("attributed non-promotion", async () => {
     const built = await receiptFor(fx, "CURRENT", () => source("attributed_report"));
     await assert.rejects(validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }), /cannot promote/);
+  });
+  await t.test("named attributed open question", async () => {
+    const attributedFx = await fixture((docs) => {
+      docs.evidence.alpha.openQuestions[0].statement = "Agency says the result is pending.";
+      docs.evidence.alpha.openQuestions[0].status = "attributed";
+      docs.evidence.alpha.openQuestions[0].speakers = [{ name: "Agency" }];
+    });
+    const built = await receiptFor(attributedFx, "CURRENT", () => source("attributed_report"));
+    assert.equal((await validatePrepublishData({ repoRoot: attributedFx.root, baseRef: attributedFx.base, receiptPath: built.path })).outcome, "READY");
   });
   await t.test("honest open cutoff", async () => {
     const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));

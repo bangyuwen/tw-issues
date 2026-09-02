@@ -138,6 +138,16 @@ function proposition(topicSlug, path, kind, before, after, attributed = false) {
   return { topic_slug: topicSlug, path, kind, before: before === undefined ? null : stable(before), after: after === undefined ? null : stable(after), attributed };
 }
 
+function retainsNamedAttribution(value) {
+  if (Array.isArray(value)) return value.some(retainsNamedAttribution);
+  if (!value || typeof value !== "object") return false;
+  const named = (Array.isArray(value.speakers) && value.speakers.some((speaker) => typeof speaker?.name === "string" && speaker.name.trim()))
+    || (typeof value.speaker === "string" && value.speaker.trim())
+    || (typeof value.attributedTo === "string" && value.attributedTo.trim());
+  if ((value.status === "attributed" || "attributedTo" in value) && named) return true;
+  return Object.values(value).some(retainsNamedAttribution);
+}
+
 function isMachineKey(key) {
   const normalized = key.normalize("NFKC").replace(/[^a-z0-9]/gi, "").toLowerCase();
   return ["occurredat", "reportedat", "publishedat", "capturedat", "canonicalurl"].includes(normalized)
@@ -181,7 +191,7 @@ function deriveEvidenceScope(base, head) {
     const maxQuestions = Math.max(oldQuestions.length, newQuestions.length);
     for (let index = 0; index < maxQuestions; index += 1) {
       if (!same(oldQuestions[index], newQuestions[index])) {
-        result.push(proposition(slug, `app/public-evidence.json:${slug}.openQuestions[${index}]`, "open_question", oldQuestions[index], newQuestions[index]));
+        result.push(proposition(slug, `app/public-evidence.json:${slug}.openQuestions[${index}]`, "open_question", oldQuestions[index], newQuestions[index], retainsNamedAttribution(newQuestions[index])));
       }
     }
     const oldTracks = oldTopic.proceedingTracks ?? [];
@@ -190,7 +200,7 @@ function deriveEvidenceScope(base, head) {
       for (const field of ["status", "conclusion"]) {
         const before = oldTracks[index]?.[field];
         const after = newTracks[index]?.[field];
-        if (!same(before, after)) result.push(proposition(slug, `app/public-evidence.json:${slug}.proceedingTracks[${index}].${field}`, "proceeding", before, after));
+        if (!same(before, after)) result.push(proposition(slug, `app/public-evidence.json:${slug}.proceedingTracks[${index}].${field}`, "proceeding", before, after, retainsNamedAttribution(newTracks[index])));
       }
     }
     const oldTimeline = timelineMap(oldTopic, slug, "base");
@@ -203,8 +213,7 @@ function deriveEvidenceScope(base, head) {
       const event = changed.at(-1);
       const key = event.publicKey;
       const after = newTimeline.get(key);
-      const attributed = JSON.stringify(after ?? {}).includes('"status":"attributed"') && Array.isArray(after?.items) && after.items.some((item) => Array.isArray(item.speakers) && item.speakers.length);
-      result.push(proposition(slug, `app/public-evidence.json:${slug}.reportedTimeline[publicKey=${key}]`, "timeline", oldTimeline.get(key), after, attributed));
+      result.push(proposition(slug, `app/public-evidence.json:${slug}.reportedTimeline[publicKey=${key}]`, "timeline", oldTimeline.get(key), after, retainsNamedAttribution(after)));
     }
     visibleTemporalDiff(oldTopic, newTopic, `app/public-evidence.json:${slug}`, slug, result);
   }
@@ -215,16 +224,22 @@ function deriveScope(baseDocs, headDocs) {
   const result = deriveEvidenceScope(baseDocs[1], headDocs[1]);
   const bundleSlugs = new Set([...Object.keys(baseDocs[0]?.topics ?? {}), ...Object.keys(headDocs[0]?.topics ?? {})]);
   for (const slug of bundleSlugs) {
-    const before = baseDocs[0]?.topics?.[slug]?.as_of;
-    const after = headDocs[0]?.topics?.[slug]?.as_of;
+    const oldTopic = baseDocs[0]?.topics?.[slug] ?? {};
+    const newTopic = headDocs[0]?.topics?.[slug] ?? {};
+    const before = oldTopic.as_of;
+    const after = newTopic.as_of;
     if (!same(before, after)) result.push(proposition(slug, `public-bundle.json:topics.${slug}.as_of`, "freshness_date", before, after));
+    visibleTemporalDiff(oldTopic, newTopic, `public-bundle.json:topics.${slug}`, slug, result);
   }
   const oldIndex = topicIndex(baseDocs[2]);
   const newIndex = topicIndex(headDocs[2]);
   for (const slug of new Set([...oldIndex.keys(), ...newIndex.keys()])) {
-    const before = oldIndex.get(slug)?.lastUpdated;
-    const after = newIndex.get(slug)?.lastUpdated;
+    const oldTopic = oldIndex.get(slug) ?? {};
+    const newTopic = newIndex.get(slug) ?? {};
+    const before = oldTopic.lastUpdated;
+    const after = newTopic.lastUpdated;
     if (!same(before, after)) result.push(proposition(slug, `app/research-topics.json:topics[${slug}].lastUpdated`, "freshness_date", before, after));
+    visibleTemporalDiff(oldTopic, newTopic, `app/research-topics.json:topics[${slug}]`, slug, result);
   }
   const unique = new Map();
   for (const item of result) {
@@ -263,8 +278,9 @@ function valueAtPath(documents, path) {
 }
 
 function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
-  const allowed = ["publicRef", "role", "publisher", "canonical_url", "publication_date", "proof_scope", "limitations", "retrieval_cutoff"];
-  assertKeys(source, allowed, allowed, `source ${source?.publicRef ?? "?"}`);
+  const baseKeys = ["publicRef", "role", "publisher", "canonical_url", "publication_date", "proof_scope", "limitations", "retrieval_cutoff"];
+  const allowed = [...baseKeys, "provenance_status", "coverage_boundary"];
+  assertKeys(source, allowed, baseKeys, `source ${source?.publicRef ?? "?"}`);
   if (!ROLES.has(source.role)) fail(`${source.publicRef}: invalid source role`);
   for (const key of ["publicRef", "publisher", "canonical_url", "publication_date", "proof_scope", "limitations", "retrieval_cutoff"]) assertText(source[key], `${source.publicRef}.${key}`);
   if (!DATE.test(source.publication_date) || !DATE.test(source.retrieval_cutoff) || source.retrieval_cutoff !== cutoff) fail(`${source.publicRef}: invalid publication/retrieval date binding`);
@@ -276,7 +292,12 @@ function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
   if (source.role === "official_record" && !url.hostname.toLowerCase().endsWith(".gov.tw")) fail(`${source.publicRef}: official_record must use a .gov.tw hostname`);
   if (source.role === "primary_document") {
     const primary = topic?.primaryDocument;
-    if (!primary?.source || primary.source.publicRef !== source.publicRef || !primary.provenanceStatus || !primary.coverage) fail(`${source.publicRef}: primary_document does not match published provenance and coverage`);
+    if (!primary?.source || primary.source.publicRef !== source.publicRef || !primary.provenanceStatus || !primary.coverage
+      || source.provenance_status !== primary.provenanceStatus || source.coverage_boundary !== stable(primary.coverage)) {
+      fail(`${source.publicRef}: primary_document does not exactly match published provenance and coverage`);
+    }
+  } else if ("provenance_status" in source || "coverage_boundary" in source) {
+    fail(`${source.publicRef}: provenance fields are only allowed for primary_document`);
   }
   if (source.role === "bounded_search" && propositionItem.audit.disposition !== "OPEN_WITH_CUTOFF") fail(`${source.publicRef}: bounded_search only supports OPEN_WITH_CUTOFF`);
   if ((propositionItem.kind === "proceeding" || propositionItem.audit.disposition === "MOVE_OUT_OF_OPEN_QUESTIONS") && !["official_record", "primary_document"].includes(source.role)) fail(`${source.publicRef}: proceeding outcomes require official_record or primary_document`);
