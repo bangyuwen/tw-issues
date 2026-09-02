@@ -56,7 +56,9 @@ Each audited proposition SHALL record a `publicRef` whose publisher, canonical H
 - **THEN** the proposition MAY use `OPEN_WITH_CUTOFF` with its search scope and limitation
 - **AND** the overall outcome MAY be `READY_WITH_OPEN_GAPS`
 - **AND** its `finding` SHALL equal `No identifiable public result was located within the recorded search scope by the retrieval cutoff.`
-- **AND** any other finding, including a claim that no result exists, SHALL be blocked
+- **AND** its bounded-search `proof_scope` SHALL equal `This evidence records only a bounded public search completed by the retrieval cutoff.`
+- **AND** its bounded-search `limitations` SHALL equal `The search may be incomplete; later, unpublished, or unindexed results may exist.`
+- **AND** any other value in those three fields, including a claim that no result exists, SHALL be blocked
 
 #### Scenario: A named speaker is the only source
 - **WHEN** a named speaker or report is the only evidence

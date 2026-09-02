@@ -11,7 +11,7 @@
 
 ## 3. Verify the contract
 
-- [x] 3.1 Add focused tests for one-topic factual scope, timeline reorder/ties/missing or duplicate `publicKey`, date-only `as_of`/`lastUpdated` scope and mirror mismatch, presentation-only `NOT_APPLICABLE`, `publicRef`/official-domain/published-role/primary-document binding, attributed-source non-promotion, and `OPEN_WITH_CUTOFF` gaps whose exact bounded finding cannot assert that no result exists.
+- [x] 3.1 Add focused tests for one-topic factual scope, timeline reorder/ties/missing or duplicate `publicKey`, date-only `as_of`/`lastUpdated` scope and mirror mismatch, presentation-only `NOT_APPLICABLE`, `publicRef`/official-domain/published-role/primary-document binding, attributed-source non-promotion, and `OPEN_WITH_CUTOFF` gaps whose exact bounded finding, proof scope, and limitations cannot assert that no result exists.
 - [x] 3.2 Add focused tests for omitted or duplicate scope, revision/data/staged/worktree drift, move target paths, invalid outcomes, unknown or nested private receipt fields, every forbidden receipt boundary, no network calls, and no worktree mutation.
 - [x] 3.3 Run the focused tests, `npm test`, `npm run lint`, `npm run build`, and `npm run build:github-pages`.
 - [x] 3.4 Inspect the fixed diff and static output to confirm the receipt is absent, rendering is unchanged, and no private producer, global skill, CI search, deployment, or secret surface was added.

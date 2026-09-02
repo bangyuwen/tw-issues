@@ -27,6 +27,8 @@ const OFFICIAL_RECORD_DISPLAY_ROLES = new Set([
   "行政法院判決",
 ]);
 const OPEN_WITH_CUTOFF_FINDING = "No identifiable public result was located within the recorded search scope by the retrieval cutoff.";
+const BOUNDED_SEARCH_PROOF_SCOPE = "This evidence records only a bounded public search completed by the retrieval cutoff.";
+const BOUNDED_SEARCH_LIMITATIONS = "The search may be incomplete; later, unpublished, or unindexed results may exist.";
 const FORBIDDEN_KEYS = new Set(["secret", "token", "password", "private_key", "ledger_id", "deployment_project_id"]);
 const FORBIDDEN_VALUES = ["context/", "account/", ".claude/", "evidence-ledger"];
 const TEMPORAL_MARKERS = ["目前", "仍", "尚未", "將", "進行中", "截至", "current", "still", "not yet", "will", "in progress", "as of"];
@@ -343,7 +345,12 @@ function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
   } else if ("provenance_status" in source || "coverage_boundary" in source) {
     fail(`${source.publicRef}: provenance fields are only allowed for primary_document`);
   }
-  if (source.role === "bounded_search" && propositionItem.audit.disposition !== "OPEN_WITH_CUTOFF") fail(`${source.publicRef}: bounded_search only supports OPEN_WITH_CUTOFF`);
+  if (source.role === "bounded_search") {
+    if (propositionItem.audit.disposition !== "OPEN_WITH_CUTOFF") fail(`${source.publicRef}: bounded_search only supports OPEN_WITH_CUTOFF`);
+    if (source.proof_scope !== BOUNDED_SEARCH_PROOF_SCOPE || source.limitations !== BOUNDED_SEARCH_LIMITATIONS) {
+      fail(`${source.publicRef}: bounded_search must use the bounded proof scope and limitations`);
+    }
+  }
   if ((propositionItem.kind === "proceeding" || propositionItem.audit.disposition === "MOVE_OUT_OF_OPEN_QUESTIONS") && !["official_record", "primary_document"].includes(source.role)) fail(`${source.publicRef}: proceeding outcomes require official_record or primary_document`);
   if (source.role === "attributed_report" && !propositionItem.attributed) fail(`${source.publicRef}: attributed_report cannot promote an unattributed proposition`);
 }

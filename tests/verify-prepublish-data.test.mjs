@@ -111,6 +111,10 @@ function source(role = "official_record", overrides = {}) {
     result.provenance_status = "published_partial";
     result.coverage_boundary = '{"limitation":"partial"}';
   }
+  if (role === "bounded_search") {
+    result.proof_scope = "This evidence records only a bounded public search completed by the retrieval cutoff.";
+    result.limitations = "The search may be incomplete; later, unpublished, or unindexed results may exist.";
+  }
   return { ...result, ...overrides };
 }
 
@@ -383,17 +387,20 @@ test("official, primary, attributed, cutoff, and outcome roles remain bounded", 
     const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));
     assert.equal((await validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path })).outcome, "READY_WITH_OPEN_GAPS");
   });
-  await t.test("open cutoff rejects an absolute no-result claim", async () => {
-    const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));
-    for (const scope of built.receipt.scope) for (const item of scope.propositions) {
-      item.audit.finding = "No result exists.";
-    }
-    await writeJson(fx.parent, "receipt.json", built.receipt);
-    await assert.rejects(
-      validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }),
-      /must use the bounded search statement/,
-    );
-  });
+  for (const field of ["finding", "proof_scope", "limitations"]) {
+    await t.test(`open cutoff rejects an absolute no-result claim in ${field}`, async () => {
+      const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));
+      for (const scope of built.receipt.scope) for (const item of scope.propositions) {
+        if (field === "finding") item.audit.finding = "No result exists.";
+        else item.audit.sources[0][field] = "No result exists.";
+      }
+      await writeJson(fx.parent, "receipt.json", built.receipt);
+      await assert.rejects(
+        validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }),
+        /must use the bounded (search statement|proof scope and limitations)/,
+      );
+    });
+  }
   await t.test("invalid outcome", () => rejects(fx, (r) => { r.outcome = "READY_WITH_OPEN_GAPS"; }, /does not match/));
 });
 
