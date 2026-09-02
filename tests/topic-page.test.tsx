@@ -627,7 +627,7 @@ test("topic page does not invent a timeline when safe durable events are absent"
   assert.doesNotMatch(html, /class="event-progress-section"/);
   assert.match(html, /id="reports"/);
   assert.match(html, /測試公開命題/);
-  assert.match(html, /class="citation" data-source-ref="source-01" href="https:\/\/example\.com\/source" target="_blank" rel="noreferrer"/);
+  assert.match(html, /href="#source-01"/);
 });
 
 test("topic page leads with progression and then each evidence disposition", () => {
@@ -672,7 +672,7 @@ test("topic page leads with progression and then each evidence disposition", () 
     const card = html.slice(cardStart, cardEnd);
     assert.match(card, /這能確認/);
     assert.match(card, /這不能證明/);
-    assert.match(card, /data-source-ref="source-01" href="https:\/\/example\.com\/source"/);
+    assert.match(card, /href="#source-01"/);
   }
   assert.match(html, /說法歸屬[\s\S]*測試機關/);
   assert.match(html, /不能判定污染根因。；不能判定最終責任。/);

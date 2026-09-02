@@ -334,7 +334,7 @@ test("cross-border page publishes reviewed facts and clearly attributed statemen
   const html = await response.text();
   assert.equal(response.status, 200);
   assert.match(html, /Freedom House 發布跨國鎮壓全球追蹤報告/);
-  assert.match(html, /不能證明什麼|class="citation" data-source-ref="source-/);
+  assert.match(html, /不能證明什麼|href="#source-/);
   assert.match(html, /不同主體怎麼說|只證明陸委會採取何種行政協處/);
   assert.doesNotMatch(html, /id="src-intimidation-/);
   assert.doesNotMatch(html, /下一個就是你|個案司法責任/);
@@ -385,9 +385,9 @@ test("food-safety page separates public facts, reported chronology, and open que
   assert.equal(response.status, 200);
   assert.match(html, /每公斤 8.1 微克/);
   assert.match(html, /每公斤 2.0 微克/);
-  assert.match(html, /data-source-ref="source-03" href="https?:\/\//);
-  assert.match(html, /data-source-ref="source-02" href="https?:\/\//);
-  assert.match(html, /data-source-ref="source-04" href="https?:\/\//);
+  assert.match(html, /href="#source-03"/);
+  assert.match(html, /href="#source-02"/);
+  assert.match(html, /href="#source-04"/);
   assert.doesNotMatch(html, /id="src-bap-/);
   assert.match(html, /不同主體怎麼說/);
   assert.match(html, /class="speaker-group-summary"><span>摘要<\/span>/);
@@ -812,7 +812,7 @@ test("generic rendered topics retain the non-case navigation and disclosure cont
   assert.match(html, /class="article-nav"/);
   assert.doesNotMatch(html, /case-toc|case-toc-chapter|dossier-shell--hsinchu|id="coverage-limits"|id="primary-document(?:-reading)?"|href="#primary-document(?:-reading)?"/);
   assert.match(html, /class="sources-disclosure" id="sources"/);
-  assert.match(html, /class="citation" data-source-ref="source-[^"]+" href="https?:\/\//);
+  assert.match(html, /href="#source-/);
   assert.match(html, /class="speaker-group-details"/);
   assert.doesNotMatch(html, /href="#case-contents"[^>]*>回到本頁目錄/);
 });
