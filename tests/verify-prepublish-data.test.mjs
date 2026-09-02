@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -319,6 +319,12 @@ test("official, primary, attributed, cutoff, and outcome roles remain bounded", 
   for (const field of ["publication_date", "retrieval_cutoff"]) {
     await t.test(`source ${field} calendar date`, () => rejects(fx, (r) => { r.scope[0].propositions[0].audit.sources[0][field] = "2026-99-99"; }, /invalid publication\/retrieval date binding/));
   }
+  await t.test("source publication after retrieval cutoff", () => rejects(fx, (r) => {
+    r.retrieval_cutoff = "2026-01-31";
+    for (const scope of r.scope) for (const item of scope.propositions) {
+      for (const evidence of item.audit.sources) evidence.retrieval_cutoff = "2026-01-31";
+    }
+  }, /publication date must not be after retrieval cutoff/));
   await t.test("official domain", () => rejects(fx, (r) => { r.scope[0].propositions[0].audit.sources[0].canonical_url = "https://example.com/result"; }, /metadata does not exactly match HEAD|\.gov\.tw/));
   await t.test("primary binding", async () => {
     const built = await receiptFor(fx, "CURRENT", () => source("primary_document"));
@@ -367,6 +373,22 @@ test("proceeding evidence and move target paths require stronger bindings", asyn
   built.receipt.scope[0].propositions[0].audit.target_path = "app/public-evidence.json:alpha.openQuestions[0]";
   await writeJson(moved.parent, "receipt.json", built.receipt);
   await assert.rejects(validatePrepublishData({ repoRoot: moved.root, baseRef: moved.base, receiptPath: built.path }), /outside openQuestions/);
+});
+
+test("CLI exits nonzero for a blocked release outcome", async () => {
+  const fx = await fixture();
+  const built = await receiptFor(fx, "UPDATE_REQUIRED");
+  const tests = join(fx.root, "tests");
+  execFileSync("mkdir", [tests]);
+  const cli = join(tests, "verify-prepublish-data.mjs");
+  await copyFile(new URL("./verify-prepublish-data.mjs", import.meta.url), cli);
+  assert.throws(() => execFileSync(process.execPath, [cli, "--base-ref", fx.base, "--receipt", built.path], {
+    encoding: "utf8", stdio: ["ignore", "pipe", "pipe"],
+  }), (error) => {
+    assert.equal(error.status, 1);
+    assert.match(error.stdout, /BLOCKED_STALE_DATA/);
+    return true;
+  });
 });
 
 test("validator performs no network call and does not mutate the worktree", async () => {

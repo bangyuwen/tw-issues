@@ -18,6 +18,7 @@ const DISPOSITIONS = new Set([
   "BLOCKED",
 ]);
 const OUTCOMES = new Set(["READY", "READY_WITH_OPEN_GAPS", "BLOCKED_STALE_DATA"]);
+const PASSING_OUTCOMES = new Set(["READY", "READY_WITH_OPEN_GAPS", "NOT_APPLICABLE"]);
 const ROLES = new Set(["official_record", "primary_document", "attributed_report", "bounded_search"]);
 const FORBIDDEN_KEYS = new Set(["secret", "token", "password", "private_key", "ledger_id", "deployment_project_id"]);
 const FORBIDDEN_VALUES = ["context/", "account/", ".claude/", "evidence-ledger"];
@@ -313,6 +314,7 @@ function validateSource(source, propositionItem, topic, sourceMap, cutoff) {
   if (!ROLES.has(source.role)) fail(`${source.publicRef}: invalid source role`);
   for (const key of ["publicRef", "publisher", "canonical_url", "publication_date", "proof_scope", "limitations", "retrieval_cutoff"]) assertText(source[key], `${source.publicRef}.${key}`);
   if (!isCalendarDate(source.publication_date) || !isCalendarDate(source.retrieval_cutoff) || source.retrieval_cutoff !== cutoff) fail(`${source.publicRef}: invalid publication/retrieval date binding`);
+  if (source.publication_date > source.retrieval_cutoff) fail(`${source.publicRef}: publication date must not be after retrieval cutoff`);
   let url;
   try { url = new URL(source.canonical_url); } catch { fail(`${source.publicRef}: canonical_url is invalid`); }
   if (url.protocol !== "https:") fail(`${source.publicRef}: canonical_url must use HTTPS`);
@@ -453,6 +455,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   try {
     const result = await validatePrepublishData(parseArgs(process.argv.slice(2)));
     console.log(`prepublish data check ${result.outcome} (${result.scope.length} propositions, ${result.head})`);
+    if (!PASSING_OUTCOMES.has(result.outcome)) process.exitCode = 1;
   } catch (error) {
     console.error(`prepublish data check BLOCKED_STALE_DATA: ${error.message}`);
     process.exitCode = 1;
