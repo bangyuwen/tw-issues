@@ -260,6 +260,20 @@ test("allTopics-only entries remain outside canonical public-topic scope", async
   assert.equal(result.outcome, "NOT_APPLICABLE");
 });
 
+test("changed freshness values require valid calendar dates", async (t) => {
+  await t.test("as_of", async () => {
+    const fx = await fixture((docs) => { docs.bundle.topics.alpha.as_of = "2026-02-31"; });
+    await assert.rejects(derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base }), /as_of must be a valid/);
+  });
+  await t.test("lastUpdated", async () => {
+    const fx = await fixture((docs) => {
+      docs.index.topics[0].lastUpdated = "2026-99-99";
+      docs.index.allTopics[0].lastUpdated = "2026-99-99";
+    });
+    await assert.rejects(derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base }), /lastUpdated must be a valid/);
+  });
+});
+
 test("scope omissions, duplicates, widening, revisions, and fingerprints are blocked", async (t) => {
   const fx = await fixture();
   await t.test("omitted", () => rejects(fx, (r) => r.scope[0].propositions.pop(), /omits/));

@@ -247,7 +247,12 @@ function deriveScope(baseDocs, headDocs) {
     const newTopic = headDocs[0]?.topics?.[slug] ?? {};
     const before = oldTopic.as_of;
     const after = newTopic.as_of;
-    if (!same(before, after)) result.push(proposition(slug, `public-bundle.json:topics.${slug}.as_of`, "freshness_date", before, after));
+    if (!same(before, after)) {
+      if ([before, after].some((value) => value !== undefined && !isCalendarDate(value))) {
+        fail(`${slug}: as_of must be a valid YYYY-MM-DD calendar date`);
+      }
+      result.push(proposition(slug, `public-bundle.json:topics.${slug}.as_of`, "freshness_date", before, after));
+    }
     visibleTemporalDiff(oldTopic, newTopic, `public-bundle.json:topics.${slug}`, slug, result);
   }
   const oldIndex = topicIndex(baseDocs[2]);
@@ -257,7 +262,12 @@ function deriveScope(baseDocs, headDocs) {
     const newTopic = newIndex.get(slug) ?? {};
     const before = oldTopic.lastUpdated;
     const after = newTopic.lastUpdated;
-    if (!same(before, after)) result.push(proposition(slug, `app/research-topics.json:topics[${slug}].lastUpdated`, "freshness_date", before, after));
+    if (!same(before, after)) {
+      if ([before, after].some((value) => value !== undefined && !isCalendarDate(value))) {
+        fail(`${slug}: lastUpdated must be a valid YYYY-MM-DD calendar date`);
+      }
+      result.push(proposition(slug, `app/research-topics.json:topics[${slug}].lastUpdated`, "freshness_date", before, after));
+    }
     visibleTemporalDiff(oldTopic, newTopic, `app/research-topics.json:topics[${slug}]`, slug, result);
   }
   const unique = new Map();
