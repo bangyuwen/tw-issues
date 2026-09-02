@@ -124,7 +124,13 @@ async function receiptFor(fx, disposition = "CURRENT", sourceFactory = () => sou
       kind: item.kind,
       before: item.before,
       after: item.after,
-      audit: { disposition, finding: "Checked against bounded current evidence.", sources: [sourceFactory(item)] },
+      audit: {
+        disposition,
+        finding: disposition === "OPEN_WITH_CUTOFF"
+          ? "No identifiable public result was located within the recorded search scope by the retrieval cutoff."
+          : "Checked against bounded current evidence.",
+        sources: [sourceFactory(item)],
+      },
     });
   }
   const receipt = {
@@ -376,6 +382,17 @@ test("official, primary, attributed, cutoff, and outcome roles remain bounded", 
   await t.test("honest open cutoff", async () => {
     const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));
     assert.equal((await validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path })).outcome, "READY_WITH_OPEN_GAPS");
+  });
+  await t.test("open cutoff rejects an absolute no-result claim", async () => {
+    const built = await receiptFor(fx, "OPEN_WITH_CUTOFF", () => source("bounded_search"));
+    for (const scope of built.receipt.scope) for (const item of scope.propositions) {
+      item.audit.finding = "No result exists.";
+    }
+    await writeJson(fx.parent, "receipt.json", built.receipt);
+    await assert.rejects(
+      validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base, receiptPath: built.path }),
+      /must use the bounded search statement/,
+    );
   });
   await t.test("invalid outcome", () => rejects(fx, (r) => { r.outcome = "READY_WITH_OPEN_GAPS"; }, /does not match/));
 });

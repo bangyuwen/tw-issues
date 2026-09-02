@@ -26,6 +26,7 @@ const OFFICIAL_RECORD_DISPLAY_ROLES = new Set([
   "檢察機關偵查終結公告",
   "行政法院判決",
 ]);
+const OPEN_WITH_CUTOFF_FINDING = "No identifiable public result was located within the recorded search scope by the retrieval cutoff.";
 const FORBIDDEN_KEYS = new Set(["secret", "token", "password", "private_key", "ledger_id", "deployment_project_id"]);
 const FORBIDDEN_VALUES = ["context/", "account/", ".claude/", "evidence-ledger"];
 const TEMPORAL_MARKERS = ["目前", "仍", "尚未", "將", "進行中", "截至", "current", "still", "not yet", "will", "in progress", "as of"];
@@ -388,6 +389,9 @@ function validateReceipt(receipt, expected, headDocs) {
     assertKeys(audit, ["disposition", "finding", "sources", "target_path", "replacement_text"], ["disposition", "finding", "sources"], `${item.path}.audit`);
     if (!DISPOSITIONS.has(audit.disposition)) fail(`${item.path}: invalid disposition`);
     assertText(audit.finding, `${item.path}.audit.finding`);
+    if (audit.disposition === "OPEN_WITH_CUTOFF" && audit.finding !== OPEN_WITH_CUTOFF_FINDING) {
+      fail(`${item.path}: OPEN_WITH_CUTOFF finding must use the bounded search statement`);
+    }
     if (!Array.isArray(audit.sources) || audit.sources.length === 0) fail(`${item.path}: audit sources must be non-empty`);
     const topic = headDocs[1]?.[item.topic_slug];
     const sourceMap = sourcesByTopic.get(item.topic_slug) ?? new Map();
