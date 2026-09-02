@@ -123,9 +123,6 @@ function topicIndex(index) {
   };
   const topics = toMap(index.topics, "topics");
   const allTopics = toMap(index.allTopics, "allTopics");
-  if (topics.size !== allTopics.size || [...allTopics.keys()].some((slug) => !topics.has(slug))) {
-    fail("topics/allTopics slug set mismatch");
-  }
   for (const [slug, topic] of topics) {
     if (!allTopics.has(slug) || allTopics.get(slug).lastUpdated !== topic.lastUpdated) {
       fail(`${slug}: topics/allTopics lastUpdated mirror mismatch`);

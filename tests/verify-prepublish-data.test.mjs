@@ -252,11 +252,12 @@ test("lastUpdated mirrors must match and freshness creates one canonical proposi
   assert.deepEqual(scope.map((item) => item.path), ["app/research-topics.json:topics[alpha].lastUpdated"]);
 });
 
-test("research topic mirrors require identical slug sets", async () => {
+test("allTopics-only entries remain outside canonical public-topic scope", async () => {
   const fx = await fixture((docs) => {
     docs.index.allTopics.push({ slug: "extra", lastUpdated: "2026-02-02", title: "Review is still pending" });
   });
-  await assert.rejects(derivePrepublishData({ repoRoot: fx.root, baseRef: fx.base }), /slug set mismatch/);
+  const result = await validatePrepublishData({ repoRoot: fx.root, baseRef: fx.base });
+  assert.equal(result.outcome, "NOT_APPLICABLE");
 });
 
 test("scope omissions, duplicates, widening, revisions, and fingerprints are blocked", async (t) => {
