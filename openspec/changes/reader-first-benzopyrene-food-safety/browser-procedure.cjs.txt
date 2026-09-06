@@ -1,0 +1,34 @@
+const {chromium}=require('/Users/bangyuwen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('fs');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const result={browser:browser.version(),route:'http://localhost:4175/topics/benzopyrene-food-safety',viewports:[],noJavaScript:{}};
+ const page=await browser.newPage({reducedMotion:"reduce"});
+ for(const width of [320,390,800,1440]){
+  await page.setViewportSize({width,height:900}); await page.goto(result.route); await page.waitForSelector('#oil-claims-title');
+  const check=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,headings:[...document.querySelectorAll('h1,h2')].map(e=>e.textContent),nav:[...document.querySelectorAll('#issue-contents a')].map(e=>({label:e.textContent,href:e.getAttribute('href')}))}));
+  if(check.scrollWidth>width) throw Error('overflow '+JSON.stringify(check));
+  result.viewports.push(check);
+  if(width===390||width===1440)await page.screenshot({path:`openspec/changes/reader-first-benzopyrene-food-safety/oil-${width}.png`,fullPage:false});
+ }
+ await page.setViewportSize({width:390,height:900});
+ await page.goto(result.route); await page.keyboard.press('Tab');
+ result.keyboard={firstFocus:await page.locator(':focus').textContent()};
+ await page.keyboard.press('Enter'); result.keyboard.skipHash=new URL(page.url()).hash;
+ await page.locator('#issue-contents a[href="#questions"]').click();
+ result.questionHash=new URL(page.url()).hash;
+ await page.locator('#questions details').first().locator('summary').click();
+ await page.locator('#questions .citation').first().click();
+ await page.waitForFunction(()=>document.querySelector('#sources').open);
+ result.source={hash:new URL(page.url()).hash,focus:await page.locator(':focus').getAttribute('id'),open:await page.locator('#sources').evaluate(e=>e.open)};
+ await page.goBack(); result.backHash=new URL(page.url()).hash;
+ const nojs=await browser.newContext({javaScriptEnabled:false,reducedMotion:"reduce",viewport:{width:390,height:900}}); const p=await nojs.newPage();
+ await p.goto(result.route); await p.locator('#issue-contents a[href="#questions"]').click();
+ result.noJavaScript.questionHash=new URL(p.url()).hash;
+ result.noJavaScript.questionText=await p.locator('#questions').innerText();
+ fs.writeFileSync('openspec/changes/reader-first-benzopyrene-food-safety/browser-results.json',JSON.stringify(result,null,2)+'\n');
+ await p.locator('#sources > summary').press('Enter'); result.noJavaScript.canonicalLinks=await p.locator('#sources .source-title:visible').count();
+ if(result.noJavaScript.canonicalLinks!==36)throw Error('missing sources');
+ fs.writeFileSync('openspec/changes/reader-first-benzopyrene-food-safety/browser-results.json',JSON.stringify(result,null,2)+'\n');
+ console.log(JSON.stringify(result)); await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

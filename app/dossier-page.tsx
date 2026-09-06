@@ -1,4 +1,5 @@
 import SiteLink from "./site-link";
+import { publicEvidenceBySlug } from "./topic-data";
 import type { ReactNode } from "react";
 import type { AdministrationAction, ContextOverview, DeepResearchTopic, PoliticalNarrative, PrimaryDocument, ProceedingTrack, PublicClaim, PublicPersonProfile, PublicSource, SocialObservation } from "./topic-data";
 import { getHsinchuDossierChapters, type AttributedReportModel, type ClaimCollectionModel, type CoverageLimitViewModel, type DossierPageModel, type HsinchuChapterDescriptor, type TimelineGroup, type TimelinePhaseModel } from "./dossier-page-model";
@@ -263,15 +264,16 @@ function TimelineGroups({ groups, sourceLinks, targetAvailability, itemHeadingLe
   })}</div>;
 }
 
-function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks, targetAvailability, headingLevel = 2 }: {
+function ChronologySection({ phases, unphasedGroups, timelineGroups, sourceLinks, targetAvailability, headingLevel = 2, sequentialHeadings = false }: {
   phases: TimelinePhaseModel[];
   unphasedGroups: TimelineGroup[];
   timelineGroups: TimelineGroup[];
   sourceLinks: (ids: string[]) => ReactNode;
   targetAvailability: TimelineTargetAvailability;
   headingLevel?: HeadingLevel;
+  sequentialHeadings?: boolean;
 }) {
-  if (phases.length === 0) return <section className="event-progress-section" id="progress" aria-label="事件進展"><div className="section-intro"><p className="eyebrow">事件進展</p><Heading level={headingLevel}>事情怎麼走到今天？</Heading></div><TimelineGroups groups={timelineGroups} sourceLinks={sourceLinks} targetAvailability={targetAvailability} itemHeadingLevel={headingLevel === 2 ? 4 : nextHeadingLevel(headingLevel)} /></section>;
+  if (phases.length === 0) return <section className="event-progress-section" id="progress" aria-label="事件進展"><div className="section-intro"><p className="eyebrow">事件進展</p><Heading level={headingLevel}>事情怎麼走到今天？</Heading></div><TimelineGroups groups={timelineGroups} sourceLinks={sourceLinks} targetAvailability={targetAvailability} itemHeadingLevel={headingLevel === 2 && !sequentialHeadings ? 4 : nextHeadingLevel(headingLevel)} /></section>;
   const phaseHeadingLevel = nextHeadingLevel(headingLevel);
   const eventHeadingLevel = nextHeadingLevel(phaseHeadingLevel);
   return <section className="event-progress-section case-chronology" id="progress" aria-label="分階段事件脈絡">
@@ -479,6 +481,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   const { topic, displayTitle, collections, attributedSpeakerGroups, attributedReports = [], coverageLimits = [], hsinchuChapters = [], primaryDocument, contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const isCaseDossier = topic.slug === "hsinchu-baseball-stadium";
+  const isOilDossier = topic.slug === "benzopyrene-food-safety" && model.topicId === "benzopyrene-food-safety-2026";
   const sourceNumberByRef = new Map(publicSources.map((source, index) => [source.publicRef, String(index + 1).padStart(2, "0")]));
   const sourceLinks = (sourceIds: string[]) => sourceIds.map((id) => {
     const source = sourceById.get(id);
@@ -505,6 +508,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     headingLevel={isCaseDossier ? 3 : 2}
   /> : null;
   const chronologySection = timelineGroups.length > 0 ? <ChronologySection
+    sequentialHeadings={isOilDossier}
     phases={timelinePhases}
     unphasedGroups={unphasedTimelineGroups}
     timelineGroups={timelineGroups}
@@ -517,8 +521,8 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     headingLevel={isCaseDossier ? 3 : 2}
   /> : null;
   const sectionHeadingLevel: HeadingLevel = isCaseDossier ? 3 : 2;
-  const coverageLimitsSection = isCaseDossier && coverageLimits.length > 0
-    ? <CoverageLimitsSection limits={coverageLimits} sourceLinks={sourceLinks} headingLevel={3} />
+  const coverageLimitsSection = (isCaseDossier || isOilDossier) && coverageLimits.length > 0
+    ? <CoverageLimitsSection limits={coverageLimits} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} />
     : null;
   const administrationSection = administrationActions.length > 0 ? <AdministrationActionsSection actions={administrationActions} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
   const proceedingsSection = proceedingTracks.length > 0 ? <ProceedingTracksSection tracks={proceedingTracks} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
@@ -529,6 +533,43 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   const analysisSection = analysisClaims.length > 0 ? <EditorialSection id="analysis" eyebrow="我們怎麼理解" heading={isCaseDossier ? "TW Issues 的分析" : undefined} claims={analysisClaims} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
   const positionsSection = editorialPositions.length > 0 ? <EditorialSection id="positions" eyebrow="我們主張什麼" heading={isCaseDossier ? "TW Issues 的主張" : undefined} claims={editorialPositions} sourceLinks={sourceLinks} headingLevel={sectionHeadingLevel} /> : null;
   const socialSection = socialObservations.length > 0 ? <SocialObservationsSection observations={socialObservations} sampleSize={socialSampleSize} sourceLinks={sourceLinks} sourceById={sourceById} isCaseDossier={isCaseDossier} headingLevel={sectionHeadingLevel} /> : null;
+
+  // Fixed public pointers: batch inspection, July 21 handling, July 27 investigation.
+  // Match whole records so reordered or synthetic collections never select by position.
+  const oilPriority = isOilDossier
+    ? [1, 5, 6].map(index => JSON.stringify(publicEvidenceBySlug["benzopyrene-food-safety"].claims[index]))
+    : [];
+  const oilClaims = isOilDossier ? [...verified.claims].sort((a, b) => {
+    const rank = (claim: PublicClaim) => {
+      const index = oilPriority.indexOf(JSON.stringify(claim));
+      return index < 0 ? oilPriority.length : index;
+    };
+    return rank(a) - rank(b);
+  }) : verified.claims;
+  const oilVerifiedSection = verified.claims.length > 0 ? <section className="evidence-board evidence-board--known-only" id="claims" aria-labelledby="oil-claims-title">
+    <header className="section-intro"><p className="eyebrow">已知資訊 · 可核對命題</p><h2 id="oil-claims-title">檢驗與處置確認了什麼？</h2><p>先看檢驗、處置與調查紀錄，再讀法規及背景；每筆資訊只適用於其標示的日期、批次與證明範圍。</p></header>
+    <div data-collection-id="claims"><ClaimCollection collection={{ ...verified, claims: oilClaims }} sourceLinks={sourceLinks} exposeBoundary /></div>
+  </section> : null;
+  const oilQuestionsSection = unresolved.claims.length > 0 ? <section className="evidence-board evidence-board--open-only" id="questions" aria-labelledby="oil-questions-title">
+    <header className="section-intro"><p className="eyebrow">仍待釐清 · 依紀錄日期閱讀</p><h2 id="oil-questions-title">調查當時還有哪些問題？</h2><p>以下保留各筆紀錄當時的問題與限制，請依文內日期閱讀；早期問題不代表後續調查的最新結論。{timelineGroups.length > 0 && <a href="#progress">對照事件進展</a>}</p></header>
+    <div data-collection-id="questions"><ClaimCollection collection={unresolved} sourceLinks={sourceLinks} exposeBoundary /></div>
+  </section> : null;
+  const oilNavigation = <nav className="article-nav" id="issue-contents" aria-label="本頁閱讀導覽"><span>本頁導覽</span><div>
+    {verified.claims.length > 0 && <a href="#claims">檢驗與處置確認了什麼</a>}
+    {timelineGroups.length > 0 && <a href="#progress">事情如何發展</a>}
+    {contextOverview && <a href="#context">脈絡總覽</a>}
+    {administrationActions.length > 0 && <a href="#administration-actions">市府行動</a>}
+    {proceedingTracks.length > 0 && <a href="#proceedings">責任與程序</a>}
+    {publicPeople.length > 0 && <a href="#people">人物索引</a>}
+    {(attributedSpeakerGroups.length > 0 || attributedReports.length > 0) && <a href="#reports">各方說了什麼</a>}
+    {politicalNarratives.length > 0 && <a href="#narratives">政治敘事</a>}
+    {unresolved.claims.length > 0 && <a href="#questions">調查當時的問題</a>}
+    {coverageLimits.length > 0 && <a href="#coverage-limits">資料限制</a>}
+    {analysisClaims.length > 0 && <a href="#analysis">TW Issues 的分析</a>}
+    {editorialPositions.length > 0 && <a href="#positions">TW Issues 的主張</a>}
+    {socialObservations.length > 0 && <a href="#social-observations">社群討論樣本</a>}
+    <a href="#sources">核對資料來源</a>
+  </div></nav>;
 
   const sourcesDisclosure = <SourcesDisclosure sourceCount={publicSources.length}>
     <section className="sources-section" aria-label="資料與來源">
@@ -543,19 +584,19 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     {caseChapters[3] && <HsinchuChapter chapter={caseChapters[3]}>{peopleSection}{reportsSection}{narrativesSection}</HsinchuChapter>}
     {caseChapters[4] && <HsinchuChapter chapter={caseChapters[4]}>{analysisSection}{positionsSection}</HsinchuChapter>}
     {caseChapters[5] && <HsinchuChapter chapter={caseChapters[5]}>{socialSection}{sourcesDisclosure}</HsinchuChapter>}
-  </> : <>{contextSection}{chronologySection}{administrationSection}{proceedingsSection}{narrativesSection}{evidenceSection}{peopleSection}{reportsSection}{analysisSection}{positionsSection}{socialSection}</>;
+  </> : isOilDossier ? <>{oilVerifiedSection}{chronologySection}{contextSection}{administrationSection}{proceedingsSection}{peopleSection}{reportsSection}{narrativesSection}{oilQuestionsSection}{coverageLimitsSection}{analysisSection}{positionsSection}{socialSection}</> : <>{contextSection}{chronologySection}{administrationSection}{proceedingsSection}{narrativesSection}{evidenceSection}{peopleSection}{reportsSection}{analysisSection}{positionsSection}{socialSection}</>;
 
-  return <main className={`site-shell dossier-shell${isCaseDossier ? " dossier-shell--case dossier-shell--hsinchu" : ""}`}>
+  return <main className={`site-shell dossier-shell${isCaseDossier ? " dossier-shell--case dossier-shell--hsinchu" : isOilDossier ? " dossier-shell--oil" : ""}`}>
     <a className="skip-link" href="#main-content">跳至主要內容</a>
     <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
     <section id="main-content" tabIndex={-1} className="hero hero-detail">
-      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。{isCaseDossier ? "先從案情範圍、責任與證據界線開始，再進入核心文件與完整時間脈絡；也可直接跳到核心文件的可見範圍與導讀。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
-      {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#primary-document">直達核心文件</a><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
+      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">{isOilDossier ? "頁面更新：" : "更新於 "}{topic.lastUpdated}。{isOilDossier ? "本頁整理中聯油品事件的檢驗與處置紀錄、調查進展及各方說法。先看可核對資訊，再依日期閱讀完整事件；每則內容保留來源與適用限制。" : isCaseDossier ? "先從案情範圍、責任與證據界線開始，再進入核心文件與完整時間脈絡；也可直接跳到核心文件的可見範圍與導讀。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
+      {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#primary-document">直達核心文件</a><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : isOilDossier ? <aside className="dossier-meta"><p>閱讀與核對</p><a href="#sources">查看資料來源</a><span>來源數量不代表資訊完整或說法已確認</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
     </section>
     {!isCaseDossier && primaryDocumentGateway}
     {!isCaseDossier && primaryDocumentReadingSection}
     {isCaseDossier && <CaseReadingLegend />}
-    <ArticleNavigation
+    {isOilDossier ? oilNavigation : <ArticleNavigation
       isCaseDossier={isCaseDossier}
       caseChapters={caseChapters}
       contextOverview={contextOverview}
@@ -569,7 +610,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
       attributedSpeakerGroups={attributedSpeakerGroups}
       analysisClaims={analysisClaims}
       editorialPositions={editorialPositions}
-    />
+    />}
     {caseContent}
     {!isCaseDossier && sourcesDisclosure}
     <section className="next-topic"><div><p className="eyebrow">繼續閱讀</p><h2>繼續探索其他議題。</h2></div><SiteLink href="/">回到議題索引 <span>→</span></SiteLink></section>

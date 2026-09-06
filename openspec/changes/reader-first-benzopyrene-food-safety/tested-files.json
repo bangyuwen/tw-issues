@@ -1,0 +1,7 @@
+{
+  "app/dossier-page.tsx": "c6312b0a8fdbf4d596731c29fdd920fbeca3a4e2fc2aac0207797d89e34dd9cc",
+  "app/globals.css": "8c7eb08cfcad9794dcb53fd734bd9131ddded2f81be6347d33474802ed84ae28",
+  "tests/topic-page.test.tsx": "e883327518280c8f50a499647561452a2459276c8be6c97e952c8c7a3e4944ab",
+  "tests/rendered-html.test.mjs": "a44b3ee4b858c4de884e5ff19f8541d2789ea4d892b10a95f6555842d1b5ef4f",
+  "package-lock.json": "0822b36500a83be494ba7b9629f9363ee36202602cbebcaaadb77001f71d2b98"
+}

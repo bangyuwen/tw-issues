@@ -1,0 +1,194 @@
+{
+  "browser": "151.0.7922.138",
+  "route": "http://localhost:4175/topics/benzopyrene-food-safety",
+  "viewports": [
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "headings": [
+        "食用油苯駢芘超標",
+        "檢驗與處置確認了什麼？",
+        "事情怎麼走到今天？",
+        "不同主體的公開說法。",
+        "調查當時還有哪些問題？",
+        "這份公開紀錄還缺哪些文件？",
+        "繼續探索其他議題。"
+      ],
+      "nav": [
+        {
+          "label": "檢驗與處置確認了什麼",
+          "href": "#claims"
+        },
+        {
+          "label": "事情如何發展",
+          "href": "#progress"
+        },
+        {
+          "label": "各方說了什麼",
+          "href": "#reports"
+        },
+        {
+          "label": "調查當時的問題",
+          "href": "#questions"
+        },
+        {
+          "label": "資料限制",
+          "href": "#coverage-limits"
+        },
+        {
+          "label": "社群討論樣本",
+          "href": "#social-observations"
+        },
+        {
+          "label": "核對資料來源",
+          "href": "#sources"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "headings": [
+        "食用油苯駢芘超標",
+        "檢驗與處置確認了什麼？",
+        "事情怎麼走到今天？",
+        "不同主體的公開說法。",
+        "調查當時還有哪些問題？",
+        "這份公開紀錄還缺哪些文件？",
+        "繼續探索其他議題。"
+      ],
+      "nav": [
+        {
+          "label": "檢驗與處置確認了什麼",
+          "href": "#claims"
+        },
+        {
+          "label": "事情如何發展",
+          "href": "#progress"
+        },
+        {
+          "label": "各方說了什麼",
+          "href": "#reports"
+        },
+        {
+          "label": "調查當時的問題",
+          "href": "#questions"
+        },
+        {
+          "label": "資料限制",
+          "href": "#coverage-limits"
+        },
+        {
+          "label": "社群討論樣本",
+          "href": "#social-observations"
+        },
+        {
+          "label": "核對資料來源",
+          "href": "#sources"
+        }
+      ]
+    },
+    {
+      "width": 800,
+      "scrollWidth": 800,
+      "headings": [
+        "食用油苯駢芘超標",
+        "檢驗與處置確認了什麼？",
+        "事情怎麼走到今天？",
+        "不同主體的公開說法。",
+        "調查當時還有哪些問題？",
+        "這份公開紀錄還缺哪些文件？",
+        "繼續探索其他議題。"
+      ],
+      "nav": [
+        {
+          "label": "檢驗與處置確認了什麼",
+          "href": "#claims"
+        },
+        {
+          "label": "事情如何發展",
+          "href": "#progress"
+        },
+        {
+          "label": "各方說了什麼",
+          "href": "#reports"
+        },
+        {
+          "label": "調查當時的問題",
+          "href": "#questions"
+        },
+        {
+          "label": "資料限制",
+          "href": "#coverage-limits"
+        },
+        {
+          "label": "社群討論樣本",
+          "href": "#social-observations"
+        },
+        {
+          "label": "核對資料來源",
+          "href": "#sources"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "headings": [
+        "食用油苯駢芘超標",
+        "檢驗與處置確認了什麼？",
+        "事情怎麼走到今天？",
+        "不同主體的公開說法。",
+        "調查當時還有哪些問題？",
+        "這份公開紀錄還缺哪些文件？",
+        "繼續探索其他議題。"
+      ],
+      "nav": [
+        {
+          "label": "檢驗與處置確認了什麼",
+          "href": "#claims"
+        },
+        {
+          "label": "事情如何發展",
+          "href": "#progress"
+        },
+        {
+          "label": "各方說了什麼",
+          "href": "#reports"
+        },
+        {
+          "label": "調查當時的問題",
+          "href": "#questions"
+        },
+        {
+          "label": "資料限制",
+          "href": "#coverage-limits"
+        },
+        {
+          "label": "社群討論樣本",
+          "href": "#social-observations"
+        },
+        {
+          "label": "核對資料來源",
+          "href": "#sources"
+        }
+      ]
+    }
+  ],
+  "noJavaScript": {
+    "questionHash": "#questions",
+    "questionText": "仍待釐清 · 依紀錄日期閱讀\n\n調查當時還有哪些問題？\n\n以下保留各筆紀錄當時的問題與限制，請依文內日期閱讀；早期問題不代表後續調查的最新結論。對照事件進展\n\n01\n仍待釐清\n\n截至 7 月 3 日，中央與地方主管機關仍調查製程、溫控與採樣等可能原因，公開資料尚未指出污染根因。\n\n這能確認\n\n證明截至 7 月 3 日主管機關仍在調查多種可能原因。\n\n這不能證明\n\n不能證明任何一項可能原因已成立，也不排除後續調查已有新結論。；媒體轉述不能證明初步研判成立，也不能排除後續出現新調查結果。\n\n查看資料與來源\n展開",
+    "canonicalLinks": 36
+  },
+  "keyboard": {
+    "firstFocus": "跳至主要內容",
+    "skipHash": "#main-content"
+  },
+  "questionHash": "#questions",
+  "source": {
+    "hash": "#source-35",
+    "focus": "source-35",
+    "open": true
+  },
+  "backHash": "#questions"
+}
