@@ -1,0 +1,1972 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "179f4fc5eefe2390e9a7fb2d5583541b3a16fc6e",
+  "scope": "Hsinchu-only introduction-first reading-order pilot; public inputs and non-pilot routes are frozen.",
+  "publicFiles": {
+    "public-bundle.json": "47b60706ce6f71ea19de9dcf4483a427beda76b20068cfba075a54d0cf7ed910",
+    "app/public-evidence.json": "172cb2bd78fbcfb84b11a2b25e8e01426a9b32a97258bffc49bdfb58e0e9d426",
+    "app/research-topics.json": "7002faa8b6a693dc3f0daabb006aada4dd423ff2b2cb8b675110eed079685ebc"
+  },
+  "baselineRendered": {
+    "hsinchu-baseball-stadium": {
+      "sha256": "97e9f3d5881cec435df3715012149b3144595fca8a59defb2b59a7f4f02d0348",
+      "anchors": [
+        "main-content",
+        "primary-document",
+        "primary-document-title",
+        "primary-document-support-title",
+        "primary-document-coverage-title",
+        "primary-document-reading",
+        "primary-document-reading-title",
+        "primary-document-reading-boundary",
+        "primary-document-guide-title",
+        "primary-document-layers-title",
+        "primary-document-document-layer-title",
+        "primary-document-excerpt-title",
+        "primary-document-analysis-title",
+        "case-reading-legend-title",
+        "case-contents",
+        "dossier-chapter-01",
+        "context",
+        "responsibility-lines",
+        "coverage-limits",
+        "coverage-limits-title",
+        "dossier-chapter-02",
+        "claims",
+        "questions",
+        "dossier-chapter-03",
+        "progress",
+        "administration-actions",
+        "proceedings",
+        "dossier-chapter-04",
+        "people",
+        "reports",
+        "narratives",
+        "dossier-chapter-05",
+        "analysis",
+        "dossier-chapter-06",
+        "social-observations",
+        "social-observation-title",
+        "social-observation-criticism",
+        "social-observation-counterpoint",
+        "sources",
+        "source-02",
+        "source-01",
+        "source-03",
+        "source-39",
+        "source-58",
+        "source-05",
+        "source-08",
+        "source-07",
+        "source-37",
+        "source-36",
+        "source-34",
+        "source-09",
+        "source-31",
+        "source-24",
+        "source-38",
+        "source-06",
+        "source-04",
+        "source-10",
+        "source-11",
+        "source-40",
+        "source-41",
+        "source-42",
+        "source-43",
+        "source-44",
+        "source-45",
+        "source-46",
+        "source-47",
+        "source-48",
+        "source-13",
+        "source-33",
+        "source-12",
+        "source-15",
+        "source-28",
+        "source-35",
+        "source-16",
+        "source-17",
+        "source-18",
+        "source-19",
+        "source-20",
+        "source-27",
+        "source-29",
+        "source-30",
+        "source-21",
+        "source-23",
+        "source-32",
+        "source-22",
+        "source-25",
+        "source-26",
+        "source-14",
+        "source-49",
+        "source-50",
+        "source-51",
+        "source-52",
+        "source-53",
+        "source-54",
+        "source-57",
+        "source-56",
+        "source-55"
+      ]
+    },
+    "ezway-preauthorization": {
+      "sha256": "f8fe5bbe04852c424eb58ce3a7d22ba035d9dad192767db1d4f993ab6ae95323",
+      "anchors": [
+        "main-content",
+        "issue-contents",
+        "claims",
+        "ezway-scope-title",
+        "ezway-record-scope",
+        "cite-ezway-scope-faq",
+        "ezway-record-identity",
+        "cite-ezway-identity-overview",
+        "cite-ezway-identity-registration",
+        "ezway-record-effective-date",
+        "cite-ezway-effective-date-preauth",
+        "ezway-process",
+        "ezway-process-title",
+        "ezway-record-process",
+        "cite-ezway-process-preauth",
+        "cite-ezway-process-plan",
+        "ezway-record-checks",
+        "cite-ezway-checks-faq",
+        "cite-ezway-checks-overview",
+        "ezway-record-registration",
+        "cite-ezway-registration-registration",
+        "reports",
+        "ezway-reports-title",
+        "ezway-record-industry-concern",
+        "cite-ezway-industry-concern-news-preauth",
+        "ezway-record-adoption",
+        "cite-ezway-adoption-news-preauth",
+        "ezway-record-capacity",
+        "cite-ezway-capacity-news-preauth",
+        "ezway-record-registration-count",
+        "cite-ezway-registration-count-news-registration",
+        "progress",
+        "ezway-progress-title",
+        "ezway-record-ezway-event-registration-security",
+        "cite-ezway-ezway-event-registration-security-registration",
+        "ezway-record-ezway-event-preauth-announced",
+        "cite-ezway-ezway-event-preauth-announced-plan",
+        "ezway-record-ezway-event-preauth-effective",
+        "cite-ezway-ezway-event-preauth-effective-preauth",
+        "questions",
+        "ezway-questions-title",
+        "ezway-record-individual-shipment",
+        "cite-ezway-individual-shipment-faq",
+        "ezway-record-mismatch-timing",
+        "cite-ezway-mismatch-timing-preauth",
+        "cite-ezway-mismatch-timing-support",
+        "sources",
+        "source-ezway-preauth",
+        "source-ezway-plan",
+        "source-ezway-faq",
+        "source-ezway-overview",
+        "source-ezway-registration",
+        "source-ezway-support",
+        "source-ezway-news-preauth",
+        "source-ezway-news-registration"
+      ]
+    },
+    "benzopyrene-food-safety": {
+      "sha256": "87cff411ce3b80d847b9386bf9f5c9441dd51b83e5674265d59fe426299b6cf4",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "questions",
+        "reports",
+        "social-observations",
+        "social-observation-observations",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06",
+        "source-07",
+        "source-08",
+        "source-09",
+        "source-10",
+        "source-11",
+        "source-12",
+        "source-13",
+        "source-35",
+        "source-20",
+        "source-29",
+        "source-24",
+        "source-25",
+        "source-18",
+        "source-19",
+        "source-14",
+        "source-16",
+        "source-36",
+        "source-21",
+        "source-26",
+        "source-27",
+        "source-17",
+        "source-23",
+        "source-22",
+        "source-32",
+        "source-28",
+        "source-30",
+        "source-31",
+        "source-33",
+        "source-15",
+        "source-34"
+      ]
+    },
+    "self-defense-readiness": {
+      "sha256": "aafae09a85bed01dd8023ed32039c99a72436c205265c3d716b3b5ea05bbd638",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "questions",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06"
+      ]
+    },
+    "defense-procurement": {
+      "sha256": "41058f67d77b97a9440e1142189c9b3c42bc7ba216932c655a6240e7880b229a",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06",
+        "source-07",
+        "source-08",
+        "source-09",
+        "source-10",
+        "source-11",
+        "source-12"
+      ]
+    },
+    "taipei-tree-governance": {
+      "sha256": "e49d9a23383efdc0b80e70d89f064fe44ca4376db56c2e1969b290f4f4ccf627",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "questions",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-09",
+        "source-10",
+        "source-11",
+        "source-06",
+        "source-08",
+        "source-07"
+      ]
+    },
+    "typhoon-governance": {
+      "sha256": "a521fd711c6b855594d4884b68f09f6bdbb8130197f4c4528e48b53f25df50a4",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "questions",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06"
+      ]
+    },
+    "japan-taiwan-alliance": {
+      "sha256": "ebe1a2d204b051abeff9e0f155b2095b8913e9a33357b8d13b38f93acdaf5f82",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05"
+      ]
+    },
+    "budget-delay-governance": {
+      "sha256": "c1a9a399f8be9471a02c0c4bb6f4a53bf00f672ae017f23eeae53b7959909866",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06",
+        "source-07",
+        "source-08",
+        "source-09",
+        "source-10",
+        "source-18",
+        "source-12",
+        "source-11",
+        "source-14",
+        "source-17",
+        "source-19",
+        "source-16",
+        "source-13",
+        "source-15"
+      ]
+    },
+    "cross-border-intimidation": {
+      "sha256": "2cebb039838d99104e3c2e6c8cf162d290f5ecd397800cf636469f6851461666",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "questions",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-06",
+        "source-08",
+        "source-04",
+        "source-07",
+        "source-05",
+        "source-09"
+      ]
+    },
+    "flood-budget-bottleneck": {
+      "sha256": "9919671d148681003554898f546089fa1bca93affc5e7e34789f2427c3bdc555",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06",
+        "source-07"
+      ]
+    },
+    "transnational-repression": {
+      "sha256": "cba8c482622acded18e1ace6507788f928b635b865a526b5f85305fe9733c5e3",
+      "anchors": [
+        "main-content",
+        "progress",
+        "claims",
+        "reports",
+        "sources",
+        "source-01",
+        "source-02",
+        "source-03",
+        "source-04",
+        "source-05",
+        "source-06"
+      ]
+    }
+  },
+  "hsinchu": {
+    "projectionSha256": "5049e53e895d790810b2bae9d6e5dfb83d3a0bf3ab55ef9f6ddd8c78f370e89a",
+    "counts": {
+      "claims": 12,
+      "attributedClaims": 3,
+      "attributedSpeakerGroups": 2,
+      "openQuestions": 8,
+      "reportedTimeline": 16,
+      "administrationActions": 12,
+      "proceedingTracks": 6,
+      "publicPeople": 13,
+      "politicalNarratives": 9,
+      "analysisClaims": 5,
+      "editorialPositions": 0,
+      "socialObservations": 10,
+      "coverageGaps": 3
+    },
+    "records": {
+      "claims": [
+        {
+          "key": "claims:0",
+          "publicKey": null,
+          "claimType": "project_finance_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-02"
+          ],
+          "sha256": "b29779f0955c83ecb522c88cd759f9494a974a60281af9dfcc966d2ffbe71686"
+        },
+        {
+          "key": "claims:1",
+          "publicKey": null,
+          "claimType": "project_contract_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-02"
+          ],
+          "sha256": "9cdbd5f04abe7ee3a73b79e771de1633f27df0dbf60e6a5e2908cd09770cb320"
+        },
+        {
+          "key": "claims:2",
+          "publicKey": null,
+          "claimType": "administrative_finding",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-02"
+          ],
+          "sha256": "c3bf493f348d856a574c22e60b919c90f167871bfa4bd2fb3d633c27899bd8a8"
+        },
+        {
+          "key": "claims:3",
+          "publicKey": null,
+          "claimType": "reported_event_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-03",
+            "source-02"
+          ],
+          "sha256": "231af176eace5703f5cc23dd976f549553a3d288cd66d5da7d2fc6f09d31775f"
+        },
+        {
+          "key": "claims:4",
+          "publicKey": null,
+          "claimType": "administrative_finding",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-02"
+          ],
+          "sha256": "7ed6140ca2ed4867f9f41c80b7a60df0de11482ce636de1a7b1955be8f838d9f"
+        },
+        {
+          "key": "claims:5",
+          "publicKey": null,
+          "claimType": "administrative_finding",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01"
+          ],
+          "sha256": "98b9c5671034a108420f91a4884ffd1a76179365762405c9296c339f6973909c"
+        },
+        {
+          "key": "claims:6",
+          "publicKey": null,
+          "claimType": "administrative_finding",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01"
+          ],
+          "sha256": "3efb11fb2d7676bf9e66f1ab67f06e51d2c693a3490dc7e55c82749a75c29b57"
+        },
+        {
+          "key": "claims:7",
+          "publicKey": null,
+          "claimType": "law_enforcement_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-39",
+            "source-58"
+          ],
+          "sha256": "0fd4b70c6a3087c42f98b718b361c5054bf7373cd49a9c383ccdf12e22334557"
+        },
+        {
+          "key": "claims:8",
+          "publicKey": null,
+          "claimType": "law_enforcement_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-05"
+          ],
+          "sha256": "32232af368c41cff59aea190d91efc871597a07b00e8d2d49a0a164f54259bfa"
+        },
+        {
+          "key": "claims:9",
+          "publicKey": null,
+          "claimType": "judicial_outcome",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-08"
+          ],
+          "sha256": "f159397d0a393879bafda397963e95b27e4746ff343bb016c607350ca7b75c99"
+        },
+        {
+          "key": "claims:10",
+          "publicKey": null,
+          "claimType": "operational_fact",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-07"
+          ],
+          "sha256": "a86595678d4a4f5b7191ff31e8a387f04a30af9d5b564e0e4f0ece1ead14b4c0"
+        },
+        {
+          "key": "claims:11",
+          "publicKey": null,
+          "claimType": "law_enforcement_event",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "d24b84196316a3124f56948fb359737ba431453989e46abf66bf990a2de5cb1e"
+        }
+      ],
+      "attributedClaims": [
+        {
+          "key": "attributedClaims:0",
+          "publicKey": null,
+          "claimType": "attributed_statement",
+          "status": null,
+          "speakers": [
+            {
+              "name": "新竹市政府",
+              "role": "主管機關公開說明"
+            }
+          ],
+          "sourceRefs": [
+            "source-06"
+          ],
+          "sha256": "4faad9813c138d8be742b0ec8bcabe1fdb63fc652fa5e3c1435c43c0375c9fe9"
+        },
+        {
+          "key": "attributedClaims:1",
+          "publicKey": null,
+          "claimType": "attributed_statement",
+          "status": null,
+          "speakers": [
+            {
+              "name": "新竹市政府",
+              "role": "主管機關公開說明"
+            }
+          ],
+          "sourceRefs": [
+            "source-06"
+          ],
+          "sha256": "c9704acf1cd114c3a3018eddae5ebd58db56e7f7882fbb3b96b13899e3c58454"
+        },
+        {
+          "key": "attributedClaims:2",
+          "publicKey": null,
+          "claimType": "attributed_procedural_report",
+          "status": null,
+          "speakers": [
+            {
+              "name": "聯合報",
+              "role": "媒體報導"
+            }
+          ],
+          "sourceRefs": [
+            "source-09"
+          ],
+          "sha256": "1811b80a99a7385cc57ba49a57a7e9b6873920e090e141bbe652e88f95c631a4"
+        }
+      ],
+      "openQuestions": [
+        {
+          "key": "openQuestions:0",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-58",
+            "source-39",
+            "source-34",
+            "source-09"
+          ],
+          "sha256": "84162ac598573a0dad3f1069981fd1752340fb03e022e1e2cfcc6d262abaee43"
+        },
+        {
+          "key": "openQuestions:1",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "4d4581bf21cdd9bbe26783e824c557c18d38db7433bfed1c3e7004346f8b5cac"
+        },
+        {
+          "key": "openQuestions:2",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-31",
+            "source-24"
+          ],
+          "sha256": "7519930f9eff1186052193b8e1cc7a645685e57b1c781c6bec4490fca7867460"
+        },
+        {
+          "key": "openQuestions:3",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-38"
+          ],
+          "sha256": "5a5f4a3bf99639f5d9cf26dc0eb94f577c417da55ccea5934a11967ab09d3602"
+        },
+        {
+          "key": "openQuestions:4",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-06"
+          ],
+          "sha256": "f8c382a150c830f7e6288bcfd9b64fd1335b8d90878d7053c88f83488711b05f"
+        },
+        {
+          "key": "openQuestions:5",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-04"
+          ],
+          "sha256": "2a92bdf6ca6a3ed063f51edf73332e9ac7347bc21e068f98e1335e122ec43328"
+        },
+        {
+          "key": "openQuestions:6",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-06"
+          ],
+          "sha256": "f2e2a78e5b1f54983f92d5c649fa4417b9775b78f07264d4b56d07cc68434f1b"
+        },
+        {
+          "key": "openQuestions:7",
+          "publicKey": null,
+          "claimType": "open_question",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-08"
+          ],
+          "sha256": "640692487b7dbe8140232101cfba46886a95b04c913ec5dea11f1cb54d15ebd3"
+        }
+      ],
+      "timeline": [
+        {
+          "key": "timeline:event-01",
+          "occurredAt": "2016-08-08",
+          "headlineSha256": "36bccbba3df8ff314bed2792357033da02c8d3988544f6d3c41a52a38224ee89",
+          "items": [
+            {
+              "key": "timeline:event-01:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-02"
+              ],
+              "sha256": "00b6205eab98e54ba5372e5b6c566b063e6868b10ae1b1f5eb1e0de89b5e4e94"
+            }
+          ],
+          "sha256": "726877d9fa4a0e569dea6805a9fc1fc8ece91a6ff51b4cf3c0c87e96d947aedf"
+        },
+        {
+          "key": "timeline:event-02",
+          "occurredAt": "2017-11-16",
+          "headlineSha256": "494b4882b80cb9414d2737ce1b985a8f9a001448e010d48513bb9366ff672f1b",
+          "items": [
+            {
+              "key": "timeline:event-02:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-02"
+              ],
+              "sha256": "bccc955efeb7856b97b7a516abfaffad55df9740f8d981fdfb5aec1ecee8bb0b"
+            }
+          ],
+          "sha256": "c465a0b40c263de27003abefd3b342ef995195b25bf38c86d74da1896816ed2e"
+        },
+        {
+          "key": "timeline:event-03",
+          "occurredAt": "2019-01-10",
+          "headlineSha256": "9bfe8ec82fa72ba1c3e7857993a6736451f2140484d61c109a6f561243310337",
+          "items": [
+            {
+              "key": "timeline:event-03:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-02"
+              ],
+              "sha256": "3bb647d2d6487b14ea4c2c811c19d171b7eb8d5f83b1d2033c9c58ba3575adff"
+            }
+          ],
+          "sha256": "7e493cbb1c360c35eb9b5d6ae9e230969bde17c07867647afa454773bd274986"
+        },
+        {
+          "key": "timeline:event-04",
+          "occurredAt": "2022-05-10",
+          "headlineSha256": "e6b3d0b7187c7a9669c0ec8d768b307eceadf00919b312fc566fe2c7de1c660a",
+          "items": [
+            {
+              "key": "timeline:event-04:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-02"
+              ],
+              "sha256": "be5f0757a1e45e6a20472ea7c37057c173406f4db44dacece73d1f1c99a9e8f7"
+            }
+          ],
+          "sha256": "bab7bfe7f4d192e8a3cfbbd466722c8f08415b6077eef52e7a5798864192e2a4"
+        },
+        {
+          "key": "timeline:event-05",
+          "occurredAt": "2022-07-22",
+          "headlineSha256": "7b1dfe5714afc4056b8259c52f92b4a1a3820a3c8aadeafc55cc393c6789d097",
+          "items": [
+            {
+              "key": "timeline:event-05:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-03",
+                "source-02"
+              ],
+              "sha256": "9729085a2c2dc50b4d1ded68e9e68076bea7a27379ef56a49f5d78197575094e"
+            }
+          ],
+          "sha256": "0badea9c05e56b18209470bd556d73e0e98db5064cc67c2252622061ce964faf"
+        },
+        {
+          "key": "timeline:event-06",
+          "occurredAt": "2022-07-27",
+          "headlineSha256": "5b4f09f13f6e8795a59c47bfc2f37ae9ec6cb9eafba5fe294434abdc452e1361",
+          "items": [
+            {
+              "key": "timeline:event-06:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-03"
+              ],
+              "sha256": "a517d3b5258a154dab4bc550b25a46669aa82ef8481ae238861e73235b1da614"
+            }
+          ],
+          "sha256": "4896ca92098f7ba87845a82481f80f731f77eeb73bd2ec9a67a10c2b99d0a8cc"
+        },
+        {
+          "key": "timeline:event-08",
+          "occurredAt": "2024-03-01",
+          "headlineSha256": "7e5d1ea40100809db5a3515012ba95e2dd6b9c69e13a9277683f91612a9e2fc5",
+          "items": [
+            {
+              "key": "timeline:event-08:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-02"
+              ],
+              "sha256": "cbecd6077107c80056e02830ab3bae01550c740d9c5c937428493dc9eb7e5a48"
+            }
+          ],
+          "sha256": "32b2c15c5b90bc72d8febad7c0e9098f1a619df550dc04da4c0bed98cd7ca4cc"
+        },
+        {
+          "key": "timeline:event-08-evidence-preservation",
+          "occurredAt": "2024-03-25",
+          "headlineSha256": "8069482e8e8dd7c21ad79ddbdb3f8c9dde165281b25db0801e2e18071941035c",
+          "items": [
+            {
+              "key": "timeline:event-08-evidence-preservation:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-28",
+                "source-29"
+              ],
+              "sha256": "75fc1ff0a6531e54ca6d6910b7f2443f429041a881427e6a9151222e09ba98e2"
+            }
+          ],
+          "sha256": "92d34c7d5c6c0ce4dcab7f2faa32ca321ca1e6fe784e4682d0ea5d1ef875dd96"
+        },
+        {
+          "key": "timeline:event-08-procurement-search",
+          "occurredAt": "2024-10-09",
+          "headlineSha256": "d3c86ef4c266e45a594e28df6949d71927afb9ce3a0a0e5c078cd84254cef89c",
+          "items": [
+            {
+              "key": "timeline:event-08-procurement-search:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-37",
+                "source-36"
+              ],
+              "sha256": "7c794ad7589354723089cc6f68466005b97d09a75c58445069fb4b389b763ca9"
+            }
+          ],
+          "sha256": "05ee44082a6cd7290057013464c47138b4683953055794fee1c5b2d927b842ee"
+        },
+        {
+          "key": "timeline:event-08-new-materials-case",
+          "occurredAt": "2025-02-25",
+          "headlineSha256": "3e725fc38724fd8e0eb06e1b2bd74e532dc946272756b287e91e1e133f395d21",
+          "items": [
+            {
+              "key": "timeline:event-08-new-materials-case:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "attributed",
+              "speakers": [
+                {
+                  "name": "新竹市政府／新竹地方檢察署",
+                  "role": "工程發現與司法程序公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-31"
+              ],
+              "sha256": "991d125d72834fed4b4474b2df204ac1ccf0a4c9c01d237a43e0d027f751c5cc"
+            }
+          ],
+          "sha256": "0a4f32ffae42e5cff6ccd039fcb1d30af62f39e9398aec6f92f63482065e4c0a"
+        },
+        {
+          "key": "timeline:event-09",
+          "occurredAt": "2025-10-31",
+          "headlineSha256": "a55fe41bfa0dec07ea94ec073c9c2a19033b9e0617916113e607d1e0d09e987d",
+          "items": [
+            {
+              "key": "timeline:event-09:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-08"
+              ],
+              "sha256": "08860539fdb96ce9bb3ec1807023a46d32bddcbe81cfcaa87cb31826519d70eb"
+            }
+          ],
+          "sha256": "b830a639d23e1462358e82e2e12960977b7846765c5fb8ef57f3f2ff7b56bfee"
+        },
+        {
+          "key": "timeline:event-10",
+          "occurredAt": "2026-03-21",
+          "headlineSha256": "c89d1dad49481800090d89398e40b5a05083ffa0191abe87cd6ec3fc1be32a12",
+          "items": [
+            {
+              "key": "timeline:event-10:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-07"
+              ],
+              "sha256": "95a205c067203cc809de6d72dac94edda40f7513c276d3246bcf73428ead18b5"
+            }
+          ],
+          "sha256": "318397655451dbe53b7bea2f61febd67a77a4871fb6c961991bf05b9ba9952a0"
+        },
+        {
+          "key": "timeline:event-11",
+          "occurredAt": "2026-07-17",
+          "headlineSha256": "53b569d1617ddd7c50bc5421e2e4ee132b576fa7a742743a317ceae0ba8e100c",
+          "items": [
+            {
+              "key": "timeline:event-11:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "verified",
+              "speakers": [],
+              "sourceRefs": [
+                "source-01"
+              ],
+              "sha256": "c0ee837916f95616b97726c91aa8b9a6582f738fd43aed561f72fa087426b7ba"
+            }
+          ],
+          "sha256": "5b378cb8ca6daa46b188cdf2711a576196f2927f66df17977823d6179682ad0d"
+        },
+        {
+          "key": "timeline:event-12",
+          "occurredAt": "2026-08-20",
+          "headlineSha256": "335fdf9a84997aa52013bd1bddac91658cc9a3d22e802ba4dd70e60bba4ff4e6",
+          "items": [
+            {
+              "key": "timeline:event-12:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "attributed",
+              "speakers": [
+                {
+                  "name": "新竹市政府",
+                  "role": "主管機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-06",
+                "source-33"
+              ],
+              "sha256": "39a49dc58596a959dca7a1ddfc26f0711d470153c3925f7008daa94f04419597"
+            }
+          ],
+          "sha256": "d4874ff71cde9bc93ab15e5ecf9d38aa1aa7cb4d36652cde8606fd18511793d8"
+        },
+        {
+          "key": "timeline:event-13",
+          "occurredAt": "2026-08-28",
+          "headlineSha256": "bfcc0c455ede6eb21e89508658d2caa2245f833acaecabb54455dfb94e19fb04",
+          "items": [
+            {
+              "key": "timeline:event-13:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "attributed",
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-39",
+                "source-58"
+              ],
+              "sha256": "9c8500091835da439b1bee5bb3d1d80f19db50d03c0abfe08d96ac760f33c9ad"
+            }
+          ],
+          "sha256": "9cee3887dcf14e259036c22bcc931ffb03e526a0519a6b79600b28322067d9c6"
+        },
+        {
+          "key": "timeline:event-14",
+          "occurredAt": "2026-08-29",
+          "headlineSha256": "d5b1a93796a3cd4e2d09e07341750f5a5eda61eedd017fd9a5d7f627d4af36fc",
+          "items": [
+            {
+              "key": "timeline:event-14:item:0",
+              "publicKey": null,
+              "claimType": null,
+              "status": "attributed",
+              "speakers": [
+                {
+                  "name": "高虹安／新竹市政府",
+                  "role": "新竹市長與告發機關公開回應"
+                }
+              ],
+              "sourceRefs": [
+                "source-34"
+              ],
+              "sha256": "666ebe346a2fd752087f026d2c7aa54c815dfd45a65220eb2f1604404bcaa0fb"
+            },
+            {
+              "key": "timeline:event-14:item:1",
+              "publicKey": null,
+              "claimType": null,
+              "status": "attributed",
+              "speakers": [
+                {
+                  "name": "楊玲宜",
+                  "role": "新竹市議員公開回應"
+                }
+              ],
+              "sourceRefs": [
+                "source-35"
+              ],
+              "sha256": "05b8cd7c71fc94260de2a046b3d3a681886a4803e81aeccbafff32e0f5d5512b"
+            }
+          ],
+          "sha256": "f03ee03246257d9ae9a89a3db86b4eb9a8138563893825a36e3fa773c339c266"
+        }
+      ],
+      "administrationActions": [
+        {
+          "key": "administrationActions:action-01-safety-pause-and-evidence-handoff",
+          "publicKey": "action-01-safety-pause-and-evidence-handoff",
+          "claimType": null,
+          "status": "completed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-16",
+            "source-17"
+          ],
+          "sha256": "7558c9ede39518ec7023b9f832d5eea009705fffc77dd3829c7cfeb2e2ca8503"
+        },
+        {
+          "key": "administrationActions:action-02-inspection-and-external-testing",
+          "publicKey": "action-02-inspection-and-external-testing",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-18",
+            "source-19",
+            "source-20",
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "2f033599983ab8b2152e94817871be78f5d13091dd313be8d52b4b442dc84344"
+        },
+        {
+          "key": "administrationActions:action-03-ot-pause-and-asset-handover",
+          "publicKey": "action-03-ot-pause-and-asset-handover",
+          "claimType": null,
+          "status": "completed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-20"
+          ],
+          "sha256": "bfd965bc351a6bc7cfbecf256900b687a8648182aaf1b60229de9d43eba6d748"
+        },
+        {
+          "key": "administrationActions:action-04-internal-accountability-referral",
+          "publicKey": "action-04-internal-accountability-referral",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-15",
+            "source-01"
+          ],
+          "sha256": "003639417b8c95aa12df58ce87976e3c7b4a05767c7addbe50b8bf15a9da764c"
+        },
+        {
+          "key": "administrationActions:action-05-partial-termination-and-redesign",
+          "publicKey": "action-05-partial-termination-and-redesign",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-21",
+            "source-23"
+          ],
+          "sha256": "b7a81e609bb440935a56a0867f943def0a2352c59146c552130f08930bba5803"
+        },
+        {
+          "key": "administrationActions:action-05b-overburden-contract-and-evidence-preservation",
+          "publicKey": "action-05b-overburden-contract-and-evidence-preservation",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-27",
+            "source-28",
+            "source-29",
+            "source-30"
+          ],
+          "sha256": "b2c47e82e2a789ff19bd5b18061daf174b070155f1cea5614d96110820106b2e"
+        },
+        {
+          "key": "administrationActions:action-06-overburden-removal",
+          "publicKey": "action-06-overburden-removal",
+          "claimType": null,
+          "status": "completed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-22",
+            "source-23",
+            "source-31"
+          ],
+          "sha256": "339634134ea7f3ac7278e588fe487ae2f5aab189f9f8f26e3e60a01954bc2407"
+        },
+        {
+          "key": "administrationActions:action-07-additional-criminal-complaint",
+          "publicKey": "action-07-additional-criminal-complaint",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-24"
+          ],
+          "sha256": "cbb7a790979e68e954bcf4219118485a9c7198d839ec4c6654a8af902e8bc721"
+        },
+        {
+          "key": "administrationActions:action-08-rebuild-contract-to-acceptance",
+          "publicKey": "action-08-rebuild-contract-to-acceptance",
+          "claimType": null,
+          "status": "ongoing",
+          "speakers": [],
+          "sourceRefs": [
+            "source-25",
+            "source-26",
+            "source-06",
+            "source-20",
+            "source-21",
+            "source-33"
+          ],
+          "sha256": "7e3d7abc978db7fa1c9d9c33cdcbcc0541724cb9c62fb49e2a637f831a07b190"
+        },
+        {
+          "key": "administrationActions:action-09-operating-relationship-reset",
+          "publicKey": "action-09-operating-relationship-reset",
+          "claimType": null,
+          "status": "mixed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-07"
+          ],
+          "sha256": "f817463f4e99f31c8add9508c61a80ec95078802555ff2071a85d9777d190639"
+        },
+        {
+          "key": "administrationActions:action-10-damages-and-procurement-review",
+          "publicKey": "action-10-damages-and-procurement-review",
+          "claimType": null,
+          "status": "ongoing",
+          "speakers": [],
+          "sourceRefs": [
+            "source-24",
+            "source-32",
+            "source-06"
+          ],
+          "sha256": "1a45ad6a14c1b8804ffbf0b3a5f9772a7d76116fb5ba485871c77f19215d19c8"
+        },
+        {
+          "key": "administrationActions:action-11-announced-reconsideration",
+          "publicKey": "action-11-announced-reconsideration",
+          "claimType": null,
+          "status": "ongoing",
+          "speakers": [],
+          "sourceRefs": [
+            "source-34",
+            "source-09"
+          ],
+          "sha256": "ce29fc75b74b553dd778bfbc6c36e47035a7c5175a19787d56d5922d3f121682"
+        }
+      ],
+      "proceedingTracks": [
+        {
+          "key": "proceedingTracks:0",
+          "publicKey": null,
+          "claimType": null,
+          "status": "糾正已公布；監察院成果頁標示機關改善仍須持續定期追蹤，個別公務員行政責任的後續處理仍待公開確認。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-38"
+          ],
+          "sha256": "fee825749900012736f6858d6f976f0ac8a7be4742d3c352ccdb6735553ad05d"
+        },
+        {
+          "key": "proceedingTracks:1",
+          "publicKey": null,
+          "claimType": null,
+          "status": "官方偵查終結公告已確認偵結；媒體報導林智堅部分將依法送台灣高等檢察署再議，市府另於2026年8月29日表示將提出再議。兩者不是同一項程序證據，目前尚未取得高檢署結果或市府另行聲請的正式文件。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-39",
+            "source-58",
+            "source-34",
+            "source-09"
+          ],
+          "sha256": "6caf47fde91f14a79fa793c4792129581151a06d3ca2c180a7b93a8e68269cc3"
+        },
+        {
+          "key": "proceedingTracks:2",
+          "publicKey": null,
+          "claimType": null,
+          "status": "未決／公開資料未見終結；這是搜尋結果限制，不是絕對證明檢方尚未處分。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "a832d8bc69d1606f6d6d60b2e8dea84e36624939bd541f54d72c0587c1e904ad"
+        },
+        {
+          "key": "proceedingTracks:3",
+          "publicKey": null,
+          "claimType": null,
+          "status": "市府已提出求償主張、原案已進入結算、停權審查已啟動；三者結果仍待正式文件。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-06"
+          ],
+          "sha256": "8ddef2756a71e9df1cd0024c44dcdb822af9413a597ca3b20045e83dc1c45546"
+        },
+        {
+          "key": "proceedingTracks:4",
+          "publicKey": null,
+          "claimType": null,
+          "status": "一審判決已公布；是否上訴及判決是否確定仍待查。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-08"
+          ],
+          "sha256": "8ed061bc4c481de3eb86afe77215c183ccbc0f9e66f263d69ca8f1df0f8db01b"
+        },
+        {
+          "key": "proceedingTracks:5",
+          "publicKey": null,
+          "claimType": null,
+          "status": "現場性能測試已執行；正式驗收與重新使用仍待結果。",
+          "speakers": [],
+          "sourceRefs": [
+            "source-06",
+            "source-33"
+          ],
+          "sha256": "fb4ef3fdc8362c1251ff40ca46138fbb0b6cd33ae006baf9f8f6dde2e2f26199"
+        }
+      ],
+      "publicPeople": [
+        {
+          "key": "publicPeople:0",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-04"
+          ],
+          "sha256": "9f6f12b08a8d267774f360efe35e049b275c655b85ba4f12104a38b5cd316f14"
+        },
+        {
+          "key": "publicPeople:1",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-10",
+            "source-11"
+          ],
+          "sha256": "f93a45451a4837e5a63f0c782f6820d7baf81901afc52deb82f19f52a22cb8eb"
+        },
+        {
+          "key": "publicPeople:2",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-32",
+            "source-25"
+          ],
+          "sha256": "b36998afc3cf1863a094d2ad1bd175a80609a3764ddb26caf9edc2e3608e06b6"
+        },
+        {
+          "key": "publicPeople:3",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "77a0bbe01aec2fee95ff789dab05c134b02e38e6b725b354bbbc353fefb10e9e"
+        },
+        {
+          "key": "publicPeople:4",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-10"
+          ],
+          "sha256": "7a05b11379fe0f2c8dccf212570b206082236b98b6ffdc745be78a99e16b3c5f"
+        },
+        {
+          "key": "publicPeople:5",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-10",
+            "source-12"
+          ],
+          "sha256": "b45ccd6e800a1d8984f7d661058349fe723811097653482a19327bdf3524e26d"
+        },
+        {
+          "key": "publicPeople:6",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-11"
+          ],
+          "sha256": "ac1fce4dfccc52b1d4347bf3f9c02e587861b1f0575281cbadd79a332858eec9"
+        },
+        {
+          "key": "publicPeople:7",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-03"
+          ],
+          "sha256": "cba250004786dd02694f8861bde08435a61f9da6ce27e0f18b0b669683a72863"
+        },
+        {
+          "key": "publicPeople:8",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-12"
+          ],
+          "sha256": "177a60f41a5ff564db8b530043b13645fa09f852eefdecaea74ee0f99c99c24a"
+        },
+        {
+          "key": "publicPeople:9",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-13"
+          ],
+          "sha256": "95e1e9a143f56a9e321c1308c95bff499caddd8057b98efd1755fd4c0afdff58"
+        },
+        {
+          "key": "publicPeople:10",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-14"
+          ],
+          "sha256": "188560a3d962adb2a853d2b6954e06fd1cbe6dae2303d94cd981db9d7cd618c6"
+        },
+        {
+          "key": "publicPeople:11",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-15",
+            "source-35"
+          ],
+          "sha256": "6006f7de25eee1a11a8e9ec12ac47749dd20d275dfe29d2ae3692c8567fe546a"
+        },
+        {
+          "key": "publicPeople:12",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-15",
+            "source-36"
+          ],
+          "sha256": "0934d7e82b0a768456102835ae7aaffbb46a802fbdfd90b13f1b03880eb1e798"
+        }
+      ],
+      "politicalNarratives": [
+        {
+          "key": "politicalNarratives:narrative-2022-kao-campaign",
+          "publicKey": "narrative-2022-kao-campaign",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-10"
+          ],
+          "sha256": "bdd4beabdf3537297d500aeec9e1e14c241ea8d444d2ea74733e0da579819610"
+        },
+        {
+          "key": "politicalNarratives:narrative-2022-lin-geng-jen-campaign",
+          "publicKey": "narrative-2022-lin-geng-jen-campaign",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-10"
+          ],
+          "sha256": "268c655224010fd8a95c40d04481c563b56c1498e605175f719197cf9ce40c05"
+        },
+        {
+          "key": "politicalNarratives:narrative-2022-kao-12-billion",
+          "publicKey": "narrative-2022-kao-12-billion",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-11"
+          ],
+          "sha256": "e74cea84aadfd5e476f995079bb43d8dcc17dac526c45446499f39ab85f8b5d3"
+        },
+        {
+          "key": "politicalNarratives:narrative-2022-chu-party-framing",
+          "publicKey": "narrative-2022-chu-party-framing",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-12"
+          ],
+          "sha256": "9f5130b9596ddd0f2c5a2f6f6f764bda63deb408d7863df1529e31b9de2689dd"
+        },
+        {
+          "key": "politicalNarratives:narrative-2023-legislative-oversight",
+          "publicKey": "narrative-2023-legislative-oversight",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-14"
+          ],
+          "sha256": "8f8b46c69b031cc8d971101e43549dde945b0e0f65f7d8207b5dc9b5ed0d14ad"
+        },
+        {
+          "key": "politicalNarratives:narrative-2024-local-counterclaim",
+          "publicKey": "narrative-2024-local-counterclaim",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-15"
+          ],
+          "sha256": "05b331354d925927f3e1858a009a56d62c3d829b0b00fe096d6a9fdbc911da57"
+        },
+        {
+          "key": "politicalNarratives:narrative-2026-huang-response",
+          "publicKey": "narrative-2026-huang-response",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-13"
+          ],
+          "sha256": "c56842242c7c87cef8fc0fa77072c1770d90810a637617a8e65677abf816bd61"
+        },
+        {
+          "key": "politicalNarratives:narrative-2026-yang-counterframe",
+          "publicKey": "narrative-2026-yang-counterframe",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-35"
+          ],
+          "sha256": "410f51dd633c7661f731c5dbfe2b92047838644b64f2b0b65fd516997d645584"
+        },
+        {
+          "key": "politicalNarratives:narrative-2026-kao-city-response",
+          "publicKey": "narrative-2026-kao-city-response",
+          "claimType": null,
+          "status": "attributed",
+          "speakers": [],
+          "sourceRefs": [
+            "source-34"
+          ],
+          "sha256": "4933662f7decb14a97a0a27ef5b8d4834f91b82bc0e54e244b6dfaf90b0ed3cb"
+        }
+      ],
+      "analysisClaims": [
+        {
+          "key": "analysisClaims:0",
+          "publicKey": null,
+          "claimType": "analysis",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-01",
+            "source-58"
+          ],
+          "sha256": "16011ff07593d7b43f3fcd6d2cf537da299c07533036ab662bdc402d546677ff"
+        },
+        {
+          "key": "analysisClaims:1",
+          "publicKey": null,
+          "claimType": "analysis",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-02",
+            "source-58"
+          ],
+          "sha256": "7f72ee5f3e64466d1544c0d43a0c1ff21abe25b04a3b17bab3c527074824fd53"
+        },
+        {
+          "key": "analysisClaims:2",
+          "publicKey": null,
+          "claimType": "analysis",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-40",
+            "source-41",
+            "source-42",
+            "source-05",
+            "source-43",
+            "source-44",
+            "source-45",
+            "source-46",
+            "source-47"
+          ],
+          "sha256": "a79cd6b0a75eed4b8e4ef7f04237aeb3608e298c74496c88bd53f76e76ce75b9"
+        },
+        {
+          "key": "analysisClaims:3",
+          "publicKey": null,
+          "claimType": "analysis",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-43",
+            "source-44",
+            "source-45",
+            "source-46",
+            "source-47"
+          ],
+          "sha256": "c7540230c77271cb55221ca34e03ebce5ecc780f122ffe5475bf3ccb75fe02ea"
+        },
+        {
+          "key": "analysisClaims:4",
+          "publicKey": null,
+          "claimType": "analysis",
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-44",
+            "source-48"
+          ],
+          "sha256": "f765f98823f9a887bf2e76ae29a72b8fee6fa031c230049e71230a947f90f83f"
+        }
+      ],
+      "editorialPositions": [],
+      "socialObservations": [
+        {
+          "key": "socialObservations:0",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-49"
+          ],
+          "sha256": "d99fe05256ade7ed55de4739bc2bd3a00b615b2066788b146b277a29f9a55a10"
+        },
+        {
+          "key": "socialObservations:1",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-50"
+          ],
+          "sha256": "19f7cd7f1916eed7f5f1ef35ba5035adf6fad941a580d088b3ad570b4b4352a1"
+        },
+        {
+          "key": "socialObservations:2",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-51"
+          ],
+          "sha256": "4c64ff460b3de54a54c00fac6953b82335b004ca39e6fd486d265a720c3e59ba"
+        },
+        {
+          "key": "socialObservations:3",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-52"
+          ],
+          "sha256": "d2b497a9c5d3a3f4db2eff486a620342a6a8749629146853a324a5b10e1b69d6"
+        },
+        {
+          "key": "socialObservations:4",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-53"
+          ],
+          "sha256": "fd77db07d5bbd01c95d4c11bee28a736c2549e7b01fc875bd89031b55945ccff"
+        },
+        {
+          "key": "socialObservations:5",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-54"
+          ],
+          "sha256": "ad30cf4a54def9d4c9ecc810c90e1ebf3193d091d56d7090d7bce932531e209e"
+        },
+        {
+          "key": "socialObservations:6",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-49"
+          ],
+          "sha256": "6ea5c8ca32d14f044fff3b99314e0f21b0eddab452ce676354968aeb639a0bb8"
+        },
+        {
+          "key": "socialObservations:7",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-57"
+          ],
+          "sha256": "6fa44e79932a3516bd35e1e05fa58505197ce343b5a145cc81c0f04a033af631"
+        },
+        {
+          "key": "socialObservations:8",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-56"
+          ],
+          "sha256": "ee7198b1c9570e30dfb02a3afe4c4e66fcf15d3c91459cc7afd52a9197da4683"
+        },
+        {
+          "key": "socialObservations:9",
+          "publicKey": null,
+          "claimType": null,
+          "status": null,
+          "speakers": [],
+          "sourceRefs": [
+            "source-55"
+          ],
+          "sha256": "4edf3e19414557570d2880fd6e7840f4ea041849486dccc331c166d5af1792fa"
+        }
+      ],
+      "coverageGaps": [
+        {
+          "key": "coverageGaps:0",
+          "publicKey": null,
+          "claimType": null,
+          "status": "partial",
+          "speakers": [],
+          "sourceRefs": [
+            "source-58",
+            "source-39",
+            "source-34",
+            "source-01",
+            "source-09",
+            "source-38"
+          ],
+          "sha256": "df99886015ff2947480b92849df65578d723f42327aa3a24787839824f489e8d"
+        },
+        {
+          "key": "coverageGaps:1",
+          "publicKey": null,
+          "claimType": null,
+          "status": "partial",
+          "speakers": [],
+          "sourceRefs": [
+            "source-37",
+            "source-36"
+          ],
+          "sha256": "24c42fa320a9e836724458aeb5b92b36a5afb4e4df5530e8e724f54f91422894"
+        },
+        {
+          "key": "coverageGaps:2",
+          "publicKey": null,
+          "claimType": null,
+          "status": "not_promoted",
+          "speakers": [],
+          "sourceRefs": [
+            "source-10",
+            "source-11"
+          ],
+          "sha256": "3dc0ebd276007d3d51eeaaa2200d3040749bc6ef5552111027177f977d3dd62a"
+        }
+      ],
+      "attributedGroups": [
+        {
+          "key": "attributedGroup:新竹市政府:0",
+          "speaker": {
+            "name": "新竹市政府",
+            "role": "主管機關公開說明"
+          },
+          "stanceSummarySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "claims": [
+            {
+              "key": "attributedGroup:新竹市政府:0",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹市政府",
+                  "role": "主管機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-06"
+              ],
+              "sha256": "032436cf61f6a6b7e46a7ca808214e53a75fc85b7c8ce3dee8d2dccab940ff35"
+            },
+            {
+              "key": "attributedGroup:新竹市政府:1",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹市政府",
+                  "role": "主管機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-06"
+              ],
+              "sha256": "6ff96c2c642a4277c7246f5d854790f255a2d25c4cf41ab4921cdf056d6e3a19"
+            }
+          ],
+          "sha256": "560924f6ea6fce3468514175382f3b7e0e04b1a8891662815167d87591bb8b69"
+        },
+        {
+          "key": "attributedGroup:新竹地方檢察署:1",
+          "speaker": {
+            "name": "新竹地方檢察署",
+            "role": "檢察機關公開說明"
+          },
+          "stanceSummarySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "claims": [
+            {
+              "key": "attributedGroup:新竹地方檢察署:0",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-58"
+              ],
+              "sha256": "0b0dd8c5a41f78501e3824415184904d85ce2bda0ffce0bc6f6fd9de65f576f4"
+            },
+            {
+              "key": "attributedGroup:新竹地方檢察署:1",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-58"
+              ],
+              "sha256": "1ea63aa0a5ac05785386f2b97b5d7833fdb43359aba3c328af71fac9f4211da5"
+            },
+            {
+              "key": "attributedGroup:新竹地方檢察署:2",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-58"
+              ],
+              "sha256": "f381e15d0eb8150e3f7b73f46cc89ada10b096f30dee502fff163fa30ebb40ac"
+            },
+            {
+              "key": "attributedGroup:新竹地方檢察署:3",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-58"
+              ],
+              "sha256": "12ab8f680cfe4be4017a642d22e573d136349e63f2d32b7064ac2dab0b2b43b8"
+            },
+            {
+              "key": "attributedGroup:新竹地方檢察署:4",
+              "publicKey": null,
+              "claimType": "attributed_statement",
+              "status": null,
+              "speakers": [
+                {
+                  "name": "新竹地方檢察署",
+                  "role": "檢察機關公開說明"
+                }
+              ],
+              "sourceRefs": [
+                "source-58"
+              ],
+              "sha256": "5100814f5a0826a7832b6416affccb943f51b32bbcf2f15398ce7ceb59daf7a9"
+            }
+          ],
+          "sha256": "276cc4a63601ff6e5d9f5447ad491164b9603198d7fa54be42eb97eb039c4cef"
+        }
+      ]
+    },
+    "primaryDocument": {
+      "publicKey": "primary-document-source-58",
+      "sourceRef": "source-58",
+      "titleSha256": "279c58ca366be46eee5736f8111e24f4768fd80fb0fa7bc3e722b3d27c80f124",
+      "provenanceStatus": "third_party_published_stamped_redacted_partial_document_images",
+      "coverage": {
+        "firstObservedPage": 3,
+        "lastObservedPage": 22,
+        "missingBefore": "第 1–2 頁未附",
+        "missingAfter": "附件止於第 22 頁；貼文另提第 24–25 頁，因此至少第 23–25 頁未附",
+        "redactionStatus": "原貼文已遮蔽部分人名與公司名稱，TW Issues 不推測或還原",
+        "copyStatus": "這批材料是透過 Threads 第三方社群貼文公開的部分頁面影像；頁面可見紅色騎縫印文，但「具印文」只描述影像外觀，不能僅由印文判定持有人紙本為正本或副本。"
+      },
+      "guideSha256": "5b064bef370552ed0e1bc35c50a6e269c14f12642cc4b53e13ce40f4e6b1d63a",
+      "excerptsSha256": "7402f856dc13293381e32dfc7326e61f77ff9e9b25d64c60ad15fcd3f3eb29a7",
+      "analysisBoundarySha256": "015f7150a0ee103fd5e21d19452d3d195f1f936a53bcd58f19fc25aac98578be",
+      "sha256": "1c76a522e9a133f726f443794a7035e19d0827dd0c19eb6d2be8c0f13c469024"
+    },
+    "sourceRefs": [
+      "source-02",
+      "source-01",
+      "source-03",
+      "source-39",
+      "source-58",
+      "source-05",
+      "source-08",
+      "source-07",
+      "source-37",
+      "source-36",
+      "source-06",
+      "source-09",
+      "source-34",
+      "source-31",
+      "source-24",
+      "source-38",
+      "source-04",
+      "source-28",
+      "source-29",
+      "source-33",
+      "source-35",
+      "source-16",
+      "source-17",
+      "source-18",
+      "source-19",
+      "source-20",
+      "source-15",
+      "source-21",
+      "source-23",
+      "source-27",
+      "source-30",
+      "source-22",
+      "source-25",
+      "source-26",
+      "source-32",
+      "source-10",
+      "source-11",
+      "source-12",
+      "source-13",
+      "source-14",
+      "source-40",
+      "source-41",
+      "source-42",
+      "source-43",
+      "source-44",
+      "source-45",
+      "source-46",
+      "source-47",
+      "source-48",
+      "source-49",
+      "source-50",
+      "source-51",
+      "source-52",
+      "source-53",
+      "source-54",
+      "source-57",
+      "source-56",
+      "source-55"
+    ]
+  }
+}

@@ -281,6 +281,8 @@ export function getHsinchuDossierChapters(model: DossierPageModel): HsinchuChapt
         ...link("#context", "案情範圍", Boolean(model.contextOverview)),
         ...link("#responsibility-lines", "責任與狀態", Boolean(model.contextOverview?.lanes.length)),
         ...link("#coverage-limits", "證據覆蓋界線", model.coverageLimits.length > 0),
+        ...link("#primary-document", "核心文件", Boolean(model.primaryDocument)),
+        ...link("#primary-document-reading", "文件導讀", Boolean(model.primaryDocument)),
       ],
     },
     {

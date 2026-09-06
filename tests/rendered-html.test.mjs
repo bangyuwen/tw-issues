@@ -211,13 +211,15 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="skip-link" href="#main-content"/);
   assert.match(html, /id="main-content" tabindex="-1" class="hero hero-detail"/);
   assert.match(html, /class="dossier-meta dossier-meta--case"/);
+  assert.match(html, /href="#primary-document">直達核心文件/);
   assert.match(html, /查看已列來源/);
   assert.match(html, /58<!-- --> 筆/);
   assert.match(html, /class="article-nav article-nav--case case-toc"/);
   assert.match(html, /id="case-contents"/);
   assert.match(html, /href="#context"[^>]*>.*?案情範圍與證據界線/);
   const hsinchuNav = html.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  assert.doesNotMatch(hsinchuNav, /href="#primary-document(?:-reading)?"/);
+  assert.match(hsinchuNav, /href="#primary-document">核心文件/);
+  assert.match(hsinchuNav, /href="#primary-document-reading">文件導讀/);
   assert.match(html, /href="#context"[^>]*>.*?案情範圍/);
   assert.match(html, /href="#claims"[^>]*>.*?已知與未決/);
   assert.match(html, /href="#progress"[^>]*>.*?時間與程序/);
@@ -228,18 +230,19 @@ test("Hsinchu stadium page presents people, political narratives, and evidence b
   assert.match(html, /class="case-reading-legend"/);
   assert.match(html, /aria-label="來源 01：/);
   assert.doesNotMatch(html, /class="context-phases"/);
-  const sourceFirstOrder = [
+  const issueFirstOrder = [
     'id="main-content"',
-    'id="primary-document"',
-    'id="primary-document-reading"',
     'class="case-reading-legend"',
     'id="case-contents"',
+    'id="dossier-chapter-01"',
     'id="context"',
     'id="responsibility-lines"',
     'id="coverage-limits"',
+    'id="primary-document"',
+    'id="primary-document-reading"',
   ].map((token) => html.indexOf(token));
-  assert.ok(sourceFirstOrder.every((position) => position >= 0), "every source-first Hsinchu landmark is rendered");
-  assert.deepEqual(sourceFirstOrder, [...sourceFirstOrder].sort((left, right) => left - right));
+  assert.ok(issueFirstOrder.every((position) => position >= 0), "every issue-first Hsinchu landmark is rendered");
+  assert.deepEqual(issueFirstOrder, [...issueFirstOrder].sort((left, right) => left - right));
   assert.ok(html.indexOf('id="context"') < html.indexOf('id="claims"'), "context overview precedes known and unresolved evidence");
   assert.ok(html.indexOf('id="claims"') < html.indexOf('id="progress"'), "known and unresolved evidence precede the detailed timeline");
   assert.ok(html.indexOf('id="progress"') < html.indexOf('id="administration-actions"'), "timeline precedes the administration action audit");
@@ -644,14 +647,15 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   for (const target of [
     "context", "responsibility-lines", "coverage-limits", "claims", "questions", "progress",
     "administration-actions", "proceedings", "people", "reports", "narratives", "analysis",
-    "social-observations", "sources",
+    "social-observations", "sources", "primary-document", "primary-document-reading",
   ]) {
     assert.match(nav, new RegExp(`href="#${target}"`));
     assert.match(html, new RegExp(`(?:id|data-target)="${target}"`));
   }
-  assert.doesNotMatch(nav, /href="#primary-document(?:-reading)?"/);
+  assert.match(nav, /href="#primary-document">核心文件/);
+  assert.match(nav, /href="#primary-document-reading">文件導讀/);
   assert.match(html, /id="primary-document-reading"/);
-  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits"]
+  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits", "primary-document", "primary-document-reading"]
     .map((target) => nav.indexOf(`href="#${target}"`));
   assert.ok(chapterOneTargets.every((position) => position >= 0));
   assert.deepEqual(chapterOneTargets, [...chapterOneTargets].sort((left, right) => left - right));
@@ -659,13 +663,14 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   assert.ok(coverage.length > 0);
   const renderedOrder = [
     'id="main-content"',
-    'id="primary-document"',
-    'id="primary-document-reading"',
     'class="case-reading-legend"',
     'id="case-contents"',
+    'id="dossier-chapter-01"',
     'id="context"',
     'id="responsibility-lines"',
     'id="coverage-limits"',
+    'id="primary-document"',
+    'id="primary-document-reading"',
   ].map((token) => html.indexOf(token));
   assert.ok(renderedOrder.every((position) => position >= 0));
   assert.deepEqual(renderedOrder, [...renderedOrder].sort((left, right) => left - right));
@@ -710,13 +715,18 @@ test("Hsinchu renders six chapters, complete secondary targets, and public-safe 
   const gatewayStart = visibleDocument.indexOf('id="primary-document"');
   const guideStart = visibleDocument.indexOf('id="primary-document-reading"');
   const legendStart = visibleDocument.indexOf('class="case-reading-legend"');
+  const contentsStart = visibleDocument.indexOf('id="case-contents"');
+  const chapterOneStart = visibleDocument.indexOf('class="dossier-chapter dossier-chapter--01"');
+  const chapterTwoStart = visibleDocument.indexOf('class="dossier-chapter dossier-chapter--02"');
   const contextStart = visibleDocument.indexOf('id="context"');
   const gateway = visibleDocument.slice(gatewayStart, guideStart);
-  const guide = visibleDocument.slice(guideStart, legendStart);
+  const guide = visibleDocument.slice(guideStart, chapterTwoStart);
   const gatewayText = gateway.replaceAll("<!-- -->", "");
   const visibleText = visibleDocument.replaceAll("<!-- -->", "");
   const guideText = guide.replaceAll("<!-- -->", "");
-  assert.ok(gatewayStart >= 0 && guideStart >= 0 && legendStart >= 0 && contextStart >= 0);
+  assert.ok(gatewayStart >= 0 && guideStart >= 0 && legendStart >= 0 && contentsStart >= 0 && chapterOneStart >= 0 && chapterTwoStart >= 0 && contextStart >= 0);
+  const issueFirstOrder = [legendStart, contentsStart, chapterOneStart, contextStart, gatewayStart, guideStart];
+  assert.deepEqual(issueFirstOrder, [...issueFirstOrder].sort((left, right) => left - right));
   assert.match(gatewayText, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
   assert.match(gatewayText, /可見頁面可直接支持什麼？/);
   const gatewayOrder = [
