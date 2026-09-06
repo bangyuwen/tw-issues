@@ -1,0 +1,48 @@
+const {chromium}=require('/Users/bangyuwen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs'); const assert=require('node:assert/strict');
+const base='http://127.0.0.1:4317', topic='/topics/ezway-preauthorization';
+const A='cite-ezway-effective-date-preauth', B='cite-ezway-process-preauth', source='source-ezway-preauth';
+const results={browser:null,steps:[],screens:[],errors:[]};
+async function snap(page,label){ const value=await page.evaluate(()=>({url:location.pathname+location.search+location.hash,state:history.state,focus:document.activeElement?.id||document.activeElement?.tagName,open:document.querySelector('#sources')?.open,historyLength:history.length,preferred:document.querySelector('.ezway-preferred-return a')?.getAttribute('href')??null}));results.steps.push({label,...value});return value; }
+async function hash(page,id){await page.waitForFunction(id=>location.hash==='#'+id,id);await page.waitForTimeout(80);}
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true}); results.browser=browser.version();
+ try {
+ const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});const page=await context.newPage();page.on('pageerror',e=>results.errors.push(e.message));
+ await page.goto(base+topic+'?reader=qa#issue-contents');await page.waitForTimeout(500);
+ await page.evaluate(()=>history.replaceState({...history.state,qaKeep:{value:7}},'',location.href));
+ await snap(page,'S5 start');
+ await page.locator(`[data-citation-inspect="${B}"]`).click();await hash(page,source);
+ let s=await snap(page,'S5 inspect B');assert.equal(s.focus,source);assert.equal(s.open,true);assert.equal(s.state.qaKeep.value,7);assert.equal(s.state.twIssuesCitationOrigin.anchorId,B);assert.equal(s.preferred,'#'+B);
+ const length=s.historyLength;
+ await page.goBack();await hash(page,B);s=await snap(page,'S5 Back B');assert.equal(s.focus,B);assert.equal(s.historyLength,length);
+ await page.goForward();await hash(page,source);s=await snap(page,'S5 Forward source');assert.equal(s.focus,source);assert.equal(s.preferred,'#'+B);assert.equal(s.historyLength,length);
+ await page.getByRole('link',{name:'回到引用處',exact:true}).click();await hash(page,B);s=await snap(page,'S5 preferred return B');assert.equal(s.focus,B);
+ await page.goBack();await hash(page,source);await snap(page,'S5 Back after return');
+ // Canonical action opens precisely its declared URL; stub external response to avoid fetching publisher sites.
+ let requested;await context.route('https://**/*',route=>{requested=route.request().url();return route.fulfill({status:200,body:'Canonical navigation target intercepted for local QA'});});
+ const canonical=page.locator(`#${B} a[target="_blank"]`);const href=await canonical.getAttribute('href');assert.equal(await canonical.getAttribute('rel'),'noreferrer');const before=await snap(page,'S2 before canonical');
+ const popupPromise=page.waitForEvent('popup');await canonical.click();const popup=await popupPromise;await popup.waitForLoadState();assert.equal(requested,href);const after=await snap(page,'S2 after canonical');assert.equal(after.url,before.url);assert.deepEqual(after.state,before.state);results.canonical={href,target:'_blank',rel:'noreferrer',requested};await popup.close();
+ // Direct entry and every invalid origin.
+ await page.goto(base+topic+'#'+source);await page.waitForTimeout(200);s=await snap(page,'S3 direct source');assert.equal(s.preferred,null);assert.equal(s.focus,source);
+ for(const origin of [{topicSlug:'wrong-topic',anchorId:B,sourceRef:source},{topicSlug:'ezway-preauthorization',anchorId:B,sourceRef:'source-ezway-faq'},{topicSlug:'ezway-preauthorization',anchorId:'unmapped',sourceRef:source}]){
+   await page.evaluate(origin=>{history.replaceState({twIssuesCitationOrigin:origin},'',location.href);dispatchEvent(new PopStateEvent('popstate'));},origin);s=await snap(page,'S3 invalid '+JSON.stringify(origin));assert.equal(s.preferred,null);
+ }
+ // Repeated source inspections use the current entry, not a global last origin.
+ await page.locator(`[data-citation-inspect="${A}"]`).click();await hash(page,source);s=await snap(page,'S6 inspect A');assert.equal(s.preferred,'#'+A);
+ await page.locator(`[data-citation-inspect="${B}"]`).click();await hash(page,source);s=await snap(page,'S6 inspect B again');assert.equal(s.preferred,'#'+B);
+ const beforeModified=await snap(page,'S6 before modified');
+ await page.locator(`[data-citation-inspect="${B}"]`).dispatchEvent('click',{button:0,ctrlKey:true});s=await snap(page,'S6 modified ctrl click');assert.equal(s.url,beforeModified.url);assert.deepEqual(s.state,beforeModified.state);
+ const newTabPromise=context.waitForEvent('page');await page.locator(`[data-citation-inspect="${B}"]`).click({button:'middle'});const tab=await newTabPromise;await tab.waitForLoadState();await tab.waitForTimeout(200);s=await snap(tab,'S6 native new tab');assert.equal(s.preferred,null);assert.equal(s.state?.twIssuesCitationOrigin,undefined);await tab.close();
+ for(const id of ['main-content','claims','reports','progress','questions','sources','source-ezway-faq']){await page.evaluate(id=>{location.hash=id},id);await hash(page,id);s=await snap(page,'S6 legacy '+id);assert.equal(s.preferred,null);}
+ // Keyboard activation.
+ await page.locator(`[data-citation-inspect="${B}"]`).focus();await page.keyboard.press('Enter');await hash(page,source);s=await snap(page,'Keyboard Enter inspect');assert.equal(s.focus,source);
+ const session=await context.newCDPSession(page);const ax=await session.send('Accessibility.getFullAXTree');results.accessibility={main:ax.nodes.filter(n=>n.role?.value==='main').length,navigations:ax.nodes.filter(n=>n.role?.value==='navigation').map(n=>n.name?.value),headings:ax.nodes.filter(n=>n.role?.value==='heading').map(n=>({name:n.name?.value,level:n.properties?.find(p=>p.name==='level')?.value.value})),note:'Chrome accessibility tree inspection, not a screen-reader user test'};
+ for(const width of [1280,640,390,320]){await page.setViewportSize({width,height:900});await page.goto(base+topic);await page.waitForTimeout(200);const geometry=await page.evaluate(()=>({innerWidth,scrollWidth:document.documentElement.scrollWidth,scrollBehavior:getComputedStyle(document.documentElement).scrollBehavior,overflow:[...document.querySelectorAll('main *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.right>innerWidth+1||r.left< -1)}).slice(0,8).map(el=>({tag:el.tagName,id:el.id,cls:el.className}))}));results.screens.push({width,...geometry});assert.ok(geometry.scrollWidth<=width+1,JSON.stringify(geometry));await page.screenshot({path:`/private/tmp/tw-issues-ia-ezway-${width}.png`});}
+ // No-JavaScript SSR and manual round trip.
+ const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:900},reducedMotion:'reduce'});const plain=await nojs.newPage();await plain.goto(base+topic+'#issue-contents');await plain.locator(`[data-citation-inspect="${B}"]`).click();await hash(plain,source);await snap(plain,'S4 noJS inspection');if(!await plain.locator('#sources').getAttribute('open').then(v=>v!==null))await plain.locator('#sources > summary').click();
+ await plain.locator(`#${source} a[href="#${B}"]`).click();await hash(plain,B);await snap(plain,'S4 labeled return B');await plain.goBack();await hash(plain,source);await snap(plain,'S4 Back source');await plain.goForward();await hash(plain,B);await snap(plain,'S4 Forward B');
+ await plain.goto(base+'/#recent-updates');results.home=await plain.evaluate(()=>({hash:location.hash,all:[...document.querySelectorAll('#all-issues a[href^="/topics/"]')].map(a=>a.getAttribute('href')),recent:[...document.querySelectorAll('#recent-updates h3 a')].map(a=>a.getAttribute('href')),recentTop:document.querySelector('#recent-updates').getBoundingClientRect().top,scrollWidth:document.documentElement.scrollWidth,width:innerWidth}));assert.equal(results.home.all.length,12);assert.equal(results.home.recent.length,12);assert.ok(results.home.scrollWidth<=results.home.width+1);await plain.screenshot({path:'/private/tmp/tw-issues-ia-home-390.png'});
+ await nojs.close();await context.close();results.status='PASS';
+ }catch(e){results.status='FAIL';results.failure=e.stack;throw e;}finally{fs.writeFileSync('/private/tmp/tw-issues-ia-browser-results.json',JSON.stringify(results,null,2));await browser.close();}
+})().catch(e=>{console.error(e.message);process.exitCode=1});

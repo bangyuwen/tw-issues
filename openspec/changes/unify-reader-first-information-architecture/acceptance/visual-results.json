@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/",
+    "contrast": {
+      "samples": 334,
+      "failed": [],
+      "minimum": 3.354278558641016
+    },
+    "focus": null
+  },
+  {
+    "path": "/topics/ezway-preauthorization",
+    "contrast": {
+      "samples": 262,
+      "failed": [],
+      "minimum": 5.353188473799392
+    },
+    "focus": {
+      "outline": "rgb(255, 254, 250)",
+      "background": "rgb(16, 41, 54)"
+    }
+  },
+  {
+    "basePathFixture": {
+      "path": "/tw-issues/",
+      "hash": "#recent-updates",
+      "topicLinks": 24,
+      "top": -0.0625
+    },
+    "mode": "no JavaScript, SSR with configured base path; fixture route only, not a deployed build"
+  }
+]

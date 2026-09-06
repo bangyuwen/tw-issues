@@ -1,0 +1,16 @@
+{
+  "baselineCommit": "67fc1b5efc4c4fd639874d92c7d1f92b5047d813",
+  "kind": "uncommitted working-tree implementation, as explicitly requested",
+  "fingerprint": "8ab6b4cc855f75669056e98ce68270c6f237082d34eb5ccbc331c02b217179fb",
+  "files": {
+    "app/page.tsx": "efe86f7ef4a1e2de4b962e091efc69cf5b8f6389f0dd897dc435167f6277955b",
+    "app/dossier-page.tsx": "199a80cb671bc20b52406e45cfc48273f358150fa78e92ec5bf9261b005ff55c",
+    "app/ezway-dossier.tsx": "3b3ca32890d21ed5f9f2c54f5fa289fda6bd6c6dc530f7b1dfef8f66cfb85d99",
+    "app/ezway-reading-map.ts": "67c905984eab3be8319a81fd0fcc08acb690ba30a19a7adeb05773181d5df440",
+    "app/ezway-source-disclosure.tsx": "7af5ea93c4ed1d4f36acaf91779acf92377f969a30bcf3fca0a750c4c97c2af8",
+    "app/globals.css": "2d98a3d3bfb42732a44117ab69fa135d36fe59870ccd0d5bdc2ae6a7e82e3806",
+    "tests/topic-page.test.tsx": "4f868552eb1607ef56fb4eada12c69810e22be694e19162a52db8e2de2869750",
+    "tests/rendered-html.test.mjs": "b2a19d2ccc1b7209d57e3cfb8e28f47158ec00044a4a443a10b772c2b90f3d19"
+  },
+  "inventorySha256": "73ac2d743a15667b602162882b8313b8f2214d8150c8770dea2d7e0823208e30"
+}

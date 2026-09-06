@@ -4,6 +4,7 @@ import type { AdministrationAction, ContextOverview, DeepResearchTopic, Politica
 import { getHsinchuDossierChapters, type AttributedReportModel, type ClaimCollectionModel, type CoverageLimitViewModel, type DossierPageModel, type HsinchuChapterDescriptor, type TimelineGroup, type TimelinePhaseModel } from "./dossier-page-model";
 import SourcesDisclosure from "./topics/[slug]/source-disclosure";
 import EventDisclosure from "./event-disclosure";
+import EzwayDossier, { buildEzwayReadingModel } from "./ezway-dossier";
 
 const eventStatusCopy = {
   verified: { label: "已確認", target: "#claims" },
@@ -473,6 +474,8 @@ function ArticleNavigation({
 }
 
 export default function DossierPage({ model }: { model: DossierPageModel }) {
+  const ezwayReading = buildEzwayReadingModel(model);
+  if (ezwayReading) return <EzwayDossier model={model} reading={ezwayReading} />;
   const { topic, displayTitle, collections, attributedSpeakerGroups, attributedReports = [], coverageLimits = [], hsinchuChapters = [], primaryDocument, contextOverview, administrationActions = [], proceedingTracks = [], publicPeople = [], politicalNarratives = [], analysisClaims = [], editorialPositions = [], socialObservations = [], socialSampleSize, publicSources, sourceById, timelineGroups, timelinePhases, unphasedContextPhases, unphasedTimelineGroups } = model;
   if (!topic || !displayTitle) throw new Error("Dossier page metadata is required");
   const isCaseDossier = topic.slug === "hsinchu-baseball-stadium";
