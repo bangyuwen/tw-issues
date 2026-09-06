@@ -537,7 +537,7 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
   </SourcesDisclosure>;
 
   const caseContent = isCaseDossier ? <>
-    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{contextSection}{coverageLimitsSection}</HsinchuChapter>}
+    {caseChapters[0] && <HsinchuChapter chapter={caseChapters[0]}>{contextSection}{coverageLimitsSection}{primaryDocumentGateway}{primaryDocumentReadingSection}</HsinchuChapter>}
     {caseChapters[1] && <HsinchuChapter chapter={caseChapters[1]}>{evidenceSection}</HsinchuChapter>}
     {caseChapters[2] && <HsinchuChapter chapter={caseChapters[2]}>{chronologySection}{administrationSection}{proceedingsSection}</HsinchuChapter>}
     {caseChapters[3] && <HsinchuChapter chapter={caseChapters[3]}>{peopleSection}{reportsSection}{narrativesSection}</HsinchuChapter>}
@@ -549,11 +549,11 @@ export default function DossierPage({ model }: { model: DossierPageModel }) {
     <a className="skip-link" href="#main-content">跳至主要內容</a>
     <header className="topbar topbar-detail"><SiteLink className="brand" href="/"><span className="brand-mark">T</span> TW <em>Issues</em></SiteLink><SiteLink className="back-link" href="/">← 議題索引</SiteLink></header>
     <section id="main-content" tabIndex={-1} className="hero hero-detail">
-      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。{isCaseDossier ? primaryDocument ? "先核對核心文件的來源與可見範圍，再界定案情與證據邊界，並分辨已知與未決、時間與程序、人物說法，以及 TW Issues 的分析。" : "先界定案情與證據邊界，再分辨已知與未決、時間與程序、人物說法，以及 TW Issues 的分析。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
-      {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
+      <div className="hero-detail-copy"><p className="eyebrow">深度研究 · 公開命題證據</p><h1>{displayTitle}</h1><p className="lede">更新於 {topic.lastUpdated}。{isCaseDossier ? "先從案情範圍、責任與證據界線開始，再進入核心文件與完整時間脈絡；也可直接跳到核心文件的可見範圍與導讀。" : "先看事情如何發展，再分辨哪些資訊已確認、各方怎麼說，以及哪些問題仍待釐清。"}</p></div>
+      {isCaseDossier ? <aside className="dossier-meta dossier-meta--case"><p>資料範圍</p><strong>{publicSources.length} 筆</strong><a href="#primary-document">直達核心文件</a><a href="#sources">查看已列來源</a><span>每筆均附 canonical source link；數量是資料索引，不代表完整性</span></aside> : <aside className="dossier-meta"><p>公開來源</p><strong>{String(publicSources.length).padStart(2, "0")}</strong><span>筆可核對來源</span></aside>}
     </section>
-    {primaryDocumentGateway}
-    {primaryDocumentReadingSection}
+    {!isCaseDossier && primaryDocumentGateway}
+    {!isCaseDossier && primaryDocumentReadingSection}
     {isCaseDossier && <CaseReadingLegend />}
     <ArticleNavigation
       isCaseDossier={isCaseDossier}

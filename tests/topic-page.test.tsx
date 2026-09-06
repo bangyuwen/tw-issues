@@ -195,8 +195,8 @@ test("topic page publishes an eligible Hsinchu primary-document-only projection"
 
   assert.match(html, /id="primary-document"/);
   assert.match(html, /id="primary-document-reading"/);
-  assert.doesNotMatch(html, /href="#primary-document-reading"/);
-  assert.doesNotMatch(html, /href="#primary-document"/);
+  assert.match(html, /href="#primary-document-reading"/);
+  assert.match(html, /href="#primary-document"/);
   assert.match(html, /新竹棒球場案不起訴處分書影像（第 3–22 頁）/);
   assert.match(html, /這批不起訴處分書影像由新竹市議員楊玲宜於 Threads 公開/);
   assert.match(html, /可見頁面可直接支持什麼？/);
@@ -765,12 +765,12 @@ test("Hsinchu uses one downstream-only table of contents without changing generi
   assert.match(hsinchu, /id="case-contents"/);
   assert.doesNotMatch(hsinchu, /article-nav-groups|case-map-nav|案情問題導覽/);
   const nav = hsinchu.match(/<nav[^>]+id="case-contents"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits"];
+  const chapterOneTargets = ["context", "responsibility-lines", "coverage-limits", "primary-document", "primary-document-reading"];
   const chapterOneLinkPositions = chapterOneTargets.map((id) => nav.indexOf(`href="#${id}"`));
   assert.ok(chapterOneLinkPositions.every((position) => position >= 0));
-  assert.doesNotMatch(nav, /href="#primary-document(?:-reading)?"/);
   assert.deepEqual(chapterOneLinkPositions, [...chapterOneLinkPositions].sort((left, right) => left - right));
-  const order = ["primary-document", "primary-document-reading", "case-contents", "context", "responsibility-lines", "coverage-limits", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
+  assert.match(hsinchu, /href="#primary-document">直達核心文件/);
+  const order = ["case-contents", "dossier-chapter-01", "context", "responsibility-lines", "coverage-limits", "primary-document", "primary-document-reading", "claims", "progress", "administration-actions", "proceedings", "people", "reports", "narratives", "analysis", "social-observations", "sources"]
     .map((id) => hsinchu.indexOf(`id="${id}"`));
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
@@ -1177,6 +1177,7 @@ test("Hsinchu model exposes the primary document, public-safe coverage limits, a
   ]);
   assert.deepEqual(model.hsinchuChapters.flatMap(({ links }) => links.map(({ href }) => href)), [
     "#context", "#responsibility-lines", "#coverage-limits",
+    "#primary-document", "#primary-document-reading",
     "#claims", "#questions",
     "#progress", "#administration-actions", "#proceedings",
     "#people", "#reports", "#narratives",
@@ -1349,15 +1350,128 @@ import { ezwayCitations, ezwaySlug } from "../app/ezway-reading-map";
 import { validCitationOrigin } from "../app/ezway-source-disclosure";
 
 const preservation = JSON.parse(readFileSync(new URL("../openspec/changes/unify-reader-first-information-architecture/content-preservation.json", import.meta.url), "utf8"));
+const hsinchuPreservation = JSON.parse(readFileSync(new URL("../openspec/changes/pilot-hsinchu-reader-first-ia/content-preservation.json", import.meta.url), "utf8"));
+const hsinchuSlug = "hsinchu-baseball-stadium";
 const digest = (bytes: string | Buffer) => createHash("sha256").update(bytes).digest("hex");
 const escapedText = (value: string) => renderToStaticMarkup(<span>{value}</span>).slice(6, -7);
 
-test("reader-first pilot preserves public input bytes and all eleven untouched topic outputs", () => {
+test("reader-first pilot preserves public input bytes and all untouched topic outputs", () => {
   for (const [path, sha256] of Object.entries(preservation.publicFiles)) assert.equal(digest(readFileSync(path)), sha256, path);
-  for (const topic of deepResearchTopics.filter(topic => topic.slug !== ezwaySlug)) {
+  for (const topic of deepResearchTopics.filter(topic => topic.slug !== ezwaySlug && topic.slug !== hsinchuSlug)) {
     const html = renderToStaticMarkup(<TopicPage params={{ slug: topic.slug }} />);
     assert.equal(digest(html), preservation.baselineRendered[topic.slug].sha256, topic.slug);
   }
+});
+
+test("Hsinchu pilot preserves the public projection while moving only its reading order", () => {
+  for (const [path, sha256] of Object.entries(hsinchuPreservation.publicFiles)) assert.equal(digest(readFileSync(path)), sha256, path);
+  const projection = publicEvidenceBySlug[hsinchuSlug];
+  assert.equal(projection.claims.length, hsinchuPreservation.hsinchu.counts.claims);
+  assert.equal(projection.attributedClaims.length, hsinchuPreservation.hsinchu.counts.attributedClaims);
+  assert.equal(projection.openQuestions.length, hsinchuPreservation.hsinchu.counts.openQuestions);
+  assert.equal(projection.reportedTimeline?.length, hsinchuPreservation.hsinchu.counts.reportedTimeline);
+  assert.equal(projection.coverageGaps?.length, hsinchuPreservation.hsinchu.counts.coverageGaps);
+  assert.equal(projection.primaryDocument?.source.publicRef, hsinchuPreservation.hsinchu.primaryDocument.sourceRef);
+  assert.deepEqual(
+    { first: projection.primaryDocument?.coverage.firstObservedPage, last: projection.primaryDocument?.coverage.lastObservedPage },
+    { first: hsinchuPreservation.hsinchu.primaryDocument.coverage.firstObservedPage, last: hsinchuPreservation.hsinchu.primaryDocument.coverage.lastObservedPage },
+  );
+  type FrozenRecordInput = {
+    publicKey?: string | null;
+    claimType?: string | null;
+    status?: string | null;
+    speakers?: unknown[];
+    sourceRefs?: string[];
+    sources?: Array<{ publicRef: string }>;
+  };
+  const sourceRefsFor = (value: unknown) => {
+    const record = value as FrozenRecordInput;
+    return record.sourceRefs ?? record.sources?.map(({ publicRef }) => publicRef) ?? [];
+  };
+  const compactRecord = (value: unknown, key: string) => {
+    const record = value as FrozenRecordInput;
+    return {
+      key,
+      publicKey: record.publicKey ?? null,
+      claimType: record.claimType ?? null,
+      status: record.status ?? null,
+      speakers: record.speakers ?? [],
+      sourceRefs: sourceRefsFor(record),
+      sha256: digest(JSON.stringify(value)),
+    };
+  };
+  const frozenRecords = hsinchuPreservation.hsinchu.records;
+  const plainCollections: Array<[keyof typeof frozenRecords, string, readonly unknown[]]> = [
+    ["claims", "claims", projection.claims],
+    ["attributedClaims", "attributedClaims", projection.attributedClaims],
+    ["openQuestions", "openQuestions", projection.openQuestions],
+    ["administrationActions", "administrationActions", projection.administrationActions ?? []],
+    ["proceedingTracks", "proceedingTracks", projection.proceedingTracks ?? []],
+    ["publicPeople", "publicPeople", projection.publicPeople ?? []],
+    ["politicalNarratives", "politicalNarratives", projection.politicalNarratives ?? []],
+    ["analysisClaims", "analysisClaims", projection.analysisClaims ?? []],
+    ["editorialPositions", "editorialPositions", projection.editorialPositions ?? []],
+    ["socialObservations", "socialObservations", projection.socialObservations ?? []],
+    ["coverageGaps", "coverageGaps", projection.coverageGaps ?? []],
+  ];
+  for (const [inventoryKey, prefix, records] of plainCollections) {
+    const actual = records.map((record, index) => compactRecord(record, `${prefix}:${(record as FrozenRecordInput).publicKey ?? index}`));
+    assert.deepEqual(actual, frozenRecords[inventoryKey], `${inventoryKey} fingerprints and source refs remain frozen`);
+  }
+  const timelineRecords = (projection.reportedTimeline ?? []).map((event) => ({
+    key: `timeline:${event.publicKey}`,
+    occurredAt: event.occurredAt,
+    headlineSha256: digest(event.headline),
+    items: event.items.map((item, itemIndex) => compactRecord(item, `timeline:${event.publicKey}:item:${itemIndex}`)),
+    sha256: digest(JSON.stringify(event)),
+  }));
+  assert.deepEqual(timelineRecords, frozenRecords.timeline, "timeline event and item fingerprints remain frozen");
+  const attributedGroups = (projection.attributedSpeakerGroups ?? []).map((group, groupIndex) => {
+    const groupKey = `attributedGroup:${group.speaker.name}:${groupIndex}`;
+    return {
+      key: groupKey,
+      speaker: group.speaker,
+      stanceSummarySha256: digest(group.stanceSummary ?? ""),
+      claims: group.claims.map((record, claimIndex) => compactRecord(record, `attributedGroup:${group.speaker.name}:${claimIndex}`)),
+      sha256: digest(JSON.stringify(group)),
+    };
+  });
+  assert.deepEqual(attributedGroups, frozenRecords.attributedGroups, "attributed group fingerprints and source refs remain frozen");
+  const sourceRecords = new Map<string, { canonicalUrl: string; title: string; publisher: string; publishedAt: string; displayRole?: string }>();
+  const collectSources = (value: unknown): void => {
+    if (Array.isArray(value)) {
+      value.forEach(collectSources);
+      return;
+    }
+    if (!value || typeof value !== "object") return;
+    const record = value as Record<string, unknown>;
+    if (typeof record.publicRef === "string" && typeof record.canonicalUrl === "string" && typeof record.title === "string" && typeof record.publisher === "string" && typeof record.publishedAt === "string") {
+      const source = { canonicalUrl: record.canonicalUrl, title: record.title, publisher: record.publisher, publishedAt: record.publishedAt, ...(typeof record.displayRole === "string" ? { displayRole: record.displayRole } : {}) };
+      const previous = sourceRecords.get(record.publicRef);
+      if (previous) assert.deepEqual(source, previous, `${record.publicRef} source metadata remains canonical`);
+      sourceRecords.set(record.publicRef, source);
+    }
+    Object.values(record).forEach(collectSources);
+  };
+  collectSources(projection);
+  const hsinchuModel = buildDossierPageModel(projection, {
+    topic: { slug: hsinchuSlug, title: "新竹棒球場爭議", topicId: "hsinchu-baseball-stadium-2026", lastUpdated: "2026-08-29", publicEvidenceAvailable: true },
+    displayTitle: "新竹棒球場爭議",
+  });
+  assert.equal(hsinchuModel.publicSources.length, hsinchuPreservation.hsinchu.sourceRefs.length);
+  assert.deepEqual(hsinchuModel.publicSources.map(({ publicRef }) => publicRef).sort(), [...hsinchuPreservation.hsinchu.sourceRefs].sort());
+  for (const source of hsinchuModel.publicSources) {
+    const frozen = sourceRecords.get(source.publicRef);
+    assert.ok(frozen, `${source.publicRef} has a source record`);
+    assert.deepEqual({ canonicalUrl: source.canonicalUrl, title: source.title, publisher: source.publisher, publishedAt: source.publishedAt, ...(source.displayRole ? { displayRole: source.displayRole } : {}) }, frozen, `${source.publicRef} canonical metadata remains unchanged`);
+  }
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: hsinchuSlug }} />);
+  const order = ["case-contents", "context", "coverage-limits", "primary-document", "primary-document-reading", "claims"].map((id) => html.indexOf(`id="${id}"`));
+  assert.ok(order.every((position) => position >= 0));
+  assert.deepEqual(order, [...order].sort((left, right) => left - right));
+  assert.equal((html.match(/id="primary-document"/g) ?? []).length, 1);
+  assert.equal((html.match(/id="primary-document-reading"/g) ?? []).length, 1);
+  assert.match(html, /target="_blank" rel="noreferrer"/);
 });
 
 test("homepage has two native sections with precisely the approved topic links", () => {
