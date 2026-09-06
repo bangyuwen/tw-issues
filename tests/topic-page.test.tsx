@@ -488,7 +488,7 @@ test("structured speakers provide conservative attribution when statement parsin
 });
 
 test("index keeps attribution and status beside real attributed and mixed latest events", () => {
-  const html = renderToStaticMarkup(<DossierIndexPage />);
+  const html = renderToStaticMarkup(<DossierIndexPage />).split('id="recent-updates"')[1];
   const stadiumCard = html.match(/href="\/topics\/hsinchu-baseball-stadium"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const foodCard = html.match(/href="\/topics\/benzopyrene-food-safety"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
   const japanCard = html.match(/href="\/topics\/japan-taiwan-alliance"[\s\S]*?<b aria-hidden="true">↗<\/b>/)?.[0] ?? "";
@@ -1338,4 +1338,123 @@ test("Hsinchu preserves all 16 timeline events and 17 inner items with their evi
   assert.equal(model.analysisClaims?.length, 5);
   assert.equal(model.socialObservations.length, 10);
   assert.equal(model.publicSources.length, 58);
+});
+
+// Reader-first pilot checks use the frozen public inventory, never regenerated snapshots.
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { PageUpdateDate, sortByPageUpdate, validPageDate } from "../app/page";
+import { deepResearchTopics } from "../app/topic-data";
+import { ezwayCitations, ezwaySlug } from "../app/ezway-reading-map";
+import { validCitationOrigin } from "../app/ezway-source-disclosure";
+
+const preservation = JSON.parse(readFileSync(new URL("../openspec/changes/unify-reader-first-information-architecture/content-preservation.json", import.meta.url), "utf8"));
+const digest = (bytes: string | Buffer) => createHash("sha256").update(bytes).digest("hex");
+const escapedText = (value: string) => renderToStaticMarkup(<span>{value}</span>).slice(6, -7);
+
+test("reader-first pilot preserves public input bytes and all eleven untouched topic outputs", () => {
+  for (const [path, sha256] of Object.entries(preservation.publicFiles)) assert.equal(digest(readFileSync(path)), sha256, path);
+  for (const topic of deepResearchTopics.filter(topic => topic.slug !== ezwaySlug)) {
+    const html = renderToStaticMarkup(<TopicPage params={{ slug: topic.slug }} />);
+    assert.equal(digest(html), preservation.baselineRendered[topic.slug].sha256, topic.slug);
+  }
+});
+
+test("homepage has two native sections with precisely the approved topic links", () => {
+  const html = renderToStaticMarkup(<DossierIndexPage />);
+  assert.ok(html.indexOf('id="all-issues"') < html.indexOf('id="recent-updates"'));
+  for (const id of ["all-issues", "recent-updates"]) {
+    assert.ok(html.includes(`href="#${id}"`));
+    const section = html.slice(html.indexOf(`id="${id}"`), id === "all-issues" ? html.indexOf('id="recent-updates"') : html.indexOf('class="index-note"'));
+    const slugs = [...section.matchAll(/href="\/topics\/([^"]+)"/g)].map(match => match[1]);
+    const expected = id === "all-issues" ? deepResearchTopics : sortByPageUpdate(deepResearchTopics);
+    assert.deepEqual(slugs, expected.map(topic => topic.slug));
+    for (const slug of preservation.excludedSlugs) assert.ok(!slugs.includes(slug));
+  }
+  assert.ok(html.includes("頁面更新"));
+  assert.ok(html.includes("事件日期"));
+});
+
+test("page update dates sort by valid calendar date then slug, with invalid dates last", () => {
+  const input = [
+    { slug: "z", lastUpdated: "2026-03-01" }, { slug: "bad-z", lastUpdated: "2026-02-30" },
+    { slug: "a", lastUpdated: "2026-03-01" }, { slug: "older", lastUpdated: "2025-12-31" },
+    { slug: "bad-a" }, { slug: "bad-b", lastUpdated: "not-a-date" },
+  ];
+  assert.deepEqual(sortByPageUpdate(input).map(topic => topic.slug), ["a", "z", "older", "bad-a", "bad-b", "bad-z"]);
+  assert.equal(input[0].slug, "z");
+  assert.equal(validPageDate("2024-02-29"), true);
+  assert.equal(validPageDate("2026-02-29"), false);
+  assert.equal(renderToStaticMarkup(<PageUpdateDate date="2026-02-30" />), "<span>頁面更新日期未提供</span>");
+});
+
+test("EZ WAY preserves every claim boundary, attribution, source and legacy fragment", () => {
+  const projection = publicEvidenceBySlug[ezwaySlug];
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: ezwaySlug }} />);
+  assert.ok(html.includes("dossier-shell--ezway"));
+  const records = [...projection.claims, ...projection.openQuestions, ...projection.attributedSpeakerGroups!.flatMap(group => group.claims), ...projection.reportedTimeline!.flatMap(event => event.items)];
+  for (const record of records) {
+    for (const text of [record.statement, record.proofScope, ...record.limitations]) assert.ok(html.includes(escapedText(text)), text);
+    for (const source of record.sources) assert.ok(html.includes(`href="${escapedText(source.canonicalUrl)}"`));
+  }
+  for (const group of projection.attributedSpeakerGroups!) {
+    for (const text of [group.speaker.name, group.speaker.role, group.stanceSummary].filter(Boolean)) assert.ok(html.includes(escapedText(text!)));
+  }
+  const ids = [...html.matchAll(/ id="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const id of preservation.baselineRendered[ezwaySlug].anchors) assert.ok(ids.includes(id), id);
+  const order = ["claims", "ezway-process", "reports", "progress", "questions", "sources"];
+  assert.deepEqual(ids.filter(id => order.includes(id)), order);
+  for (const entry of preservation.citations) {
+    assert.ok(html.includes(`id="${entry.anchorId}" tabindex="-1"`), entry.anchorId);
+    assert.ok(html.includes(`href="#${entry.anchorId}"`));
+    assert.ok(html.includes(escapedText(entry.returnLabel)));
+  }
+  const beforeSources = preservation.baselineRendered[ezwaySlug].anchors.filter((id: string) => id.startsWith("source-"));
+  assert.deepEqual(ids.filter(id => id.startsWith("source-")), beforeSources);
+});
+
+test("EZ WAY citation identities survive record and source reorder without inferred deduplication", () => {
+  const projection = structuredClone(publicEvidenceBySlug[ezwaySlug]);
+  projection.claims.reverse().forEach(claim => claim.sources.reverse());
+  projection.openQuestions.reverse();
+  projection.attributedSpeakerGroups!.reverse().forEach(group => group.claims.reverse());
+  projection.reportedTimeline!.reverse();
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: ezwaySlug }} projectionOverride={projection} />);
+  assert.ok(html.includes("dossier-shell--ezway"));
+  for (const entry of ezwayCitations) {
+    assert.ok(html.includes(`id="${entry.anchorId}"`));
+    assert.ok(html.includes(`href="#${entry.sourceRef}" data-citation-inspect="${entry.anchorId}"`));
+  }
+  assert.equal((html.match(/id="cite-/g) ?? []).length, 19);
+});
+
+test("EZ WAY omits absent modules and preserves unknown material in its original renderer", () => {
+  const projection = structuredClone(publicEvidenceBySlug[ezwaySlug]);
+  projection.claims = [];
+  projection.attributedSpeakerGroups = [];
+  projection.attributedClaims = [];
+  projection.reportedTimeline = [];
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: ezwaySlug }} projectionOverride={projection} />);
+  assert.ok(html.includes("dossier-shell--ezway"));
+  for (const id of ["claims", "reports", "progress", "ezway-process", "analysis", "people"]) {
+    assert.ok(!html.includes(`id="${id}"`)); assert.ok(!html.includes(`href="#${id}"`));
+  }
+  const changed = structuredClone(publicEvidenceBySlug[ezwaySlug]);
+  changed.claims[0].statement = "新增的公開記錄不可因未分組而遺失";
+  const retained = renderToStaticMarkup(<TopicPage params={{ slug: ezwaySlug }} projectionOverride={changed} />);
+  assert.ok(retained.includes(changed.claims[0].statement));
+  assert.ok(!retained.includes("dossier-shell--ezway"));
+  projection.openQuestions = [];
+  const unavailable = renderToStaticMarkup(<TopicPage params={{ slug: ezwaySlug }} projectionOverride={projection} />);
+  assert.ok(!unavailable.includes("dossier-shell--ezway"));
+  assert.ok(unavailable.includes("資料補強中"));
+});
+
+test("preferred source origin must match the exact topic, source and occurrence", () => {
+  const entry = ezwayCitations[0];
+  const state = { unrelated: { preserved: true }, twIssuesCitationOrigin: { topicSlug: ezwaySlug, anchorId: entry.anchorId, sourceRef: entry.sourceRef } };
+  assert.equal(validCitationOrigin(state, `#${entry.sourceRef}`, ezwayCitations), entry);
+  for (const invalid of [null, {}, { twIssuesCitationOrigin: "bad" }, { ...state, twIssuesCitationOrigin: { ...state.twIssuesCitationOrigin, topicSlug: "hsinchu-baseball-stadium" } }, { ...state, twIssuesCitationOrigin: { ...state.twIssuesCitationOrigin, anchorId: "//example.com" } }]) assert.equal(validCitationOrigin(invalid, `#${entry.sourceRef}`, ezwayCitations), undefined);
+  assert.equal(validCitationOrigin(state, "#source-ezway-faq", ezwayCitations), undefined);
 });

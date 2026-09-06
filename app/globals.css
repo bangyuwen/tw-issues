@@ -595,3 +595,54 @@ html { scroll-padding-top:82px; }
 @media (prefers-reduced-motion:reduce) {
   .dossier-shell--hsinchu *,.dossier-shell--hsinchu *::before,.dossier-shell--hsinchu *::after { transition:none!important; animation:none!important; }
 }
+/* Reader-first pilot: homepage and exact EZ WAY opt-in only. */
+.index-shell .index-reading-nav { display:flex; flex-wrap:wrap; gap:12px 24px; padding:20px clamp(20px,5vw,70px); border-block:1px solid var(--line); }
+.index-shell .index-reading-nav a, .index-shell .topic-card h3 a { display:inline-flex; align-items:center; min-height:44px; text-underline-offset:5px; }
+.index-shell .topic-card h3 { margin:8px 0; font-size:clamp(1.35rem,3vw,1.8rem); line-height:1.45; }
+.index-shell article.topic-card { cursor:auto; }
+.index-shell .index-event-boundary { margin:16px 0; padding:16px; background:var(--paper-white); }
+.index-shell .index-event-boundary a { display:block; padding-block:12px; overflow-wrap:anywhere; }
+.index-shell .topic-card-progress summary { min-height:44px; padding-block:12px; cursor:pointer; }
+.index-shell :is(a,summary):focus-visible, .dossier-shell--ezway :is(a,summary,[tabindex="-1"]):focus-visible { outline:3px solid var(--navy); outline-offset:4px; }
+.index-shell :is(#all-issues,#recent-updates), .dossier-shell--ezway [id] { scroll-margin-top:24px; }
+.dossier-shell--ezway .ezway-contents, .dossier-shell--ezway .ezway-section { width:min(100% - 40px,900px); margin:0 auto 48px; }
+.dossier-shell--ezway .ezway-contents { padding-block:24px; border-block:1px solid var(--line); }
+.dossier-shell--ezway .ezway-contents ol { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 32px; padding-left:24px; }
+.dossier-shell--ezway .ezway-contents a, .dossier-shell--ezway .ezway-source-returns a, .dossier-shell--ezway .ezway-preferred-return a { display:inline-block; min-height:44px; padding-block:10px; line-height:1.5; text-underline-offset:4px; }
+.dossier-shell--ezway .ezway-section h2 { margin-block:32px 20px; font-size:clamp(1.5rem,4vw,2rem); line-height:1.4; }
+.dossier-shell--ezway .ezway-section h3 { margin-top:28px; font-size:1.2rem; line-height:1.5; }
+.dossier-shell--ezway .ezway-record { padding:24px 0; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
+.dossier-shell--ezway .ezway-statement { font-size:1.1rem; line-height:1.85; }
+.dossier-shell--ezway .ezway-status { width:fit-content; padding:4px 10px; background:#e2ebe5; color:#245143; font-weight:750; }
+.dossier-shell--ezway .ezway-status--attributed { background:#f4ead4; color:#704b0d; }
+.dossier-shell--ezway .ezway-status--unresolved { background:#f5e4e0; color:#743c34; }
+.dossier-shell--ezway .ezway-boundary { display:grid; grid-template-columns:1fr 1fr; gap:16px; line-height:1.75; }
+.dossier-shell--ezway .ezway-boundary > div { padding:16px; background:var(--paper-white); }
+.dossier-shell--ezway .ezway-boundary dt { font-weight:750; }
+.dossier-shell--ezway .ezway-boundary dd { margin:8px 0 0; }
+.dossier-shell--ezway .ezway-boundary ul { margin:0; padding-left:20px; }
+.dossier-shell--ezway .ezway-citations { display:grid; gap:10px; }
+.dossier-shell--ezway .ezway-citation { display:flex; flex-wrap:wrap; align-items:center; gap:4px 20px; padding-block:4px; }
+.dossier-shell--ezway .ezway-citation a { padding-block:10px; min-height:44px; line-height:1.5; text-underline-offset:4px; }
+.dossier-shell--ezway .ezway-source-returns { display:grid; justify-items:start; margin-top:12px; }
+.dossier-shell--ezway .ezway-source-returns a { font-size:.95rem; }
+.dossier-shell--ezway .sources-section { padding-inline:0; }
+.dossier-shell--ezway .source-list li { overflow-wrap:anywhere; }
+.dossier-shell--ezway .source-meta { display:block; line-height:1.6; }
+.dossier-shell--ezway .dossier-meta { width:auto; max-width:240px; }
+.dossier-shell--ezway .dossier-meta p { font-size:.85rem; line-height:1.7; }
+@media (max-width:600px) {
+  .dossier-shell--ezway .ezway-contents ol, .dossier-shell--ezway .ezway-boundary { grid-template-columns:1fr; }
+  .dossier-shell--ezway .ezway-citation { display:grid; }
+  .index-shell .topic-card { grid-template-columns:24px minmax(0,1fr); }
+  .index-shell .topic-card > b { display:none; }
+  .index-shell .topic-card-progress header { flex-wrap:wrap; }
+}
+@media (prefers-reduced-motion:reduce) { .index-shell *, .dossier-shell--ezway * { scroll-behavior:auto; transition:none; animation:none; } }
+.index-shell .brand em,
+.index-shell .eyebrow,
+.index-shell .topic-card > span,
+.dossier-shell--ezway .brand em,
+.dossier-shell--ezway .source-list li > span { color:#994537; }
+.dossier-shell--ezway .next-topic .eyebrow { color:#385c4d; }
+.dossier-shell--ezway .hero a:focus-visible { outline-color:var(--paper-white); }

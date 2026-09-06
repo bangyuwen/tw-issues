@@ -288,10 +288,16 @@ test("every published route renders only claim projections and allowlisted sourc
     const response = await render(pathname);
     const html = await response.text();
     assert.equal(response.status, 200);
-    assert.match(html, /命題追溯/);
+    if (pathname === "/topics/ezway-preauthorization") {
+      assert.match(html, /這能確認/);
+      assert.match(html, /這不能證明/);
+      assert.match(html, /data-citation-inspect="cite-ezway-/);
+    } else {
+      assert.match(html, /命題追溯/);
+      assert.match(html, /citation-tooltip/);
+    }
     assert.doesNotMatch(html, /data-claim-id|clm-|src-|sourceRole|independenceGroup/);
     assert.doesNotMatch(html, /claim ID：|source role：|independence group：/);
-    assert.match(html, /citation-tooltip/);
     assert.match(html, /class="sources-disclosure" id="sources"/);
     assert.match(html, /資料與來源 · (?:<!-- -->)?\d+(?:<!-- -->)? 筆/);
     assert.match(html, /class="source-title"/);

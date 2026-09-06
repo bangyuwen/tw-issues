@@ -1,0 +1,500 @@
+{
+  "browser": "151.0.7922.138",
+  "steps": [
+    {
+      "label": "S5 start",
+      "url": "/topics/ezway-preauthorization?reader=qa#issue-contents",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        }
+      },
+      "focus": "issue-contents",
+      "open": false,
+      "historyLength": 2,
+      "preferred": null
+    },
+    {
+      "label": "S5 inspect B",
+      "url": "/topics/ezway-preauthorization?reader=qa#source-ezway-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        },
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 3,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S5 Back B",
+      "url": "/topics/ezway-preauthorization?reader=qa#cite-ezway-process-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        }
+      },
+      "focus": "cite-ezway-process-preauth",
+      "open": true,
+      "historyLength": 3,
+      "preferred": null
+    },
+    {
+      "label": "S5 Forward source",
+      "url": "/topics/ezway-preauthorization?reader=qa#source-ezway-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        },
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 3,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S5 preferred return B",
+      "url": "/topics/ezway-preauthorization?reader=qa#cite-ezway-process-preauth",
+      "state": null,
+      "focus": "cite-ezway-process-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S5 Back after return",
+      "url": "/topics/ezway-preauthorization?reader=qa#source-ezway-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        },
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S2 before canonical",
+      "url": "/topics/ezway-preauthorization?reader=qa#source-ezway-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        },
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S2 after canonical",
+      "url": "/topics/ezway-preauthorization?reader=qa#source-ezway-preauth",
+      "state": {
+        "qaKeep": {
+          "value": 7
+        },
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "A",
+      "open": true,
+      "historyLength": 4,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S3 direct source",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": null,
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S3 invalid {\"topicSlug\":\"wrong-topic\",\"anchorId\":\"cite-ezway-process-preauth\",\"sourceRef\":\"source-ezway-preauth\"}",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "wrong-topic",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S3 invalid {\"topicSlug\":\"ezway-preauthorization\",\"anchorId\":\"cite-ezway-process-preauth\",\"sourceRef\":\"source-ezway-faq\"}",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-faq"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S3 invalid {\"topicSlug\":\"ezway-preauthorization\",\"anchorId\":\"unmapped\",\"sourceRef\":\"source-ezway-preauth\"}",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "unmapped",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S6 inspect A",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-effective-date-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 5,
+      "preferred": "#cite-ezway-effective-date-preauth"
+    },
+    {
+      "label": "S6 inspect B again",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 6,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S6 before modified",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 6,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S6 modified ctrl click",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 6,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S6 native new tab",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": null,
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 1,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy main-content",
+      "url": "/topics/ezway-preauthorization#main-content",
+      "state": null,
+      "focus": "main-content",
+      "open": true,
+      "historyLength": 7,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy claims",
+      "url": "/topics/ezway-preauthorization#claims",
+      "state": null,
+      "focus": "claims",
+      "open": true,
+      "historyLength": 8,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy reports",
+      "url": "/topics/ezway-preauthorization#reports",
+      "state": null,
+      "focus": "reports",
+      "open": true,
+      "historyLength": 9,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy progress",
+      "url": "/topics/ezway-preauthorization#progress",
+      "state": null,
+      "focus": "progress",
+      "open": true,
+      "historyLength": 10,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy questions",
+      "url": "/topics/ezway-preauthorization#questions",
+      "state": null,
+      "focus": "questions",
+      "open": true,
+      "historyLength": 11,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy sources",
+      "url": "/topics/ezway-preauthorization#sources",
+      "state": null,
+      "focus": "SUMMARY",
+      "open": true,
+      "historyLength": 12,
+      "preferred": null
+    },
+    {
+      "label": "S6 legacy source-ezway-faq",
+      "url": "/topics/ezway-preauthorization#source-ezway-faq",
+      "state": null,
+      "focus": "source-ezway-faq",
+      "open": true,
+      "historyLength": 13,
+      "preferred": null
+    },
+    {
+      "label": "Keyboard Enter inspect",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": {
+        "twIssuesCitationOrigin": {
+          "topicSlug": "ezway-preauthorization",
+          "anchorId": "cite-ezway-process-preauth",
+          "sourceRef": "source-ezway-preauth"
+        }
+      },
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 14,
+      "preferred": "#cite-ezway-process-preauth"
+    },
+    {
+      "label": "S4 noJS inspection",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": null,
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 3,
+      "preferred": null
+    },
+    {
+      "label": "S4 labeled return B",
+      "url": "/topics/ezway-preauthorization#cite-ezway-process-preauth",
+      "state": null,
+      "focus": "cite-ezway-process-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S4 Back source",
+      "url": "/topics/ezway-preauthorization#source-ezway-preauth",
+      "state": null,
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    },
+    {
+      "label": "S4 Forward B",
+      "url": "/topics/ezway-preauthorization#cite-ezway-process-preauth",
+      "state": null,
+      "focus": "source-ezway-preauth",
+      "open": true,
+      "historyLength": 4,
+      "preferred": null
+    }
+  ],
+  "screens": [
+    {
+      "width": 1280,
+      "innerWidth": 1280,
+      "scrollWidth": 1280,
+      "scrollBehavior": "auto",
+      "overflow": []
+    },
+    {
+      "width": 640,
+      "innerWidth": 640,
+      "scrollWidth": 640,
+      "scrollBehavior": "auto",
+      "overflow": []
+    },
+    {
+      "width": 390,
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "scrollBehavior": "auto",
+      "overflow": []
+    },
+    {
+      "width": 320,
+      "innerWidth": 320,
+      "scrollWidth": 320,
+      "scrollBehavior": "auto",
+      "overflow": []
+    }
+  ],
+  "errors": [],
+  "canonical": {
+    "href": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191",
+    "target": "_blank",
+    "rel": "noreferrer",
+    "requested": "https://web.customs.gov.tw/singlehtml/2222?cntId=5b7a9da7e7674b4e90e0cee314f85191"
+  },
+  "accessibility": {
+    "main": 1,
+    "navigations": [
+      "本頁閱讀導覽"
+    ],
+    "headings": [
+      {
+        "name": "本頁目錄",
+        "level": 2
+      },
+      {
+        "name": "這是什麼、適用哪些情況？",
+        "level": 2
+      },
+      {
+        "name": "公開流程與核對方式是什麼？",
+        "level": 2
+      },
+      {
+        "name": "業者與主管機關怎麼說？",
+        "level": 2
+      },
+      {
+        "name": "制度在何時調整？",
+        "level": 2
+      },
+      {
+        "name": "哪些事需要個別確認？",
+        "level": 2
+      },
+      {
+        "name": "繼續探索其他議題。",
+        "level": 2
+      },
+      {
+        "name": "EZ WAY 易利委預先委任",
+        "level": 1
+      },
+      {
+        "name": "台北市航空貨運承攬公會",
+        "level": 3
+      },
+      {
+        "name": "財政部關務署",
+        "level": 3
+      },
+      {
+        "name": "簡訊認證新註冊改採實體健保卡驗證",
+        "level": 3
+      },
+      {
+        "name": "關務署公告全面實施預先委任規劃",
+        "level": 3
+      },
+      {
+        "name": "預先確認委任全面實施",
+        "level": 3
+      }
+    ],
+    "note": "Chrome accessibility tree inspection, not a screen-reader user test"
+  },
+  "home": {
+    "hash": "#recent-updates",
+    "all": [
+      "/topics/hsinchu-baseball-stadium",
+      "/topics/ezway-preauthorization",
+      "/topics/benzopyrene-food-safety",
+      "/topics/self-defense-readiness",
+      "/topics/defense-procurement",
+      "/topics/taipei-tree-governance",
+      "/topics/typhoon-governance",
+      "/topics/japan-taiwan-alliance",
+      "/topics/budget-delay-governance",
+      "/topics/cross-border-intimidation",
+      "/topics/flood-budget-bottleneck",
+      "/topics/transnational-repression"
+    ],
+    "recent": [
+      "/topics/hsinchu-baseball-stadium",
+      "/topics/benzopyrene-food-safety",
+      "/topics/budget-delay-governance",
+      "/topics/ezway-preauthorization",
+      "/topics/japan-taiwan-alliance",
+      "/topics/defense-procurement",
+      "/topics/self-defense-readiness",
+      "/topics/taipei-tree-governance",
+      "/topics/typhoon-governance",
+      "/topics/cross-border-intimidation",
+      "/topics/flood-budget-bottleneck",
+      "/topics/transnational-repression"
+    ],
+    "recentTop": 43.9375,
+    "scrollWidth": 390,
+    "width": 390
+  },
+  "status": "PASS"
+}
