@@ -4,7 +4,7 @@
 
 - Baseline commit: `179f4fc5eefe2390e9a7fb2d5583541b3a16fc6e` (`origin/main` at implementation start).
 - Implementation commits: `f3dc8df` (`feat(tw-issues): pilot Hsinchu reader-first issue flow`), `1b395d4` (bind acceptance evidence), and `f2edeb2` (freeze Hsinchu record fingerprints and source metadata).
-- Corrected exact-range review: `179f4fc5eefe2390e9a7fb2d5583541b3a16fc6e..32ffd14`, fresh `independent-reviewer`, no P1/P2/P3 findings.
+- Corrected implementation-range review: `179f4fc5eefe2390e9a7fb2d5583541b3a16fc6e..32ffd14`, fresh `independent-reviewer`, no P1/P2/P3 findings. The later `a578ec8` commit only closes the OpenSpec receipt gate; the current release candidate still receives a separate exact-head review before PR delivery.
 - D1 selected: introduction-first. The route must introduce the dispute and reading map before the long primary-document unit while retaining a prominent direct document shortcut.
 - The frozen inventory is `content-preservation.json`. Its three public input hashes, baseline SSR hashes/fragments for all twelve approved topics, Hsinchu projection hash, record summaries, source references, and primary-document coverage describe the pre-change contract.
 - EZ WAY remains a process/information page. The homepage, EZ WAY, generic dossier routes, other approved topics, and seven metadata-only topics are outside this pilot.
