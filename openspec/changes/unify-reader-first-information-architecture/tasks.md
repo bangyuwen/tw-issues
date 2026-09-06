@@ -1,9 +1,9 @@
 ## 1. Resolve decisions and freeze preservation inputs
 
 - [ ] 1.1 Record the explicit D1 document-placement decision and align proposal, design and entry scenarios before changing Hsinchu order; retain D2 category deferral unless explicitly selected.
-- [ ] 1.2 Freeze the implementation baseline, two pilot public-record inventories, existing routes and all actual section/source fragments; map full owners and secondary references with exact identities and limitation variants.
+- [ ] 1.2 Create and commit `content-preservation.json` and `acceptance-evidence.md` in this change directory before tasks 2–3: freeze baseline commit, both pilots' full public records/limitation variants, keys or JSON pointers and SHA-256, owner/secondary destinations and all fragment mappings; use the evidence file for decisions and revision-bound verification.
 - [ ] 1.3 Confirm sourced introductory selections and reader-question labels for both pilots; retain unmapped records and related-case analyses without inferred relationships.
-- [ ] 1.4 Identify only the superseded Hsinchu ordering assertions in earlier change-local contracts and tests; document their replacement while preserving all evidence and accessibility requirements.
+- [ ] 1.4 Finalize `contract-reconciliation.md` after D1, update the selected replacement requirements/scenarios and affected ordering tests, and record exact source heading → replacement heading mappings in `acceptance-evidence.md`; leave all non-replaced evidence and accessibility requirements intact.
 
 ## 2. Implement common discovery and reading behavior
 

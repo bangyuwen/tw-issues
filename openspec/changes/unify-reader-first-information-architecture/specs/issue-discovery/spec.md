@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Honest discovery and update ordering
-The homepage SHALL distinguish all-issue discovery from recent page updates. Recent updates SHALL sort valid `lastUpdated` dates descending with slug ascending for ties; unknown or invalid dates SHALL follow valid dates and be explicitly labeled unavailable. Event dates SHALL be identified separately from page dates, and latest events MUST NOT be described as newly added without change-history evidence.
+The homepage SHALL distinguish all-issue discovery from recent page updates. All issues SHALL preserve the array order of the approved `research-topics.json.topics` input, including explicitly positioned new entries; array position defines a total order without ties. Recent updates SHALL sort valid `lastUpdated` dates descending with slug ascending for ties; unknown or invalid dates SHALL follow valid dates in slug-ascending order and be explicitly labeled unavailable. Event dates SHALL be identified separately from page dates, and latest events MUST NOT be described as newly added without change-history evidence.
 
 #### Scenario: Input order differs from update date
 - **WHEN** an August-updated topic follows a July-updated topic in the input array

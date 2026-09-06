@@ -20,7 +20,7 @@ First-time readers currently encounter document detail or chronology before unde
 
 ### Modified Capabilities
 
-None in `openspec/specs/`, which does not exist at the baseline. Existing change-local Hsinchu contracts are retained as historical constraints and explicitly reconciled in the design; this proposal does not silently amend them.
+None in `openspec/specs/`, which does not exist at the baseline. The affected change-local capabilities are `hsinchu-primary-document-entry`, `hsinchu-primary-document-reading`, `hsinchu-chaptered-evidence-dossier`, and `hsinchu-dossier-reading-flow`. Their exact ordering clauses and conditional replacements are enumerated in `contract-reconciliation.md`; this explicit reconciliation artifact governs their proposed supersession rather than treating them as unaffected or creating invalid MODIFIED deltas against absent main specs. No replacement activates before the recorded owner decision and aligned specification update.
 
 ## Impact
 
