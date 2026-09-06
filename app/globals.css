@@ -646,3 +646,14 @@ html { scroll-padding-top:82px; }
 .dossier-shell--ezway .source-list li > span { color:#994537; }
 .dossier-shell--ezway .next-topic .eyebrow { color:#385c4d; }
 .dossier-shell--ezway .hero a:focus-visible { outline-color:var(--paper-white); }
+
+/* Food-oil reader-first pilot: one evidence column, with local qualifications. */
+.dossier-shell--oil .evidence-board { width:min(980px,100%); }
+.dossier-shell--oil .evidence-claim-card { min-width:0; padding:24px 0; }
+.dossier-shell--oil .evidence-claim-card + .evidence-claim-card { border-top:1px solid var(--line); }
+.dossier-shell--oil .evidence-claim-card-heading { display:grid; grid-template-columns:28px minmax(0,1fr); gap:12px; }
+.dossier-shell--oil .evidence-claim-status { display:block; margin-bottom:8px; color:var(--soft); font-size:.8rem; }
+.dossier-shell--oil .evidence-claim-card > .claim-boundary { margin-top:16px; }
+.dossier-shell--oil .evidence-claim-card .claim-boundary p { overflow-wrap:anywhere; }
+.dossier-shell--oil #questions .section-intro a { display:inline-block; padding:10px 0; text-decoration:underline; }
+.dossier-shell--oil .dossier-meta a { display:inline-block; padding:12px 0; text-decoration:underline; }

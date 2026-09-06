@@ -63,7 +63,7 @@ test(`topic page renders ${section} when verified claims are empty`, () => {
       assert.doesNotMatch(html, /data-claim-id="clm-test"/);
     }
     if (section === "openQuestions") {
-      assert.match(html, /class="evidence-board evidence-board--with-open evidence-board--open-only"/);
+      assert.match(html, /class="evidence-board evidence-board--open-only"/);
       assert.doesNotMatch(html, /data-collection-id="claims"/);
       assert.match(html, /data-collection-id="questions"/);
     }
@@ -630,7 +630,7 @@ test("topic page does not invent a timeline when safe durable events are absent"
   assert.match(html, /href="#source-01"/);
 });
 
-test("topic page leads with progression and then each evidence disposition", () => {
+test("food-oil page leads with known records and keeps dated questions after reports", () => {
   const attributedClaim = { ...claim, statement: "測試機關提出具名說法。", speakers: [{ name: "測試機關", role: "主管機關" }] };
   const unresolvedClaim = { ...claim, statement: "尚缺獨立檢驗資料。", limitations: ["不能判定污染根因。", "不能判定最終責任。"] };
   const html = renderToStaticMarkup(
@@ -655,16 +655,16 @@ test("topic page leads with progression and then each evidence disposition", () 
   const order = [
     html.indexOf("class=\"hero hero-detail\""),
     html.indexOf("class=\"article-nav\""),
-    html.indexOf("class=\"event-progress-section\""),
     html.indexOf("id=\"claims\""),
-    html.indexOf("id=\"questions\""),
+    html.indexOf("class=\"event-progress-section\""),
     html.indexOf("id=\"reports\""),
+    html.indexOf("id=\"questions\""),
     html.indexOf("id=\"sources\""),
   ];
   assert.ok(order.every((position) => position >= 0));
   assert.deepEqual(order, [...order].sort((left, right) => left - right));
   assert.doesNotMatch(html, /class="topic-infographic|class="topic-evidence-chart|class="topic-source-chart/);
-  assert.match(html, /class="evidence-board-header"[\s\S]*?>證據邊界</);
+  assert.match(html, /id="oil-claims-title">檢驗與處置確認了什麼/);
 
   for (const statement of [claim.statement, attributedClaim.statement, unresolvedClaim.statement]) {
     const cardStart = html.indexOf(statement, html.indexOf("id=\"claims\""));
@@ -1357,7 +1357,7 @@ const escapedText = (value: string) => renderToStaticMarkup(<span>{value}</span>
 
 test("reader-first pilot preserves public input bytes and all untouched topic outputs", () => {
   for (const [path, sha256] of Object.entries(preservation.publicFiles)) assert.equal(digest(readFileSync(path)), sha256, path);
-  for (const topic of deepResearchTopics.filter(topic => topic.slug !== ezwaySlug && topic.slug !== hsinchuSlug)) {
+  for (const topic of deepResearchTopics.filter(topic => topic.slug !== ezwaySlug && topic.slug !== hsinchuSlug && topic.slug !== "benzopyrene-food-safety")) {
     const html = renderToStaticMarkup(<TopicPage params={{ slug: topic.slug }} />);
     assert.equal(digest(html), preservation.baselineRendered[topic.slug].sha256, topic.slug);
   }
@@ -1571,4 +1571,100 @@ test("preferred source origin must match the exact topic, source and occurrence"
   assert.equal(validCitationOrigin(state, `#${entry.sourceRef}`, ezwayCitations), entry);
   for (const invalid of [null, {}, { twIssuesCitationOrigin: "bad" }, { ...state, twIssuesCitationOrigin: { ...state.twIssuesCitationOrigin, topicSlug: "hsinchu-baseball-stadium" } }, { ...state, twIssuesCitationOrigin: { ...state.twIssuesCitationOrigin, anchorId: "//example.com" } }]) assert.equal(validCitationOrigin(invalid, `#${entry.sourceRef}`, ezwayCitations), undefined);
   assert.equal(validCitationOrigin(state, "#source-ezway-faq", ezwayCitations), undefined);
+});
+
+const oilSlug = "benzopyrene-food-safety";
+const oilPreservation = JSON.parse(readFileSync(new URL("../openspec/changes/reader-first-benzopyrene-food-safety/content-preservation.json", import.meta.url), "utf8"));
+
+test("food-oil pilot preserves public bytes, full record provenance and all non-target output", () => {
+  for (const [path, hash] of Object.entries(oilPreservation.publicFiles)) assert.equal(digest(readFileSync(path)), hash, path);
+  assert.equal(digest(renderToStaticMarkup(<DossierIndexPage />)), oilPreservation.home);
+  for (const topic of deepResearchTopics.filter(({ slug }) => slug !== oilSlug)) {
+    assert.equal(digest(renderToStaticMarkup(<TopicPage params={{ slug: topic.slug }} />)), oilPreservation.untouchedTopics[topic.slug], topic.slug);
+  }
+  const projection = publicEvidenceBySlug[oilSlug];
+  assert.equal(digest(JSON.stringify(projection)), oilPreservation.oil.projectionSha256);
+  for (const [key, value] of Object.entries(projection)) assert.equal(digest(JSON.stringify(value)), oilPreservation.oil.records[key], key);
+  const model = buildDossierPageModel(projection);
+  assert.equal(digest(JSON.stringify(model.publicSources)), oilPreservation.oil.sourcesSha256);
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: oilSlug }} />);
+  const ids = [...html.matchAll(/(?<![\w-])id="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(ids.length, new Set(ids).size);
+  for (const id of oilPreservation.oil.fragmentIds) assert.ok(ids.includes(id), id);
+  for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), match[1]);
+  for (const source of model.publicSources) assert.ok(html.includes(`href="${escapedText(source.canonicalUrl)}"`), source.publicRef);
+  // Every claim-bearing public record retains its exact text and qualifications.
+  const visit = (value: unknown) => {
+    if (!value || typeof value !== "object") return;
+    const record = value as Record<string, unknown>;
+    if (typeof record.statement === "string" && typeof record.proofScope === "string") {
+      for (const text of [record.statement, record.proofScope, ...(Array.isArray(record.limitations) ? record.limitations : [])]) {
+        assert.ok(html.includes(escapedText(String(text))), String(text));
+      }
+    }
+    for (const child of Object.values(record)) visit(child);
+  };
+  visit(projection);
+  for (const gap of model.coverageLimits) {
+    assert.ok(html.includes(escapedText(gap.gap)));
+    assert.ok(html.includes(escapedText(gap.gapReason)));
+  }
+  assert.doesNotMatch(html, /searchedAt|searchQueries|searchScope/);
+});
+
+test("food-oil contents match body order and the entry keeps complete priority records", () => {
+  const projection = publicEvidenceBySlug[oilSlug];
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: oilSlug }} />);
+  const order = ["issue-contents", "claims", "progress", "reports", "questions", "coverage-limits", "social-observations", "sources"].map(id => html.indexOf(`id="${id}"`));
+  assert.ok(order.every(index => index >= 0));
+  assert.deepEqual(order, [...order].sort((a, b) => a - b));
+  const nav = html.slice(order[0], html.indexOf("</nav>", order[0]));
+  assert.deepEqual([...nav.matchAll(/href="#([^"]+)"/g)].map(match => match[1]), ["claims", "progress", "reports", "questions", "coverage-limits", "social-observations", "sources"]);
+  const known = html.slice(order[1], order[2]);
+  const sequence = [1, 5, 6, 0, 2, 3, 4, 7, 8];
+  const positions = sequence.map(index => known.indexOf(escapedText(projection.claims[index].statement)));
+  assert.ok(positions.every(index => index >= 0));
+  assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
+  for (const index of [1, 5, 6]) {
+    const claim = projection.claims[index];
+    const start = known.indexOf(escapedText(claim.statement));
+    const disclosure = known.indexOf('<details class="evidence-claim-row', start);
+    assert.ok(known.indexOf(escapedText(claim.proofScope), start) < disclosure);
+    for (const limit of claim.limitations) assert.ok(known.indexOf(escapedText(limit), start) < disclosure);
+  }
+  assert.match(html.slice(order[4], order[5]), /截至 7 月 3 日/);
+  assert.match(html.slice(order[4], order[5]), /早期問題不代表後續調查的最新結論/);
+  assert.match(html, /頁面更新：2026-08-05/);
+  const hero = html.slice(0, order[0]);
+  assert.doesNotMatch(hero, /<strong>36<\/strong>/);
+  const headings = [...html.matchAll(/<h([1-6])\b/g)].map(match => Number(match[1]));
+  for (let i = 1; i < headings.length; i++) assert.ok(headings[i] <= headings[i - 1] + 1, `heading ${i}: ${headings[i - 1]} to ${headings[i]}`);
+});
+
+test("food-oil priority matching tolerates record reorder and rejects partial identity matches", () => {
+  const original = publicEvidenceBySlug[oilSlug];
+  const altered = { ...original.claims[1], proofScope: "Different scope must not inherit priority." };
+  const projection = { ...original, claims: [altered, ...original.claims.toReversed()] };
+  const html = renderToStaticMarkup(<TopicPage params={{ slug: oilSlug }} projectionOverride={projection} />);
+  const known = html.slice(html.indexOf('id="claims"'), html.indexOf('id="progress"'));
+  assert.ok(known.indexOf(escapedText(original.claims[6].statement)) < known.indexOf(escapedText(altered.proofScope)));
+  const titles = [...known.matchAll(/class="evidence-claim-title">([^<]*)<\/p>/g)].map(match => match[1]);
+  assert.deepEqual(titles.slice(0, 3), [1, 5, 6].map(index => escapedText(original.claims[index].statement)));
+  assert.equal(titles.length, projection.claims.length);
+});
+
+test("food-oil sparse and foreign models do not manufacture destinations or import canonical records", () => {
+  for (const section of ["claims", "openQuestions", "attributedSpeakerGroups", "socialObservations"] as const) {
+    const sparse: PublicEvidenceProjection = section === "claims"
+      ? { topicId: "benzopyrene-food-safety-2026", claims: [claim], attributedClaims: [], openQuestions: [] }
+      : projection(section);
+    const html = renderToStaticMarkup(<TopicPage params={{ slug: oilSlug }} projectionOverride={sparse} />);
+    const ids = [...html.matchAll(/(?<![\w-])id="([^"]+)"/g)].map(match => match[1]);
+    for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), `${section}: ${match[1]}`);
+    assert.doesNotMatch(html, /每公斤 8.1 微克|截至 7 月 3 日|id="coverage-limits"/);
+    assert.ok(html.includes(escapedText(section === "socialObservations" ? "有人關注測試議題。" : claim.statement)));
+  }
+  const foreign = { ...publicEvidenceBySlug[oilSlug], topicId: "foreign-projection" };
+  assert.doesNotMatch(renderToStaticMarkup(<TopicPage params={{ slug: oilSlug }} projectionOverride={foreign} />), /dossier-shell--oil|id="issue-contents"/);
+  assert.doesNotMatch(renderToStaticMarkup(<TopicPage params={{ slug: "cross-border-intimidation" }} projectionOverride={publicEvidenceBySlug[oilSlug]} />), /dossier-shell--oil|id="issue-contents"/);
 });
