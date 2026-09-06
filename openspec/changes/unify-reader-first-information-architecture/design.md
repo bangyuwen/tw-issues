@@ -93,7 +93,7 @@ Preserve `/topics/{slug}` and every existing section/source fragment, including 
 
 ## Migration Plan
 
-1. Resolve D1; retain category deferral unless D2 is explicitly selected. Freeze baseline records, anchors and remaining-topic inventory in this change's acceptance evidence.
+1. Freeze baseline records, anchors and remaining-topic inventory in this change's acceptance evidence. Resolve D1 before Hsinchu reordering via task 1.4; cross-topic reconciliation under task 1.5 may proceed independently after its relevant inventory and selection prerequisites. Retain category deferral unless D2 is explicitly selected.
 2. Implement common shell behavior and two explicit pilot mappings; retain other topic bodies. Support the approved homepage date behavior.
 3. Validate pilots with repository tests, lint and build, plus keyboard, source round trips, direct hashes/Back/Forward, no-JavaScript, mobile/reflow and screen-reader checks. Record actual outcomes rather than inherited receipts.
 4. Conduct task walkthroughs: locate issue scope, distinguish a named claim from a result, find a limitation, inspect a source and return. Report whether this was evaluator inspection or an actual reader study. Obtain owner acceptance of the pilot before broad migration.
