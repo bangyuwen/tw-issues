@@ -1,6 +1,7 @@
 {
-  "baselineCommit": "67fc1b5efc4c4fd639874d92c7d1f92b5047d813",
-  "kind": "uncommitted working-tree implementation, as explicitly requested",
+  "testedCommit": "30c8d074faa3719aa4561530948b949d5d4ecff3",
+  "testedTree": "a4a11760a02fc6a9ee2ab393b5ca219b7d574281",
+  "kind": "committed implementation revision",
   "fingerprint": "8ab6b4cc855f75669056e98ce68270c6f237082d34eb5ccbc331c02b217179fb",
   "files": {
     "app/page.tsx": "efe86f7ef4a1e2de4b962e091efc69cf5b8f6389f0dd897dc435167f6277955b",
