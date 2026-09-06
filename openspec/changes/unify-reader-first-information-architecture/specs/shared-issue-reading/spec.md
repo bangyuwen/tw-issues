@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Shared entry with topic-specific body
-Each migrated issue SHALL expose its title, public material date, mapped scope introduction, question-oriented contents, and source inspection entry before its long body. Contents SHALL follow the actual body order and link only to present sections. The renderer MUST NOT manufacture content to fill a fixed chapter template. Hsinchu document reordering MUST remain pending until D1 in the design is explicitly resolved; a document-first selection requires updating this proposed entry requirement before implementation.
+Each migrated issue SHALL expose its title, page date from topic `lastUpdated`, mapped scope introduction, question-oriented contents, and source inspection entry before its long body. Contents SHALL follow the actual body order and link only to present sections. The renderer MUST NOT manufacture content to fill a fixed chapter template. Before D1 and tasks 1.1/1.4 are complete, only the exact EZ WAY slug SHALL opt into new dossier behavior after its 1.2/1.3/1.5 prerequisites. Hsinchu renderer output, heading/section/navigation order, eligibility, canonical actions, supporting styles and ordering assertions MUST remain at baseline. Task 2.2 MUST NOT activate shared defaults for Hsinchu. Hsinchu activation, source enhancement and changed-order validation SHALL wait for task 3.1 after 1.1/1.4; a document-first selection requires updating this proposed entry requirement to permit that exception. Shared helper edits SHALL prove unchanged frozen output, or wait for that gate.
 
 #### Scenario: EZ WAY first-time entry
 - **WHEN** a reader opens the migrated EZ WAY issue
@@ -9,7 +9,12 @@ Each migrated issue SHALL expose its title, public material date, mapped scope i
 
 #### Scenario: Hsinchu ordering decision remains unresolved
 - **WHEN** D1 has no recorded owner selection
-- **THEN** the implementation does not move the Hsinchu document unit on the assumption that proposal creation approved reordering
+- **THEN** tasks 2.2–2.4 and EZ WAY task 3.2 leave the complete Hsinchu renderer output and order unchanged, including its document unit, legend, contents and chapters
+- **AND** validation retains the existing Hsinchu ordering assertions and snapshots; passing unchanged-output checks does not approve new Hsinchu behavior
+
+#### Scenario: Shared change cannot isolate Hsinchu
+- **WHEN** a helper, selector or section descriptor change would alter Hsinchu output before tasks 1.1/1.4 complete
+- **THEN** that change waits for task 3.1 rather than refreshing expected output or enabling a generic default
 
 #### Scenario: Introductory Hsinchu order is selected
 - **WHEN** D1 selects introductory scope and contents first
@@ -31,19 +36,38 @@ Every moved or reconciled public record SHALL have an explicit baseline identity
 - **THEN** it retains the third-party publisher and canonical URL, visible pages 3–22, missing-page and redaction boundaries, copy-status qualification, excerpt-specific scope, and visibly separate TW Issues interpretation
 
 ### Requirement: Source inspection and return
-Migrated issues SHALL distinguish opening the canonical source from inspecting its on-page source entry. On-page inspection SHALL provide return to the originating citation when known, with contents as fallback for direct source entry. Source metadata and qualifications MUST remain usable without hover and full evidence MUST remain readable without JavaScript.
+Migrated issues SHALL keep the existing topic path and source `publicRef` fragment and SHALL assign every citation occurrence a permanent unique `cite-<occurrenceKey>` anchor from the committed `content-preservation.json.citations` map. Entries SHALL bind occurrenceKey, recordIdentity, surfaceKey, sourceRef, anchorId and a distinct returnLabel; reordering SHALL NOT regenerate IDs from array positions, sourceRef alone or mutable text. Each focusable citation wrapper SHALL have an unchanged canonical action and a separate native `本頁來源` link to `#<sourceRef>`. Hsinchu canonical actions SHALL retain the exact canonical href, `_blank` target and `noreferrer` relation without changing topic history.
+
+Each source SHALL render all occurrence backlinks and a contents fallback in SSR: `#case-contents` for Hsinchu, additive `#issue-contents` for EZ WAY. No source query parameter, compound fragment or new route SHALL be introduced. Without JavaScript readers SHALL be able to manually expand the existing source disclosure and choose the distinctly labeled native backlink. Automatic origin selection MUST NOT be claimed in that mode.
+
+Optional enhancement SHALL handle only unmodified same-tab inspection clicks. It SHALL validate the occurrence/source pair, replace the initiating history entry's fragment with the citation anchor while retaining path/query/unrelated state, and push the source-fragment entry with `twIssuesCitationOrigin: {topicSlug, anchorId, sourceRef}`. It SHALL open, scroll and focus the source. A map-valid origin matching the current topic and source SHALL enable a preferred native `回到引用處` link; static backlinks remain. Direct/invalid source entries SHALL use static backlinks and contents fallback without guessing an origin. History handlers SHALL validate current entry state and fragment on popstate/hashchange and restore the relevant target without adding history entries or retaining a stale global origin. Source metadata and qualifications MUST remain usable without hover and full evidence MUST remain readable without JavaScript.
 
 #### Scenario: One source cited in two places
 - **WHEN** a reader inspects the source from the second citation and chooses return
-- **THEN** the page returns to that citation rather than the first citation for the same source
+- **THEN** its unique citation anchor is the preferred return target, and both distinct labeled occurrence backlinks still exist
+- **AND** reordering the records retains both mapped occurrence IDs
 
 #### Scenario: Direct source link
 - **WHEN** a reader enters an existing source fragment without a citation origin
-- **THEN** the source is reachable with disclosure and focus behavior appropriate to the target and a contents return path is available
+- **THEN** the source is reachable, with enhancement opening/focusing it when available, and static occurrence backlinks and the topic's contents link are available without a guessed preferred origin
+
+#### Scenario: Canonical Hsinchu action
+- **WHEN** a reader activates the canonical source action on an activated Hsinchu citation
+- **THEN** the unchanged canonical URL opens in a new tab with `noreferrer`, without altering topic history or turning the action into a source-registry jump
+
+#### Scenario: Enhanced browser history round trip
+- **WHEN** citation B is inspected, then browser Back and Forward are used
+- **THEN** Back targets `#cite-<B>` and Forward targets the original `#<sourceRef>` with B as the preferred origin
+- **AND** choosing the native return link creates a citation entry whose Back target is that source, without history entries created by event handlers
+
+#### Scenario: Origin state is invalid or belongs elsewhere
+- **WHEN** a source entry's origin names another topic, another source or an unknown citation ID
+- **THEN** enhancement omits the preferred return action and retains only mapped static backlinks and contents fallback
 
 #### Scenario: JavaScript disabled
 - **WHEN** JavaScript is disabled
-- **THEN** evidence, local qualifications, native section links, canonical links and manually expandable source entries remain usable
+- **THEN** evidence, local qualifications, native inspection/canonical links and manually expandable source entries remain usable; the reader can select the labeled backlink for citation B and use native Back/Forward
+- **AND** no automatic preferred-origin return or JavaScript-only control is required
 
 ### Requirement: Honest absence and supplemental content
 The site SHALL distinguish supplied public coverage gaps, unresolved questions and absent optional modules. It MUST NOT infer an absence reason or claim that a procedure remains open merely because no outcome was found. Social samples SHALL remain separate from source indexing and MUST NOT imply representative opinion.

@@ -4,12 +4,13 @@ First-time readers currently encounter document detail or chronology before unde
 
 ## What Changes
 
-- Establish a shared issue entry, question-oriented contents, source inspection and return path, and explicit missing-material behavior, with topic-specific body length and order.
+- Establish a shared issue entry, question-oriented contents, per-citation native anchors with source inspection/backlinks and optional history enhancement, and explicit missing-material behavior, with topic-specific body length and order.
 - Pilot the architecture on Hsinchu baseball stadium and EZ WAY using only existing public material; document an exact content-preservation map before moving or reconciling records.
 - Propose introductory context and contents before Hsinchu's full document guide, with a prominent document shortcut. This intentionally revisits the existing document-first decision and remains an unresolved owner decision before implementation.
-- Separate homepage discovery from date-ordered updates. Use an all-issues entry initially; topical taxonomy and individual assignments remain proposed rather than approved.
+- Separate homepage discovery from date-ordered updates as two sections on the existing home route: `#all-issues` and `#recent-updates`, both linked from its navigation. Page dates use `lastUpdated`; event dates remain separately labeled. Topical taxonomy and individual assignments remain proposed rather than approved.
 - Preserve existing routes, fragments, evidence status, proof scopes, limitations, attribution, canonical URLs, and no-JavaScript reading.
 - Define a pilot acceptance gate and a staged migration plan for the other ten public topics; do not automatically publish the seven metadata-only topics.
+- Permit the homepage and explicit EZ WAY opt-in work independently, while freezing Hsinchu renderer output, order and ordering assertions until D1 and tasks 1.1/1.4 are complete. Shared helper edits must prove that frozen output is unchanged.
 
 ## Capabilities
 

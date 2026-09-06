@@ -10,6 +10,8 @@ If D1 selects introduction-first, the finalized shared reading requirements take
 
 Cross-topic reconciliation is separate from D1 and applies under either Hsinchu placement choice. Before tasks 2.2–3.2 change EZ WAY or shared inspection behavior, task 1.5 must finalize the second table against the approved `shared-issue-reading` requirements and record the exact affected topics, surfaces and replacement scenarios in `acceptance-evidence.md`. Task 1.5 does not depend on tasks 1.1 or 1.4; the Hsinchu-reordering part of task 3.1 still does. Only explicitly mapped pilot/inspection changes supersede the listed cross-topic immutability clauses; other topics retain their baseline behavior. Creating or merging this planning PR does not itself approve those implementation mappings.
 
+Before 1.1/1.4, “shared inspection” means reusable code activated only for EZ WAY: tasks 2.2–2.4 must not change Hsinchu output, order, styles, navigation, canonical actions or ordering assertions. Every Hsinchu activation and its changed-output validation, including citation enhancements, belongs to 3.1 after 1.1/1.4. Task 1.5 cannot authorize a generic renderer default, broad selector or snapshot refresh that bypasses this boundary. Verify frozen Hsinchu output under G1/G2 in `acceptance-evidence.md`; if isolation cannot be demonstrated, defer the shared change. Homepage sections do not alter dossier routes or opt topics into migrated rendering.
+
 ## Affected requirements and proposed replacements
 
 | Source change / capability | Exact requirement heading | Proposed replacement if introduction-first is selected |

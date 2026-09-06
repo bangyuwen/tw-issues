@@ -1,5 +1,18 @@
 ## ADDED Requirements
 
+### Requirement: Same-page discovery sections
+The existing `/` homepage SHALL render two visible sections, `#all-issues` labeled `全部議題` followed by `#recent-updates` labeled `最近更新`, after native navigation links to those fragments. Both sections SHALL be present without JavaScript, with no new route, tab or filter state. Existing base-path-aware site links SHALL be used for cross-page home-fragment links. Each section SHALL link once to every approved `research-topics.json.topics` slug, twelve at the frozen baseline, and SHALL exclude the seven additional metadata-only slugs. Per-card DOM IDs, if used, SHALL NOT collide between sections.
+
+#### Scenario: First-time and returning reader entry
+- **WHEN** a reader opens `/` or follows `/#recent-updates` with JavaScript disabled
+- **THEN** both visible sections and both native navigation entries exist, with the fragment targeting recent updates when supplied
+- **AND** every one of the twelve approved topic routes is reachable from each section and none of the seven metadata-only slugs appears in either list
+
+#### Scenario: Page and event dates have different owners
+- **WHEN** an entry renders page metadata and an optional event preview
+- **THEN** `頁面更新` comes only from that topic's `lastUpdated` with a valid time element, or `頁面更新日期未提供` for a missing/invalid value
+- **AND** `事件日期` comes from the selected timeline event's `occurredAt` using its existing date-precision formatter, with its status/attribution/limitations preserved
+
 ### Requirement: Honest discovery and update ordering
 The homepage SHALL distinguish all-issue discovery from recent page updates. All issues SHALL preserve the array order of the approved `research-topics.json.topics` input, including explicitly positioned new entries; array position defines a total order without ties. Recent updates SHALL sort valid `lastUpdated` dates descending with slug ascending for ties; unknown or invalid dates SHALL follow valid dates in slug-ascending order and be explicitly labeled unavailable. Event dates SHALL be identified separately from page dates, and latest events MUST NOT be described as newly added without change-history evidence.
 
