@@ -19,6 +19,6 @@
 
 ## 4. Review and delivery gate
 
-- [ ] 4.1 Commit the exact implementation and acceptance evidence on the Hsinchu branch.
+- [x] 4.1 Commit the exact implementation and acceptance evidence on the Hsinchu branch (`f3dc8df`).
 - [ ] 4.2 Obtain a fresh exact-range `independent-reviewer` result and resolve any findings with a new reviewed commit.
 - [ ] 4.3 Prepare a PR summary that distinguishes the Hsinchu pilot from the unchanged EZ WAY process page and does not publish until separately authorized.
